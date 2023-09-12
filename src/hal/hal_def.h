@@ -81,19 +81,10 @@
 #define HAL_STFN(s)   HAL_STFN_0(s)
 
 /**
- * @brief Bit operations.
- */
-#define HAL_BITS_TEST(val, bits)        (((val) & (bits)) != 0)      ///< @return true if any bit from (bits) is set.
-#define HAL_BITS_TEST_STRICT(val, bits) (((val) & (bits)) == (bits)) ///< @return true if all bits from (bits) is set.
-#define HAL_BITS_SET(val, bits)         (val) |= (bits)
-#define HAL_BITS_RESET(val, bits)       (val) &= ~(bits)
-#define HAL_BITS_TOGGLE(val, bits)      (val) ^= (bits)
-
-/**
  * @brief Math macros.
  */
 #define HAL_IS_POW2(val)                (((val) != 0) && !((val) & ((val)-1)))
-#define HAL_IS_POW2_ALIGNED(val, align) (HAL_IS_POW2(align) && !HAL_BITS_TEST((val), ((align)-1)))
+#define HAL_IS_POW2_ALIGNED(val, align) (HAL_IS_POW2(align) && !((val) & ((align)-1)))
 #define HAL_CEIL_DIV(a, b)              (((a) + (b)-1) / (b))
 
 /**

@@ -68,17 +68,17 @@ bool tm4c129_periph_init(uint32_t periph, size_t opt)
 
     SysCtlPeripheralEnable(periph);
 
-    if (HAL_BITS_TEST(opt, TM4C129_PERIPH_OPT_SLEEP))
+    if (opt & TM4C129_PERIPH_OPT_SLEEP)
     {
         SysCtlPeripheralSleepEnable(periph);
     }
 
-    if (HAL_BITS_TEST(opt, TM4C129_PERIPH_OPT_DEEP_SLEEP))
+    if (opt & TM4C129_PERIPH_OPT_DEEP_SLEEP)
     {
         SysCtlPeripheralDeepSleepEnable(periph);
     }
 
-    if (HAL_BITS_TEST(opt, TM4C129_PERIPH_OPT_RESET))
+    if (opt & TM4C129_PERIPH_OPT_RESET)
     {
         SysCtlPeripheralReset(periph);
     }
