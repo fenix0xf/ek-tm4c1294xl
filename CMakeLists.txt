@@ -40,8 +40,6 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif ()
 
-message("-- Build type: ${CMAKE_BUILD_TYPE}")
-
 ### GCC flags for MCU architecture
 list(APPEND CFLAGS_ARCH -mthumb -march=armv7e-m -mtune=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
@@ -167,7 +165,7 @@ target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC
                            TN_STACK_CHECK=2
 )
 
-target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC $<$<CONFIG:Debug>:DEBUG=1>)
+target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC $<IF:$<CONFIG:Debug>,DEBUG=1,DEBUG=0>)
 target_compile_options(${FIRMWARE_TARGET_NAME}.elf PUBLIC ${C_WARN})
 set_target_properties(${FIRMWARE_TARGET_NAME}.elf PROPERTIES LINK_FLAGS "-Wl,-T,${FIRMWARE_LD_SCRIPT},-Map,${FIRMWARE_MAP_FILE}")
 #target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lm) # Link with C math library libm.a

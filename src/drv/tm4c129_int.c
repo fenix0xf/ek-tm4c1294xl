@@ -29,7 +29,6 @@
 #include <assert.h>
 
 #include <drv/tm4c129.h>
-#include <drv/tm4c129_mcu.h>
 
 #include <hal/hal.h>
 #include <hal/hal_mm.h>
@@ -54,16 +53,18 @@ typedef void (*tm4c129_int_entry_t)(void);
  *
  */
 static void tm4c129_int_setup_defaults(void);
-static void tm4c129_int_def(void);
-static void tm4c129_int_nmi(void);
-static void tm4c129_int_hard_fault(void);
-static void tm4c129_int_mpu_fault(void);
-static void tm4c129_int_bus_fault(void);
-static void tm4c129_int_usage_fault(void);
+
+HAL_USED static void tm4c129_int_def(void);
+HAL_USED static void tm4c129_int_nmi(void);
+HAL_USED static void tm4c129_int_hard_fault(void);
+HAL_USED static void tm4c129_int_mpu_fault(void);
+HAL_USED static void tm4c129_int_bus_fault(void);
+HAL_USED static void tm4c129_int_usage_fault(void);
 
 /**
  * Interrupts vector table, see "src/firmware.ld" file.
  */
+HAL_USED
 HAL_ALIGNED(MM_VTABLE_ALIGN)
 HAL_SECTION(".vtable")
 const tm4c129_int_entry_t g_vtable[] = {
@@ -204,7 +205,9 @@ static_assert(sizeof(g_vtable) == MM_VTABLE_SIZE, "Invalid initial ISR table siz
 /**
  * ISR RAM table, aligned as 1024 bytes.
  */
-HAL_ALIGNED(MM_VTABLE_ALIGN) static void (*g_vtable_ram[MM_VTABLE_ITEMS])(void);
+HAL_USED
+HAL_ALIGNED(MM_VTABLE_ALIGN)
+static void (*g_vtable_ram[MM_VTABLE_ITEMS])(void);
 static_assert(sizeof(g_vtable_ram) == MM_VTABLE_SIZE, "Invalid RAM vtable size!");
 
 #ifdef __GNUC__
@@ -346,37 +349,37 @@ void tm4c129_int_setup_defaults(void)
     tm4c129_int_nvic_enable(FAULT_USAGE);
 }
 
-void tm4c129_int_def(void)
+HAL_USED void tm4c129_int_def(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "Default interrupt!";
     cortex_stack_unwind_thumb();
 }
 
-void tm4c129_int_nmi(void)
+HAL_USED void tm4c129_int_nmi(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "NMI interrupt!";
     cortex_stack_unwind_thumb();
 }
 
-void tm4c129_int_hard_fault(void)
+HAL_USED void tm4c129_int_hard_fault(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "Hard fault!";
     cortex_stack_unwind_thumb();
 }
 
-void tm4c129_int_mpu_fault(void)
+HAL_USED void tm4c129_int_mpu_fault(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "MPU fault!";
     cortex_stack_unwind_thumb();
 }
 
-void tm4c129_int_bus_fault(void)
+HAL_USED void tm4c129_int_bus_fault(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "Bus fault!";
     cortex_stack_unwind_thumb();
 }
 
-void tm4c129_int_usage_fault(void)
+HAL_USED void tm4c129_int_usage_fault(void)
 {
     g_tm4c129_int_reason = INT_PREFIX "Usage fault!";
     cortex_stack_unwind_thumb();
@@ -385,7 +388,7 @@ void tm4c129_int_usage_fault(void)
 /**
  * cortex_stack_unwind() used only in assembler code.
  */
-HAL_UNUSED void cortex_stack_unwind(uintptr_t* sp, uintptr_t ipsr)
+HAL_USED void cortex_stack_unwind(uintptr_t* sp, uintptr_t ipsr)
 {
     const uintptr_t r0 = sp[0];
     const uintptr_t r1 = sp[1];

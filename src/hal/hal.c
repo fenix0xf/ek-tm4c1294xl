@@ -148,7 +148,7 @@ void hal_print_version(void)
     tm4c129_mcu_unique_id(&id0, &id1, &id2, &id3); ///< Get MCU full hardware ID.
 
     hal_printf("\n"
-               "%s\n"
+               "%s (%s)\n"
                "%s\n"
                "Board: EK-TM4C1294XL Rev D\n"
                "MCU %s [%u MHz]\n"
@@ -156,6 +156,7 @@ void hal_print_version(void)
                "MCUID 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
                "Example Firmware", // hal_version(),
+               DEBUG ? "Debug Build" : "Release Build",
                "(c) 2023",         // hal_copyright(),
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,

@@ -38,6 +38,7 @@
 #define HAL_INLINE      static inline __attribute__((always_inline))
 #define HAL_NORETURN    __attribute__((noreturn))
 #define HAL_NAKED       __attribute__((naked))
+#define HAL_USED        __attribute__((used))
 #define HAL_UNUSED      __attribute__((unused))
 #define HAL_ALIGNED(n)  __attribute__((aligned(n)))
 #define HAL_SECTION(s)  __attribute__((section(s)))

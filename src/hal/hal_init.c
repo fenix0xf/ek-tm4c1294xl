@@ -60,8 +60,8 @@ static void hal_hardware_init(void)
     HAL_INIT_ASSERT("NVIC module...", tm4c129_int_init());
     HAL_INIT_ASSERT("DMA module...", tm4c129_dma_init());
 
-//    HAL_INIT_ASSERT("DBG UART module...", tm4c129_uart_dbg_init());
-//    crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
+    //    HAL_INIT_ASSERT("DBG UART module...", tm4c129_uart_dbg_init());
+    //    crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
 
     HAL_INIT_ASSERT("CCM module...", tm4c129_ccm_init());
 }
@@ -75,7 +75,9 @@ static void hal_hardware_init(void)
  * @warning
  *
  */
-HAL_NORETURN void hal_init(void)
+HAL_USED
+HAL_NORETURN
+void hal_init(void)
 {
     /**
      * @warning
