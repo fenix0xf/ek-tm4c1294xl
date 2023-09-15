@@ -62,18 +62,18 @@ tn_task_func_idle_t tn_task_func_idle = NULL;
 #define TN_EXIT_STACK_SIZE 128
 #endif
 
-TN_STACK
+TN_STACK(tn_func_exit_stack)
 unsigned int  tn_func_exit_stack[TN_EXIT_STACK_SIZE];
 unsigned int* tn_func_exit_stack_start = &tn_func_exit_stack[TN_EXIT_STACK_SIZE - 2];
 
 //-- System tasks
 
-TN_STACK
+TN_STACK(tn_os_idle_task_stack)
 static unsigned int tn_os_idle_task_stack[TN_OS_IDLE_TASK_STACK_SIZE];
 TN_TCB              tn_os_idle_task;
 void                tn_os_idle_task_func(void* p);
 
-TN_STACK
+TN_STACK(tn_os_tick_task_stack)
 static unsigned int tn_os_tick_task_stack[TN_OS_TICK_TASK_STACK_SIZE];
 TN_TCB              tn_os_tick_task;
 void                tn_os_tick_task_func(void* p);

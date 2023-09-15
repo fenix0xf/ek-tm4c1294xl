@@ -79,6 +79,8 @@ list(APPEND TW_WARN
 
 ### Custom C Run Time Library. // todo
 if (LIBC_USE_CUSTOM)
+    message(FATAL_ERROR "LIBC_USE_CUSTOM currently is not supported!")
+
     list(APPEND LIBC_WARN
          -Wno-conversion
          -Wno-parentheses
@@ -106,7 +108,10 @@ else ()
 endif ()
 
 ### Global defines
-add_compile_definitions(TIVAWARE_USE_ROM=0 TARGET_IS_TM4C129_RA2 PART_TM4C1294NCPDT)
+add_compile_definitions(TIVAWARE_USE_ROM=0
+                        TARGET_IS_TM4C129_RA2
+                        PART_TM4C1294NCPDT
+)
 
 ### Add includes for all targets
 include_directories(${CMAKE_SOURCE_DIR}/src

@@ -44,7 +44,7 @@ extern "C"
 #if HAL_IS_CORTEX_M0_M7
 
 #define TN_INLINE          HAL_INLINE
-#define TN_STACK           HAL_ALIGNED(HAL_STACK_ALIGN) HAL_STACK_SECTION
+#define TN_STACK(name)     HAL_ALIGNED(HAL_STACK_ALIGN) HAL_STACK_SECTION(name)
 #define TN_NORETURN        HAL_NORETURN
 #define TN_LIKELY(e)       HAL_LIKELY(e)
 #define TN_UNLIKELY(e)     HAL_UNLIKELY(e)

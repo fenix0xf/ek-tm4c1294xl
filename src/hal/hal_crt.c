@@ -32,7 +32,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <limits.h>
 #include <errno.h>
 #include <reent.h>
 #include <sys/stat.h>
@@ -69,7 +68,7 @@ extern uintptr_t g_ld_ebss;
 /**
  * @brief Global heap for system malloc() function.
  */
-static char      g_heap[64 * 1024];
+HAL_HEAP_SECTION(g_heap) static char g_heap[64 * 1024];
 static ptrdiff_t g_heap_brk;
 
 static crt_stdout_func_t g_crt_stdout_func;
@@ -87,7 +86,7 @@ void crt_init(void)
 
     g_heap_brk = (ptrdiff_t)g_heap;
 
-// todo   BUFSIZ
+    // todo   BUFSIZ
     /// Disable stdio buffers.
     setbuf(stdin, NULL);
     setbuf(stdout, NULL);

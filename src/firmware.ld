@@ -86,7 +86,9 @@ SECTIONS
     .noinit (NOLOAD) :
     {
         . = ALIGN(__align);
-        *(.noinit*)
+        *(.noinit.common*)
+        *(.noinit.stack*)
+        *(.noinit.heap*)
         . = ALIGN(__align);
     } > SRAM
 }

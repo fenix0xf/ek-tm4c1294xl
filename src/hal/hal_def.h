@@ -51,13 +51,24 @@
 #endif
 
 /**
+ * @brief Stringification macros.
+ */
+#define HAL_STFN_0(s) #s
+#define HAL_STFN(s)   HAL_STFN_0(s)
+
+/**
+ * @brief Linker sections macros.
+ */
+#define HAL_STACK_SECTION(name) HAL_SECTION(".noinit.stack." HAL_STFN(name))
+#define HAL_HEAP_SECTION(name)  HAL_SECTION(".noinit.heap." HAL_STFN(name))
+
+/**
  * @brief Platform stack defines.
  */
 #if HAL_IS_CORTEX_M0_M7
 
 #define HAL_STACK_ITEM_TYPE unsigned int
 #define HAL_STACK_ALIGN     8
-#define HAL_STACK_SECTION   HAL_SECTION(".noinit")
 #define HAL_STACK_ISIZE     sizeof(HAL_STACK_ITEM_TYPE)
 #define HAL_STACK_MIN_ITEMS 96
 
@@ -69,17 +80,12 @@
     enum { g_stack_##name##_items = (size_bytes) / HAL_STACK_ISIZE };                                         \
     static_assert((((size_bytes) % HAL_STACK_ALIGN) == 0) && (g_stack_##name##_items >= HAL_STACK_MIN_ITEMS), \
                   "Invalid parameters in HAL_STACK_DECLARE()!");                                              \
-    HAL_ALIGNED(HAL_STACK_ALIGN) HAL_STACK_SECTION static HAL_STACK_ITEM_TYPE g_stack_##name[g_stack_##name##_items]
+    HAL_ALIGNED(HAL_STACK_ALIGN)                                                                              \
+    HAL_STACK_SECTION(name) static HAL_STACK_ITEM_TYPE g_stack_##name[g_stack_##name##_items]
 
 #define HAL_STACK_PTR(name)   (&g_stack_##name[g_stack_##name##_items - 1])
 #define HAL_STACK_PTRI(name)  ((HAL_STACK_ITEM_TYPE)&g_stack_##name[g_stack_##name##_items - 1])
 #define HAL_STACK_ITEMS(name) (g_stack_##name##_items)
-
-/**
- * @brief Stringification macros.
- */
-#define HAL_STFN_0(s) #s
-#define HAL_STFN(s)   HAL_STFN_0(s)
 
 /**
  * @brief Math macros.
