@@ -32,18 +32,14 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <malloc.h>
 #include <errno.h>
 #include <reent.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/unistd.h>
 
-#ifdef DEBUG
-#define CRT_HEAP_DEBUG 1
-#else
-#define CRT_HEAP_DEBUG 0
-#endif
-
+#define CRT_HEAP_DEBUG DEBUG
 #define SYSCALL_PREFIX "SYSCALL: "
 
 #undef errno
@@ -68,12 +64,13 @@ extern uintptr_t g_ld_ebss;
 /**
  * @brief Global heap for system malloc() function.
  */
-HAL_HEAP_SECTION(g_heap) static char g_heap[64 * 1024];
-static ptrdiff_t g_heap_brk;
+HAL_HEAP_SECTION(g_heap)
+static char g_heap[64 * 1024];
 
-static crt_stdout_func_t g_crt_stdout_func;
+static ptrdiff_t             g_heap_brk;
+static hal_crt_stdout_func_t g_stdout_func;
 
-void crt_init(void)
+void hal_crt_init(hal_crt_stdout_func_t stdout_func)
 {
     /// Copy the data segment initializers from FLASH to SRAM.
     uintptr_t* src = &g_ld_ldata;
@@ -84,18 +81,25 @@ void crt_init(void)
     dst = &g_ld_bss;
     while (dst < &g_ld_ebss) { *dst++ = 0; }
 
-    g_heap_brk = (ptrdiff_t)g_heap;
+    /// Set all global variables after data and bss segment initialization.
+    g_heap_brk = (ptrdiff_t)g_heap; ///< Heap initialization: malloc can be used after this.
+    hal_crt_stdout_func_set(stdout_func);
 
-    // todo   BUFSIZ
-    /// Disable stdio buffers.
-    setbuf(stdin, NULL);
-    setbuf(stdout, NULL);
-    setbuf(stderr, NULL);
+    /// Disable all stdio buffers to handle possible stdout in malloc()->_sbrk().
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+
+    char* buf = (char*)malloc(512);
+    setvbuf(stdout, buf, _IOFBF, 512);
+
+    buf = (char*)malloc(512);
+    setvbuf(stderr, buf, _IOFBF, 512);
 }
 
-void crt_stdout_func_set(crt_stdout_func_t stdout_func)
+void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func)
 {
-    g_crt_stdout_func = stdout_func;
+    g_stdout_func = stdout_func;
 }
 
 /**
@@ -160,7 +164,7 @@ size_t _write(int fd, const void* buf, size_t size)
      * This means that we should flush internal buffers. Since we don't we just return.
      * (Remember, "handle" == -1 means that all handles should be flushed.)
      */
-    if (buf == NULL)
+    if (HAL_UNLIKELY(buf == NULL))
     {
         return 0;
     }
@@ -169,19 +173,18 @@ size_t _write(int fd, const void* buf, size_t size)
      * This handler only writes to "standard out" and "standard err",
      * for all other file handles it returns failure.
      */
-    if ((fd != STDOUT_FILENO) && (fd != STDERR_FILENO))
+    if (HAL_UNLIKELY((fd != STDOUT_FILENO) && (fd != STDERR_FILENO)))
     {
         return (size_t)(-1);
     }
 
-    if (size > 1) // todo debug
+    if (HAL_LIKELY(g_stdout_func != NULL))
+    {
+        g_stdout_func(buf, size);
+    }
+    else
     {
         hal_mcu_halt();
-    }
-
-    if (g_crt_stdout_func != NULL)
-    {
-        g_crt_stdout_func(buf, size);
     }
 
     return size;
@@ -191,8 +194,8 @@ void* _sbrk(ptrdiff_t incr)
 {
     hal_cr_sect_enter();
 
-    const ptrdiff_t used = (ptrdiff_t)g_heap_brk - (ptrdiff_t)g_heap;
-    ptrdiff_t       brk  = g_heap_brk;
+    ptrdiff_t used = (ptrdiff_t)g_heap_brk - (ptrdiff_t)g_heap;
+    ptrdiff_t brk  = g_heap_brk;
 
     if ((used + incr) > (ptrdiff_t)sizeof(g_heap))
     {
@@ -219,7 +222,12 @@ void* _sbrk(ptrdiff_t incr)
     }
 
 #if CRT_HEAP_DEBUG
-    hal_printf(SYSCALL_PREFIX "_sbrk(%d bytes), used/total: %d/%u bytes\n", (int)incr, used, sizeof(g_heap));
+    used = (ptrdiff_t)g_heap_brk - (ptrdiff_t)g_heap;
+    hal_printf(SYSCALL_PREFIX "_sbrk(%d bytes), used/free/total: %d/%u/%u bytes\n",
+               (int)incr,
+               used,
+               sizeof(g_heap) - (uintptr_t)used,
+               sizeof(g_heap));
 #endif
 
 clear:
@@ -243,41 +251,4 @@ void _exit(int status)
     (void)status;
     hal_puts(SYSCALL_PREFIX "_exit()");
     hal_mcu_halt();
-}
-
-/**
- * Thread safe utilities.
- *
- */
-char* ts_strtok(char* s1, const char* s2, char** pssave)
-{
-    if (pssave == NULL)
-    {
-        return NULL;
-    }
-
-    char* sbegin = s1 ? s1 : *pssave;
-
-    if (sbegin == NULL)
-    {
-        return NULL;
-    }
-
-    sbegin += strspn(sbegin, s2);
-
-    if (*sbegin == '\0')
-    {
-        *pssave = NULL;
-        return NULL;
-    }
-
-    char* send = sbegin + strcspn(sbegin, s2);
-
-    if (*send != '\0')
-    {
-        *send++ = '\0';
-    }
-
-    *pssave = send;
-    return sbegin;
 }

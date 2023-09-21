@@ -39,7 +39,6 @@
 int  hal_puts(const char* s);
 int  hal_print(const char* s);
 int  hal_printf(const char* restrict fmt, ...);
-void hal_flush(void);
 
 #define hal_error(s) hal_printf("ERROR: \"%s\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
 

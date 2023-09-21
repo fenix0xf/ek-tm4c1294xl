@@ -37,23 +37,10 @@
  *
  */
 
-typedef void (*crt_stdout_func_t)(const void* buf, size_t size);
+typedef void (*hal_crt_stdout_func_t)(const void* buf, size_t size);
 
 /**
  * C Runtime Library initialization.
  */
-void crt_init(void);
-
-void crt_stdout_func_set(crt_stdout_func_t stdout_func);
-
-/**
- * ts_strtok() is the thread safe implementation of strtok() function.
- *
- * @param pssave is ts_strtok() internal state variable.
- *
- * @example
- * char* pssave; // Temp variable for save ts_strtok() internal state.
- * ts_strtok(str, delim, &pssave);
- * ts_strtok(NULL, delim, &pssave);
- */
-char* ts_strtok(char* s1, const char* s2, char** pssave);
+void hal_crt_init(hal_crt_stdout_func_t stdout_func);
+void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func);

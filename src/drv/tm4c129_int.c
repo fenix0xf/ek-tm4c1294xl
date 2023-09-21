@@ -63,12 +63,13 @@ HAL_USED static void tm4c129_int_usage_fault(void);
 
 /**
  * Interrupts vector table, see "src/firmware.ld" file.
+ * Attribute HAL_USED is necessary for release build with -flto option.
  */
 HAL_USED
 HAL_ALIGNED(MM_VTABLE_ALIGN)
 HAL_SECTION(".vtable")
 const tm4c129_int_entry_t g_vtable[] = {
-    (tm4c129_int_entry_t)HAL_STACK_PTRI(system), ///< 000 - The initial stack pointer,
+    (tm4c129_int_entry_t)HAL_STACK_PTRU(system), ///< 000 - The initial stack pointer,
     hal_init,                                    ///< 001 - The reset handler,
     tm4c129_int_def,                             ///< 002 - The NMI handler,
     tm4c129_int_def,                             ///< 003 - The hard fault handler,

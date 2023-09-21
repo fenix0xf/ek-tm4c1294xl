@@ -30,18 +30,16 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-bool tm4c129_uart_dbg_fail_safe_init(void);
-void tm4c129_uart_dbg_fail_safe_free(void);
-
+bool     tm4c129_uart_dbg_fail_safe_init(void);
+void     tm4c129_uart_dbg_fail_safe_free(void);
 intptr_t tm4c129_uart_dbg_fail_safe_puts(const char* s);
 intptr_t tm4c129_uart_dbg_fail_safe_print(const char* s);
 void     tm4c129_uart_dbg_fail_safe_send_buf(const void* buf, size_t size);
 void     tm4c129_uart_dbg_fail_safe_send_byte(uint8_t b);
 void     tm4c129_uart_dbg_fail_safe_flush(void);
 
-bool tm4c129_uart_dbg_init(void);
-bool tm4c129_uart_dbg_free(void);
-
+bool     tm4c129_uart_dbg_init(void);
+void     tm4c129_uart_dbg_free(void);
 intptr_t tm4c129_uart_dbg_puts(const char* s);
 intptr_t tm4c129_uart_dbg_print(const char* s);
 void     tm4c129_uart_dbg_send_buf(const void* buf, size_t size);

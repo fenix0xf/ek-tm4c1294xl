@@ -33,7 +33,9 @@
 
 int hal_puts(const char* s)
 {
-    return puts(s);
+    int ret = puts(s);
+    fflush(stdout);
+    return ret;
 }
 
 int hal_print(const char* s)
@@ -46,12 +48,8 @@ int hal_print(const char* s)
         chars++;
     }
 
+    fflush(stdout);
     return chars;
-}
-
-void hal_flush(void)
-{
-    tm4c129_uart_dbg_flush();
 }
 
 int hal_printf(const char* restrict fmt, ...)
@@ -60,6 +58,8 @@ int hal_printf(const char* restrict fmt, ...)
     va_start(args, fmt);
     int rc = vprintf(fmt, args);
     va_end(args);
+
+    fflush(stdout);
     return rc;
 }
 
@@ -68,7 +68,7 @@ int hal_printf(const char* restrict fmt, ...)
 void hal_dbg_printbuf(const void* buf, size_t size)
 {
     enum {
-        PRINT_LINES = 16,
+        COLUMNS_PER_LINE = 16,
     };
 
     hal_printf("Buffer data (addr: 0x%08X, size: %u):\n", buf, (unsigned)size);
@@ -85,7 +85,7 @@ void hal_dbg_printbuf(const void* buf, size_t size)
     {
         hal_printf("%02X", (unsigned)p[i]);
 
-        if (((i + 1) % PRINT_LINES) == 0)
+        if (((i + 1) % COLUMNS_PER_LINE) == 0)
         {
             hal_printf("\n");
         }

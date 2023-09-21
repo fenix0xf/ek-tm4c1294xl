@@ -26,7 +26,9 @@
 
 #pragma once
 
+#include <hal/hal_def.h>
+
 /**
  * HAL initialization function. Used as reset ISR handler.
  */
-void hal_init(void);
+HAL_USED HAL_NORETURN void hal_init(void);

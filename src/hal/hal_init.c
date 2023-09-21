@@ -52,6 +52,20 @@
         }                                   \
     } while (0)
 
+static bool uart_dbg_full_init(void)
+{
+    tm4c129_uart_dbg_fail_safe_free();
+
+    if (!tm4c129_uart_dbg_init())
+    {
+        hal_uart_dbg_switch_to_fail_safe(); ///< Restore fail safe UART.
+        return false;
+    }
+
+    hal_crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
+    return true;
+}
+
 /**
  * @brief Low level hardware initialization
  */
@@ -59,10 +73,7 @@ static void hal_hardware_init(void)
 {
     HAL_INIT_ASSERT("NVIC module...", tm4c129_int_init());
     HAL_INIT_ASSERT("DMA module...", tm4c129_dma_init());
-
-    HAL_INIT_ASSERT("DBG UART module...", tm4c129_uart_dbg_init());
-    crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
-
+//    HAL_INIT_ASSERT("DBG UART module...", uart_dbg_full_init());
     HAL_INIT_ASSERT("CCM module...", tm4c129_ccm_init());
 }
 
@@ -75,10 +86,7 @@ static void hal_hardware_init(void)
  * @warning
  *
  */
-HAL_USED
-
-HAL_NORETURN
-void hal_init(void)
+HAL_USED HAL_NORETURN void hal_init(void)
 {
     /**
      * @warning
@@ -125,8 +133,7 @@ void hal_init(void)
      *
      * After this call stdout is ready to work.
      */
-    crt_init();
-    crt_stdout_func_set(tm4c129_uart_dbg_fail_safe_send_buf);
+    hal_crt_init(tm4c129_uart_dbg_fail_safe_send_buf);
 
     /**
      * Print startup info.

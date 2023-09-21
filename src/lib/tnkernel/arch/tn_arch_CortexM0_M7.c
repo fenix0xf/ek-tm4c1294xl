@@ -109,7 +109,7 @@ unsigned int* tn_stack_init(void (*task_func)(void* param), void* stack_start, v
 
 #if TN_STACK_CHECK
 
-void tn_check_stack(TN_TCB* task, enum tn_check_stack_opt opt)
+void tn_check_stack(TN_TCB* task, size_t opt)
 {
     uintptr_t* end_sp = task->stk_start - task->stk_size + 1;
 

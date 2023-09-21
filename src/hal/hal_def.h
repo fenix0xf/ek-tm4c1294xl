@@ -27,6 +27,7 @@
 #pragma once
 
 #include <assert.h>
+#include <stdint.h>
 
 #include "hal_def_arch.h"
 
@@ -79,12 +80,13 @@
 #define HAL_STACK_DECLARE(name, size_bytes)                                                                   \
     enum { g_stack_##name##_items = (size_bytes) / HAL_STACK_ISIZE };                                         \
     static_assert((((size_bytes) % HAL_STACK_ALIGN) == 0) && (g_stack_##name##_items >= HAL_STACK_MIN_ITEMS), \
-                  "Invalid parameters in HAL_STACK_DECLARE()!");                                              \
+                  "HAL_STACK_DECLARE() invalid parameters!");                                                 \
     HAL_ALIGNED(HAL_STACK_ALIGN)                                                                              \
-    HAL_STACK_SECTION(name) static HAL_STACK_ITEM_TYPE g_stack_##name[g_stack_##name##_items]
+    HAL_STACK_SECTION(name)                                                                                   \
+    static HAL_STACK_ITEM_TYPE g_stack_##name[g_stack_##name##_items]
 
 #define HAL_STACK_PTR(name)   (&g_stack_##name[g_stack_##name##_items - 1])
-#define HAL_STACK_PTRI(name)  ((HAL_STACK_ITEM_TYPE)&g_stack_##name[g_stack_##name##_items - 1])
+#define HAL_STACK_PTRU(name)  ((uintptr_t)&g_stack_##name[g_stack_##name##_items - 1])
 #define HAL_STACK_ITEMS(name) (g_stack_##name##_items)
 
 /**

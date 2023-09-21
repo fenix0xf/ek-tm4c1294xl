@@ -103,13 +103,11 @@ void tn_task_exit_asm(void* tcb);
 struct _TN_TCB;
 typedef struct _TN_TCB TN_TCB;
 
-enum tn_check_stack_opt {
-    TN_CHECK_STACK_NONE  = 0x0,
-    TN_CHECK_STACK_HALT  = 0x1, ///< bit 0
-    TN_CHECK_STACK_FORCE = 0x2, ///< bit 1
-};
+#define TN_CHECK_STACK_NONE  0x0u
+#define TN_CHECK_STACK_HALT  0x1u
+#define TN_CHECK_STACK_FORCE 0x2u
 
-void tn_check_stack(TN_TCB* task, enum tn_check_stack_opt opt);
+void tn_check_stack(TN_TCB* task, size_t opt);
 
 /**
  * @brief Determining whether we are inside an interrupt.

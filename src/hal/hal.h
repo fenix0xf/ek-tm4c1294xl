@@ -158,4 +158,5 @@ HAL_INLINE uint32_t hal_timestamp_span(uint32_t ts)
 HAL_NORETURN void hal_system_startup(void);
 HAL_NORETURN void hal_system_reboot(void);
 
+void hal_uart_dbg_switch_to_fail_safe(void);
 void hal_print_version(void);

@@ -28,7 +28,9 @@
 
 #include <hal/hal_crt.h>
 #include <hal/hal_con.h>
+#include <hal/hal_init.h>
 #include <drv/tm4c129_int.h>
+#include <drv/tm4c129_uart_dbg.h>
 
 #include <tn.h>
 
@@ -36,14 +38,13 @@
 
 #define HAL_REBOOT_PAUSE_mS 1000
 
-/**
- * Local functions.
- *
- */
 static void hal_systick_handler(void);
 
 HAL_NORETURN void hal_mcu_halt(void)
 {
+    hal_uart_dbg_switch_to_fail_safe();
+    hal_mcu_int_off(); ///< Disable interrupts after hal_uart_dbg_switch_to_fail_safe()!
+
 #ifdef TN_STACK_CHECK
     if (HAL_LIKELY(tn_system_is_running()))
     {
@@ -51,7 +52,8 @@ HAL_NORETURN void hal_mcu_halt(void)
     }
 #endif
 
-    hal_puts("\n" HAL_PREFIX "System is halted!");
+    tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System is halted!");
+    tm4c129_uart_dbg_fail_safe_free();
 
     tm4c129_mcu_halt();
 }
@@ -119,10 +121,11 @@ HAL_NORETURN void hal_system_startup(void)
 
 HAL_NORETURN void hal_system_reboot(void)
 {
-    hal_mcu_int_off();
+    hal_uart_dbg_switch_to_fail_safe();
+    hal_mcu_int_off(); ///< Disable interrupts after hal_uart_dbg_switch_to_fail_safe()!
 
-    hal_puts("\n" HAL_PREFIX "System reboot!");
-    hal_flush();
+    tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System reboot!");
+    tm4c129_uart_dbg_fail_safe_free();
 
     hal_mcu_mdelay(HAL_REBOOT_PAUSE_mS);
     tm4c129_mcu_reset();
@@ -141,6 +144,22 @@ void hal_systick_handler(void)
     tn_int_exit();
 }
 
+void hal_uart_dbg_switch_to_fail_safe(void)
+{
+    tm4c129_uart_dbg_free();
+
+    if (!tm4c129_uart_dbg_fail_safe_init())
+    {
+        /**
+         * stderr and stdout is not initialized here.
+         * Stop the system without any print to stdout.
+         */
+        tm4c129_mcu_halt();
+    }
+
+    hal_crt_stdout_func_set(tm4c129_uart_dbg_fail_safe_send_buf);
+}
+
 void hal_print_version(void)
 {
     uint32_t id0, id1, id2, id3;
@@ -156,7 +175,7 @@ void hal_print_version(void)
                "MCUID 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
                "Example Firmware", // hal_version(),
-               DEBUG ? "Debug Build" : "Release Build",
+               DEBUG ? "Debug" : "Release",
                "(c) 2023",         // hal_copyright(),
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,

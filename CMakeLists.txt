@@ -33,7 +33,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON) # POSIX.1-2001 function strcasecmp() and __VA_OPT__.
 
 ### Project options.
-set(LIBC_USE_CUSTOM OFF) # Set to ON to disable default GCC libc.
+set(LIBC_USE_CUSTOM ON) # Set to ON to disable default GCC libc.
 
 ### Set default build type to Release.
 if (NOT CMAKE_BUILD_TYPE)
@@ -66,6 +66,7 @@ list(APPEND C_WARN
      -Wshadow
      -Wdouble-promotion
      -Wc++-compat
+     -Wno-unused-function
 )
 
 list(APPEND TW_WARN
@@ -77,31 +78,59 @@ list(APPEND TW_WARN
      -Wno-type-limits
 )
 
-### Custom C Run Time Library. // todo
+### Custom C Run Time Library.
 if (LIBC_USE_CUSTOM)
-    message(FATAL_ERROR "LIBC_USE_CUSTOM currently is not supported!")
-
     list(APPEND LIBC_WARN
+         -Wno-pedantic
+         -Wno-unused-parameter
+         -Wno-unused-variable
+         -Wno-unused-but-set-variable
          -Wno-conversion
-         -Wno-parentheses
-         -Wno-double-promotion
+         -Wno-implicit-fallthrough
          -Wno-sign-compare
          -Wno-shadow
-         -Wno-array-parameter
+         -Wno-unused-label
+         -Wno-maybe-uninitialized
+         -Wno-c++-compat
     )
+
+    set(LIBC_GCC_INCLUDES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES})
+    set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "")
+
+    list(FILTER LIBC_GCC_INCLUDES INCLUDE REGEX lib/gcc/)
 
     include_directories(SYSTEM
-                        ${CMAKE_SOURCE_DIR}/src/lib/musl/arch/arm
-                        ${CMAKE_SOURCE_DIR}/src/lib/musl/arch/generic
-                        ${CMAKE_SOURCE_DIR}/src/lib/musl/src/include
-                        ${CMAKE_SOURCE_DIR}/src/lib/musl/src/internal
-                        ${CMAKE_SOURCE_DIR}/src/lib/musl/include
+                        ${LIBC_GCC_INCLUDES}
+                        ${CMAKE_SOURCE_DIR}/src/lib/libc/newlib/thumb/v7e-m+fp/hard/newlib/include
+                        ${CMAKE_SOURCE_DIR}/src/lib/libc/newlib/libc/include
     )
 
-    file(GLOB_RECURSE LIBC_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/musl/*.[h,c])
+    file(GLOB_RECURSE LIBC_COMMON_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/libc/*.[h,c,s,S])
+    file(GLOB_RECURSE LIBC_ARCH_HDRS RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/thumb/*.[h])
+
+#    file(GLOB_RECURSE LIBC_ARM_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/libc_arm/*.[h,c,s,S])
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/setjmp.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strcmp.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strcpy.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memcpy.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memcpy-armv7a.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memmove.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memmove-soft.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memset.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memset-soft.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memclr.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memchr-stub.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memchr.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memcpy-stub.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memcpy.S)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strlen-stub.c)
+    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strlen.S)
+
+    list(APPEND LIBC_FILES ${LIBC_COMMON_FILES} ${LIBC_ARM_FILES} ${LIBC_ARCH_HDRS})
+
     set_source_files_properties(${LIBC_FILES} PROPERTIES
                                 COMPILE_OPTIONS "${LIBC_WARN}"
-                                COMPILE_DEFINITIONS "_XOPEN_SOURCE=700;"
+                                COMPILE_DEFINITIONS ""
     )
 else ()
     set(LIBC_FILES "")
