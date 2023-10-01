@@ -181,12 +181,12 @@ void* __emutls_get_address(struct __emutls_object* obj)
         hal_mcu_halt();
     }
 
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
 
     obj->loc.idx.is_valid = 1;
     obj->loc.idx.val      = g_tls_items_count++ & TLS_INDEX_MAX;
 
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
 
     if (tls_item_is_valid(tls_block, obj))
     {

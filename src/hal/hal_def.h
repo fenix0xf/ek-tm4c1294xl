@@ -37,6 +37,7 @@
 #ifdef __GNUC__
 
 #define HAL_INLINE      static inline __attribute__((always_inline))
+#define HAL_NOINLINE    __attribute__((noinline))
 #define HAL_NORETURN    __attribute__((noreturn))
 #define HAL_NAKED       __attribute__((naked))
 #define HAL_USED        __attribute__((used))

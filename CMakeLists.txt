@@ -27,8 +27,8 @@ cmake_minimum_required(VERSION 3.24)
 ###
 project(EK-TM4C1294XL C ASM)
 
-### Set compiler standard to C11 and enable GNU extensions.
-set(CMAKE_C_STANDARD 11)
+### Set compiler standard to C17 and enable GNU extensions.
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON) # POSIX.1-2001 function strcasecmp() and __VA_OPT__.
 
@@ -40,10 +40,10 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif ()
 
-### GCC flags for MCU architecture
+### GCC flags for MCU architecture.
 list(APPEND CFLAGS_ARCH -mthumb -march=armv7e-m -mtune=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
-### GCC flags for compile and linking
+### GCC flags for compile and linking.
 if (LIBC_USE_CUSTOM)
     list(APPEND CFLAGS -nostdinc -ffreestanding -ggdb3 -fno-strict-aliasing -fno-strict-overflow -ffunction-sections -fdata-sections -fno-builtin -fno-common)
     list(APPEND LFLAGS -nostdlib -Wl,--gc-sections,--print-memory-usage)
@@ -52,7 +52,7 @@ else ()
     list(APPEND LFLAGS -nostartfiles -specs=nano.specs -Wl,--gc-sections,--print-memory-usage)
 endif ()
 
-### Set compiler and linker flags
+### Set compiler and linker flags.
 add_compile_options(${CFLAGS_ARCH} ${CFLAGS})
 add_link_options(${CFLAGS_ARCH} ${CFLAGS} ${LFLAGS})
 
@@ -82,53 +82,33 @@ list(APPEND TW_WARN
 if (LIBC_USE_CUSTOM)
     list(APPEND LIBC_WARN
          -Wno-pedantic
-         -Wno-unused-parameter
-         -Wno-unused-variable
          -Wno-unused-but-set-variable
          -Wno-conversion
          -Wno-implicit-fallthrough
          -Wno-sign-compare
+         -Wno-parentheses
          -Wno-shadow
-         -Wno-unused-label
-         -Wno-maybe-uninitialized
-         -Wno-c++-compat
     )
 
-    set(LIBC_GCC_INCLUDES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES})
     set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "")
 
-    list(FILTER LIBC_GCC_INCLUDES INCLUDE REGEX lib/gcc/)
-
     include_directories(SYSTEM
-                        ${LIBC_GCC_INCLUDES}
-                        ${CMAKE_SOURCE_DIR}/src/lib/libc/newlib/thumb/v7e-m+fp/hard/newlib/include
-                        ${CMAKE_SOURCE_DIR}/src/lib/libc/newlib/libc/include
+                        ${CMAKE_SOURCE_DIR}/src/lib/libc/arch/arm
+                        ${CMAKE_SOURCE_DIR}/src/lib/libc/arch/generic
+                        ${CMAKE_SOURCE_DIR}/src/lib/libc/include
     )
 
-    file(GLOB_RECURSE LIBC_COMMON_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/libc/*.[h,c,s,S])
-    file(GLOB_RECURSE LIBC_ARCH_HDRS RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/thumb/*.[h])
+    list(APPEND LIBC_INTERNAL_INCLUDES
+         ${CMAKE_SOURCE_DIR}/src/lib/libc/arch/arm
+         ${CMAKE_SOURCE_DIR}/src/lib/libc/arch/generic
+         ${CMAKE_SOURCE_DIR}/src/lib/libc/internal
+         ${CMAKE_SOURCE_DIR}/src/lib/libc/include
+    )
 
-#    file(GLOB_RECURSE LIBC_ARM_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/newlib/libc_arm/*.[h,c,s,S])
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/setjmp.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strcmp.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strcpy.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memcpy.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memcpy-armv7a.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memmove.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memmove-soft.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memset.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memset-soft.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/aeabi_memclr.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memchr-stub.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memchr.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memcpy-stub.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/memcpy.S)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strlen-stub.c)
-    list(APPEND LIBC_ARM_FILES src/lib/libc/newlib/libc_arm/strlen.S)
-
-    list(APPEND LIBC_FILES ${LIBC_COMMON_FILES} ${LIBC_ARM_FILES} ${LIBC_ARCH_HDRS})
+    file(GLOB_RECURSE LIBC_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/libc/*.[h,c])
 
     set_source_files_properties(${LIBC_FILES} PROPERTIES
+                                INCLUDE_DIRECTORIES "${LIBC_INTERNAL_INCLUDES}"
                                 COMPILE_OPTIONS "${LIBC_WARN}"
                                 COMPILE_DEFINITIONS ""
     )
@@ -136,13 +116,13 @@ else ()
     set(LIBC_FILES "")
 endif ()
 
-### Global defines
+### Global defines.
 add_compile_definitions(TIVAWARE_USE_ROM=0
                         TARGET_IS_TM4C129_RA2
                         PART_TM4C1294NCPDT
 )
 
-### Add includes for all targets
+### Add includes for all targets.
 include_directories(${CMAKE_SOURCE_DIR}/src
                     ${CMAKE_SOURCE_DIR}/src/drv/tivaware
                     ${CMAKE_SOURCE_DIR}/src/lib/tnkernel
@@ -155,13 +135,13 @@ set_source_files_properties(${TIVAWARE_FILES} PROPERTIES
                             COMPILE_DEFINITIONS "DEPRECATED;gcc;"
 )
 
-### HW Drivers
+### HW Drivers.
 file(GLOB DRV_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/drv/*.[h,c])
 
 ### Hardware Abstraction Layer.
 file(GLOB_RECURSE HAL_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/hal/*.[h,c])
 
-### TN Kernel
+### TN Kernel.
 file(GLOB_RECURSE TN_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/tnkernel/*.[h,c,S,s])
 
 ### Other libs.
@@ -188,12 +168,12 @@ add_executable(${FIRMWARE_TARGET_NAME}.elf
                ${FIRMWARE_FILES}
 )
 
-### TN Kernel config
+### TN Kernel config.
 target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC
                            TN_SUPPORT_FPU=1
                            TN_USE_USER_TIMERS=1
                            TN_USE_MUTEXES=1
-                           TN_USE_EVENTS=1
+                           TN_USE_EVENTS=0
                            TN_USE_DYN_OBJ=0
                            TN_CHECK_PARAM=0
                            TN_STACK_CHECK=2
@@ -202,6 +182,7 @@ target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC
 target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC $<IF:$<CONFIG:Debug>,DEBUG=1,DEBUG=0>)
 target_compile_options(${FIRMWARE_TARGET_NAME}.elf PUBLIC ${C_WARN})
 set_target_properties(${FIRMWARE_TARGET_NAME}.elf PROPERTIES LINK_FLAGS "-Wl,-T,${FIRMWARE_LD_SCRIPT},-Map,${FIRMWARE_MAP_FILE}")
+target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lgcc) # Link with GCC library libgcc.a
 #target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lm) # Link with C math library libm.a
 
 add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} ARGS -Oihex ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.hex COMMENT "Generate HEX file...")

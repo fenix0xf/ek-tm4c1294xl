@@ -187,7 +187,7 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
     TN_INTSAVE_DATA
 
     int wait_reason = TSK_WAIT_REASON_MUTEX; // Just mutex without priority changing things
-    int fYeild      = false;
+    int fYield      = false;
     int rc          = TERR_WCONTEXT;
 
 #if TN_CHECK_PARAM
@@ -212,7 +212,6 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
         if (tn_curr_run_task == mutex->holder) //-- Recursive locking
         {
             mutex->cnt++;
-
             rc = TERR_NO_ERR;
         }
         else
@@ -266,14 +265,14 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
                         }
                     }
 
-                    fYeild = true;
+                    fYield = true;
                 }
             }
         }
 
         tn_enable_interrupt();
 
-        if (fYeild == true)
+        if (fYield == true)
         {
             tn_switch_context();
             rc = tn_curr_run_task->task_wait_rc;
@@ -324,8 +323,7 @@ int tn_mutex_unlock(TN_MUTEX* mutex)
 }
 
 //----------------------------------------------------------------------------
-int do_mutex_unlock(TN_TCB*   task,  // The mutex holder
-                    TN_MUTEX* mutex) // Mutex to unlock
+int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
 {
     int         rc = TERR_WCONTEXT;
     TN_TCB*     curr_wait_task;
@@ -383,9 +381,9 @@ int do_mutex_unlock(TN_TCB*   task,  // The mutex holder
         else // some task(s) is wait for the mutex - the first in the queue will be a new holder
         {
             // Obtain a new mutex holder
-
             curr_que        = queue_remove_head(&(mutex->wait_queue));
             new_holder_task = get_task_by_tsk_queue(curr_que);
+
             if (new_holder_task != NULL)
             {
                 (void)task_wait_complete(new_holder_task);
@@ -415,6 +413,7 @@ int do_mutex_unlock(TN_TCB*   task,  // The mutex holder
                         }
                     }
                 }
+
                 rc = TERR_NO_ERR;
             }
         }
@@ -437,6 +436,7 @@ void do_release_mutex_queue(TN_TCB* task)
     {
         que   = queue_remove_head(&(task->mutex_queue));
         mutex = get_mutex_by_mutex_queque(que);
+
         if (mutex != NULL)
         {
             (void)do_mutex_unlock(task, mutex);

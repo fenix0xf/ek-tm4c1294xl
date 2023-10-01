@@ -32,18 +32,13 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
+#include <limits.h>
 #include <errno.h>
-#include <reent.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/unistd.h>
+// #include <malloc.h>
+#include <unistd.h>
 
 #define CRT_HEAP_DEBUG DEBUG
 #define SYSCALL_PREFIX "SYSCALL: "
-
-#undef errno
-extern error_t errno;
 
 /**
  * Linker symbols from src/firmware.ld.
@@ -86,15 +81,15 @@ void hal_crt_init(hal_crt_stdout_func_t stdout_func)
     hal_crt_stdout_func_set(stdout_func);
 
     /// Disable all stdio buffers to handle possible stdout in malloc()->_sbrk().
-    setvbuf(stdin, NULL, _IONBF, 0);
-    setvbuf(stdout, NULL, _IONBF, 0);
-    setvbuf(stderr, NULL, _IONBF, 0);
+    //    setvbuf(stdin, NULL, _IONBF, 0);
+    //    setvbuf(stdout, NULL, _IONBF, 0);
+    //    setvbuf(stderr, NULL, _IONBF, 0);
 
-    char* buf = (char*)malloc(512);
-    setvbuf(stdout, buf, _IOFBF, 512);
+    //    char* buf = (char*)malloc(512);
+    //    setvbuf(stdout, buf, _IOFBF, 512);
 
-    buf = (char*)malloc(512);
-    setvbuf(stderr, buf, _IOFBF, 512);
+    //    buf = (char*)malloc(512);
+    //    setvbuf(stderr, buf, _IOFBF, 512);
 }
 
 void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func)
@@ -103,115 +98,99 @@ void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func)
 }
 
 /**
- * Implementation of The Red Hat newlib C Library platform syscalls.
+ * Implementation of LIBC platform syscalls.
  *
  */
-int _gettimeofday(struct timeval* ptimeval, struct timezone* tz)
+// int _gettimeofday(struct timeval* ptimeval, struct timezone* tz)
+//{
+//     (void)ptimeval;
+//     (void)tz;
+//     return (-1); // todo to implement
+// }
+
+ssize_t read(int fd, void* buf, size_t nbyte)
 {
-    (void)ptimeval;
-    (void)tz;
-    return (-1); // todo to implement
-}
-
-int _open(const char* file, int flags, int mode)
-{
-    (void)file;
-    (void)flags;
-    (void)mode;
-
-    return (-1);
-}
-
-int _close(int fd)
-{
-    (void)fd;
-    return (-1);
-}
-
-int _fstat(int fd, struct stat* pstat)
-{
-    (void)fd;
-
-    pstat->st_mode = S_IFCHR;
-    return 0;
-}
-
-int _isatty(int fd)
-{
-    (void)fd;
-    return 1;
-}
-
-off_t _lseek(int fd, off_t pos, int whence)
-{
-    (void)fd;
-    (void)pos;
-    (void)whence;
-    return 0;
-}
-
-size_t _read(int fd, void* buf, size_t len)
-{
-    (void)fd;
-    (void)buf;
-    (void)len;
-    return 0;
-}
-
-size_t _write(int fd, const void* buf, size_t size)
-{
-    /**
-     * This means that we should flush internal buffers. Since we don't we just return.
-     * (Remember, "handle" == -1 means that all handles should be flushed.)
-     */
-    if (HAL_UNLIKELY(buf == NULL))
+    if (HAL_UNLIKELY(nbyte == 0))
     {
-        return 0;
+        return 0; ///< It is EOF.
+    }
+
+    if (HAL_UNLIKELY(nbyte > SSIZE_MAX))
+    {
+        errno = EINVAL;
+        return (-1); ///< It is not EOF but just an error.
+    }
+
+    if (HAL_UNLIKELY(fd != STDIN_FILENO))
+    {
+        errno = EBADF;
+        return (-1); ///< It is not EOF but just an error.
+    }
+
+    (void)buf; //todo
+
+    return 0;
+}
+
+ssize_t write(int fd, const void* buf, size_t nbyte)
+{
+    if (HAL_UNLIKELY(nbyte == 0))
+    {
+        return 0; ///< It is EOF.
+    }
+
+    if (HAL_UNLIKELY(nbyte > SSIZE_MAX))
+    {
+        errno = EINVAL;
+        return (-1); ///< It is not EOF but just an error.
     }
 
     /**
-     * This handler only writes to "standard out" and "standard err",
-     * for all other file handles it returns failure.
+     * This handler only writes to "standard out" and "standard error", for all other file handles it returns failure.
      */
     if (HAL_UNLIKELY((fd != STDOUT_FILENO) && (fd != STDERR_FILENO)))
     {
-        return (size_t)(-1);
+        errno = EBADF;
+        return (-1); ///< It is not EOF but just an error.
     }
 
     if (HAL_LIKELY(g_stdout_func != NULL))
     {
-        g_stdout_func(buf, size);
+        g_stdout_func(buf, nbyte);
     }
     else
     {
         hal_mcu_halt();
     }
 
-    return size;
+    return (ssize_t)nbyte;
 }
 
 void* _sbrk(ptrdiff_t incr)
 {
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
 
-    ptrdiff_t used = (ptrdiff_t)g_heap_brk - (ptrdiff_t)g_heap;
     ptrdiff_t brk  = g_heap_brk;
+    ptrdiff_t used = brk - (ptrdiff_t)g_heap;
 
-    if ((used + incr) > (ptrdiff_t)sizeof(g_heap))
+    if (HAL_UNLIKELY((used + incr) > (ptrdiff_t)sizeof(g_heap)))
     {
+        hal_ll_cr_sect_leave();
+
         hal_errorf(SYSCALL_PREFIX "NO HEAP MEMORY! _sbrk(%d bytes), used/total: %d/%u bytes",
                    (int)incr,
                    used,
                    sizeof(g_heap));
 
         errno = ENOMEM;
-        brk   = -1;
-        goto clear;
+        return (void*)(-1);
     }
 
     g_heap_brk += incr;
 
-    if (g_heap_brk < (ptrdiff_t)g_heap)
+    hal_ll_cr_sect_leave();
+
+    if (HAL_UNLIKELY(g_heap_brk < (ptrdiff_t)g_heap))
     {
         hal_errorf(SYSCALL_PREFIX "HEAP FREE ERROR! _sbrk(%d bytes), used/total: %d/%u bytes",
                    (int)incr,
@@ -230,25 +209,11 @@ void* _sbrk(ptrdiff_t incr)
                sizeof(g_heap));
 #endif
 
-clear:
-    hal_cr_sect_leave();
     return (void*)brk;
-}
-
-void _kill(int pid, int sig)
-{
-    (void)pid;
-    (void)sig;
-}
-
-int _getpid(void)
-{
-    return -1;
 }
 
 void _exit(int status)
 {
-    (void)status;
-    hal_puts(SYSCALL_PREFIX "_exit()");
+    hal_printf(SYSCALL_PREFIX "_exit(%d)", status);
     hal_mcu_halt();
 }

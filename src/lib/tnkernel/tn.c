@@ -30,7 +30,7 @@
 #include "tn.h"
 #include "tn_utils.h"
 
-//  The System uses internally lowest priority level
+//  The System uses internally the lowest priority level
 //
 //   - level (TN_NUM_PRIORITY-1)  (lowest)  for system idle task
 

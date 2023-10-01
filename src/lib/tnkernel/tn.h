@@ -140,11 +140,11 @@ extern "C"
 #define TSK_WAIT_REASON_MUTEX_I 0x0040 //-- ver 3
 #define TSK_WAIT_REASON_WFIXMEM 0x2000
 
-#define TN_EVENT_ATTR_SINGLE    1u  // if no the attr, it will be treated as TN_EVENT_ATTR_MULTI
-#define TN_EVENT_ATTR_MULTI     2u  // may be assigned at wait
+#define TN_EVENT_ATTR_SINGLE    1u  // If no the attr, it will be treated as TN_EVENT_ATTR_MULTI
+#define TN_EVENT_ATTR_MULTI     2u  // May be assigned at wait
 
-#define TN_EVENT_ATTR_CLR       4u  // clear all
-#define TN_EVENT_ATTR_BITCLR    8u  // Clear condition bit only
+#define TN_EVENT_ATTR_CLR       4u  // Clear all bits
+#define TN_EVENT_ATTR_BITCLR    8u  // Clear the condition bit only
 
 #define TN_EVENT_WCOND_OR       16u // A single any bit set is enough
 #define TN_EVENT_WCOND_AND      32u // An all bit have to be set for the event rising
@@ -205,13 +205,13 @@ typedef struct _TN_TCB
     unsigned int* task_stk;    //-- Pointer to task's top of stack
     CDLL_QUEUE    task_queue;  //-- Queue is used to include task in ready/wait lists
     CDLL_QUEUE    timer_queue; //-- Queue is used to include task in timer (timeout,etc.) list
-    CDLL_QUEUE*   pwait_queue; //-- Ptr to object's(semaphor,event,etc.) wait list,
+    CDLL_QUEUE*   pwait_queue; //-- Ptr to object's (semaphore,event,etc.) wait list,
                                //   that task has been included for waiting (ver 2.x)
     CDLL_QUEUE create_queue;   //-- Queue is used to include task in create list only
 
 #if TN_USE_MUTEXES
     CDLL_QUEUE mutex_queue;         //-- List of all mutexes that tack locked  (ver 2.x)
-    int        num_hold_pi_mutexes; //-- Number of the holded mutexes with priority inheritance
+    int        num_hold_pi_mutexes; //-- Number of the held mutexes with priority inheritance
     int        num_pi_active_op;    //-- Number of the active priority inheritance operations
 #endif
 
@@ -345,17 +345,15 @@ typedef struct _TN_FMP
 
 typedef struct _TN_MUTEX
 {
-    CDLL_QUEUE wait_queue;       //-- List of tasks that wait a mutex
-    CDLL_QUEUE mutex_queue;      //-- To include in task's locked mutexes list (if any)
-                                 //   CDLL_QUEUE lock_mutex_queue;  //-- To include in system's locked mutexes list
-    unsigned int attr;           //-- Mutex creation attr - CEILING or INHERIT
-    int          pi_active;      //-- Priority inheritance process is active
-
-    TN_TCB*       holder;        //-- Current mutex owner(task that locked mutex)
-    int           ceil_priority; //-- When mutex created with CEILING attr
-    int           cnt;           //-- Recursive locking counter
-    unsigned long id_mutex;      //-- ID for verification(is it a mutex or another object?)
-                                 // All mutexes have the same id_mutex magic number (ver 2.x)
+    CDLL_QUEUE wait_queue;   //-- List of tasks that wait a mutex
+    CDLL_QUEUE mutex_queue;  //-- To include in task's locked mutexes list (if any) CDLL_QUEUE lock_mutex_queue;
+                             //-- To include in system's locked mutexes list
+    unsigned int  attr;      //-- Mutex creation attr - CEILING or INHERIT
+    int           pi_active; //-- Priority inheritance process is active
+    TN_TCB*       holder;    //-- Current mutex owner (task that locked mutex)
+    int           cnt;       //-- Recursive locking counter
+    unsigned long id_mutex;  //-- ID for verification(is it a mutex or another object?)
+                             //-- All mutexes have the same id_mutex magic number (ver 2.x)
 } TN_MUTEX;
 
 //----- Timer ------------
@@ -393,7 +391,7 @@ typedef struct _MEMINFO
 //-- Global vars
 
 extern CDLL_QUEUE   tn_ready_list[TN_NUM_PRIORITY]; //-- All ready to run (RUNNABLE) tasks
-extern CDLL_QUEUE   tn_create_queue;                //-- All created tasks (now - for statictic only)
+extern CDLL_QUEUE   tn_create_queue;                //-- All created tasks
 extern volatile int tn_created_tasks_qty;           //-- Num of created tasks
 
 extern volatile int tn_system_state;                //-- System state (running/not running,etc.)
@@ -656,7 +654,6 @@ TN_MUTEX* tn_mutex_create_dyn(unsigned int attribute, int* err);
 #endif
 int tn_mutex_delete(TN_MUTEX* mutex);
 int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout);
-int tn_mutex_lock_polling(TN_MUTEX* mutex);
 int tn_mutex_unlock(TN_MUTEX* mutex);
 
 int  do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex);

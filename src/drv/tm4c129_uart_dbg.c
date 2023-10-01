@@ -98,9 +98,9 @@ HAL_INLINE void dma_buf_swap(size_t bidx)
 {
     struct dma_buf* buf = &g_buf[bidx];
 
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
     buf->idx = buf_index_inc(buf->idx);
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
 }
 
 static void tm4c129_uart_dbg_init_dma(void)

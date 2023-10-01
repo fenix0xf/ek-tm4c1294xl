@@ -41,7 +41,7 @@ set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_AS arm-none-eabi-as)
 set(CMAKE_RANLIB arm-none-eabi-ranlib)
 
-# Enable C preprocessor for asm files
+# Enable C preprocessor for asm files.
 set(CMAKE_ASM_FLAGS "-x assembler-with-cpp")
 
 set(CMAKE_C_FLAGS_DEBUG "-Og")

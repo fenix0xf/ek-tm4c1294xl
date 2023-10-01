@@ -270,7 +270,7 @@ bool tm4c129_int_init(void)
         return false;
     }
 
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
 
     /**
      * Set default ISR handlers and enable some system interrupts.
@@ -282,7 +282,7 @@ bool tm4c129_int_init(void)
      */
     HWREG(NVIC_VTABLE) = (uintptr_t)g_vtable_ram;
 
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
     return true;
 }
 
@@ -293,11 +293,11 @@ bool tm4c129_int_register(size_t isr, void (*handler)(void))
         return false;
     }
 
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
 
     g_vtable_ram[isr] = (handler == NULL) ? tm4c129_int_def : handler;
 
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
 
     return true;
 }

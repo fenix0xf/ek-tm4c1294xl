@@ -29,14 +29,7 @@
 #include <inc/hw_ints.h>
 
 /**
- * Memory Map
- *
- * In release build first of 32 KiB flash memory used for bootloader.
- * In debug build bootloader is not used.
- * Next block of 240 KiB of flash memory used for common firmware.
- * Second block of 240 KiB of flash memory used as temporary buffer for firmware updates.
- * Total used only 1024 KiB on chip flash memory.
- *
+ * Memory Map.
  */
 
 #define MM_VTABLE_SP_NUM 1                                   ///< First item in ISR table is initial stack pointer.

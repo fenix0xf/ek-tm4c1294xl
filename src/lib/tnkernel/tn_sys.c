@@ -316,17 +316,13 @@ void task_curr_to_wait_action(CDLL_QUEUE* wait_que, int wait_reason, unsigned lo
     else // Add by priority
     {
         queue_insert_by_priority(wait_que, &(tn_curr_run_task->task_queue), tn_curr_run_task->priority);
-
         tn_curr_run_task->pwait_queue = wait_que;
     }
 
     //--- Add to the timers queue
-
     if (timeout != TN_WAIT_INFINITE && timeout != TN_NO_WAIT)
     {
         (void)tn_os_timer_start(tn_curr_run_task, timeout);
-
-        // queue_add_tail(&tn_wait_timeout_list, &(tn_curr_run_task->timer_queue));
     }
 }
 

@@ -33,14 +33,14 @@
  */
 HAL_INLINE void ringbuf_index_update(volatile size_t* value, size_t delta, size_t buf_len)
 {
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
 
     *value += delta;
 
     /// This loop need if (delta > buf_len).
     while (*value >= buf_len) { *value -= buf_len; }
 
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
 }
 
 /**
@@ -71,9 +71,9 @@ bool ring_buf_is_empty(struct ring_buf* rb)
 
 void ring_buf_flush(struct ring_buf* rb)
 {
-    hal_cr_sect_enter();
+    hal_ll_cr_sect_enter();
     rb->read_idx = rb->write_idx;
-    hal_cr_sect_leave();
+    hal_ll_cr_sect_leave();
 }
 
 size_t ring_buf_used(struct ring_buf* rb)

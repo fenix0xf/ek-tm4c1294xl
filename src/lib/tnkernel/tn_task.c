@@ -50,7 +50,7 @@ int tn_task_create(TN_TCB* task,                   //-- task TCB
     unsigned int* ptr_stack;
     unsigned int  i;
 
-    //-- Light weight checking of system tasks recreation
+    //-- Lightweight checking of system tasks recreation
 
     if ((priority == 0U && ((option & TN_TASK_OS_TICK) == 0U)) ||
         (priority == TN_NUM_PRIORITY - 1U && (option & TN_TASK_IDLE) == 0U))
@@ -679,8 +679,8 @@ int tn_task_change_priority(TN_TCB* task, unsigned int new_priority)
     {
         rc = TERR_WCONTEXT;
     }
-    else if (new_priority == 0U || new_priority > TN_NUM_PRIORITY - 2U) //-- try to set pri
-    {                                                                   // reserved by sys
+    else if (new_priority == 0U || new_priority > TN_NUM_PRIORITY - 2U) //-- try to set pri reserved by sys
+    {
         rc = TERR_WPARAM;
     }
     else

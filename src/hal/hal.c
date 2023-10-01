@@ -146,18 +146,21 @@ void hal_systick_handler(void)
 
 void hal_uart_dbg_switch_to_fail_safe(void)
 {
-    tm4c129_uart_dbg_free();
+    tm4c129_uart_dbg_free(); ///< Can use DMA interrupts inside, don not disable interrupts before this.
+
+    hal_ll_cr_sect_enter();
 
     if (!tm4c129_uart_dbg_fail_safe_init())
     {
         /**
-         * stderr and stdout is not initialized here.
-         * Stop the system without any print to stdout.
+         * stderr and stdout is not initialized here. Stop the system without any print to stdout.
          */
         tm4c129_mcu_halt();
     }
 
     hal_crt_stdout_func_set(tm4c129_uart_dbg_fail_safe_send_buf);
+
+    hal_ll_cr_sect_leave();
 }
 
 void hal_print_version(void)

@@ -94,9 +94,9 @@ HAL_INLINE void hal_mcu_int_restore(size_t dstate)
  */
 HAL_INLINE size_t hal_mcu_inside_int(void)
 {
-    size_t int_num;
-    tm4c129_mcu_int_active_get(int_num);
-    return int_num;
+    size_t inum;
+    tm4c129_mcu_int_active_get(inum);
+    return inum;
 }
 
 HAL_INLINE void hal_mcu_mdelay(size_t milliseconds)
@@ -131,11 +131,11 @@ void hal_sleep(size_t mS);
     } while (0)
 
 /**
- * HAL critical sections.
+ * @brief HAL low level critical sections.
  */
-#define hal_cr_sect_enter()       size_t hal_mcu_int_dstate = hal_mcu_int_off_dstate()
-#define hal_cr_sect_enter_reuse() hal_mcu_int_dstate = hal_mcu_int_off_dstate()
-#define hal_cr_sect_leave()       hal_mcu_int_restore(hal_mcu_int_dstate)
+#define hal_ll_cr_sect_enter()       size_t hal_mcu_int_dstate = hal_mcu_int_off_dstate()
+#define hal_ll_cr_sect_enter_reuse() hal_mcu_int_dstate = hal_mcu_int_off_dstate()
+#define hal_ll_cr_sect_leave()       hal_mcu_int_restore(hal_mcu_int_dstate)
 
 /**
  * Timestamp functions. All values in milliseconds.

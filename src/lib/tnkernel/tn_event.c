@@ -182,6 +182,7 @@ int tn_event_delete(TN_EVENT* evf)
             }
         }
     }
+
     return rc;
 }
 
@@ -219,12 +220,12 @@ int tn_event_wait(TN_EVENT*     evf,
             else
             {
                 tn_idisable_interrupt();
-
                 rc = do_check_release_cond(evf, wait_mode, wait_pattern);
-                if (rc == true) // Got event rising condition
+
+                if (rc == true)
                 {
-                    do_clear_pattern(evf, wait_mode, wait_pattern,
-                                     p_flags_pattern); // [OUT]
+                    // Got event rising condition
+                    do_clear_pattern(evf, wait_mode, wait_pattern, p_flags_pattern); // [OUT]
                     rc = TERR_NO_ERR;
                 }
                 else
@@ -233,6 +234,7 @@ int tn_event_wait(TN_EVENT*     evf,
                     {
                         *p_flags_pattern = evf->pattern;
                     }
+
                     rc = TERR_TIMEOUT; // Here - Polling failed
                 }
 
@@ -246,10 +248,11 @@ int tn_event_wait(TN_EVENT*     evf,
             tn_disable_interrupt();
 
             rc = do_check_release_cond(evf, wait_mode, wait_pattern);
-            if (rc == true) // Got event rising condition
+
+            if (rc == true)
             {
-                do_clear_pattern(evf, wait_mode, wait_pattern,
-                                 p_flags_pattern); // [OUT]
+                // Got event rising condition
+                do_clear_pattern(evf, wait_mode, wait_pattern, p_flags_pattern); // [OUT]
                 rc = TERR_NO_ERR;
             }
             else
@@ -258,6 +261,7 @@ int tn_event_wait(TN_EVENT*     evf,
                 {
                     *p_flags_pattern = evf->pattern;
                 }
+
                 rc = TERR_TIMEOUT; // Here - Polling failed
             }
 
@@ -409,7 +413,7 @@ static bool do_check_release_cond(TN_EVENT* evf, unsigned int wait_mode, unsigne
 
     //-- Check release condition
 
-    if ((wait_mode & TN_EVENT_WCOND_OR) == TN_EVENT_WCOND_OR) //-- any setted bit is enough for release condition
+    if ((wait_mode & TN_EVENT_WCOND_OR) == TN_EVENT_WCOND_OR) //-- any set bit is enough for release condition
     {
         if ((evf->pattern & wait_pattern) != 0U)
         {
@@ -423,6 +427,7 @@ static bool do_check_release_cond(TN_EVENT* evf, unsigned int wait_mode, unsigne
             fCond = true;
         }
     }
+
     return fCond;
 }
 

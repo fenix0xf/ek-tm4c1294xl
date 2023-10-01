@@ -34,7 +34,7 @@ MEMORY
     SRAM (rwx)  : o = 0x20000000, l = 256K
 }
 
-/* Don not use __align from C code, it refers to value at address 0x00000008 inside vtable. */
+/* Don not use __align from C code, it refers to value at address 0x00000008 inside .vtable. */
 __align = 0x00000008;
 
 SECTIONS
