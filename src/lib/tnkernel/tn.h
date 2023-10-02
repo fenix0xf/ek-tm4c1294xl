@@ -658,14 +658,8 @@ int tn_mutex_unlock(TN_MUTEX* mutex);
 
 int  do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex);
 void do_set_mutex_holder_max_priority(TN_TCB* task);
-#endif
-
-//-- Routines
-
-int  find_max_blocked_priority(TN_MUTEX* mutex, int ref_priority);
-int  try_lock_mutex(TN_TCB* task);
-int  do_unlock_mutex(TN_TCB* task, TN_MUTEX* mutex); // v 3.0
 void do_release_mutex_queue(TN_TCB* task);
+#endif
 
 //----- tn_mailbox.c ---------------------------------
 

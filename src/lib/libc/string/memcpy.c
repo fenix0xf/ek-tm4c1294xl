@@ -31,6 +31,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
             *(u32*)(d + 8)  = *(u32*)(s + 8);
             *(u32*)(d + 12) = *(u32*)(s + 12);
         }
+
         if (n & 8)
         {
             *(u32*)(d + 0)  = *(u32*)(s + 0);
@@ -38,21 +39,25 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
             d              += 8;
             s              += 8;
         }
+
         if (n & 4)
         {
             *(u32*)(d + 0)  = *(u32*)(s + 0);
             d              += 4;
             s              += 4;
         }
+
         if (n & 2)
         {
             *d++ = *s++;
             *d++ = *s++;
         }
+
         if (n & 1)
         {
             *d = *s;
         }
+
         return dest;
     }
 
@@ -66,6 +71,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
                 *d++  = *s++;
                 *d++  = *s++;
                 n    -= 3;
+
                 for (; n >= 17; s += 16, d += 16, n -= 16)
                 {
                     x               = *(u32*)(s + 1);
@@ -113,6 +119,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
                 break;
         }
     }
+
     if (n & 16)
     {
         *d++ = *s++;
@@ -132,6 +139,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
         *d++ = *s++;
         *d++ = *s++;
     }
+
     if (n & 8)
     {
         *d++ = *s++;
@@ -143,6 +151,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
         *d++ = *s++;
         *d++ = *s++;
     }
+
     if (n & 4)
     {
         *d++ = *s++;
@@ -150,15 +159,18 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
         *d++ = *s++;
         *d++ = *s++;
     }
+
     if (n & 2)
     {
         *d++ = *s++;
         *d++ = *s++;
     }
+
     if (n & 1)
     {
         *d = *s;
     }
+
     return dest;
 #endif
 

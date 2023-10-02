@@ -15,6 +15,7 @@ void* memmove(void* dest, const void* src, size_t n)
     {
         return d;
     }
+
     if ((uintptr_t)s - (uintptr_t)d - n <= -2 * n)
     {
         return memcpy(d, s, n);
@@ -31,8 +32,10 @@ void* memmove(void* dest, const void* src, size_t n)
                 {
                     return dest;
                 }
+
                 *d++ = *s++;
             }
+
             for (; n >= WS; n -= WS, d += WS, s += WS) { *(WT*)d = *(WT*)s; }
         }
 #endif
@@ -49,6 +52,7 @@ void* memmove(void* dest, const void* src, size_t n)
                 {
                     return dest;
                 }
+
                 d[n] = s[n];
             }
             while (n >= WS) { n -= WS, *(WT*)(d + n) = *(WT*)(s + n); }

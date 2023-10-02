@@ -11,7 +11,7 @@ hidden FILE __stdout_FILE = {
     .buf_size = sizeof buf - UNGET,
     .fd       = STDOUT_FILENO,
     .flags    = F_PERM | F_NORD,
-    .lbf      = '\n',
+    .lbf      = -1,
     .write    = __stdio_write,
     .mutex    = NULL,
 };

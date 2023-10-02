@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <string.h>
 
+#if __STDC_VERSION__ < 201112L
 char* gets(char* s)
 {
     size_t i = 0;
@@ -21,3 +22,4 @@ char* gets(char* s)
     FUNLOCK(stdin);
     return s;
 }
+#endif /* __STDC_VERSION__ < 201112L */

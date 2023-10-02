@@ -316,5 +316,3 @@ void __qsort_r(void* base, size_t nel, size_t width, cmpfun cmp, void* arg)
         head -= width;
     }
 }
-
-weak_alias(__qsort_r, qsort_r);

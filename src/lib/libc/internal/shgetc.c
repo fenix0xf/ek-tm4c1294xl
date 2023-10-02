@@ -9,6 +9,7 @@ void __shlim(FILE* f, off_t lim)
 {
     f->shlim = lim;
     f->shcnt = f->buf - f->rpos;
+
     /* If lim is nonzero, rend must be a valid pointer. */
     if (lim && f->rend - f->rpos > lim)
     {
@@ -24,6 +25,7 @@ int __shgetc(FILE* f)
 {
     int   c;
     off_t cnt = shcnt(f);
+
     if (f->shlim && cnt >= f->shlim || (c = __uflow(f)) < 0)
     {
         f->shcnt = f->buf - f->rpos + cnt;
@@ -31,7 +33,9 @@ int __shgetc(FILE* f)
         f->shlim = -1;
         return EOF;
     }
+
     cnt++;
+
     if (f->shlim && f->rend - f->rpos > f->shlim - cnt)
     {
         f->shend = f->rpos + (f->shlim - cnt);
@@ -40,10 +44,13 @@ int __shgetc(FILE* f)
     {
         f->shend = f->rend;
     }
+
     f->shcnt = f->buf - f->rpos + cnt;
+
     if (f->rpos <= f->buf)
     {
         f->rpos[-1] = c;
     }
+
     return c;
 }

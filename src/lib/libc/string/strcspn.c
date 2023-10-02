@@ -13,9 +13,9 @@ size_t strcspn(const char* s, const char* c)
     }
 
     memset(byteset, 0, sizeof byteset);
-    for (; *c && BITOP(byteset, *(unsigned char*)c, |=); c++)
-        ;
-    for (; *s && !BITOP(byteset, *(unsigned char*)s, &); s++)
-        ;
+
+    for (; *c && BITOP(byteset, *(unsigned char*)c, |=); c++) {}
+    for (; *s && !BITOP(byteset, *(unsigned char*)s, &); s++) {}
+
     return s - a;
 }

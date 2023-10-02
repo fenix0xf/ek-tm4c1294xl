@@ -1,13 +1,10 @@
 #include <string.h>
 #include <stdint.h>
 
-#ifdef __GNUC__
-/* Preventing of the linker error in LTO mode: undefined reference to 'memset'.
+/* An aim of "__used" attribute is preventing of the linker error in LTO mode: undefined reference to 'memset'.
  * Link time optimization (-flto) may drop memset() out as unused, but at the same time
  * C compiler can use implicit call of memset() for something like this: char s[99] = {0}; */
-__attribute__((used))
-#endif
-void* memset(void* dest, int c, size_t n)
+__used void* memset(void* dest, int c, size_t n)
 {
     unsigned char* s = (unsigned char*)dest;
     size_t         k;
@@ -15,27 +12,32 @@ void* memset(void* dest, int c, size_t n)
     /* Fill head and tail with minimal branching. Each
      * conditional ensures that all the subsequently used
      * offsets are well-defined and in the dest region. */
-
     if (!n)
     {
         return dest;
     }
+
     s[0]     = c;
     s[n - 1] = c;
+
     if (n <= 2)
     {
         return dest;
     }
+
     s[1]     = c;
     s[2]     = c;
     s[n - 2] = c;
     s[n - 3] = c;
+
     if (n <= 6)
     {
         return dest;
     }
+
     s[3]     = c;
     s[n - 4] = c;
+
     if (n <= 8)
     {
         return dest;
@@ -45,7 +47,6 @@ void* memset(void* dest, int c, size_t n)
      * and truncate n to a multiple of 4. The previous code
      * already took care of any head/tail that get cut off
      * by the alignment. */
-
     k  = -(uintptr_t)s & 3;
     s += k;
     n -= k;
@@ -62,21 +63,24 @@ void* memset(void* dest, int c, size_t n)
      * As in the initial byte-based head/tail fill, each
      * conditional below ensures that the subsequent offsets
      * are valid (e.g. !(n<=24) implies n>=28). */
-
     *(u32*)(s + 0)     = c32;
     *(u32*)(s + n - 4) = c32;
+
     if (n <= 8)
     {
         return dest;
     }
+
     *(u32*)(s + 4)      = c32;
     *(u32*)(s + 8)      = c32;
     *(u32*)(s + n - 12) = c32;
     *(u32*)(s + n - 8)  = c32;
+
     if (n <= 24)
     {
         return dest;
     }
+
     *(u32*)(s + 12)     = c32;
     *(u32*)(s + 16)     = c32;
     *(u32*)(s + 20)     = c32;
@@ -89,7 +93,6 @@ void* memset(void* dest, int c, size_t n)
     /* Align to a multiple of 8 so we can fill 64 bits at a time,
      * and avoid writing the same bytes twice as much as is
      * practical without introducing additional branching. */
-
     k  = 24 + ((uintptr_t)s & 4);
     s += k;
     n -= k;
@@ -97,8 +100,8 @@ void* memset(void* dest, int c, size_t n)
     /* If this loop is reached, 28 tail bytes have already been
      * filled, so any remainder when n drops below 32 can be
      * safely ignored. */
-
     u64 c64 = c32 | ((u64)c32 << 32);
+
     for (; n >= 32; n -= 32, s += 32)
     {
         *(u64*)(s + 0)  = c64;

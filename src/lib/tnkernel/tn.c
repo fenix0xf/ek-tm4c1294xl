@@ -125,7 +125,7 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
     (void)sys_obj_mem_size;
 #endif
 
-    //------ System timers wheel
+    //-- System timers wheel
     queue_reset(&tn_os_timer_list_gen);
     for (i = 0; i < (int)TN_OS_TICK_LISTS_CNT; i++) { queue_reset(&(tn_os_timer_list_tick[i])); }
 

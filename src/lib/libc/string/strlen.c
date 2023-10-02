@@ -10,9 +10,11 @@
 size_t strlen(const char* s)
 {
     const char* a = s;
+
 #ifdef __GNUC__
     typedef size_t __attribute__((__may_alias__)) word;
     const word* w;
+
     for (; (uintptr_t)s % ALIGN; s++)
     {
         if (!*s)
@@ -20,10 +22,12 @@ size_t strlen(const char* s)
             return s - a;
         }
     }
+
     for (w = (const word*)s; !HASZERO(*w); w++) {}
+
     s = (const char*)w;
 #endif
-    for (; *s; s++)
-        ;
+    for (; *s; s++) {}
+
     return s - a;
 }
