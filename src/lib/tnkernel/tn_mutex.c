@@ -33,14 +33,14 @@
 #if TN_USE_MUTEXES
 
 //----------------------------------------------------------------------------
-//  the field mutex->id_mutex should be set to 0
+//  the field lock->id_mutex should be set to 0
 //----------------------------------------------------------------------------
 int tn_mutex_create(TN_MUTEX* mutex, unsigned int attribute)
 {
     int rc = TERR_NO_ERR;
 
 #if TN_CHECK_PARAM
-    if (mutex == NULL || mutex->id_mutex != 0UL) //-- no recreation
+    if (lock == NULL || lock->id_mutex != 0UL) //-- no recreation
     {
         rc = TERR_WPARAM;
     }
@@ -74,12 +74,12 @@ int tn_mutex_create(TN_MUTEX* mutex, unsigned int attribute)
 //----------------------------------------------------------------------------
 TN_MUTEX* tn_mutex_create_dyn(unsigned int attribute, int* err) /* [OUT] */
 {
-    TN_MUTEX* mutex;
+    TN_MUTEX* lock;
     int       rc;
 
     if (tn_inside_int()) //  Check the call context
     {
-        mutex = NULL;
+        lock = NULL;
         if (err != NULL)
         {
             *err = TERR_WCONTEXT;
@@ -87,15 +87,15 @@ TN_MUTEX* tn_mutex_create_dyn(unsigned int attribute, int* err) /* [OUT] */
     }
     else
     {
-        mutex = (TN_MUTEX*)tn_alloc(&tn_objects_mem, sizeof(TN_MUTEX));
-        if (mutex != NULL)
+        lock = (TN_MUTEX*)tn_alloc(&tn_objects_mem, sizeof(TN_MUTEX));
+        if (lock != NULL)
         {
-            mutex->id_mutex = 0UL;
-            rc              = tn_mutex_create(mutex, attribute);
+            lock->id_mutex = 0UL;
+            rc             = tn_mutex_create(lock, attribute);
             if (rc != TERR_NO_ERR)
             {
-                (void)tn_dealloc(&tn_objects_mem, mutex);
-                mutex = NULL;
+                (void)tn_dealloc(&tn_objects_mem, lock);
+                lock = NULL;
                 if (err != NULL)
                 {
                     *err = rc;
@@ -110,16 +110,16 @@ TN_MUTEX* tn_mutex_create_dyn(unsigned int attribute, int* err) /* [OUT] */
             }
         }
 
-        if (mutex != NULL)
+        if (lock != NULL)
         {
-            mutex->id_mutex |= TN_DYN_CREATED;
+            lock->id_mutex |= TN_DYN_CREATED;
             if (err != NULL)
             {
                 *err = TERR_NO_ERR;
             }
         }
     }
-    return mutex;
+    return lock;
 }
 
 #endif /* #if TN_USE_DYN_OBJ */
@@ -136,7 +136,7 @@ int tn_mutex_delete(TN_MUTEX* mutex)
 #endif
 
 #if TN_CHECK_PARAM
-    if (mutex == NULL)
+    if (lock == NULL)
     {
         rc = TERR_WPARAM;
     }
@@ -152,7 +152,7 @@ int tn_mutex_delete(TN_MUTEX* mutex)
     }
     else
     {
-        //-- Remove all tasks(if any) from the mutex's wait queue
+        //-- Remove all tasks(if any) from the lock's wait queue
 
         tn_disable_interrupt();
 
@@ -161,7 +161,7 @@ int tn_mutex_delete(TN_MUTEX* mutex)
         (void)do_mutex_unlock(mutex->holder, mutex);
 
 #if TN_USE_DYN_OBJ
-        id = mutex->id_mutex;
+        id = lock->id_mutex;
 #endif
         mutex->id_mutex = 0UL; // Mutex set as 'not exists' now
 
@@ -170,7 +170,7 @@ int tn_mutex_delete(TN_MUTEX* mutex)
 #if TN_USE_DYN_OBJ
         if ((id & TN_DYN_MASK) == TN_DYN_CREATED) // was created dynamically
         {
-            (void)tn_dealloc(&tn_objects_mem, mutex);
+            (void)tn_dealloc(&tn_objects_mem, lock);
         }
 #endif
         if (fYield == true)
@@ -186,12 +186,12 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
 {
     TN_INTSAVE_DATA
 
-    int wait_reason = TSK_WAIT_REASON_MUTEX; // Just mutex without priority changing things
+    int wait_reason = TSK_WAIT_REASON_MUTEX; // Just lock without priority changing things
     int fYield      = false;
     int rc          = TERR_WCONTEXT;
 
 #if TN_CHECK_PARAM
-    if (mutex == NULL)
+    if (lock == NULL)
     {
         rc = TERR_WPARAM;
     }
@@ -216,11 +216,11 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
         }
         else
         {
-            if (mutex->holder == NULL) //-- mutex not locked
+            if (mutex->holder == NULL) //-- lock not locked
             {
                 mutex->holder = tn_curr_run_task;
 
-                //-- Add mutex to task's locked mutexes queue
+                //-- Add lock to task's locked mutexes queue
                 queue_add_tail(&(tn_curr_run_task->mutex_queue), &(mutex->mutex_queue));
 
                 if ((mutex->attr & TN_MUTEX_ATTR_INHERIT) == TN_MUTEX_ATTR_INHERIT)
@@ -230,7 +230,7 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
 
                 rc = TERR_NO_ERR;
             }
-            else //-- the mutex is already locked
+            else //-- the lock is already locked
             {
                 if (timeout == TN_NO_WAIT)
                 {
@@ -256,7 +256,7 @@ int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout)
                                 mutex->holder->num_pi_active_op++;
                             }
 
-                            //-- increase priority of the mutex holder
+                            //-- increase priority of the lock holder
 
                             if (tn_curr_run_task->priority < mutex->holder->priority)
                             {
@@ -294,7 +294,7 @@ int tn_mutex_unlock(TN_MUTEX* mutex)
     volatile int rc;
 
 #if TN_CHECK_PARAM
-    if (mutex == NULL)
+    if (lock == NULL)
     {
         rc = TERR_WPARAM;
     }
@@ -331,7 +331,7 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
     CDLL_QUEUE* curr_que;
     int         fPriorityUpdate = false;
 
-    //-- Unlocking is enabled only for the holder and already locked mutex
+    //-- Unlocking is enabled only for the holder and already locked lock
 
     if (task != mutex->holder || mutex->holder == NULL)
     {
@@ -344,7 +344,7 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
     }
     else
     {
-        //-- Remove mutex from the task's locked mutexes queue
+        //-- Remove lock from the task's locked mutexes queue
         queue_remove_entry(&(mutex->mutex_queue));
 
         if ((mutex->attr & TN_MUTEX_ATTR_INHERIT) == TN_MUTEX_ATTR_INHERIT)
@@ -354,6 +354,7 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
                 mutex->pi_active = false;
 
                 task->num_pi_active_op--;
+
                 if (task->num_pi_active_op == 0)
                 {
                     fPriorityUpdate = true;
@@ -373,14 +374,14 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
             }
         }
 
-        if (is_queue_empty(&(mutex->wait_queue)) == true) // No task waits a mutex
+        if (is_queue_empty(&(mutex->wait_queue)) == true) // No task waits a lock
         {
             mutex->holder = NULL;
             rc            = TERR_NO_ERR;
         }
-        else // some task(s) is wait for the mutex - the first in the queue will be a new holder
+        else // some task(s) is wait for the lock - the first in the queue will be a new holder
         {
-            // Obtain a new mutex holder
+            // Obtain a new lock holder
             curr_que        = queue_remove_head(&(mutex->wait_queue));
             new_holder_task = get_task_by_tsk_queue(curr_que);
 
@@ -396,7 +397,7 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
                 {
                     new_holder_task->num_hold_pi_mutexes++;
 
-                    // if we have another task(s) waiting for the mutex
+                    // if we have another task(s) waiting for the lock
 
                     if (is_queue_empty(&(mutex->wait_queue)) == false)
                     {
@@ -420,7 +421,7 @@ int do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex)
 
         if (fPriorityUpdate == true)
         {
-            tn_update_priority(task, task->restore_priority); // Do it last
+            tn_update_priority(task, task->restore_priority); // Do it last.
         }
     }
     return rc;
@@ -465,10 +466,10 @@ void do_set_mutex_holder_max_priority(TN_TCB* task)
             wait_task = get_task_by_tsk_queue(que);
             if (wait_task != NULL && mutex->holder != NULL) // Sanity
             {
-                //-- The mutex holder priority should be set as highest (minimal val) from
+                //-- The lock holder priority should be set as highest (minimal val) from
                 //--  - wait_task->priority
-                //--  - mutex holder->priority
-                //--  - mutex holder->restore priority
+                //--  - lock holder->priority
+                //--  - lock holder->restore priority
 
                 if (mutex->holder->priority < mutex->holder->restore_priority)
                 {
@@ -487,7 +488,7 @@ void do_set_mutex_holder_max_priority(TN_TCB* task)
                 mutex->holder->priority = priority;
             }
         }
-        else                           // No more tasks wait a mutex - restore the holder original priority
+        else                           // No more tasks wait a lock - restore the holder original priority
         {
             if (mutex->holder != NULL) // Sanity
             {

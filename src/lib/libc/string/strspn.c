@@ -11,6 +11,7 @@ size_t strspn(const char* s, const char* c)
     {
         return 0;
     }
+
     if (!c[1])
     {
         for (; *s == *c; s++)
@@ -18,9 +19,8 @@ size_t strspn(const char* s, const char* c)
         return s - a;
     }
 
-    for (; *c && BITOP(byteset, *(unsigned char*)c, |=); c++)
-        ;
-    for (; *s && BITOP(byteset, *(unsigned char*)s, &); s++)
-        ;
+    for (; *c && BITOP(byteset, *(unsigned char*)c, |=); c++) {}
+    for (; *s && BITOP(byteset, *(unsigned char*)s, &); s++) {}
+
     return s - a;
 }

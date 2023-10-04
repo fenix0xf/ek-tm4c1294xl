@@ -22,34 +22,96 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "hal_con.h"
 
+#include <hal/hal.h>
 #include <drv/tm4c129_uart_dbg.h>
 
 #include <stdio.h>
+#include <string.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <errno.h>
+
+#define STDIO_ERR_PREFIX "\nSTDIO ERR: "
+
+static void __stdio_halt(const char* func, const char* msg)
+{
+    error_t err = errno;
+    char    s[ITOA_BUFSIZ];
+
+    hal_mcu_int_off();
+    tm4c129_uart_dbg_fail_safe_init();
+
+    tm4c129_uart_dbg_fail_safe_print(STDIO_ERR_PREFIX);
+    tm4c129_uart_dbg_fail_safe_print(func);
+    tm4c129_uart_dbg_fail_safe_print(", \"");
+
+    if (msg && *msg)
+    {
+        size_t end   = strlen(msg) - 1;
+        bool   end_n = msg[end] == '\n';
+
+        tm4c129_uart_dbg_fail_safe_send_buf(msg, end_n ? end : end + 1);
+
+        if (end_n)
+        {
+            tm4c129_uart_dbg_fail_safe_print("\\n");
+        }
+    }
+
+    tm4c129_uart_dbg_fail_safe_print("\", errno=");
+    tm4c129_uart_dbg_fail_safe_puts(itoa((int)err, s, 10));
+    hal_mcu_halt();
+}
 
 int hal_puts(const char* s)
 {
-    int ret = puts(s);
-    fflush(stdout);
-    return ret;
+    int rc = puts(s);
+
+    if (HAL_UNLIKELY(rc < 0))
+    {
+        goto halt;
+    }
+
+    if (HAL_UNLIKELY(fflush(stdout) < 0))
+    {
+        goto halt;
+    }
+
+    if (0)
+    {
+halt:
+        __stdio_halt("hal_puts()", s);
+    }
+
+    return rc;
 }
 
 int hal_print(const char* s)
 {
-    int ch, chars = 0;
+    int rc = fputs(s, stdout);
 
-    while ((ch = *s++))
+    if (HAL_UNLIKELY(rc < 0))
     {
-        putc(ch, stdout);
-        chars++;
+        goto halt;
     }
 
-    fflush(stdout);
-    return chars;
+    if (HAL_UNLIKELY(fflush(stdout) < 0))
+    {
+        goto halt;
+    }
+
+    if (0)
+    {
+halt:
+        __stdio_halt("hal_print()", s);
+    }
+
+    return rc;
 }
 
 int hal_printf(const char* restrict fmt, ...)
@@ -59,12 +121,26 @@ int hal_printf(const char* restrict fmt, ...)
     int rc = vprintf(fmt, args);
     va_end(args);
 
-    fflush(stdout);
+    if (HAL_UNLIKELY(rc < 0))
+    {
+        goto halt;
+    }
+
+    if (HAL_UNLIKELY(fflush(stdout) < 0))
+    {
+        goto halt;
+    }
+
+    if (0)
+    {
+halt:
+        __stdio_halt("hal_printf()", fmt);
+    }
+
     return rc;
 }
 
-#ifdef DEBUG
-
+#if DEBUG
 void hal_dbg_printbuf(const void* buf, size_t size)
 {
     enum {
@@ -93,5 +169,4 @@ void hal_dbg_printbuf(const void* buf, size_t size)
 
     hal_printf("\n");
 }
-
-#endif // #ifdef DEBUG
+#endif /* DEBUG */

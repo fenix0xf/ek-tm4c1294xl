@@ -99,7 +99,7 @@ static const int_fast8_t g_i8I2CIntMapSnowflakeRows =
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _I2CBaseValid(uint32_t ui32Base)
 {
     return ((ui32Base == I2C0_BASE) || (ui32Base == I2C1_BASE) || (ui32Base == I2C2_BASE) || (ui32Base == I2C3_BASE) ||

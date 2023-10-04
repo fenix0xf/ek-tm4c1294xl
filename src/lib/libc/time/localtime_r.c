@@ -19,5 +19,3 @@ struct tm* __localtime_r(const time_t* restrict t, struct tm* restrict tm)
     }
     return tm;
 }
-
-weak_alias(__localtime_r, localtime_r);

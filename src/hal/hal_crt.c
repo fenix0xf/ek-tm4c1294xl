@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "hal_crt.h"
 
@@ -30,6 +30,9 @@
 #include <hal/hal_con.h>
 #include <drv/tm4c129_uart_dbg.h>
 
+#include <tn.h>
+
+#include <libc.h>
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
@@ -39,6 +42,8 @@
 
 #define CRT_HEAP_DEBUG DEBUG
 #define SYSCALL_PREFIX "SYSCALL: "
+
+#define LD_VAR(x)      ((size_t)&x)
 
 /* Linker symbols from src/firmware.ld.
  *
@@ -66,16 +71,16 @@ static hal_crt_stdout_func_t g_stdout_func;
 void hal_crt_init(hal_crt_stdout_func_t stdout_func)
 {
     /* Copy the data segment initializers from FLASH to SRAM. */
-    uintptr_t* src = &g_ld_ldata;
-    uintptr_t* dst = &g_ld_data;
-    while (dst < &g_ld_edata) { *dst++ = *src++; }
+    memcpy(&g_ld_data, &g_ld_ldata, LD_VAR(g_ld_edata) - LD_VAR(g_ld_data));
 
     /* Zero fill the bss segment. */
-    dst = &g_ld_bss;
-    while (dst < &g_ld_ebss) { *dst++ = 0; }
+    memset(&g_ld_bss, 0, LD_VAR(g_ld_ebss) - LD_VAR(g_ld_bss));
 
-    /* Set all global variables after data and bss segment initialization. */
-    g_heap_brk = (intptr_t)g_heap; /* Heap initialization: malloc can be used after this. */
+    /* Set all global variables after .data and .bss segment initialization. */
+
+    /* Heap initialization: malloc can be used after this line. */
+    g_heap_brk = (intptr_t)g_heap;
+
     hal_crt_stdout_func_set(stdout_func);
 }
 
@@ -164,7 +169,7 @@ void* sbrk(intptr_t incr)
     {
         hal_ll_cr_sect_leave();
 
-        hal_errorf(SYSCALL_PREFIX "NO HEAP MEMORY! _sbrk(%d bytes), used/total: %d/%u bytes",
+        hal_errorf(SYSCALL_PREFIX "NO HEAP MEMORY! sbrk(%d bytes), used/total: %d/%u bytes",
                    (int)incr,
                    used,
                    sizeof(g_heap));
@@ -197,4 +202,40 @@ void* sbrk(intptr_t incr)
 #endif
 
     return (void*)brk;
+}
+
+int libc_lock(void* lock)
+{
+    TN_MUTEX* mutex = (TN_MUTEX*)lock;
+
+    if (HAL_UNLIKELY(!tn_system_is_running() || tn_inside_int()))
+    {
+        return 0;
+    }
+
+    int rc = tn_mutex_lock(mutex, TN_WAIT_INFINITE);
+
+    if (HAL_UNLIKELY(rc != TERR_NO_ERR))
+    {
+        hal_mcu_halt();
+    }
+
+    return 1;
+}
+
+void libc_unlock(void* lock)
+{
+    TN_MUTEX* mutex = (TN_MUTEX*)lock;
+
+    if (HAL_UNLIKELY(!tn_system_is_running() || tn_inside_int()))
+    {
+        return;
+    }
+
+    int rc = tn_mutex_unlock(mutex);
+
+    if (HAL_UNLIKELY(rc != TERR_NO_ERR))
+    {
+        hal_mcu_halt();
+    }
 }

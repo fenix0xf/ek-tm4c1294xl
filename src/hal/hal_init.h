@@ -22,13 +22,32 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #pragma once
 
 #include <hal/hal_def.h>
 
-/**
- * HAL initialization function. Used as reset ISR handler.
- */
+#include <string.h>
+
+#define HAL_INIT_MSG_LEN 40
+
+#define HAL_INIT_ASSERT(msg, init_func)                   \
+    do {                                                  \
+        const char* m = msg;                              \
+        size_t      l = strlen(m);                        \
+        int         p = HAL_INIT_MSG_LEN - (int)l;        \
+        hal_print(m);                                     \
+        if (init_func)                                    \
+        {                                                 \
+            hal_printf("%*s\n", p > 0 ? p : 0, "[done]"); \
+        }                                                 \
+        else                                              \
+        {                                                 \
+            hal_error(HAL_STFN(init_func));               \
+            hal_mcu_halt();                               \
+        }                                                 \
+    } while (0)
+
+/* HAL initialization function. Used as reset ISR handler. */
 HAL_USED HAL_NORETURN void hal_init(void);

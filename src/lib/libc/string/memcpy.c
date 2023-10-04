@@ -2,7 +2,10 @@
 #include <stdint.h>
 #include <endian.h>
 
-void* memcpy(void* restrict dest, const void* restrict src, size_t n)
+/* An aim of "__used" attribute is preventing of the linker "undefined reference" error in LTO mode.
+ * Link time optimization (-flto) may drop the function out as unused, but at the same time
+ * C compiler can use implicit calls of this function. */
+__used void* memcpy(void* restrict dest, const void* restrict src, size_t n)
 {
     unsigned char*       d = (unsigned char*)dest;
     const unsigned char* s = (const unsigned char*)src;
@@ -172,8 +175,9 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n)
     }
 
     return dest;
-#endif
 
+#else  /* __GNUC__ */
     for (; n; n--) { *d++ = *s++; }
     return dest;
+#endif /* __GNUC__ */
 }

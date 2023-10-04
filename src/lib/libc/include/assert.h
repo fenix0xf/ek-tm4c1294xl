@@ -2,7 +2,7 @@
 
 #undef assert
 
-#ifdef DEBUG
+#if DEBUG
 #define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__), 0)))
 #else
 #define assert(x) (void)0

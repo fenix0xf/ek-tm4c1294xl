@@ -3,7 +3,7 @@
 
 #include "../../include/string.h"
 
-hidden void* __memrchr(const void*, int, size_t);
-hidden char* __strchrnul(const char*, int);
+void* __memrchr(const void*, int, size_t);
+char* __strchrnul(const char*, int);
 
 #endif

@@ -110,7 +110,7 @@ static const uint_fast8_t g_ui8TimerIntMapRowsSnowflake =
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _TimerBaseValid(uint32_t ui32Base)
 {
     return ((ui32Base == TIMER0_BASE) || (ui32Base == TIMER1_BASE) || (ui32Base == TIMER2_BASE) ||

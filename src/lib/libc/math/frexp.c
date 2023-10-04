@@ -32,5 +32,6 @@ double frexp(double x, int* e)
     *e   = ee - 0x3fe;
     y.i &= 0x800fffffffffffffull;
     y.i |= 0x3fe0000000000000ull;
+
     return y.d;
 }

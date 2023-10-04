@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "tm4c129_uart_dbg.h"
 
@@ -30,7 +30,7 @@
 
 #include <hal/hal.h>
 
-/**
+/*
  * Configure UART7 as debug console.
  */
 #define UART_PERIPH      SYSCTL_PERIPH_UART7
@@ -65,9 +65,8 @@ struct dma_buf
 
 static struct dma_buf g_buf[DMA_BUF_IDX_CNT];
 
-/**
+/*
  * Local functions.
- *
  */
 HAL_INLINE size_t buf_index_inc(size_t idx)
 {
@@ -131,9 +130,8 @@ static void tm4c129_uart_dbg_init_dma(void)
     UARTIntEnable(UART_BASE, UART_INT_DMATX);
 }
 
-/**
+/*
  * Interface functions.
- *
  */
 bool tm4c129_uart_dbg_fail_safe_init(void)
 {
@@ -152,12 +150,17 @@ bool tm4c129_uart_dbg_fail_safe_init(void)
     }
 
     UARTConfigSetExpClk(UART_BASE, TM4C129_MCU_FREQUENCY, UART_SPEED, UART_CFG);
+    UARTFIFODisable(UART_BASE);
+    UARTDMADisable(UART_BASE, UART_DMA_TX | UART_DMA_RX);
+    UARTIntDisable(UART_BASE, UART_INT_DMATX | UART_INT_DMARX);
+
     return true;
 }
 
 void tm4c129_uart_dbg_fail_safe_free(void)
 {
-    UARTDisable(UART_BASE); ///< Waiting for end of TX inside.
+    /* UARTDisable() is waiting for end of TX. */
+    UARTDisable(UART_BASE);
 
     tm4c129_periph_free(UART_PERIPH);
     tm4c129_periph_free(UART_GPIO_PERIPH);
@@ -190,7 +193,7 @@ void tm4c129_uart_dbg_fail_safe_send_byte(uint8_t b)
 
 void tm4c129_uart_dbg_fail_safe_flush(void)
 {
-    /// Wait for end of TX.
+    /* Wait for end of TX. */
     while (HWREG(UART_BASE + UART_O_FR) & UART_FR_BUSY) {}
 }
 
@@ -202,8 +205,7 @@ bool tm4c129_uart_dbg_init(void)
     }
 
     tm4c129_uart_dbg_init_dma();
-
-    return 0;
+    return false;
 }
 
 void tm4c129_uart_dbg_free(void)

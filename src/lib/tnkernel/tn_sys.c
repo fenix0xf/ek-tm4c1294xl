@@ -103,6 +103,7 @@ void tn_update_priority(TN_TCB* task, unsigned int new_priority)
         {
             new_priority = task->restore_priority;
         }
+
         old_priority   = task->priority;
         task->priority = new_priority;
 
@@ -150,12 +151,13 @@ void tn_update_priority(TN_TCB* task, unsigned int new_priority)
 
                             if (task->task_wait_reason == TSK_WAIT_REASON_MUTEX_I)
                             {
-                                //-- The task waits a mutex, therefore the mutex should have a holder
-
+                                //-- The task waits a lock, therefore the lock should have a holder
                                 mutex = get_mutex_by_wait_queque(task->pwait_queue);
+
                                 if (mutex != NULL)
                                 {
                                     task = mutex->holder; // task should not be NULL here
+
                                     if (task == NULL)
                                     {
                                         fExit = true;

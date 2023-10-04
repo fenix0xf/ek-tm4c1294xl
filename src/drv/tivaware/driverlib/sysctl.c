@@ -361,7 +361,7 @@ static const uint32_t g_pui32VCOFrequencies[MAX_VCO_ENTRIES] =
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool
 _SysCtlPeripheralValid(uint32_t ui32Peripheral)
 {

@@ -23,7 +23,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 ###
-### Project: EK-TM4C1294XL, C11 language.
+### Project: EK-TM4C1294XL, C17 language.
 ###
 project(EK-TM4C1294XL C ASM)
 
@@ -65,7 +65,7 @@ list(APPEND C_WARN
      -Wconversion
      -Wshadow
      -Wdouble-promotion
-     -Wc++-compat
+     #     -Wc++-compat
      -Wno-unused-function
 )
 

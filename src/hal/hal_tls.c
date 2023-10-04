@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "hal_tls.h"
 
@@ -35,7 +35,7 @@
 
 #if HAL_TLS_IS_SUPPORTED
 
-#define TLS_DEBUG             0
+#define TLS_DEBUG             DEBUG
 #define TLS_PREFIX            "TLS: "
 
 #define HAL_TLS_BITSET(a, b)  HAL_BITSET(a, b, HAL_TLS_BS_SLOT_BIT)
@@ -80,7 +80,7 @@ struct __emutls_object
 
 HAL_INLINE bool is_system_ctx(void)
 {
-    /// if tn_system_is_running() == 1 then tn_curr_run_task is guaranteed not to be NULL.
+    /* if tn_system_is_running() == 1 then tn_curr_run_task is guaranteed not to be NULL. */
     return hal_mcu_inside_int() || !tn_system_is_running();
 }
 
@@ -99,7 +99,7 @@ HAL_INLINE void* tls_item_get(struct hal_tls_block* tls_block, struct __emutls_o
     return &tls_block->items[obj->loc.idx.val];
 }
 
-HAL_INLINE void* tls_item_copy(struct hal_tls_block* tls_block, struct __emutls_object* obj)
+void* tls_item_copy(struct hal_tls_block* tls_block, struct __emutls_object* obj)
 {
     void* ptr = &tls_block->items[obj->loc.idx.val];
 
@@ -113,6 +113,18 @@ HAL_INLINE void* tls_item_copy(struct hal_tls_block* tls_block, struct __emutls_
     }
 
     HAL_TLS_BITSET(tls_block->bitset, obj->loc.idx.val);
+
+#if TLS_DEBUG
+    bool is_sys_ctx = is_system_ctx();
+
+    hal_printf(TLS_PREFIX "%s%s TLS item[%u] copy: size %u, align %u, templ 0x%08X\n",
+               is_sys_ctx ? "System" : "Task ",
+               is_sys_ctx ? "" : tn_curr_run_task->task_name,
+               (unsigned)obj->loc.idx.val,
+               obj->size,
+               obj->align,
+               obj->templ);
+#endif
 
     return ptr;
 }
@@ -142,7 +154,7 @@ void* __emutls_get_address(struct __emutls_object* obj)
     }
 
 #if TLS_DEBUG
-    hal_printf(TLS_PREFIX "%s%s TLS alloc: size %u, align %u, templ 0x%08X\n",
+    hal_printf("\n" TLS_PREFIX "%s%s TLS alloc: size %u, align %u, templ 0x%08X\n",
                is_sys_ctx ? "System" : "Task ",
                is_sys_ctx ? "" : tn_curr_run_task->task_name,
                obj->size,

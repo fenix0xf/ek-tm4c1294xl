@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "tm4c129_mcu.h"
 
@@ -115,7 +115,7 @@ HAL_NORETURN void tm4c129_mcu_halt(void)
 {
     tm4c129_mcu_int_off();
 
-#ifdef DEBUG
+#if DEBUG
     /// If a debugger is present, then break into the debugger.
     if (HWREG(NVIC_DBG_CTRL) & NVIC_DBG_CTRL_C_DEBUGEN)
     {
@@ -142,6 +142,13 @@ void tm4c129_mcu_systick_on(size_t frequency)
 
 const char* tm4c129_mcu_name(void)
 {
+    static char buf[32];
+
+    if (*buf)
+    {
+        return buf;
+    }
+
     if (!CLASS_IS_TM4C129)
     {
         /**
@@ -181,8 +188,7 @@ const char* tm4c129_mcu_name(void)
     const uint8_t rev_maj = (uint8_t)((HWREG(SYSCTL_DID0) & SYSCTL_DID0_MAJ_M) >> 8);
     const uint8_t rev_min = (uint8_t)(HWREG(SYSCTL_DID0) & SYSCTL_DID0_MIN_M);
 
-    static char buf[32];
-    char*       p = buf;
+    char* p = buf;
 
     /**
      * "TM4C1294NCPDT Rev A2"
