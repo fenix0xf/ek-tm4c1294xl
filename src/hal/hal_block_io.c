@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "hal_block_io.h"
 #include <hal/hal_con.h>

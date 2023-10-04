@@ -727,7 +727,7 @@ void tn_task_name_set(TN_TCB* task, const char* task_name)
 }
 
 //----------------------------------------------------------------------------
-#ifdef TN_STACK_CHECK
+#if TN_STACK_CHECK
 void tn_task_stack_check_all(void)
 {
     tn_printf("\nTasks summary (%d):\n\n", tn_created_tasks_qty);
@@ -742,4 +742,4 @@ void tn_task_stack_check_all(void)
         }
     }
 }
-#endif // #ifdef TN_STACK_CHECK
+#endif /* TN_STACK_CHECK */

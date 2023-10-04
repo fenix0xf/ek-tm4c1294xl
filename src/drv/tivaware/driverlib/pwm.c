@@ -79,7 +79,7 @@
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _PWMGenValid(uint32_t ui32Gen)
 {
     return ((ui32Gen == PWM_GEN_0) || (ui32Gen == PWM_GEN_1) || (ui32Gen == PWM_GEN_2) || (ui32Gen == PWM_GEN_3));
@@ -99,7 +99,7 @@ static bool _PWMGenValid(uint32_t ui32Gen)
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _PWMOutValid(uint32_t ui32PWMOut)
 {
     return ((ui32PWMOut == PWM_OUT_0) || (ui32PWMOut == PWM_OUT_1) || (ui32PWMOut == PWM_OUT_2) ||

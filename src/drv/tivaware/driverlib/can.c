@@ -140,7 +140,7 @@ static const uint16_t g_ui16CANBitValues[] = {
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _CANBaseValid(uint32_t ui32Base)
 {
     return ((ui32Base == CAN0_BASE) || (ui32Base == CAN1_BASE));

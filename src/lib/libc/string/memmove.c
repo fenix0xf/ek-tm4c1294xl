@@ -55,6 +55,7 @@ void* memmove(void* dest, const void* src, size_t n)
 
                 d[n] = s[n];
             }
+
             while (n >= WS) { n -= WS, *(WT*)(d + n) = *(WT*)(s + n); }
         }
 #endif

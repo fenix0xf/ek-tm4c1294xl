@@ -43,11 +43,19 @@ extern "C"
 
 #if HAL_IS_CORTEX_M0_M7
 
-#define TN_INLINE          HAL_INLINE
-#define TN_STACK(name)     HAL_ALIGNED(HAL_STACK_ALIGN) HAL_STACK_SECTION(name)
-#define TN_NORETURN        HAL_NORETURN
-#define TN_LIKELY(e)       HAL_LIKELY(e)
-#define TN_UNLIKELY(e)     HAL_UNLIKELY(e)
+#define TN_INLINE      HAL_INLINE
+#define TN_STACK(name) HAL_ALIGNED(HAL_STACK_ALIGN) HAL_STACK_SECTION(name)
+#define TN_NORETURN    HAL_NORETURN
+#define TN_LIKELY(e)   HAL_LIKELY(e)
+#define TN_UNLIKELY(e) HAL_UNLIKELY(e)
+
+#if HAL_TLS_IS_SUPPORTED
+#define TN_DECLARE_TLS_BLOCK(name) HAL_DECLARE_TLS_BLOCK(name)
+#define TN_GET_TLS_BLOCK(name)     HAL_GET_TLS_BLOCK(name)
+#else
+#define TN_DECLARE_TLS_BLOCK(name) typedef void __##name##_dummy_type
+#define TN_GET_TLS_BLOCK(name)     NULL
+#endif
 
 #define TN_DQUEUE_ELEMENT  void*
 #define TN_NO_WAIT         0u

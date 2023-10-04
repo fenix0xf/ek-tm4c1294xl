@@ -149,7 +149,7 @@ extern "C"
 #define TN_EVENT_WCOND_OR       16u // A single any bit set is enough
 #define TN_EVENT_WCOND_AND      32u // An all bit have to be set for the event rising
 
-#define TN_MUTEX_NO_ATTR        1u  // Just mutex without priority changing
+#define TN_MUTEX_NO_ATTR        1u  // Just lock without priority changing
 #define TN_MUTEX_ATTR_INHERIT   4u
 
 //-- Errors
@@ -345,14 +345,14 @@ typedef struct _TN_FMP
 
 typedef struct _TN_MUTEX
 {
-    CDLL_QUEUE wait_queue;   //-- List of tasks that wait a mutex
+    CDLL_QUEUE wait_queue;   //-- List of tasks that wait a lock
     CDLL_QUEUE mutex_queue;  //-- To include in task's locked mutexes list (if any) CDLL_QUEUE lock_mutex_queue;
                              //-- To include in system's locked mutexes list
     unsigned int  attr;      //-- Mutex creation attr - CEILING or INHERIT
     int           pi_active; //-- Priority inheritance process is active
-    TN_TCB*       holder;    //-- Current mutex owner (task that locked mutex)
+    TN_TCB*       holder;    //-- Current lock owner (task that locked lock)
     int           cnt;       //-- Recursive locking counter
-    unsigned long id_mutex;  //-- ID for verification(is it a mutex or another object?)
+    unsigned long id_mutex;  //-- ID for verification(is it a lock or another object?)
                              //-- All mutexes have the same id_mutex magic number (ver 2.x)
 } TN_MUTEX;
 
@@ -561,7 +561,7 @@ void tn_task_exit(void); // v 3.0
 int  tn_task_delete(TN_TCB* task);
 int  tn_task_change_priority(TN_TCB* task, unsigned int new_priority);
 void tn_task_name_set(TN_TCB* task, const char* task_name);
-#ifdef TN_STACK_CHECK
+#if TN_STACK_CHECK
 void tn_task_stack_check_all(void);
 #endif
 

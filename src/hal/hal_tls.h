@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #pragma once
 
@@ -32,8 +32,8 @@
 
 #include <hal/hal_def.h>
 
-/**
- * @brief Custom GCC TLS is supported since Iain Sandoe <iain@sandoe.co.uk> commit on Nov 19, 2021
+/*
+ * Custom GCC TLS is supported since Iain Sandoe <iain@sandoe.co.uk> commit on Nov 19, 2021
  * https://github.com/gcc-mirror/gcc/commit/b9873b4e2c9a9955789318f4d550147ef9405b07
  *
  * libgcc, emutls: Allow building weak definitions of the emutls functions.
@@ -43,8 +43,7 @@
      ((__GNUC__ == 10) && (__GNUC_MINOR__ >= 4)) || ((__GNUC__ == 9) && (__GNUC_MINOR__ >= 5)))
 
 #if HAL_TLS_IS_SUPPORTED
-
-typedef uint64_t hal_tls_item_t;
+typedef uint32_t hal_tls_item_t;
 typedef uint32_t hal_tls_bs_slot_t;
 
 #define HAL_TLS_MAX_ITEMS   8
@@ -57,6 +56,9 @@ struct hal_tls_block
     hal_tls_bs_slot_t bitset[HAL_TLS_BS_SLOT_NUM];
 };
 
-#else
+#define HAL_DECLARE_TLS_BLOCK(name) static struct hal_tls_block name
+#define HAL_GET_TLS_BLOCK(name)     (&name)
+
+#else  /* HAL_TLS_IS_SUPPORTED */
 #error Thread Local Storage is not supported for this GCC version!
-#endif // #if HAL_TLS_IS_SUPPORTED
+#endif /* HAL_TLS_IS_SUPPORTED */

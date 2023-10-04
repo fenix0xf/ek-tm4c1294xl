@@ -4,6 +4,7 @@
 char* strcasestr(const char* h, const char* n)
 {
     size_t l = strlen(n);
+
     for (; *h; h++)
     {
         if (!strncasecmp(h, n, l))
@@ -11,5 +12,6 @@ char* strcasestr(const char* h, const char* n)
             return (char*)h;
         }
     }
+
     return 0;
 }

@@ -22,21 +22,46 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
+
+#include <hal/hal.h>
+#include <hal/hal_con.h>
+#include <hal/hal_init.h>
 
 #include <tn.h>
+#include <libc.h>
+#include <stdbool.h>
 
-/**
- * @note
- *
+#define OS_PREFIX "OS: "
+
+bool init_stdio_lock(void)
+{
+    static TN_MUTEX stdin_mutex, stdout_mutex, stderr_mutex;
+    bool            rc;
+
+    rc  = tn_mutex_create(&stdin_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+    rc &= tn_mutex_create(&stdout_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+    rc &= tn_mutex_create(&stderr_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+
+    if (rc)
+    {
+        libc_set_file_lock(stdin, &stdin_mutex);
+        libc_set_file_lock(stdout, &stdout_mutex);
+        libc_set_file_lock(stderr, &stderr_mutex);
+    }
+
+    return rc;
+}
+
+/*
  * Before a call tn_app_init() all interrupts are disabled by the caller.
  * After an return from this function all interrupts will be enabled.
  *
- * @warning Don't use tn_task_sleep() inside! This function enable interrupts!
+ * Do not use tn_task_sleep() inside! This function enable interrupts!
  */
 int tn_app_init(void)
 {
-    hal_puts("[done]\n"); ///< After "Starting OS..." in hal_system_startup()
+    HAL_INIT_ASSERT(OS_PREFIX "Stdio lock init...", init_stdio_lock());
 
     return TERR_NO_ERR;
 }

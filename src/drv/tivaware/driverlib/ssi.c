@@ -90,7 +90,7 @@ static const uint_fast8_t g_ui8SSIIntMapSnowflakeRows =
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _SSIBaseValid(uint32_t ui32Base)
 {
     return ((ui32Base == SSI0_BASE) || (ui32Base == SSI1_BASE) || (ui32Base == SSI2_BASE) || (ui32Base == SSI3_BASE));

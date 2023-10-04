@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #pragma once
 
@@ -36,9 +36,9 @@
  * @details Stdout is used, initialize C standard library low-level output first.
  *
  */
-int  hal_puts(const char* s);
-int  hal_print(const char* s);
-int  hal_printf(const char* restrict fmt, ...);
+int hal_puts(const char* s);
+int hal_print(const char* s);
+int hal_printf(const char* restrict fmt, ...);
 
 #define hal_error(s) hal_printf("ERROR: \"%s\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
 
@@ -51,17 +51,12 @@ int  hal_printf(const char* restrict fmt, ...);
  * @details Stdout is used, initialize C standard library low-level output first.
  *
  */
-#ifdef DEBUG
-
+#if DEBUG
 #define hal_dbg_trace() hal_printf("TRACE: %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", __func__)
 #define hal_dbg_puts(s) hal_printf("DEBUG: \"%s\", %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
-
 void hal_dbg_printbuf(const void* buf, size_t size);
-
 #else
-
 #define hal_dbg_trace()
 #define hal_dbg_puts(s)
 #define hal_dbg_printbuf(buf, size)
-
-#endif // DEBUG
+#endif /* DEBUG */

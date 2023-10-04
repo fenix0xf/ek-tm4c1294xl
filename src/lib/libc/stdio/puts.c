@@ -2,9 +2,9 @@
 
 int puts(const char* s)
 {
-    int r;
+    int rc;
     FLOCK(stdout);
-    r = -(fputs(s, stdout) < 0 || putc_unlocked('\n', stdout) < 0);
+    rc = -(fputs(s, stdout) < 0 || putc_unlocked('\n', stdout) < 0);
     FUNLOCK(stdout);
-    return r;
+    return rc;
 }

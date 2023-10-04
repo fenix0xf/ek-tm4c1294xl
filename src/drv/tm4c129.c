@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "tm4c129.h"
 
@@ -94,7 +94,7 @@ void tm4c129_periph_free(uint32_t periph)
     }
 }
 
-#ifdef DEBUG
+#if DEBUG
 void __error__(char* filename, uint32_t line)
 {
     hal_printf("TIVAWARE ASSERT(\"%s\":%u);\n", filename, (unsigned)line);

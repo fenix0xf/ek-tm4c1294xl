@@ -23,6 +23,6 @@ static size_t string_read(FILE* f, unsigned char* buf, size_t len)
 
 int vsscanf(const char* restrict s, const char* restrict fmt, va_list ap)
 {
-    FILE f = {.buf = (unsigned char*)s, .cookie = (void*)s, .read = string_read, .mutex = NULL};
+    FILE f = {.buf = (unsigned char*)s, .cookie = (void*)s, .read = string_read, .lock = NULL};
     return vfscanf(&f, fmt, ap);
 }

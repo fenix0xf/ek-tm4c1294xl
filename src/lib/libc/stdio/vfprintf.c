@@ -701,25 +701,29 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
 
         /* Update output count, end loop when fmt is exhausted */
         cnt += l;
+
         if (!*s)
         {
             break;
         }
 
         /* Handle literal text and %% format specifiers */
-        for (a = s; *s && *s != '%'; s++)
-            ;
-        for (z = s; s[0] == '%' && s[1] == '%'; z++, s += 2)
-            ;
+        for (a = s; *s && *s != '%'; s++) {}
+
+        for (z = s; s[0] == '%' && s[1] == '%'; z++, s += 2) {}
+
         if (z - a > INT_MAX - cnt)
         {
             goto overflow;
         }
+
         l = z - a;
+
         if (f)
         {
             out(f, a, l);
         }
+
         if (l)
         {
             continue;
@@ -815,6 +819,7 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
 
         /* Format specifier state machine */
         st = 0;
+
         do {
             if (OOB(*s))
             {
@@ -823,6 +828,7 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
             ps = st;
             st = states[st] S(*s++);
         } while (st - 1 < STOP);
+
         if (!st)
         {
             goto inval;
@@ -912,6 +918,7 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                 {
                     prefix += (t >> 4), pl = 2;
                 }
+
                 if (0)
                 {
                     case 'o':
@@ -921,6 +928,7 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                             p = z - a + 1;
                         }
                 }
+
                 if (0)
                 {
                     case 'd':
@@ -944,19 +952,23 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                         }
                     case 'u': a = fmt_u(arg.i, z);
                 }
+
                 if (xp && p < 0)
                 {
                     goto overflow;
                 }
+
                 if (xp)
                 {
                     fl &= ~ZERO_PAD;
                 }
+
                 if (!arg.i && !p)
                 {
                     a = z;
                     break;
                 }
+
                 p = MAX(p, z - a + !arg.i);
                 break;
             case 'c':
@@ -964,7 +976,7 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                 fl                 &= ~ZERO_PAD;
                 break;
             case 'm':
-                if (1)
+                if (0)
                 {
                     a = strerror(errno);
                 }
@@ -979,8 +991,10 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                 {
                     goto overflow;
                 }
+
                 p   = z - a;
                 fl &= ~ZERO_PAD;
+
                 break;
             case 'e':
             case 'f':
@@ -994,11 +1008,14 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
                 {
                     goto overflow;
                 }
+
                 l = fmt_fp(f, arg.f, w, p, fl, t);
+
                 if (l < 0)
                 {
                     goto overflow;
                 }
+
                 continue;
         }
 
@@ -1006,14 +1023,17 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
         {
             p = z - a;
         }
+
         if (p > INT_MAX - pl)
         {
             goto overflow;
         }
+
         if (w < pl + p)
         {
             w = pl + p;
         }
+
         if (w > INT_MAX - cnt)
         {
             goto overflow;
@@ -1033,23 +1053,26 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
     {
         return cnt;
     }
+
     if (!l10n)
     {
         return 0;
     }
 
     for (i = 1; i <= NL_ARGMAX && nl_type[i]; i++) { pop_arg(nl_arg + i, nl_type[i], ap); }
-    for (; i <= NL_ARGMAX && !nl_type[i]; i++)
-        ;
+    for (; i <= NL_ARGMAX && !nl_type[i]; i++) {}
+
     if (i <= NL_ARGMAX)
     {
         goto inval;
     }
+
     return 1;
 
 inval:
     errno = EINVAL;
     return -1;
+
 overflow:
     errno = EOVERFLOW;
     return -1;
@@ -1066,6 +1089,7 @@ int vfprintf(FILE* restrict f, const char* restrict fmt, va_list ap)
 
     /* the copy allows passing va_list* even if va_list is an array */
     va_copy(ap2, ap);
+
     if (printf_core(0, fmt, &ap2, nl_arg, nl_type) < 0)
     {
         va_end(ap2);

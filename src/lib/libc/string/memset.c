@@ -1,9 +1,9 @@
 #include <string.h>
 #include <stdint.h>
 
-/* An aim of "__used" attribute is preventing of the linker error in LTO mode: undefined reference to 'memset'.
- * Link time optimization (-flto) may drop memset() out as unused, but at the same time
- * C compiler can use implicit call of memset() for something like this: char s[99] = {0}; */
+/* An aim of "__used" attribute is preventing of the linker "undefined reference" error in LTO mode.
+ * Link time optimization (-flto) may drop the function out as unused, but at the same time
+ * C compiler can use implicit calls of this function. */
 __used void* memset(void* dest, int c, size_t n)
 {
     unsigned char* s = (unsigned char*)dest;
@@ -109,10 +109,10 @@ __used void* memset(void* dest, int c, size_t n)
         *(u64*)(s + 16) = c64;
         *(u64*)(s + 24) = c64;
     }
-#else
+#else  /* __GNUC__ */
     /* Pure C fallback with no aliasing violations. */
     for (; n; n--, s++) { *s = c; }
-#endif
+#endif /* __GNUC__ */
 
     return dest;
 }

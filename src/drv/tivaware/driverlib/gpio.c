@@ -149,7 +149,7 @@ static const uint32_t g_pui32GPIOBaseAddrs[] = {
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _GPIOBaseValid(uint32_t ui32Port)
 {
     return ((ui32Port == GPIO_PORTA_BASE) || (ui32Port == GPIO_PORTA_AHB_BASE) || (ui32Port == GPIO_PORTB_BASE) ||

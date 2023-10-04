@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include "hal_init.h"
 
@@ -38,31 +38,21 @@
 
 #define HAL_PREFIX "HAL: "
 
-#define HAL_INIT_ASSERT(msg, init_func)     \
-    do {                                    \
-        hal_print(HAL_PREFIX msg);          \
-        if (init_func)                      \
-        {                                   \
-            hal_puts("[done]");             \
-        }                                   \
-        else                                \
-        {                                   \
-            hal_error(HAL_STFN(init_func)); \
-            hal_mcu_halt();                 \
-        }                                   \
-    } while (0)
-
 static bool uart_dbg_full_init(void)
 {
-    tm4c129_uart_dbg_fail_safe_free();
+    hal_ll_cr_sect_enter();
 
     if (!tm4c129_uart_dbg_init())
     {
-        hal_uart_dbg_switch_to_fail_safe(); ///< Restore fail safe UART.
+        hal_uart_dbg_switch_to_fail_safe(); /* Restore fail safe UART. */
+
+        hal_ll_cr_sect_leave();
         return false;
     }
 
     hal_crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
+
+    hal_ll_cr_sect_leave();
     return true;
 }
 
@@ -71,10 +61,10 @@ static bool uart_dbg_full_init(void)
  */
 static void hal_hardware_init(void)
 {
-    HAL_INIT_ASSERT("NVIC module...", tm4c129_int_init());
-    HAL_INIT_ASSERT("DMA module...", tm4c129_dma_init());
-//    HAL_INIT_ASSERT("DBG UART module...", uart_dbg_full_init());
-    HAL_INIT_ASSERT("CCM module...", tm4c129_ccm_init());
+    HAL_INIT_ASSERT(HAL_PREFIX "NVIC module init...", tm4c129_int_init());
+    HAL_INIT_ASSERT(HAL_PREFIX "DMA module init...", tm4c129_dma_init());
+    //    HAL_INIT_ASSERT(HAL_PREFIX "DBG UART module init...", uart_dbg_full_init());
+    HAL_INIT_ASSERT(HAL_PREFIX "CCM module init...", tm4c129_ccm_init());
 }
 
 /**
@@ -139,8 +129,6 @@ HAL_USED HAL_NORETURN void hal_init(void)
      * Print startup info.
      */
     hal_print_version();
-
-    hal_puts(HAL_PREFIX "Hardware initialization:\n");
 
     /**
      * Initialize hardware modules.

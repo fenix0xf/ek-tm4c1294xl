@@ -26,6 +26,11 @@ long      atol(const char*);
 long long atoll(const char*);
 double    atof(const char*);
 
+#define ITOA_BUFSIZ (sizeof(int) * 8 + 1) /* non-ANSI */
+
+char* itoa(int, char*, int);              /* non-ANSI */
+char* utoa(unsigned int, char*, int);     /* non-ANSI */
+
 float       strtof(const char* __restrict, char** __restrict);
 double      strtod(const char* __restrict, char** __restrict);
 long double strtold(const char* __restrict, char** __restrict);
@@ -73,10 +78,7 @@ div_t   div(int, int);
 ldiv_t  ldiv(long, long);
 lldiv_t lldiv(long long, long long);
 
-#define EXIT_FAILURE 1
-#define EXIT_SUCCESS 0
-
-#define RAND_MAX     (0x7fffffff)
+#define RAND_MAX (0x7fffffff)
 
 #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 #include <alloca.h>

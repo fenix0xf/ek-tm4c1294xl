@@ -105,7 +105,7 @@ static const uint_fast8_t g_ui8UARTIntMapRowsSnowflake =
 //! otherwise.
 //
 //*****************************************************************************
-#ifdef DEBUG
+#if DEBUG
 static bool _UARTBaseValid(uint32_t ui32Base)
 {
     return ((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||

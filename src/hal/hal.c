@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #include <hal/hal.h>
 
@@ -42,15 +42,15 @@ static void hal_systick_handler(void);
 
 HAL_NORETURN void hal_mcu_halt(void)
 {
+    hal_mcu_int_off();
     hal_uart_dbg_switch_to_fail_safe();
-    hal_mcu_int_off(); ///< Disable interrupts after hal_uart_dbg_switch_to_fail_safe()!
 
-#ifdef TN_STACK_CHECK
+#if TN_STACK_CHECK
     if (HAL_LIKELY(tn_system_is_running()))
     {
         tn_task_stack_check_all();
     }
-#endif
+#endif /* TN_STACK_CHECK */
 
     tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System is halted!");
     tm4c129_uart_dbg_fail_safe_free();
@@ -66,7 +66,7 @@ uint32_t hal_mcu_unique_id(void)
     return 0; // TODO
 }
 
-/**
+/*
  * Universal sleep function.
  */
 void hal_sleep(size_t mS)
@@ -90,11 +90,11 @@ HAL_NORETURN void hal_system_startup(void)
 {
     hal_mcu_int_off();
 
-    hal_print("\n" HAL_PREFIX "Starting OS...");
+    hal_puts("\n" HAL_PREFIX "Starting OS kernel...\n");
 
-    /**
+    /*
      * Set PendSV handler for TN Kernel task switching.
-     * See src/lib/tnkernel/arch/tn_arch_CortexM0_M7_asm.s and src/lib/tnkernel/arch/tn_arch.h
+     * See src/lib/tnkernel/arch/tn_arch_CortexM0_M7_asm.S and src/lib/tnkernel/arch/tn_arch.h
      */
     if (!tm4c129_int_register(FAULT_PENDSV, tn_pendsv_handler))
     {
@@ -110,9 +110,10 @@ HAL_NORETURN void hal_system_startup(void)
 
     tm4c129_mcu_systick_on(HAL_SYSTICK_FREQUENCY);
 
-    int rc = tn_start_system(NULL, 0); ///< Calls tn_app_init() inside.
+    /* tn_app_init() is called inside. */
+    int rc = tn_start_system(NULL, 0);
 
-    /**
+    /*
      * Never reach this.
      */
     hal_errorf("tn_start_system() returns %d!", rc);
@@ -122,7 +123,7 @@ HAL_NORETURN void hal_system_startup(void)
 HAL_NORETURN void hal_system_reboot(void)
 {
     hal_uart_dbg_switch_to_fail_safe();
-    hal_mcu_int_off(); ///< Disable interrupts after hal_uart_dbg_switch_to_fail_safe()!
+    hal_mcu_int_off(); /* Disable interrupts after hal_uart_dbg_switch_to_fail_safe()! */
 
     tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System reboot!");
     tm4c129_uart_dbg_fail_safe_free();
@@ -131,30 +132,23 @@ HAL_NORETURN void hal_system_reboot(void)
     tm4c129_mcu_reset();
 }
 
-/**
+/*
  * Local functions.
- *
  */
 void hal_systick_handler(void)
 {
-    /**
-     * Calling the TNKernel scheduler every one millisecond.
-     */
+    /* Calling the TNKernel scheduler every one millisecond. */
     tn_tick_int_processing();
     tn_int_exit();
 }
 
 void hal_uart_dbg_switch_to_fail_safe(void)
 {
-    tm4c129_uart_dbg_free(); ///< Can use DMA interrupts inside, don not disable interrupts before this.
-
     hal_ll_cr_sect_enter();
 
     if (!tm4c129_uart_dbg_fail_safe_init())
     {
-        /**
-         * stderr and stdout is not initialized here. Stop the system without any print to stdout.
-         */
+        /* stderr and stdout is not initialized here. Stop the system without any print to stdout. */
         tm4c129_mcu_halt();
     }
 
@@ -167,7 +161,8 @@ void hal_print_version(void)
 {
     uint32_t id0, id1, id2, id3;
 
-    tm4c129_mcu_unique_id(&id0, &id1, &id2, &id3); ///< Get MCU full hardware ID.
+    /* Get MCU full hardware ID. */
+    tm4c129_mcu_unique_id(&id0, &id1, &id2, &id3);
 
     hal_printf("\n"
                "%s (%s)\n"
@@ -177,9 +172,9 @@ void hal_print_version(void)
                "SRAM %u KiB, FLASH %u/%u KiB\n"
                "MCUID 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
-               "Example Firmware", // hal_version(),
+               "Example Firmware", /* hal_version(), */
                DEBUG ? "Debug" : "Release",
-               "(c) 2023",         // hal_copyright(),
+               "(c) 2023",         /* hal_copyright(), */
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,
                (unsigned)(hal_mcu_sram_size() / 1024),

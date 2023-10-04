@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-*/
+ */
 
 #pragma once
 
@@ -31,41 +31,41 @@
 
 #include "hal_def_arch.h"
 
-/**
- * @brief Compiler independent C attributes.
+/*
+ * Compiler independent C attributes.
  */
 #ifdef __GNUC__
 
-#define HAL_INLINE      static inline __attribute__((always_inline))
-#define HAL_NOINLINE    __attribute__((noinline))
-#define HAL_NORETURN    __attribute__((noreturn))
-#define HAL_NAKED       __attribute__((naked))
-#define HAL_USED        __attribute__((used))
-#define HAL_UNUSED      __attribute__((unused))
-#define HAL_ALIGNED(n)  __attribute__((aligned(n)))
-#define HAL_SECTION(s)  __attribute__((section(s)))
-#define HAL_PACKED      __attribute__((packed))
-#define HAL_LIKELY(e)   __builtin_expect(!!(e), 1)
-#define HAL_UNLIKELY(e) __builtin_expect(!!(e), 0)
+#define HAL_INLINE        static inline __attribute__((always_inline))
+#define HAL_NOINLINE      __attribute__((noinline))
+#define HAL_NORETURN      __attribute__((noreturn))
+#define HAL_NAKED         __attribute__((naked))
+#define HAL_USED          __attribute__((used))
+#define HAL_UNUSED        __attribute__((unused))
+#define HAL_ALIGNED(n)    __attribute__((aligned(n)))
+#define HAL_SECTION(s)    __attribute__((section(s)))
+#define HAL_PACKED        __attribute__((packed))
+#define HAL_LIKELY(exp)   __builtin_expect(!!(exp), 1)
+#define HAL_UNLIKELY(exp) __builtin_expect(!!(exp), 0)
 
 #else
 #error Currently only GCC is supported!
 #endif
 
-/**
- * @brief Stringification macros.
+/*
+ * Stringification macros.
  */
 #define HAL_STFN_0(s) #s
 #define HAL_STFN(s)   HAL_STFN_0(s)
 
-/**
- * @brief Linker sections macros.
+/*
+ * Linker sections macros.
  */
 #define HAL_STACK_SECTION(name) HAL_SECTION(".noinit.stack." HAL_STFN(name))
 #define HAL_HEAP_SECTION(name)  HAL_SECTION(".noinit.heap." HAL_STFN(name))
 
-/**
- * @brief Platform stack defines.
+/*
+ * Platform stack defines.
  */
 #if HAL_IS_CORTEX_M0_M7
 
@@ -90,15 +90,15 @@
 #define HAL_STACK_PTRU(name)  ((uintptr_t)&g_stack_##name[g_stack_##name##_items - 1])
 #define HAL_STACK_ITEMS(name) (g_stack_##name##_items)
 
-/**
- * @brief Math macros.
+/*
+ * Math macros.
  */
 #define HAL_IS_POW2(val)                (((val) != 0) && !((val) & ((val)-1)))
 #define HAL_IS_POW2_ALIGNED(val, align) (HAL_IS_POW2(align) && !((val) & ((align)-1)))
 #define HAL_CEIL_DIV(a, b)              (((a) + (b)-1) / (b))
 
-/**
- * @brief Bitset macros.
+/*
+ * Bitset macros.
  */
 #define HAL_BITMASK(b, s)     (1 << ((b) % (s)))
 #define HAL_BITSLOT(b, s)     ((b) / (s))
@@ -107,7 +107,7 @@
 #define HAL_BITTEST(a, b, s)  ((a)[HAL_BITSLOT(b, s)] & HAL_BITMASK(b, s))
 #define HAL_BITNSLOTS(nb, s)  HAL_CEIL_DIV(nb, s)
 
-/**
- * @brief Utilities.
+/*
+ * Utilities.
  */
 #define HAL_NELEMS(a) (sizeof(a) / sizeof(*(a)))

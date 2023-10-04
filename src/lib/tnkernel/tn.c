@@ -78,10 +78,8 @@ static unsigned int tn_os_tick_task_stack[TN_OS_TICK_TASK_STACK_SIZE];
 TN_TCB              tn_os_tick_task;
 void                tn_os_tick_task_func(void* p);
 
-#if HAL_TLS_IS_SUPPORTED
-struct hal_tls_block tn_os_idle_task_tls;
-struct hal_tls_block tn_os_tick_task_tls;
-#endif
+TN_DECLARE_TLS_BLOCK(tn_os_idle_task_tls);
+TN_DECLARE_TLS_BLOCK(tn_os_tick_task_tls);
 
 TN_SEM tn_sys_tick_sem;
 
@@ -176,7 +174,7 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
                         TN_OS_IDLE_TASK_STACK_SIZE,
                         NULL,
                         TN_TASK_IDLE,
-                        HAL_TLS_IS_SUPPORTED ? &tn_os_idle_task_tls : NULL,
+                        TN_GET_TLS_BLOCK(tn_os_idle_task_tls),
                         "tn_os_idle_task");
 
     if (rc != TERR_NO_ERR)
@@ -189,7 +187,7 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
 
     //-- OS ticks task #2
 
-    tn_os_tick_task.id_task = 0UL;
+    tn_os_tick_task.id_task = 0;
 
     rc = tn_task_create(&tn_os_tick_task,
                         tn_os_tick_task_func,
@@ -198,7 +196,7 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
                         TN_OS_TICK_TASK_STACK_SIZE,
                         NULL,
                         TN_TASK_OS_TICK,
-                        HAL_TLS_IS_SUPPORTED ? &tn_os_tick_task_tls : NULL,
+                        TN_GET_TLS_BLOCK(tn_os_tick_task_tls),
                         "tn_os_tick_task");
 
     if (rc != TERR_NO_ERR)
@@ -206,7 +204,7 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
         goto err;
     }
 
-    //-- user's objects initial (tasks etc.) creation
+    //-- User's objects initial (tasks etc.) creation.
     rc = tn_app_init();
 
     if (rc != TERR_NO_ERR)
@@ -216,8 +214,10 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
 
     //-- Run OS - first context switch.
     //-- The global interrupts will be enabled inside.
-    tn_start_exe(); //-- it sets tn_system_state = TN_ST_STATE_RUNNING and never returns
+    //-- It sets tn_system_state to TN_ST_STATE_RUNNING and never returns.
+    tn_start_exe();
 
+    /* Never reach this. */
     tn_halt();
 
 err:

@@ -1,15 +1,16 @@
 #ifndef _STDIO_IMPL_H
 #define _STDIO_IMPL_H
 
+#include <libc.h>
 #include <stdio.h>
 
 #define UNGET    8
 
-#define FLOCK(f) int __need_unlock = (((f)->mutex == NULL) ? 0 : __lockfile((f)))
-#define FUNLOCK(f)             \
-    do {                       \
-        if (__need_unlock)     \
-            __unlockfile((f)); \
+#define FLOCK(f) int __need_unlock = (__predict_false((f)->lock == NULL) ? 0 : libc_lock((f)->lock))
+#define FUNLOCK(f)                         \
+    do {                                   \
+        if (__predict_true(__need_unlock)) \
+            libc_unlock((f)->lock);        \
     } while (0)
 
 #define F_PERM 1
@@ -31,28 +32,22 @@ struct _IO_FILE
     size_t         buf_size;
     int            fd;
     int            mode;
-    void*          mutex;
+    void*          lock;
     int            lbf;
     void*          cookie;
     unsigned char* shend;
     off_t          shlim, shcnt;
 };
 
-hidden int  __lockfile(FILE*);
-hidden void __unlockfile(FILE*);
+size_t __stdio_read(FILE*, unsigned char*, size_t);
+size_t __stdio_write(FILE*, const unsigned char*, size_t);
 
-hidden size_t __stdio_read(FILE*, unsigned char*, size_t);
-hidden size_t __stdio_write(FILE*, const unsigned char*, size_t);
+int __toread(FILE*);
+int __towrite(FILE*);
+int __overflow(FILE*, int);
+int __uflow(FILE*);
 
-hidden int __toread(FILE*);
-hidden int __towrite(FILE*);
-
-#if defined(__PIC__) && (100 * __GNUC__ + __GNUC_MINOR__ >= 303)
-__attribute__((visibility("protected")))
-#endif
-int __overflow(FILE *, int), __uflow(FILE *);
-
-hidden size_t __fwritex(const unsigned char*, size_t, FILE*);
+size_t __fwritex(const unsigned char*, size_t, FILE*);
 
 #define feof(f)          ((f)->flags & F_EOF)
 #define ferror(f)        ((f)->flags & F_ERR)
