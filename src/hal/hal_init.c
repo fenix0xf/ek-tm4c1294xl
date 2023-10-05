@@ -44,7 +44,8 @@ static bool uart_dbg_full_init(void)
 
     if (!tm4c129_uart_dbg_init())
     {
-        hal_uart_dbg_switch_to_fail_safe(); /* Restore fail safe UART. */
+        /* Restore fail safe UART. */
+        hal_uart_dbg_switch_to_fail_safe();
 
         hal_ll_cr_sect_leave();
         return false;

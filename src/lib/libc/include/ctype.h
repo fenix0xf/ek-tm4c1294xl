@@ -8,46 +8,98 @@ extern "C"
 
 #include <features.h>
 
-int isalnum(int);
-int isalpha(int);
-int isblank(int);
-int iscntrl(int);
-int isdigit(int);
-int isgraph(int);
-int islower(int);
-int isprint(int);
-int ispunct(int);
-int isspace(int);
-int isupper(int);
-int isxdigit(int);
-int tolower(int);
-int toupper(int);
-
-#ifndef __cplusplus
-static __inline int __isspace(int _c)
+static __inline int isalpha(int c)
 {
-    return _c == ' ' || (unsigned)_c - '\t' < 5;
+    return ((unsigned)c | 32) - 'a' < 26;
 }
 
-#define isalpha(a) (0 ? isalpha(a) : (((unsigned)(a) | 32) - 'a') < 26)
-#define isdigit(a) (0 ? isdigit(a) : ((unsigned)(a) - '0') < 10)
-#define islower(a) (0 ? islower(a) : ((unsigned)(a) - 'a') < 26)
-#define isupper(a) (0 ? isupper(a) : ((unsigned)(a) - 'A') < 26)
-#define isprint(a) (0 ? isprint(a) : ((unsigned)(a)-0x20) < 0x5f)
-#define isgraph(a) (0 ? isgraph(a) : ((unsigned)(a)-0x21) < 0x5e)
-#define isspace(a) __isspace(a)
-#endif
+static __inline int isblank(int c)
+{
+    return (c == ' ' || c == '\t');
+}
+
+static __inline int iscntrl(int c)
+{
+    return (unsigned)c < 0x20 || c == 0x7f;
+}
+
+static __inline int isdigit(int c)
+{
+    return (unsigned)c - '0' < 10;
+}
+
+static __inline int isalnum(int c)
+{
+    return isalpha(c) || isdigit(c);
+}
+
+static __inline int isgraph(int c)
+{
+    return (unsigned)c - 0x21 < 0x5e;
+}
+
+static __inline int islower(int c)
+{
+    return (unsigned)c - 'a' < 26;
+}
+
+static __inline int isprint(int c)
+{
+    return (unsigned)c - 0x20 < 0x5f;
+}
+
+static __inline int ispunct(int c)
+{
+    return isgraph(c) && !isalnum(c);
+}
+
+static __inline int isspace(int c)
+{
+    return c == ' ' || (unsigned)c - '\t' < 5;
+}
+
+static __inline int isupper(int c)
+{
+    return (unsigned)c - 'A' < 26;
+}
+
+static __inline int isxdigit(int c)
+{
+    return isdigit(c) || ((unsigned)c | 32) - 'a' < 6;
+}
+
+static __inline int tolower(int c)
+{
+    if (isupper(c))
+    {
+        return c | 32;
+    }
+
+    return c;
+}
+
+static __inline int toupper(int c)
+{
+    if (islower(c))
+    {
+        return c & 0x5f;
+    }
+
+    return c;
+}
 
 #if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || \
     defined(_BSD_SOURCE)
 
-int isascii(int);
-int toascii(int);
-#define _tolower(a) ((a) | 0x20)
-#define _toupper(a) ((a)&0x5f)
-#ifndef __cplusplus
-#define isascii(a) (0 ? isascii(a) : (unsigned)(a) < 128)
-#endif
+static __inline int isascii(int c)
+{
+    return !(c & ~0x7f);
+}
+
+static __inline int toascii(int c)
+{
+    return c & 0x7f;
+}
 
 #endif
 
@@ -55,4 +107,4 @@ int toascii(int);
 }
 #endif
 
-#endif
+#endif /* _CTYPE_H */

@@ -26,7 +26,7 @@
 
 #include <errno.h>
 
-#if __STDC_VERSION__ >= 201112L && __STDC_VERSION__ < 202311L
+#if __STDC_VERSION__ >= 201112L
 thread_local error_t __tls_errno;
 #else
 error_t __errno;

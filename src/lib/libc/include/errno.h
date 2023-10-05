@@ -45,7 +45,7 @@ extern "C"
 typedef int error_t;
 #endif
 
-#if __STDC_VERSION__ >= 201112L && __STDC_VERSION__ < 202311L
+#if __STDC_VERSION__ >= 201112L
 extern thread_local error_t __tls_errno;
 #define errno (__tls_errno)
 #else
