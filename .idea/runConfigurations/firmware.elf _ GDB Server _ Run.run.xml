@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="firmware.elf | GDB Server | Run" type="com.jetbrains.cidr.embedded.customgdbserver.type" factoryName="com.jetbrains.cidr.embedded.customgdbserver.factory" PROGRAM_PARAMS="-device TM4C1294NCPDT -if jtag -speed 8000 -port 11898 -nogui -singlerun" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EK-TM4C1294XL" TARGET_NAME="firmware.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="EK-TM4C1294XL" RUN_TARGET_NAME="firmware.elf">
+    <custom-gdb-server version="1" gdb-connect="tcp::11898" executable="C:\Program Files\SEGGER\JLink\JLinkGDBServerCL.exe" warmup-ms="0" download-type="UPDATED_ONLY" reset-cmd="monitor reset" reset-type="AFTER_DOWNLOAD">
+      <debugger kind="GDB" isBundled="true" />
+    </custom-gdb-server>
+    <method v="2">
+      <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="gdbinit-reset.py" run_configuration_type="PythonConfigurationType" />
+    </method>
+  </configuration>
+</component>

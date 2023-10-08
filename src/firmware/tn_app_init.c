@@ -55,8 +55,7 @@ bool init_stdio_lock(void)
 
 /*
  * Before a call tn_app_init() all interrupts are disabled by the caller.
- * After an return from this function all interrupts will be enabled.
- *
+ * After returning from this function all interrupts will be enabled.
  * Do not use tn_task_sleep() inside! This function enable interrupts!
  */
 int tn_app_init(void)

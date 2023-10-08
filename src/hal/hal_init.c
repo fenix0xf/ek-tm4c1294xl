@@ -57,8 +57,8 @@ static bool uart_dbg_full_init(void)
     return true;
 }
 
-/**
- * @brief Low level hardware initialization
+/*
+ * Low level hardware initialization.
  */
 static void hal_hardware_init(void)
 {
@@ -68,81 +68,48 @@ static void hal_hardware_init(void)
     HAL_INIT_ASSERT(HAL_PREFIX "CCM module init...", tm4c129_ccm_init());
 }
 
-/**
+/*
  * HAL initialization function. Used as reset ISR handler.
- *
- * Ignore clang-tidy error: Non-ASM statement in naked function is not supported.
- * It is correct in this case and it is fine for GCC.
- *
- * @warning
- *
  */
 HAL_USED HAL_NORETURN void hal_init(void)
 {
-    /**
-     * @warning
-     *
-     * This function is called before initialization of C standard library.
-     * Non constant static variables are in a non-initialized state!
-     * Don't use non constant static variables here!
+    /* This function is called before initialization of C standard library.
+     * Non-constant static variables are in a non-initialized state!
+     * Don't use non-constant static variables here!
      */
 
-    /**
-     * Disable all interrupts.
-     */
+    /* Disable all interrupts. */
     tm4c129_mcu_int_off();
 
-    /**
-     * Initialize the FPU module and set MCU OSC clock.
-     */
+    /* Initialize the FPU module and set MCU OSC clock. */
     if (!tm4c129_mcu_init())
     {
-        /**
-         * stderr and stdout is not initialized here yet.
-         * Stop the system without any print to stdout.
-         */
+        /* stderr and stdout is not initialized here yet. Stop the system without any print to stdout. */
         tm4c129_mcu_halt();
     }
 
-    /**
-     * Initialize the debug UART.
-     *
-     * After UART and CRT initialization stdout will be ready to work.
-     */
+    /* Initialize the debug UART. After UART and CRT initialization stdout will be ready to work. */
     if (!tm4c129_uart_dbg_fail_safe_init())
     {
-        /**
-         * stderr and stdout is not initialized here yet.
-         * Stop the system without any print to stdout.
-         */
+        /* stderr and stdout is not initialized here yet. Stop the system without any print to stdout. */
         tm4c129_mcu_halt();
     }
 
-    /**
-     * Initialize the C runtime library.
+    /* Initialize the C runtime library.
      * This function initialize C standard library (global variables, internal CRT structures, etc.).
-     *
      * After this call stdout is ready to work.
      */
     hal_crt_init(tm4c129_uart_dbg_fail_safe_send_buf);
 
-    /**
-     * Print startup info.
-     */
+    /* Print startup info. */
     hal_print_version();
 
-    /**
-     * Initialize hardware modules.
-     */
+    /* Initialize hardware modules. */
     hal_hardware_init();
 
-    /**
-     * TN Kernel initialization and start.
-     */
+    /* TN Kernel initialization and start. */
     hal_system_startup();
 
-    /**
-     * Never reach this.
-     */
+    /* Never reach this. */
     hal_mcu_halt();
 }

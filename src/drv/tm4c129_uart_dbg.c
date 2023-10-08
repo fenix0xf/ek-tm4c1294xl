@@ -50,10 +50,6 @@
 #define DMA_BUF_SIZE     256
 #define DMA_BUF_NUM      2
 
-#define DMA_BUF_IDX_RX   0
-#define DMA_BUF_IDX_TX   1
-#define DMA_BUF_IDX_CNT  2
-
 #define UART_FIFO_SIZE   16
 
 struct dma_buf
@@ -63,42 +59,55 @@ struct dma_buf
     size_t  idx;
 };
 
-static struct dma_buf g_buf[DMA_BUF_IDX_CNT];
+static struct dma_buf g_buf_rx, g_buf_tx;
 
 /*
  * Local functions.
  */
-HAL_INLINE size_t buf_index_inc(size_t idx)
+HAL_INLINE size_t next_idx(size_t idx)
 {
     return (idx + 1) % DMA_BUF_NUM;
 }
 
-HAL_INLINE uint8_t* dma_buf_get_empty(size_t buf_idx, size_t* olen)
+size_t tx_buf_get_empty(uint8_t** buf)
 {
-    struct dma_buf* buf = &g_buf[buf_idx];
-    size_t          idx = buf->idx;
-
-    *olen = buf->len[idx];
-
-    return buf->payload[idx];
+    size_t idx = g_buf_tx.idx;
+    *buf       = g_buf_tx.payload[idx];
+    return g_buf_tx.len[idx];
 }
 
-HAL_INLINE uint8_t* dma_buf_get_full(size_t buf_idx, size_t* olen)
+size_t tx_buf_get_full(uint8_t** buf)
 {
-    struct dma_buf* buf = &g_buf[buf_idx];
-    size_t          idx = buf_index_inc(buf->idx);
-
-    *olen = buf->len[idx];
-
-    return buf->payload[idx];
+    size_t idx = next_idx(g_buf_tx.idx);
+    *buf       = g_buf_tx.payload[idx];
+    return g_buf_tx.len[idx];
 }
 
-HAL_INLINE void dma_buf_swap(size_t bidx)
+void tx_buf_swap(void)
 {
-    struct dma_buf* buf = &g_buf[bidx];
-
     hal_ll_cr_sect_enter();
-    buf->idx = buf_index_inc(buf->idx);
+    g_buf_tx.idx = next_idx(g_buf_tx.idx);
+    hal_ll_cr_sect_leave();
+}
+
+size_t rx_buf_get_empty(uint8_t** buf)
+{
+    size_t idx = g_buf_rx.idx;
+    *buf       = g_buf_rx.payload[idx];
+    return g_buf_rx.len[idx];
+}
+
+size_t rx_buf_get_full(uint8_t** buf)
+{
+    size_t idx = next_idx(g_buf_rx.idx);
+    *buf       = g_buf_rx.payload[idx];
+    return g_buf_rx.len[idx];
+}
+
+void rx_buf_swap(void)
+{
+    hal_ll_cr_sect_enter();
+    g_buf_rx.idx = next_idx(g_buf_rx.idx);
     hal_ll_cr_sect_leave();
 }
 
