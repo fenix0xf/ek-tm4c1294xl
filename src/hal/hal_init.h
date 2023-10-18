@@ -34,12 +34,11 @@
 
 #define HAL_INIT_ASSERT(msg, init_func)                   \
     do {                                                  \
-        const char* m = msg;                              \
-        size_t      l = strlen(m);                        \
-        int         p = HAL_INIT_MSG_LEN - (int)l;        \
-        hal_print(m);                                     \
+        hal_print(msg);                                   \
+        hal_flush();                                      \
         if (init_func)                                    \
         {                                                 \
+            int p = HAL_INIT_MSG_LEN - (int)strlen(msg);  \
             hal_printf("%*s\n", p > 0 ? p : 0, "[done]"); \
         }                                                 \
         else                                              \

@@ -38,33 +38,13 @@
 
 #define HAL_PREFIX "HAL: "
 
-static bool uart_dbg_full_init(void)
-{
-    hal_ll_cr_sect_enter();
-
-    if (!tm4c129_uart_dbg_init())
-    {
-        /* Restore fail safe UART. */
-        hal_uart_dbg_switch_to_fail_safe();
-
-        hal_ll_cr_sect_leave();
-        return false;
-    }
-
-    hal_crt_stdout_func_set(tm4c129_uart_dbg_send_buf);
-
-    hal_ll_cr_sect_leave();
-    return true;
-}
-
 /*
  * Low level hardware initialization.
  */
-static void hal_hardware_init(void)
+static void hal_ll_hardware_init(void)
 {
     HAL_INIT_ASSERT(HAL_PREFIX "NVIC module init...", tm4c129_int_init());
     HAL_INIT_ASSERT(HAL_PREFIX "DMA module init...", tm4c129_dma_init());
-    //    HAL_INIT_ASSERT(HAL_PREFIX "DBG UART module init...", uart_dbg_full_init());
     HAL_INIT_ASSERT(HAL_PREFIX "CCM module init...", tm4c129_ccm_init());
 }
 
@@ -89,23 +69,24 @@ HAL_USED HAL_NORETURN void hal_init(void)
     }
 
     /* Initialize the debug UART. After UART and CRT initialization stdout will be ready to work. */
-    if (!tm4c129_uart_dbg_fail_safe_init())
+    if (!tm4c129_uart_dbg_init())
     {
         /* stderr and stdout is not initialized here yet. Stop the system without any print to stdout. */
         tm4c129_mcu_halt();
     }
 
-    /* Initialize the C runtime library.
+    /*
+     * Initialize the C runtime library.
      * This function initialize C standard library (global variables, internal CRT structures, etc.).
      * After this call stdout is ready to work.
      */
-    hal_crt_init(tm4c129_uart_dbg_fail_safe_send_buf);
+    hal_crt_init(tm4c129_uart_dbg_send_buf, tm4c129_uart_dbg_send_buf);
 
     /* Print startup info. */
     hal_print_version();
 
     /* Initialize hardware modules. */
-    hal_hardware_init();
+    hal_ll_hardware_init();
 
     /* TN Kernel initialization and start. */
     hal_system_startup();

@@ -40,7 +40,7 @@
 
 HAL_ALIGNED(1024) static tDMAControlTable g_dma_ctl_table[TM4C129_DMA_CHANNELS_NUM];
 
-static void tm4c129_dma_error_isr(void)
+static void __dma_error_isr(void)
 {
     static size_t error_count;
 
@@ -66,7 +66,7 @@ bool tm4c129_dma_init(void)
     uDMAEnable();
     uDMAControlBaseSet(g_dma_ctl_table);
 
-    tm4c129_int_register(INT_UDMAERR, tm4c129_dma_error_isr);
+    tm4c129_int_register(INT_UDMAERR, __dma_error_isr);
     tm4c129_int_nvic_enable(INT_UDMAERR);
 
     return true;

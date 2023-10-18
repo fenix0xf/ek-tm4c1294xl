@@ -30,26 +30,22 @@
 #include <stdint.h>
 #include <hal/hal_def.h>
 
-/**
- * Console output.
- *
- * @details Stdout is used, initialize C standard library low-level output first.
- *
+/*
+ * stdout and stderr is used here, you should initialize C standard library low-level output first.
  */
 int hal_puts(const char* s);
 int hal_print(const char* s);
 int hal_printf(const char* restrict fmt, ...);
+int hal_eprintf(const char* restrict fmt, ...);
+int hal_flush(void);
 
-#define hal_error(s) hal_printf("ERROR: \"%s\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
+#define hal_error(s) hal_eprintf("ERROR: \"%s\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
+#define hal_errorf(fmt, ...)                                                                                    \
+    hal_eprintf("ERROR: \"" fmt "\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n" __VA_OPT__(, ) __VA_ARGS__, \
+                __func__)
 
-#define hal_errorf(fmt, ...) \
-    hal_printf("ERROR: \"" fmt "\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n" __VA_OPT__(, ) __VA_ARGS__, __func__)
-
-/**
- * Debug output.
- *
- * @details Stdout is used, initialize C standard library low-level output first.
- *
+/*
+ * Output for debug builds.
  */
 #if DEBUG
 #define hal_dbg_trace() hal_printf("TRACE: %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", __func__)

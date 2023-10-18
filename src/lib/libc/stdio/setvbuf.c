@@ -2,7 +2,7 @@
 
 /* The behavior of this function is undefined except when it is the first
  * operation on the stream, so the presence or absence of locking is not
- * observable in a program whose behavior is defined. Thus no locking is
+ * observable in a program whose behavior is defined. Thus, no locking is
  * performed here. No allocation of buffers is performed, but a buffer
  * provided by the caller is used as long as it is suitably sized. */
 

@@ -28,7 +28,6 @@
 
 #include <hal/hal.h>
 #include <hal/hal_con.h>
-#include <drv/tm4c129_uart_dbg.h>
 
 #include <tn.h>
 
@@ -66,9 +65,9 @@ HAL_HEAP_SECTION(g_heap)
 static char g_heap[64 * 1024];
 
 static intptr_t              g_heap_brk;
-static hal_crt_stdout_func_t g_stdout_func;
+static hal_crt_stdout_func_t g_stdout_func, g_stderr_func;
 
-void hal_crt_init(hal_crt_stdout_func_t stdout_func)
+void hal_crt_init(hal_crt_stdout_func_t stdout_func, hal_crt_stdout_func_t stderr_func)
 {
     /* Copy the data segment initializers from FLASH to SRAM. */
     memcpy(&g_ld_data, &g_ld_ldata, LD_VAR(g_ld_edata) - LD_VAR(g_ld_data));
@@ -78,15 +77,18 @@ void hal_crt_init(hal_crt_stdout_func_t stdout_func)
 
     /* Set all global variables after .data and .bss segment initialization. */
 
+    if (stdout_func && stderr_func)
+    {
+        g_stdout_func = stdout_func;
+        g_stderr_func = stderr_func;
+    }
+    else
+    {
+        hal_mcu_halt();
+    }
+
     /* Heap initialization: malloc can be used after this line. */
     g_heap_brk = (intptr_t)g_heap;
-
-    hal_crt_stdout_func_set(stdout_func);
-}
-
-void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func)
-{
-    g_stdout_func = stdout_func;
 }
 
 /*
@@ -104,7 +106,7 @@ ssize_t read(int fd, void* buf, size_t nbyte)
 {
     if (HAL_UNLIKELY(nbyte == 0))
     {
-        return 0; /* It is EOF. */
+        return 0;
     }
 
     if (HAL_UNLIKELY(nbyte > SSIZE_MAX))
@@ -128,7 +130,7 @@ ssize_t write(int fd, const void* buf, size_t nbyte)
 {
     if (HAL_UNLIKELY(nbyte == 0))
     {
-        return 0; /* It is EOF. */
+        return 0;
     }
 
     if (HAL_UNLIKELY(nbyte > SSIZE_MAX))
@@ -137,25 +139,26 @@ ssize_t write(int fd, const void* buf, size_t nbyte)
         return (-1); /* It is not EOF but just an error. */
     }
 
+    ssize_t rc;
+
     /*
      * This handler only writes to "standard out" and "standard error", for all other file handles it returns failure.
      */
-    if (HAL_UNLIKELY((fd != STDOUT_FILENO) && (fd != STDERR_FILENO)))
+    if (HAL_LIKELY(fd == STDOUT_FILENO))
     {
-        errno = EBADF;
-        return (-1); /* It is not EOF but just an error. */
+        rc = g_stdout_func(buf, nbyte);
     }
-
-    if (HAL_LIKELY(g_stdout_func != NULL))
+    else if (fd == STDERR_FILENO)
     {
-        g_stdout_func(buf, nbyte);
+        rc = g_stderr_func(buf, nbyte);
     }
     else
     {
-        hal_mcu_halt();
+        errno = EBADF;
+        rc    = (-1); /* It is not EOF but just an error. */
     }
 
-    return (ssize_t)nbyte;
+    return rc;
 }
 
 void* sbrk(intptr_t incr)
@@ -204,16 +207,33 @@ void* sbrk(intptr_t incr)
     return (void*)brk;
 }
 
+bool hal_crt_stdio_lock_init(void)
+{
+    static TN_MUTEX stdin_mutex, stdout_mutex, stderr_mutex;
+    bool            rc;
+
+    rc  = tn_mutex_create(&stdin_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+    rc &= tn_mutex_create(&stdout_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+    rc &= tn_mutex_create(&stderr_mutex, TN_MUTEX_ATTR_INHERIT) == TERR_NO_ERR;
+
+    if (rc)
+    {
+        libc_set_file_lock(stdin, &stdin_mutex);
+        libc_set_file_lock(stdout, &stdout_mutex);
+        libc_set_file_lock(stderr, &stderr_mutex);
+    }
+
+    return rc;
+}
+
 int libc_lock(void* lock)
 {
-    TN_MUTEX* mutex = (TN_MUTEX*)lock;
-
     if (HAL_UNLIKELY(!tn_system_is_running() || tn_inside_int()))
     {
         return 0;
     }
 
-    int rc = tn_mutex_lock(mutex, TN_WAIT_INFINITE);
+    int rc = tn_mutex_lock((TN_MUTEX*)lock, TN_WAIT_INFINITE);
 
     if (HAL_UNLIKELY(rc != TERR_NO_ERR))
     {
@@ -225,14 +245,12 @@ int libc_lock(void* lock)
 
 void libc_unlock(void* lock)
 {
-    TN_MUTEX* mutex = (TN_MUTEX*)lock;
-
     if (HAL_UNLIKELY(!tn_system_is_running() || tn_inside_int()))
     {
         return;
     }
 
-    int rc = tn_mutex_unlock(mutex);
+    int rc = tn_mutex_unlock((TN_MUTEX*)lock);
 
     if (HAL_UNLIKELY(rc != TERR_NO_ERR))
     {

@@ -43,7 +43,6 @@ static void hal_systick_handler(void);
 HAL_NORETURN void hal_mcu_halt(void)
 {
     hal_mcu_int_off();
-    hal_uart_dbg_switch_to_fail_safe();
 
 #if TN_STACK_CHECK
     if (HAL_LIKELY(tn_system_is_running()))
@@ -52,8 +51,8 @@ HAL_NORETURN void hal_mcu_halt(void)
     }
 #endif /* TN_STACK_CHECK */
 
-    tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System is halted!");
-    tm4c129_uart_dbg_fail_safe_free();
+    tm4c129_uart_dbg_puts("\n" HAL_PREFIX "System is halted!");
+    tm4c129_uart_dbg_free();
 
     tm4c129_mcu_halt();
 }
@@ -79,11 +78,6 @@ void hal_sleep(size_t mS)
     {
         hal_mcu_mdelay(mS);
     }
-}
-
-uint32_t hal_timestamp_get(void)
-{
-    return tn_get_sys_ticks();
 }
 
 HAL_NORETURN void hal_system_startup(void)
@@ -122,11 +116,10 @@ HAL_NORETURN void hal_system_startup(void)
 
 HAL_NORETURN void hal_system_reboot(void)
 {
-    hal_uart_dbg_switch_to_fail_safe();
-    hal_mcu_int_off(); /* Disable interrupts after hal_uart_dbg_switch_to_fail_safe()! */
+    hal_mcu_int_off();
 
-    tm4c129_uart_dbg_fail_safe_puts("\n" HAL_PREFIX "System reboot!");
-    tm4c129_uart_dbg_fail_safe_free();
+    tm4c129_uart_dbg_puts("\n" HAL_PREFIX "System reboot!");
+    tm4c129_uart_dbg_free();
 
     hal_mcu_mdelay(HAL_REBOOT_PAUSE_mS);
     tm4c129_mcu_reset();
@@ -140,21 +133,6 @@ void hal_systick_handler(void)
     /* Calling the TNKernel scheduler every one millisecond. */
     tn_tick_int_processing();
     tn_int_exit();
-}
-
-void hal_uart_dbg_switch_to_fail_safe(void)
-{
-    hal_ll_cr_sect_enter();
-
-    if (!tm4c129_uart_dbg_fail_safe_init())
-    {
-        /* stderr and stdout is not initialized here. Stop the system without any print to stdout. */
-        tm4c129_mcu_halt();
-    }
-
-    hal_crt_stdout_func_set(tm4c129_uart_dbg_fail_safe_send_buf);
-
-    hal_ll_cr_sect_leave();
 }
 
 void hal_print_version(void)

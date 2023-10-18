@@ -69,11 +69,9 @@ HAL_INLINE void hal_mcu_int_off(void)
     tm4c129_mcu_int_off();
 }
 
-/**
+/*
  * Disable MCU interrupts and return previous interrupts disable state.
- *
- * @return  1 - previous interrupts state is disabled,
- *          0 - previous interrupts state is enabled.
+ * It returns 1 if previous interrupts state is disabled, 0 if previous interrupts state is enabled.
  */
 HAL_INLINE size_t hal_mcu_int_off_dstate(void)
 {
@@ -87,10 +85,9 @@ HAL_INLINE void hal_mcu_int_restore(size_t dstate)
     tm4c129_mcu_int_restore(dstate);
 }
 
-/**
- * @brief Determining whether we are inside an interrupt.
- *
- * @return Current ISR number if we are in an interrupt or 0 (zero) if we are in the thread mode.
+/*
+ * Determining whether we are inside an interrupt.
+ * It returns current ISR number if we are in an interrupt or 0 (zero) if we are in the thread mode.
  */
 HAL_INLINE size_t hal_mcu_inside_int(void)
 {
@@ -113,12 +110,12 @@ HAL_NORETURN void hal_mcu_halt(void);
 
 uint32_t hal_mcu_unique_id(void);
 
-/**
+/*
  * Universal sleep function.
  */
 void hal_sleep(size_t mS);
 
-/**
+/*
  * Assert with MCU halt if assert failed.
  */
 #define hal_assert(cond, message)  \
@@ -130,33 +127,17 @@ void hal_sleep(size_t mS);
         }                          \
     } while (0)
 
-/**
- * @brief HAL low level critical sections.
+/*
+ * HAL low level critical sections.
  */
 #define hal_ll_cr_sect_enter()       size_t hal_mcu_int_dstate = hal_mcu_int_off_dstate()
 #define hal_ll_cr_sect_enter_reuse() hal_mcu_int_dstate = hal_mcu_int_off_dstate()
 #define hal_ll_cr_sect_leave()       hal_mcu_int_restore(hal_mcu_int_dstate)
 
-/**
- * Timestamp functions. All values in milliseconds.
- *
- * @details
- *
- * Maximum timestamp value is 4294967000 milliseconds = 4294967 seconds =
- * 71582,78(3) minutes = 1193,0463(8) hours = 49,71 days.
- */
-uint32_t hal_timestamp_get(void);
-
-HAL_INLINE uint32_t hal_timestamp_span(uint32_t ts)
-{
-    return hal_timestamp_get() - ts;
-}
-
-/**
+/*
  * Common part.
  */
 HAL_NORETURN void hal_system_startup(void);
 HAL_NORETURN void hal_system_reboot(void);
 
-void hal_uart_dbg_switch_to_fail_safe(void);
 void hal_print_version(void);

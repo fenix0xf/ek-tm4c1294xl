@@ -10,7 +10,9 @@
 #define FUNLOCK(f)                         \
     do {                                   \
         if (__predict_true(__need_unlock)) \
+        {                                  \
             libc_unlock((f)->lock);        \
+        }                                  \
     } while (0)
 
 #define F_PERM 1

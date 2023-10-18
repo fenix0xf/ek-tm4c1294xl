@@ -26,21 +26,13 @@
 
 #pragma once
 
-#include <time.h>
 #include <stddef.h>
-#include <stdint.h>
-#include <assert.h>
 #include <stdbool.h>
 
-/**
- * The Red Hat newlib C Library initialization and syscalls implementation.
- *
- */
+typedef int (*hal_crt_stdout_func_t)(const void* buf, size_t size);
 
-typedef void (*hal_crt_stdout_func_t)(const void* buf, size_t size);
-
-/**
+/*
  * C Runtime Library initialization.
  */
-void hal_crt_init(hal_crt_stdout_func_t stdout_func);
-void hal_crt_stdout_func_set(hal_crt_stdout_func_t stdout_func);
+void hal_crt_init(hal_crt_stdout_func_t stdout_func, hal_crt_stdout_func_t stderr_func);
+bool hal_crt_stdio_lock_init(void);

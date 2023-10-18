@@ -16,21 +16,26 @@ static size_t sn_write(FILE* f, const unsigned char* s, size_t l)
 {
     struct cookie* c = (struct cookie*)f->cookie;
     size_t         k = MIN(c->n, f->wpos - f->wbase);
+
     if (k)
     {
         memcpy(c->s, f->wbase, k);
         c->s += k;
         c->n -= k;
     }
+
     k = MIN(c->n, l);
+
     if (k)
     {
         memcpy(c->s, s, k);
         c->s += k;
         c->n -= k;
     }
+
     *c->s   = 0;
     f->wpos = f->wbase = f->buf;
+
     /* pretend to succeed, even if we discarded extra data */
     return l;
 }

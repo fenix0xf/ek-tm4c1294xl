@@ -11,7 +11,7 @@ FILE __stderr_FILE = {
     .buf_size = 0,
     .fd       = STDERR_FILENO,
     .flags    = F_PERM | F_NORD,
-    .lbf      = -1,
+    .lbf      = EOF,
     .write    = __stdio_write,
     .lock     = NULL,
 };

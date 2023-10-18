@@ -11,7 +11,7 @@ FILE __stdout_FILE = {
     .buf_size = sizeof buf - UNGET,
     .fd       = STDOUT_FILENO,
     .flags    = F_PERM | F_NORD,
-    .lbf      = -1,
+    .lbf      = '\n',
     .write    = __stdio_write,
     .lock     = NULL,
 };

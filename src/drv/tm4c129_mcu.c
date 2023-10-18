@@ -28,7 +28,7 @@
 
 #include <drv/tm4c129.h>
 
-/**
+/*
  * Get uint8_t part number from uint32_t register "Device Identification 1" value.
  */
 #define U8PRTNO(n) (uint8_t)((n & SYSCTL_DID1_PRTNO_M) >> 16)
@@ -39,7 +39,7 @@ struct mcu_part
     const char* const name;
 };
 
-/**
+/*
  * MCU TM4C129x table.
  */
 static const struct mcu_part g_mcu_part[] = {
@@ -84,11 +84,10 @@ static void tm4c129_mcu_power_save_setup(void)
     tm4c129_mcu_periph_power_off(SYSCTL_PERIPH_USB0);
 }
 
-/**
+/*
  * This function is called before initialization of C standard library.
  * Static variables are in a non-initialized state!
  * Don't use static variables here, use only variables on a stack!
- *
  */
 bool tm4c129_mcu_init(void)
 {
@@ -96,7 +95,7 @@ bool tm4c129_mcu_init(void)
 
     FPUEnable();
 
-    /**
+    /*
      * Errata MEM#09
      *
      * Description: The ROM_SysCtlClockFreqSet() function does not properly configure the MOSC.
@@ -116,7 +115,7 @@ HAL_NORETURN void tm4c129_mcu_halt(void)
     tm4c129_mcu_int_off();
 
 #if DEBUG
-    /// If a debugger is present, then break into the debugger.
+    /* If a debugger is present, then break into the debugger. */
     if (HWREG(NVIC_DBG_CTRL) & NVIC_DBG_CTRL_C_DEBUGEN)
     {
         TM4C129_MCU_BKPT();
@@ -129,7 +128,7 @@ HAL_NORETURN void tm4c129_mcu_halt(void)
 HAL_NORETURN void tm4c129_mcu_reset(void)
 {
     SysCtlReset();
-    for (;;) {} ///< To eliminate warning: 'noreturn' function does return
+    for (;;) {} /* To eliminate warning: 'noreturn' function does return. */
 }
 
 void tm4c129_mcu_systick_on(size_t frequency)
@@ -151,15 +150,11 @@ const char* tm4c129_mcu_name(void)
 
     if (!CLASS_IS_TM4C129)
     {
-        /**
-         * MCU is not TM4C129 class.
-         */
+        /* MCU is not TM4C129 class. */
         return CLASS_IS_TM4C123 ? "TM4C123 class" : "Unknown";
     }
 
-    /**
-     * Read "Device Identification 1" register and get part number as uint8_t.
-     */
+    /* Read "Device Identification 1" register and get part number as uint8_t. */
     const uint8_t prtno = U8PRTNO(HWREG(SYSCTL_DID1));
 
     const struct mcu_part* part = g_mcu_part;
@@ -169,9 +164,7 @@ const char* tm4c129_mcu_name(void)
     {
         if (HAL_UNLIKELY(part->name == NULL))
         {
-            /**
-             * Not found in TM4C129 MCU table.
-             */
+            /* Not found in TM4C129 MCU table. */
             name = "TM4C129 class";
             break;
         }
@@ -182,17 +175,13 @@ const char* tm4c129_mcu_name(void)
         }
     }
 
-    /**
-     * Read "Device Identification 0" register and get major and minor revision as uint8_t.
-     */
+    /* Read "Device Identification 0" register and get major and minor revision as uint8_t. */
     const uint8_t rev_maj = (uint8_t)((HWREG(SYSCTL_DID0) & SYSCTL_DID0_MAJ_M) >> 8);
     const uint8_t rev_min = (uint8_t)(HWREG(SYSCTL_DID0) & SYSCTL_DID0_MIN_M);
 
     char* p = buf;
 
-    /**
-     * "TM4C1294NCPDT Rev A2"
-     */
+    /* "TM4C1294NCPDT Rev A2" */
     while ((*p++ = *name++)) {}
     p--;
 
@@ -223,15 +212,14 @@ size_t tm4c129_mcu_flash_sector_size(void)
     return SysCtlFlashSectorSizeGet();
 }
 
-/**
- * @brief Simple delay in 3 MCU cycles per one loop.
- *
- * @param count is the number of delay loop iterations to perform.
+/*
+ * Simple delay in 3 MCU cycles per one loop.
+ * "count" is the number of delay loop iterations to perform.
  */
 HAL_NAKED void tm4c129_mcu_3cycles_delay(HAL_UNUSED uint32_t count)
 {
-    __asm("subs r0, #1\n"                    ///< 1 MCU cycle
-          "bne  tm4c129_mcu_3cycles_delay\n" ///< 2 MCU cycles if the branch is taken
+    __asm("subs r0, #1\n"                    /* 1 MCU cycle. */
+          "bne  tm4c129_mcu_3cycles_delay\n" /* 2 MCU cycles if the branch is taken */
           "bx   lr\n");
 }
 

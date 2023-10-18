@@ -38,33 +38,33 @@
 
 #define STDIO_ERR_PREFIX "\nSTDIO ERR: "
 
-static void __stdio_halt(const char* func, const char* msg)
+HAL_NORETURN static void __stdio_halt(const char* func, const char* msg)
 {
     error_t err = errno;
     char    s[ITOA_BUFSIZ];
 
     hal_mcu_int_off();
-    tm4c129_uart_dbg_fail_safe_init();
 
-    tm4c129_uart_dbg_fail_safe_print(STDIO_ERR_PREFIX);
-    tm4c129_uart_dbg_fail_safe_print(func);
-    tm4c129_uart_dbg_fail_safe_print(", \"");
+    tm4c129_uart_dbg_print(STDIO_ERR_PREFIX);
+    tm4c129_uart_dbg_print(func);
+    tm4c129_uart_dbg_print(", \"");
 
     if (msg && *msg)
     {
         size_t end   = strlen(msg) - 1;
         bool   end_n = msg[end] == '\n';
 
-        tm4c129_uart_dbg_fail_safe_send_buf(msg, end_n ? end : end + 1);
+        tm4c129_uart_dbg_send_buf(msg, end_n ? end : end + 1);
 
         if (end_n)
         {
-            tm4c129_uart_dbg_fail_safe_print("\\n");
+            tm4c129_uart_dbg_print("\\n");
         }
     }
 
-    tm4c129_uart_dbg_fail_safe_print("\", errno=");
-    tm4c129_uart_dbg_fail_safe_puts(itoa((int)err, s, 10));
+    tm4c129_uart_dbg_print("\", errno=");
+    tm4c129_uart_dbg_puts(itoa((int)err, s, 10));
+
     hal_mcu_halt();
 }
 
@@ -74,17 +74,6 @@ int hal_puts(const char* s)
 
     if (HAL_UNLIKELY(rc < 0))
     {
-        goto halt;
-    }
-
-    if (HAL_UNLIKELY(fflush(stdout) < 0))
-    {
-        goto halt;
-    }
-
-    if (0)
-    {
-halt:
         __stdio_halt("hal_puts()", s);
     }
 
@@ -97,17 +86,6 @@ int hal_print(const char* s)
 
     if (HAL_UNLIKELY(rc < 0))
     {
-        goto halt;
-    }
-
-    if (HAL_UNLIKELY(fflush(stdout) < 0))
-    {
-        goto halt;
-    }
-
-    if (0)
-    {
-halt:
         __stdio_halt("hal_print()", s);
     }
 
@@ -116,28 +94,37 @@ halt:
 
 int hal_printf(const char* restrict fmt, ...)
 {
-    va_list args;
-    va_start(args, fmt);
-    int rc = vprintf(fmt, args);
-    va_end(args);
+    va_list ap;
+    va_start(ap, fmt);
+    int rc = vfprintf(stdout, fmt, ap);
+    va_end(ap);
 
     if (HAL_UNLIKELY(rc < 0))
     {
-        goto halt;
-    }
-
-    if (HAL_UNLIKELY(fflush(stdout) < 0))
-    {
-        goto halt;
-    }
-
-    if (0)
-    {
-halt:
-        __stdio_halt("hal_printf()", fmt);
+        __stdio_halt("hal_eprintf()", fmt);
     }
 
     return rc;
+}
+
+int hal_eprintf(const char* restrict fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    int rc = vfprintf(stderr, fmt, ap); /* stderr is no-buffering stream. */
+    va_end(ap);
+
+    if (HAL_UNLIKELY(rc < 0))
+    {
+        __stdio_halt("hal_eprintf()", fmt);
+    }
+
+    return rc;
+}
+
+int hal_flush(void)
+{
+    return fflush(stdout);
 }
 
 #if DEBUG
