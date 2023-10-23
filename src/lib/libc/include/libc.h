@@ -32,3 +32,4 @@ int  libc_lock(void* lock);   /* Should be implemented in user code. */
 void libc_unlock(void* lock); /* Should be implemented in user code. */
 
 void libc_set_file_lock(FILE* f, void* lock);
+void libc_set_malloc_lock(void* lock);

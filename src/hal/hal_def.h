@@ -93,9 +93,11 @@
 /*
  * Math macros.
  */
-#define HAL_IS_POW2(val)                (((val) != 0) && !((val) & ((val)-1)))
-#define HAL_IS_POW2_ALIGNED(val, align) (HAL_IS_POW2(align) && !((val) & ((align)-1)))
-#define HAL_CEIL_DIV(a, b)              (((a) + (b)-1) / (b))
+#define HAL_CEIL_DIV(a, b)           (((a) + (b)-1) / (b))
+#define HAL_ALIGN(a, alignment)      (HAL_CEIL_DIV(a, alignment) * alignment)
+
+#define HAL_IS_POW2(a)               (((a) != 0) && !((a) & ((a)-1)))
+#define HAL_IS_ALIGNED(a, alignment) ((a != 0) && (((a) % (alignment)) == 0))
 
 /*
  * Bitset macros.

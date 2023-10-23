@@ -2,15 +2,19 @@
 
 #undef assert
 
-#if DEBUG
-#define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__), 0)))
-#else
+#ifdef NDEBUG
 #define assert(x) (void)0
+#else
+#define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__), 0)))
 #endif
 
-#if __STDC_VERSION__ >= 201112L && !defined(__cplusplus)
+#ifndef __cplusplus
+
+#if __STDC_VERSION__ >= 201112L && __STDC_VERSION__ < 202311L
 #define static_assert _Static_assert
-#endif
+#endif /* __STDC_VERSION__ >= 201112L && __STDC_VERSION__ < 202311L */
+
+#endif /* __cplusplus */
 
 #ifdef __cplusplus
 extern "C"

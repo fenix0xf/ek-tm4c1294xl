@@ -36,7 +36,6 @@
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
-// #include <malloc.h>
 #include <unistd.h>
 
 #define CRT_HEAP_DEBUG DEBUG

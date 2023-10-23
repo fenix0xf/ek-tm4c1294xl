@@ -38,19 +38,18 @@
 
 #define INT_PREFIX "ISR: "
 
-/**
+/*
  * System stack for startup and interrupts.
  */
 HAL_STACK_DECLARE(system, 2048);
 
-/**
+/*
  * Type of vector table entry.
  */
 typedef void (*tm4c129_int_entry_t)(void);
 
-/**
+/*
  * Local functions.
- *
  */
 static void tm4c129_int_setup_defaults(void);
 
@@ -61,7 +60,7 @@ HAL_USED static void tm4c129_int_mpu_fault(void);
 HAL_USED static void tm4c129_int_bus_fault(void);
 HAL_USED static void tm4c129_int_usage_fault(void);
 
-/**
+/*
  * Interrupts vector table, see "src/firmware.ld" file.
  * Attribute HAL_USED is necessary for release build with -flto option.
  */
@@ -203,7 +202,7 @@ const tm4c129_int_entry_t g_vtable[] = {
 
 static_assert(sizeof(g_vtable) == MM_VTABLE_SIZE, "Invalid initial ISR table size!");
 
-/**
+/*
  * ISR RAM table, aligned as 1024 bytes.
  */
 HAL_USED
@@ -217,10 +216,8 @@ static_assert(__alignof(g_vtable_ram) == MM_VTABLE_ALIGN, "Invalid RAM vtable al
 
 static const char* g_tm4c129_int_reason = INT_PREFIX "Unknown reason";
 
-/**
+/*
  * Thumb assembler macro for stack unwind.
- *
- * @details
  *
  * Cortex-M4 Devices Generic User Guide.
  *
@@ -258,13 +255,12 @@ static const char* g_tm4c129_int_reason = INT_PREFIX "Unknown reason";
                    "mrs r1, ipsr\n"  /** Read IPSR into R1 */                                                \
                    "b cortex_stack_unwind\n");
 
-/**
+/*
  * Driver interface functions.
- *
  */
 bool tm4c129_int_init(void)
 {
-    if (!HAL_IS_POW2_ALIGNED((uintptr_t)g_vtable_ram, MM_VTABLE_ALIGN))
+    if (!HAL_IS_ALIGNED((uintptr_t)g_vtable_ram, MM_VTABLE_ALIGN))
     {
         hal_errorf("g_vtable_ram align != %u!", (unsigned)MM_VTABLE_ALIGN);
         return false;
@@ -272,14 +268,10 @@ bool tm4c129_int_init(void)
 
     hal_ll_cr_sect_enter();
 
-    /**
-     * Set default ISR handlers and enable some system interrupts.
-     */
+    /* Set default ISR handlers and enable some system interrupts. */
     tm4c129_int_setup_defaults();
 
-    /**
-     * Set new ISR table pointer.
-     */
+    /* Set new ISR table pointer. */
     HWREG(NVIC_VTABLE) = (uintptr_t)g_vtable_ram;
 
     hal_ll_cr_sect_leave();
@@ -323,14 +315,13 @@ void tm4c129_int_nvic_disable(size_t isr)
     IntDisable(isr);
 }
 
-/**
+/*
  * Local functions.
- *
  */
 void tm4c129_int_setup_defaults(void)
 {
-    g_vtable_ram[0]             = g_vtable[0]; ///< Initial stack pointer
-    g_vtable_ram[1]             = g_vtable[1]; ///< Reset handler
+    g_vtable_ram[0]             = g_vtable[0]; /* Initial stack pointer, it is not necessary for RAM vtable. */
+    g_vtable_ram[1]             = g_vtable[1]; /* Reset handler, it is not necessary for RAM vtable. */
     g_vtable_ram[FAULT_NMI]     = tm4c129_int_nmi;
     g_vtable_ram[FAULT_HARD]    = tm4c129_int_hard_fault;
     g_vtable_ram[FAULT_MPU]     = tm4c129_int_mpu_fault;
@@ -386,8 +377,9 @@ HAL_USED void tm4c129_int_usage_fault(void)
     cortex_stack_unwind_thumb();
 }
 
-/**
+/*
  * cortex_stack_unwind() used only in assembler code.
+ * HAL_USED is necessary for LTO builds.
  */
 HAL_USED void cortex_stack_unwind(uintptr_t* sp, uintptr_t ipsr)
 {

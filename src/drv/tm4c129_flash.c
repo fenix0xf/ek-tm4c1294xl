@@ -59,7 +59,7 @@ bool tm4c129_flash_erase(uintptr_t block_addr)
 {
     const size_t align = tm4c129_flash_ealign();
 
-    if (!HAL_IS_POW2_ALIGNED(block_addr, align))
+    if (!HAL_IS_ALIGNED(block_addr, align))
     {
         return false;
     }
@@ -74,7 +74,7 @@ bool tm4c129_flash_erase(uintptr_t block_addr)
 
 bool tm4c129_flash_write(uintptr_t addr, const void* buf, size_t len)
 {
-    if (!HAL_IS_POW2_ALIGNED(addr, TM4C129_FLASH_ADDR_ALIGN) || !HAL_IS_POW2_ALIGNED(len, TM4C129_FLASH_ADDR_ALIGN))
+    if (!HAL_IS_ALIGNED(addr, TM4C129_FLASH_ADDR_ALIGN) || !HAL_IS_ALIGNED(len, TM4C129_FLASH_ADDR_ALIGN))
     {
         return false;
     }
@@ -89,7 +89,7 @@ bool tm4c129_flash_write(uintptr_t addr, const void* buf, size_t len)
 
 bool tm4c129_flash_compare(uintptr_t addr, const void* buf, size_t len)
 {
-    if (!HAL_IS_POW2_ALIGNED(addr, TM4C129_FLASH_ADDR_ALIGN) || !HAL_IS_POW2_ALIGNED(len, TM4C129_FLASH_ADDR_ALIGN))
+    if (!HAL_IS_ALIGNED(addr, TM4C129_FLASH_ADDR_ALIGN) || !HAL_IS_ALIGNED(len, TM4C129_FLASH_ADDR_ALIGN))
     {
         return false;
     }
@@ -119,9 +119,7 @@ bool tm4c129_flash_jtag_is_on(void)
 
 void tm4c129_flash_jtag_permanently_off(void)
 {
-    /**
-     * The Boot Configuration (BOOTCFG) register requires a power-on reset before the committed changes take effect.
-     */
+    /* The Boot Configuration (BOOTCFG) register requires a power-on reset before the committed changes take effect. */
     if (tm4c129_flash_jtag_is_on())
     {
         HWREG(FLASH_FMA) = FLASH_FMA_BOOTCFG_WR;

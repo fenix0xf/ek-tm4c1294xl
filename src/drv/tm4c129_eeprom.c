@@ -66,7 +66,7 @@ bool tm4c129_eeprom_mass_erase(void)
 
 bool tm4c129_eeprom_read(uintptr_t addr, void* buf, size_t len)
 {
-    if (!HAL_IS_POW2_ALIGNED(addr, TM4C129_EEPROM_ALIGN) || !HAL_IS_POW2_ALIGNED(len, TM4C129_EEPROM_ALIGN))
+    if (!HAL_IS_ALIGNED(addr, TM4C129_EEPROM_ALIGN) || !HAL_IS_ALIGNED(len, TM4C129_EEPROM_ALIGN))
     {
         return false;
     }
@@ -82,7 +82,7 @@ bool tm4c129_eeprom_read(uintptr_t addr, void* buf, size_t len)
 
 bool tm4c129_eeprom_write(uintptr_t addr, const void* buf, size_t len)
 {
-    if (!HAL_IS_POW2_ALIGNED(addr, TM4C129_EEPROM_ALIGN) || !HAL_IS_POW2_ALIGNED(len, TM4C129_EEPROM_ALIGN))
+    if (!HAL_IS_ALIGNED(addr, TM4C129_EEPROM_ALIGN) || !HAL_IS_ALIGNED(len, TM4C129_EEPROM_ALIGN))
     {
         return false;
     }
