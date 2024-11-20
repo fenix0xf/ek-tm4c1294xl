@@ -44,13 +44,13 @@
 #define ALIGN_SIZE(size, align) (((size) + (align) - (size_t)1) & ~((align) - (size_t)1))
 
 /* Alignment of allocated block */
-#define MALLOC_ALIGN   (8U)
+#define MALLOC_ALIGN   (8u)
 #define CHUNK_ALIGN    (sizeof(void*))
 #define MALLOC_PADDING ((MAX(MALLOC_ALIGN, CHUNK_ALIGN)) - CHUNK_ALIGN)
 
 /* As well as the minimal allocation size to hold a free pointer. */
 #define MALLOC_MINSIZE (sizeof(void*))
-#define MAX_ALLOC_SIZE (0x80000000U)
+#define MAX_ALLOC_SIZE (0x80000000u)
 
 struct malloc_chunk
 {
@@ -83,8 +83,8 @@ struct malloc_chunk
 
 void* __libc_malloc_lock = NULL;                 /* OS mutex primitive, use libc_set_malloc_lock() to set it. */
 
-static struct malloc_chunk* __free_list  = NULL; /* List header of free blocks. */
-static char*                __sbrk_start = NULL; /* Starting point of memory allocated from system. */
+static struct malloc_chunk* g_free_list  = NULL; /* List header of free blocks. */
+static char*                g_sbrk_start = NULL; /* Starting point of memory allocated from system. */
 
 #define CHUNK_OFFSET ((size_t)(&(((struct malloc_chunk*)0)->next)))
 
@@ -145,9 +145,9 @@ static void* sbrk_aligned(size_t s)
 {
     char *p, *align_p;
 
-    if (__sbrk_start == NULL)
+    if (g_sbrk_start == NULL)
     {
-        __sbrk_start = sbrk(0);
+        g_sbrk_start = sbrk(0);
     }
 
     p = sbrk(s);
@@ -196,7 +196,7 @@ void* malloc(size_t s)
 
     MALLOC_LOCK;
 
-    p = __free_list;
+    p = g_free_list;
     r = p;
 
     while (r)
@@ -211,9 +211,9 @@ void* malloc(size_t s)
                 {
                     /* First item in the list, break it into two chunks and return the first one. */
                     r->size           = alloc_size;
-                    __free_list       = (struct malloc_chunk*)((char*)r + alloc_size);
-                    __free_list->size = rem;
-                    __free_list->next = r->next;
+                    g_free_list       = (struct malloc_chunk*)((char*)r + alloc_size);
+                    g_free_list->size = rem;
+                    g_free_list->next = r->next;
                 }
                 else
                 {
@@ -227,12 +227,12 @@ void* malloc(size_t s)
             /* Find a chunk that is exactly the size or slightly bigger than requested size, just return this chunk. */
             else if (p == r)
             {
-                /* Now it implies p==r==__free_list. Move the __free_list to next chunk. */
-                __free_list = r->next;
+                /* Now it implies p==r==g_free_list. Move the g_free_list to next chunk. */
+                g_free_list = r->next;
             }
             else
             {
-                /* Normal case. Remove it from __free_list. */
+                /* Normal case. Remove it from g_free_list. */
                 p->next = r->next;
             }
 
@@ -253,7 +253,7 @@ void* malloc(size_t s)
         {
             /* sbrk didn't have the requested amount. Let's check if the last item in the free list is adjacent to the
              * current heap end (sbrk(0)). In that case, only ask for the difference in size and merge them. */
-            p = __free_list;
+            p = g_free_list;
             r = p;
 
             while (r)
@@ -271,13 +271,13 @@ void* malloc(size_t s)
                 {
                     p->size += alloc_size;
 
-                    /* Remove chunk from __free_list. Since p != NULL there is at least one chunk. */
-                    r = __free_list;
+                    /* Remove chunk from g_free_list. Since p != NULL there is at least one chunk. */
+                    r = g_free_list;
 
                     if (r->next == NULL)
                     {
                         /* There is only a single chunk, remove it. */
-                        __free_list = NULL;
+                        g_free_list = NULL;
                     }
                     else
                     {
@@ -335,7 +335,7 @@ void* malloc(size_t s)
 }
 
 /*
- * Maintain a global free chunk single link list, headed by global variable __free_list.
+ * Maintain a global free chunk single link list, headed by global variable g_free_list.
  * When free, insert the to-be-freed chunk into free list. The place to insert should make sure all chunks are sorted
  * by address from low to high. Then merge with neighbor chunks if adjacent.
  */
@@ -353,35 +353,35 @@ void free(void* free_p)
 
     MALLOC_LOCK;
 
-    if (__free_list == NULL)
+    if (g_free_list == NULL)
     {
         /* Set first free list element. */
-        p_to_free->next = __free_list;
-        __free_list     = p_to_free;
+        p_to_free->next = g_free_list;
+        g_free_list     = p_to_free;
         MALLOC_UNLOCK;
         return;
     }
 
-    if (p_to_free < __free_list)
+    if (p_to_free < g_free_list)
     {
-        if ((char*)p_to_free + p_to_free->size == (char*)__free_list)
+        if ((char*)p_to_free + p_to_free->size == (char*)g_free_list)
         {
             /* Chunk to free is just before the first element of free list. */
-            p_to_free->size += __free_list->size;
-            p_to_free->next  = __free_list->next;
+            p_to_free->size += g_free_list->size;
+            p_to_free->next  = g_free_list->next;
         }
         else
         {
-            /* Insert before current __free_list. */
-            p_to_free->next = __free_list;
+            /* Insert before current g_free_list. */
+            p_to_free->next = g_free_list;
         }
 
-        __free_list = p_to_free;
+        g_free_list = p_to_free;
         MALLOC_UNLOCK;
         return;
     }
 
-    q = __free_list;
+    q = g_free_list;
 
     /* Walk through the free list to find the place for insert. */
     do {

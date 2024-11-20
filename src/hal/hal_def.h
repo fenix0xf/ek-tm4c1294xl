@@ -55,8 +55,8 @@
 /*
  * Stringification macros.
  */
-#define HAL_STFN_0(s) #s
-#define HAL_STFN(s)   HAL_STFN_0(s)
+#define HAL_STFN_0(s)           #s
+#define HAL_STFN(s)             HAL_STFN_0(s)
 
 /*
  * Linker sections macros.
@@ -71,7 +71,7 @@
 
 #define HAL_STACK_ITEM_TYPE unsigned int
 #define HAL_STACK_ALIGN     8
-#define HAL_STACK_ISIZE     sizeof(HAL_STACK_ITEM_TYPE)
+#define HAL_STACK_ITEM_SIZE sizeof(HAL_STACK_ITEM_TYPE)
 #define HAL_STACK_MIN_ITEMS 96
 
 #else
@@ -79,37 +79,40 @@
 #endif
 
 #define HAL_STACK_DECLARE(name, size_bytes)                                                                   \
-    enum { g_stack_##name##_items = (size_bytes) / HAL_STACK_ISIZE };                                         \
+    enum                                                                                                      \
+    {                                                                                                         \
+        g_stack_##name##_items = (size_bytes) / HAL_STACK_ITEM_SIZE,                                          \
+    };                                                                                                        \
     static_assert((((size_bytes) % HAL_STACK_ALIGN) == 0) && (g_stack_##name##_items >= HAL_STACK_MIN_ITEMS), \
                   "HAL_STACK_DECLARE() invalid parameters!");                                                 \
     HAL_ALIGNED(HAL_STACK_ALIGN)                                                                              \
     HAL_STACK_SECTION(name)                                                                                   \
     static HAL_STACK_ITEM_TYPE g_stack_##name[g_stack_##name##_items]
 
-#define HAL_STACK_PTR(name)   (&g_stack_##name[g_stack_##name##_items - 1])
-#define HAL_STACK_PTRU(name)  ((uintptr_t)&g_stack_##name[g_stack_##name##_items - 1])
-#define HAL_STACK_ITEMS(name) (g_stack_##name##_items)
+#define HAL_STACK_PTR(name)          (&g_stack_##name[g_stack_##name##_items - 1])
+#define HAL_STACK_PTRU(name)         ((uintptr_t)HAL_STACK_PTR(name))
+#define HAL_STACK_ITEMS(name)        (g_stack_##name##_items)
 
 /*
  * Math macros.
  */
-#define HAL_CEIL_DIV(a, b)           (((a) + (b)-1) / (b))
+#define HAL_CEIL_DIV(a, b)           (((a) + (b) - 1) / (b))
 #define HAL_ALIGN(a, alignment)      (HAL_CEIL_DIV(a, alignment) * alignment)
 
-#define HAL_IS_POW2(a)               (((a) != 0) && !((a) & ((a)-1)))
-#define HAL_IS_ALIGNED(a, alignment) ((a != 0) && (((a) % (alignment)) == 0))
+#define HAL_IS_POW2(a)               (((a) != 0) && !((a) & ((a) - 1)))
+#define HAL_IS_ALIGNED(a, alignment) (((a) != 0) && (((a) % (alignment)) == 0))
 
 /*
  * Bitset macros.
  */
-#define HAL_BITMASK(b, s)     (1 << ((b) % (s)))
-#define HAL_BITSLOT(b, s)     ((b) / (s))
-#define HAL_BITSET(a, b, s)   ((a)[HAL_BITSLOT(b, s)] |= HAL_BITMASK(b, s))
-#define HAL_BITCLEAR(a, b, s) ((a)[HAL_BITSLOT(b, s)] &= ~HAL_BITMASK(b, s))
-#define HAL_BITTEST(a, b, s)  ((a)[HAL_BITSLOT(b, s)] & HAL_BITMASK(b, s))
-#define HAL_BITNSLOTS(nb, s)  HAL_CEIL_DIV(nb, s)
+#define HAL_BITMASK(b, s)            (1u << ((b) % (s)))
+#define HAL_BITSLOT(b, s)            ((b) / (s))
+#define HAL_BITSET(a, b, s)          ((a)[HAL_BITSLOT(b, s)] |= HAL_BITMASK(b, s))
+#define HAL_BITCLEAR(a, b, s)        ((a)[HAL_BITSLOT(b, s)] &= ~HAL_BITMASK(b, s))
+#define HAL_BITTEST(a, b, s)         ((a)[HAL_BITSLOT(b, s)] & HAL_BITMASK(b, s))
+#define HAL_BITNSLOTS(nb, s)         HAL_CEIL_DIV(nb, s)
 
 /*
  * Utilities.
  */
-#define HAL_NELEMS(a) (sizeof(a) / sizeof(*(a)))
+#define HAL_NELEMS(a)                (sizeof(a) / sizeof(*(a)))

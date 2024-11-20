@@ -38,7 +38,7 @@
 
 #define HAL_REBOOT_PAUSE_mS 1000
 
-static void hal_systick_handler(void);
+static void       hal_systick_handler(void);
 
 HAL_NORETURN void hal_mcu_halt(void)
 {
@@ -142,17 +142,17 @@ void hal_print_version(void)
     /* Get MCU full hardware ID. */
     tm4c129_mcu_unique_id(&id0, &id1, &id2, &id3);
 
-    hal_printf("\n"
-               "%s (%s)\n"
-               "%s\n"
+    hal_printf("\n\n"
+               "%s (%s) %s!\n"
                "Board: EK-TM4C1294XL Rev D\n"
-               "MCU %s [%u MHz]\n"
-               "SRAM %u KiB, FLASH %u/%u KiB\n"
-               "MCUID 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
+               "MCU  : %s [%u MHz]\n"
+               "SRAM : %u KiB\n"
+               "FLASH: %u/%u KiB\n"
+               "MCUID: 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
-               "Example Firmware", /* hal_version(), */
+               "Test Firmware", /* hal_version(), */
                DEBUG ? "Debug" : "Release",
-               "(c) 2023",         /* hal_copyright(), */
+               "© 2023 Alexander Kotikov", /* hal_copyright(), */
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,
                (unsigned)(hal_mcu_sram_size() / 1024),

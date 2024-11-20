@@ -1,8 +1,18 @@
 #include <string.h>
 
-char* strtok(char* restrict s, const char* restrict sep)
+#if __STDC_VERSION__ >= 201112L && __STDC_VERSION__ < 202311L
+#include <threads.h>
+#endif
+
+#if __STDC_VERSION__ >= 201112L
+static thread_local char* __tls_p;
+#else
+static char* __tls_p;
+#endif
+
+char* strtok(char* __restrict s, const char* __restrict sep)
 {
-    static char* p;
+    char* p = __tls_p;
 
     if (!s && !(s = p))
     {

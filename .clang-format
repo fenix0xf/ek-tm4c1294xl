@@ -5,7 +5,7 @@ AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
   Enabled: true
   AcrossEmptyLines: false
-  AcrossComments: false
+  AcrossComments: true
   AlignCompound: true
   PadOperators: true
 AlignConsecutiveBitFields:
@@ -16,24 +16,23 @@ AlignConsecutiveBitFields:
   PadOperators: true
 AlignConsecutiveDeclarations:
   Enabled: true
-  AcrossEmptyLines: false
-  AcrossComments: false
+  AcrossEmptyLines: true
+  AcrossComments: true
   AlignCompound: true
   PadOperators: true
 AlignConsecutiveMacros:
   Enabled: true
   AcrossEmptyLines: true
-  AcrossComments: false
+  AcrossComments: true
   AlignCompound: true
   PadOperators: true
 AlignEscapedNewlines: Left
 AlignOperands: AlignAfterOperator
-AlignTrailingComments:
-  Kind: Always
-  OverEmptyLines: 1
+AlignTrailingComments: Always
 AllowAllArgumentsOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: Always
+AllowAllConstructorInitializersOnNextLine: false
+AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortEnumsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: None
@@ -53,9 +52,9 @@ BraceWrapping:
   AfterCaseLabel: true
   AfterClass: true
   AfterControlStatement: Always
-  AfterEnum: false
+  AfterEnum: true
   AfterFunction: true
-  AfterNamespace: false
+  AfterNamespace: true
   AfterObjCDeclaration: true
   AfterStruct: true
   AfterUnion: true
@@ -79,7 +78,7 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
-ColumnLimit: 120
+ColumnLimit: 140
 CommentPragmas: ""
 CompactNamespaces: true
 ConstructorInitializerIndentWidth: 4
@@ -141,7 +140,7 @@ LineEnding: LF
 MacroBlockBegin: ""
 MacroBlockEnd: ""
 MaxEmptyLinesToKeep: 1
-NamespaceIndentation: None
+NamespaceIndentation: All
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
 ObjCBreakBeforeNestedBlockParam: true
@@ -220,4 +219,3 @@ WhitespaceSensitiveMacros:
   - NS_SWIFT_NAME
   - PP_STRINGIZE
   - STRINGIZE
-AllowAllConstructorInitializersOnNextLine: false

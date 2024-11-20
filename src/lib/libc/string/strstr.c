@@ -4,8 +4,7 @@
 static char* twobyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint16_t nw = n[0] << 8 | n[1], hw = h[0] << 8 | h[1];
-    for (h++; *h && hw != nw; hw = hw << 8 | *++h)
-        ;
+    for (h++; *h && hw != nw; hw = hw << 8 | *++h) {}
     return *h ? (char*)h - 1 : 0;
 }
 
@@ -13,8 +12,7 @@ static char* threebyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8;
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8;
-    for (h += 2; *h && hw != nw; hw = (hw | *++h) << 8)
-        ;
+    for (h += 2; *h && hw != nw; hw = (hw | *++h) << 8) {}
     return *h ? (char*)h - 2 : 0;
 }
 
@@ -22,8 +20,7 @@ static char* fourbyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3];
-    for (h += 3; *h && hw != nw; hw = hw << 8 | *++h)
-        ;
+    for (h += 3; *h && hw != nw; hw = hw << 8 | *++h) {}
     return *h ? (char*)h - 3 : 0;
 }
 
@@ -41,6 +38,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
 
     /* Computing length of needle and fill shift table */
     for (l = 0; n[l] && h[l]; l++) { BITOP(byteset, n[l], |=), shift[n[l]] = l + 1; }
+
     if (n[l])
     {
         return 0; /* hit the end of h */
@@ -50,6 +48,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
     ip = -1;
     jp = 0;
     k = p = 1;
+
     while (jp + k < l)
     {
         if (n[ip + k] == n[jp + k])
@@ -76,6 +75,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
             k = p = 1;
         }
     }
+
     ms = ip;
     p0 = p;
 
@@ -83,6 +83,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
     ip = -1;
     jp = 0;
     k = p = 1;
+
     while (jp + k < l)
     {
         if (n[ip + k] == n[jp + k])
@@ -109,6 +110,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
             k = p = 1;
         }
     }
+
     if (ip + 1 > ms + 1)
     {
         ms = ip;
@@ -142,6 +144,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
             /* Fast estimate for MAX(l,63) */
             size_t               grow = l | 63;
             const unsigned char* z2   = (const unsigned char*)memchr(z, 0, grow);
+
             if (z2)
             {
                 z = z2;
@@ -160,6 +163,7 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
         if (BITOP(byteset, h[l - 1], &))
         {
             k = l - shift[h[l - 1]];
+
             if (k)
             {
                 if (k < mem)
@@ -179,21 +183,23 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
         }
 
         /* Compare right half */
-        for (k = MAX(ms + 1, mem); n[k] && n[k] == h[k]; k++)
-            ;
+        for (k = MAX(ms + 1, mem); n[k] && n[k] == h[k]; k++) {}
+
         if (n[k])
         {
             h   += k - ms;
             mem  = 0;
             continue;
         }
+
         /* Compare left half */
-        for (k = ms + 1; k > mem && n[k - 1] == h[k - 1]; k--)
-            ;
+        for (k = ms + 1; k > mem && n[k - 1] == h[k - 1]; k--) {}
+
         if (k <= mem)
         {
             return (char*)h;
         }
+
         h   += p;
         mem  = mem0;
     }
@@ -209,30 +215,37 @@ char* strstr(const char* h, const char* n)
 
     /* Use faster algorithms for short needles */
     h = strchr(h, *n);
+
     if (!h || !n[1])
     {
         return (char*)h;
     }
+
     if (!h[1])
     {
         return 0;
     }
+
     if (!n[2])
     {
         return twobyte_strstr((const unsigned char*)h, (const unsigned char*)n);
     }
+
     if (!h[2])
     {
         return 0;
     }
+
     if (!n[3])
     {
         return threebyte_strstr((const unsigned char*)h, (const unsigned char*)n);
     }
+
     if (!h[3])
     {
         return 0;
     }
+
     if (!n[4])
     {
         return fourbyte_strstr((const unsigned char*)h, (const unsigned char*)n);

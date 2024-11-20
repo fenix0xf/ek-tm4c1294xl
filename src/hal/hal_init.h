@@ -30,7 +30,7 @@
 
 #include <string.h>
 
-#define HAL_INIT_MSG_LEN 40
+#define HAL_INIT_MSG_LEN 0
 
 #define HAL_INIT_ASSERT(msg, init_func)                   \
     do {                                                  \

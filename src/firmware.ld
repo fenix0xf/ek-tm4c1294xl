@@ -46,19 +46,17 @@ SECTIONS
         . = ALIGN(__align);
         KEEP(*(.version))
         . = ALIGN(__align);
-        *(.psvhandler)
+        KEEP(*(.reset))
         . = ALIGN(__align);
         *(.text*)
         . = ALIGN(__align);
         *(.rodata*)
-        . = ALIGN(__align);
     } > FLASH
 
     .ARM.exidx :
     {
         . = ALIGN(__align);
         *(.ARM.exidx*)
-        . = ALIGN(__align);
     } > FLASH
 
     g_ld_ldata = LOADADDR(.data);
@@ -69,7 +67,6 @@ SECTIONS
         g_ld_data = .;
         *(.data*)
         g_ld_edata = .;
-        . = ALIGN(__align);
     } > SRAM AT> FLASH
 
     .bss (NOLOAD) :
@@ -80,7 +77,6 @@ SECTIONS
         . = ALIGN(__align);
         *(COMMON)
         g_ld_ebss = .;
-        . = ALIGN(__align);
     } > SRAM
 
     .noinit (NOLOAD) :
@@ -89,6 +85,5 @@ SECTIONS
         *(.noinit.common*)
         *(.noinit.stack*)
         *(.noinit.heap*)
-        . = ALIGN(__align);
     } > SRAM
 }

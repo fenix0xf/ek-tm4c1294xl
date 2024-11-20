@@ -8,6 +8,7 @@ void srand(unsigned s)
     seed = s - 1;
 }
 
+/* rand() is not guaranteed to be thread-safe. */
 int rand(void)
 {
     seed = 6364136223846793005ULL * seed + 1;

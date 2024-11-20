@@ -61,7 +61,7 @@ extern "C"
 #define TN_NO_WAIT         0u
 #define TN_INVALID_VAL_UL  0xFFFFFFFFul
 
-#define TN_STACK_ITEM_SIZE HAL_STACK_ISIZE
+#define TN_STACK_ITEM_SIZE HAL_STACK_ITEM_SIZE
 
 #if TN_SUPPORT_FPU && (__ARM_FP & ~4u)
 #error Bit 1 - Half precision FPU (16-bit) and Bit 3 - double precision FPU (64-bit) is not supported.

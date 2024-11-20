@@ -100,12 +100,12 @@ bool tm4c129_mcu_init(void)
      *
      * Description: The ROM_SysCtlClockFreqSet() function does not properly configure the MOSC.
      * Due to this erratum, any ROM functions that rely on the proper operation of the MOSC,
-     * such as the Ethernet boot loader, will not function correctly.
+     * such as the Ethernet bootloader, will not function correctly.
      *
      * Workaround(s): Use the TivaWare function of SysCtlClockFreqSet() in Flash memory.
      */
-    size_t cpu_frequency = SysCtlClockFreqSet(SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_240,
-                                              TM4C129_MCU_FREQUENCY);
+    size_t cpu_frequency =
+        SysCtlClockFreqSet(SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_240, TM4C129_MCU_FREQUENCY);
 
     return cpu_frequency == TM4C129_MCU_FREQUENCY;
 }
@@ -122,13 +122,19 @@ HAL_NORETURN void tm4c129_mcu_halt(void)
     }
 #endif
 
-    for (;;) {}
+    for (;;)
+    {
+    }
 }
 
 HAL_NORETURN void tm4c129_mcu_reset(void)
 {
     SysCtlReset();
-    for (;;) {} /* To eliminate warning: 'noreturn' function does return. */
+
+    /* To eliminate warning: 'noreturn' function does return. */
+    for (;;)
+    {
+    }
 }
 
 void tm4c129_mcu_systick_on(size_t frequency)
@@ -155,7 +161,7 @@ const char* tm4c129_mcu_name(void)
     }
 
     /* Read "Device Identification 1" register and get part number as uint8_t. */
-    const uint8_t prtno = U8PRTNO(HWREG(SYSCTL_DID1));
+    const uint8_t          prtno = U8PRTNO(HWREG(SYSCTL_DID1));
 
     const struct mcu_part* part = g_mcu_part;
     const char*            name;
@@ -179,10 +185,13 @@ const char* tm4c129_mcu_name(void)
     const uint8_t rev_maj = (uint8_t)((HWREG(SYSCTL_DID0) & SYSCTL_DID0_MAJ_M) >> 8);
     const uint8_t rev_min = (uint8_t)(HWREG(SYSCTL_DID0) & SYSCTL_DID0_MIN_M);
 
-    char* p = buf;
+    char*         p = buf;
 
     /* "TM4C1294NCPDT Rev A2" */
-    while ((*p++ = *name++)) {}
+    while ((*p++ = *name++))
+    {
+    }
+
     p--;
 
     *p++ = ' ';

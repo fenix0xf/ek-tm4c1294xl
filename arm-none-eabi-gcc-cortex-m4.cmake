@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 #
-# Usage: cmake -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc-cortex-m4.cmake
+# Usage: cmake -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc-cortex-m4.cmake --no-warn-unused-cli
 #
 
 set(CMAKE_SYSTEM_NAME Generic)

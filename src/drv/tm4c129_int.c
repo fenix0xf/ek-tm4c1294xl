@@ -51,7 +51,7 @@ typedef void (*tm4c129_int_entry_t)(void);
 /*
  * Local functions.
  */
-static void tm4c129_int_setup_defaults(void);
+static void          tm4c129_int_setup_defaults(void);
 
 HAL_USED static void tm4c129_int_def(void);
 HAL_USED static void tm4c129_int_nmi(void);
@@ -320,8 +320,8 @@ void tm4c129_int_nvic_disable(size_t isr)
  */
 void tm4c129_int_setup_defaults(void)
 {
-    g_vtable_ram[0]             = g_vtable[0]; /* Initial stack pointer, it is not necessary for RAM vtable. */
-    g_vtable_ram[1]             = g_vtable[1]; /* Reset handler, it is not necessary for RAM vtable. */
+    g_vtable_ram[0]             = g_vtable[0]; /* Initial stack pointer. */
+    g_vtable_ram[1]             = g_vtable[1]; /* Reset handler. */
     g_vtable_ram[FAULT_NMI]     = tm4c129_int_nmi;
     g_vtable_ram[FAULT_HARD]    = tm4c129_int_hard_fault;
     g_vtable_ram[FAULT_MPU]     = tm4c129_int_mpu_fault;
@@ -332,7 +332,10 @@ void tm4c129_int_setup_defaults(void)
     g_vtable_ram[FAULT_PENDSV]  = tm4c129_int_def;
     g_vtable_ram[FAULT_SYSTICK] = tm4c129_int_def;
 
-    for (size_t i = (FAULT_SYSTICK + 1); i < MM_VTABLE_ITEMS; i++) { g_vtable_ram[i] = tm4c129_int_def; }
+    for (size_t i = (FAULT_SYSTICK + 1); i < MM_VTABLE_ITEMS; i++)
+    {
+        g_vtable_ram[i] = tm4c129_int_def;
+    }
 
     tm4c129_int_nvic_enable(FAULT_NMI);
     tm4c129_int_nvic_enable(FAULT_HARD);
