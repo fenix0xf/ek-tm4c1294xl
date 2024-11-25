@@ -41,9 +41,9 @@
 
 #define MAILBOX_ENTRY_HEADER_SIZE ((unsigned long)elem_size + sizeof(SLL_QUEUE) + sizeof(unsigned long))
 
-TN_INLINE void do_copy_to_mb(TN_MAILBOX* mb, SLL_QUEUE* que, void* data_ptr, unsigned long data_size);
+TN_INLINE void           do_copy_to_mb(TN_MAILBOX* mb, SLL_QUEUE* que, void* data_ptr, unsigned long data_size);
 
-TN_INLINE unsigned long do_copy_from_mb(TN_MAILBOX* mb, SLL_QUEUE* que, void* data_ptr, unsigned long max_len);
+TN_INLINE unsigned long  do_copy_from_mb(TN_MAILBOX* mb, SLL_QUEUE* que, void* data_ptr, unsigned long max_len);
 
 //----------------------------------------------------------------------------
 TN_INLINE unsigned long* get_len_addr(SLL_QUEUE* queue)
@@ -69,11 +69,7 @@ TN_INLINE unsigned char* get_data_addr(SLL_QUEUE* queue)
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-int tn_mailbox_create(TN_MAILBOX*    mb,
-                      unsigned long  num_elem,
-                      unsigned long  elem_size,
-                      unsigned char* data_buf,
-                      unsigned long  data_buf_size)
+int tn_mailbox_create(TN_MAILBOX* mb, unsigned long num_elem, unsigned long elem_size, unsigned char* data_buf, unsigned long data_buf_size)
 {
     int            rc = TERR_NO_ERR;
     unsigned char* ptr;
@@ -333,12 +329,7 @@ long tn_mailbox_receive(TN_MAILBOX*   mb,
             {
                 tn_idisable_interrupt();
 
-                rc = do_input_sem(&mb->inuse_que,
-                                  TERR_UNDERFLOW,
-                                  &sque,
-                                  &mb->inuse_wait_queue,
-                                  TSK_WAIT_REASON_INUSE_Q,
-                                  timeout);
+                rc = do_input_sem(&mb->inuse_que, TERR_UNDERFLOW, &sque, &mb->inuse_wait_queue, TSK_WAIT_REASON_INUSE_Q, timeout);
 
                 tn_ienable_interrupt();
 
@@ -365,12 +356,7 @@ long tn_mailbox_receive(TN_MAILBOX*   mb,
 
             tn_disable_interrupt();
 
-            rc = do_input_sem(&mb->inuse_que,
-                              TERR_UNDERFLOW,
-                              &sque,
-                              &mb->inuse_wait_queue,
-                              TSK_WAIT_REASON_INUSE_Q,
-                              timeout);
+            rc = do_input_sem(&mb->inuse_que, TERR_UNDERFLOW, &sque, &mb->inuse_wait_queue, TSK_WAIT_REASON_INUSE_Q, timeout);
             tn_enable_interrupt();
 
             if (rc == TERR_YIELD)
@@ -451,12 +437,7 @@ int tn_mailbox_send_ex(TN_MAILBOX*   mb,
             {
                 tn_idisable_interrupt();
 
-                rc = do_input_sem(&mb->free_que,
-                                  TERR_OVERFLOW,
-                                  &sque,
-                                  &mb->free_wait_queue,
-                                  TSK_WAIT_REASON_FREE_Q,
-                                  timeout);
+                rc = do_input_sem(&mb->free_que, TERR_OVERFLOW, &sque, &mb->free_wait_queue, TSK_WAIT_REASON_FREE_Q, timeout);
                 if (rc == TERR_NO_ERR)
                 {
                     mb->free_cnt--;
@@ -484,12 +465,7 @@ int tn_mailbox_send_ex(TN_MAILBOX*   mb,
 
             tn_disable_interrupt();
 
-            rc = do_input_sem(&mb->free_que,
-                              TERR_OVERFLOW,
-                              &sque,
-                              &mb->free_wait_queue,
-                              TSK_WAIT_REASON_FREE_Q,
-                              timeout);
+            rc = do_input_sem(&mb->free_que, TERR_OVERFLOW, &sque, &mb->free_wait_queue, TSK_WAIT_REASON_FREE_Q, timeout);
             if (rc == TERR_NO_ERR)
             {
                 mb->free_cnt--;

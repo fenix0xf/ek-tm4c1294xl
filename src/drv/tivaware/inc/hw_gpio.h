@@ -124,21 +124,21 @@
 // The following are defines for the bit fields in the GPIO_O_LOCK register.
 //
 //*****************************************************************************
-#define GPIO_LOCK_M 0xFFFFFFFF   // GPIO Lock
+#define GPIO_LOCK_M     0xFFFFFFFF // GPIO Lock
 #define GPIO_LOCK_UNLOCKED \
-    0x00000000                   // The GPIOCR register is unlocked
-                                 // and may be modified
+    0x00000000 // The GPIOCR register is unlocked
+               // and may be modified
 #define GPIO_LOCK_LOCKED \
-    0x00000001                   // The GPIOCR register is locked
-                                 // and may not be modified
-#define GPIO_LOCK_KEY 0x4C4F434B // Unlocks the GPIO_CR register
+    0x00000001                        // The GPIOCR register is locked
+                                      // and may not be modified
+#define GPIO_LOCK_KEY      0x4C4F434B // Unlocks the GPIO_CR register
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the GPIO_O_SI register.
 //
 //*****************************************************************************
-#define GPIO_SI_SUM 0x00000001 // Summary Interrupt
+#define GPIO_SI_SUM        0x00000001 // Summary Interrupt
 
 //*****************************************************************************
 //
@@ -147,19 +147,19 @@
 //*****************************************************************************
 #define GPIO_DR12R_DRV12_M 0x000000FF // Output Pad 12-mA Drive Enable
 #define GPIO_DR12R_DRV12_12MA \
-    0x00000001                        // The corresponding GPIO pin has
-                                      // 12-mA drive. This encoding is
-                                      // only valid if the GPIOPP EDE bit
-                                      // is set and the appropriate
-                                      // GPIOPC EDM bit field is
-                                      // programmed to 0x3
+    0x00000001 // The corresponding GPIO pin has
+               // 12-mA drive. This encoding is
+               // only valid if the GPIOPP EDE bit
+               // is set and the appropriate
+               // GPIOPC EDM bit field is
+               // programmed to 0x3
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the GPIO_O_WAKEPEN register.
 //
 //*****************************************************************************
-#define GPIO_WAKEPEN_WAKEP4 0x00000010 // P[4] Wake Enable
+#define GPIO_WAKEPEN_WAKEP4   0x00000010 // P[4] Wake Enable
 
 //*****************************************************************************
 //
@@ -174,43 +174,43 @@
 // register.
 //
 //*****************************************************************************
-#define GPIO_WAKESTAT_STAT4 0x00000010 // P[4] Wake Status
+#define GPIO_WAKESTAT_STAT4   0x00000010 // P[4] Wake Status
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the GPIO_O_PP register.
 //
 //*****************************************************************************
-#define GPIO_PP_EDE 0x00000001 // Extended Drive Enable
+#define GPIO_PP_EDE           0x00000001 // Extended Drive Enable
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the GPIO_O_PC register.
 //
 //*****************************************************************************
-#define GPIO_PC_EDM7_M 0x0000C000 // Extended Drive Mode Bit 7
-#define GPIO_PC_EDM6_M 0x00003000 // Extended Drive Mode Bit 6
-#define GPIO_PC_EDM5_M 0x00000C00 // Extended Drive Mode Bit 5
-#define GPIO_PC_EDM4_M 0x00000300 // Extended Drive Mode Bit 4
-#define GPIO_PC_EDM3_M 0x000000C0 // Extended Drive Mode Bit 3
-#define GPIO_PC_EDM2_M 0x00000030 // Extended Drive Mode Bit 2
-#define GPIO_PC_EDM1_M 0x0000000C // Extended Drive Mode Bit 1
-#define GPIO_PC_EDM0_M 0x00000003 // Extended Drive Mode Bit 0
+#define GPIO_PC_EDM7_M        0x0000C000 // Extended Drive Mode Bit 7
+#define GPIO_PC_EDM6_M        0x00003000 // Extended Drive Mode Bit 6
+#define GPIO_PC_EDM5_M        0x00000C00 // Extended Drive Mode Bit 5
+#define GPIO_PC_EDM4_M        0x00000300 // Extended Drive Mode Bit 4
+#define GPIO_PC_EDM3_M        0x000000C0 // Extended Drive Mode Bit 3
+#define GPIO_PC_EDM2_M        0x00000030 // Extended Drive Mode Bit 2
+#define GPIO_PC_EDM1_M        0x0000000C // Extended Drive Mode Bit 1
+#define GPIO_PC_EDM0_M        0x00000003 // Extended Drive Mode Bit 0
 #define GPIO_PC_EDM0_DISABLE \
-    0x00000000                    // Drive values of 2, 4 and 8 mA
-                                  // are maintained. GPIO n Drive
-                                  // Select (GPIODRnR) registers
-                                  // function as normal
+    0x00000000 // Drive values of 2, 4 and 8 mA
+               // are maintained. GPIO n Drive
+               // Select (GPIODRnR) registers
+               // function as normal
 #define GPIO_PC_EDM0_6MA \
-    0x00000001                    // An additional 6 mA option is
-                                  // provided
+    0x00000001 // An additional 6 mA option is
+               // provided
 #define GPIO_PC_EDM0_PLUS2MA \
-    0x00000003                    // A 2 mA driver is always enabled;
-                                  // setting the corresponding
-                                  // GPIODR4R register bit adds 2 mA
-                                  // and setting the corresponding
-                                  // GPIODR8R of GPIODR12R register
-                                  // bit adds an additional 4 mA
+    0x00000003 // A 2 mA driver is always enabled;
+               // setting the corresponding
+               // GPIODR4R register bit adds 2 mA
+               // and setting the corresponding
+               // GPIODR8R of GPIODR12R register
+               // bit adds an additional 4 mA
 #define GPIO_PC_EDM7_S 14
 #define GPIO_PC_EDM6_S 12
 #define GPIO_PC_EDM5_S 10

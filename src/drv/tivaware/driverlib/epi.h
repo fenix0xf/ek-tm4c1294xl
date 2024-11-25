@@ -56,84 +56,84 @@ extern "C"
 // Values that can be passed to EPIModeSet()
 //
 //*****************************************************************************
-#define EPI_MODE_GENERAL 0x00000010
-#define EPI_MODE_SDRAM   0x00000011
-#define EPI_MODE_HB8     0x00000012
-#define EPI_MODE_HB16    0x00000013
-#define EPI_MODE_DISABLE 0x00000000
+#define EPI_MODE_GENERAL              0x00000010
+#define EPI_MODE_SDRAM                0x00000011
+#define EPI_MODE_HB8                  0x00000012
+#define EPI_MODE_HB16                 0x00000013
+#define EPI_MODE_DISABLE              0x00000000
 
 //*****************************************************************************
 //
 // Values that can be passed to EPIConfigSDRAMSet()
 //
 //*****************************************************************************
-#define EPI_SDRAM_CORE_FREQ_0_15   0x00000000
-#define EPI_SDRAM_CORE_FREQ_15_30  0x40000000
-#define EPI_SDRAM_CORE_FREQ_30_50  0x80000000
-#define EPI_SDRAM_CORE_FREQ_50_100 0xC0000000
-#define EPI_SDRAM_LOW_POWER        0x00000200
-#define EPI_SDRAM_FULL_POWER       0x00000000
-#define EPI_SDRAM_SIZE_64MBIT      0x00000000
-#define EPI_SDRAM_SIZE_128MBIT     0x00000001
-#define EPI_SDRAM_SIZE_256MBIT     0x00000002
-#define EPI_SDRAM_SIZE_512MBIT     0x00000003
+#define EPI_SDRAM_CORE_FREQ_0_15      0x00000000
+#define EPI_SDRAM_CORE_FREQ_15_30     0x40000000
+#define EPI_SDRAM_CORE_FREQ_30_50     0x80000000
+#define EPI_SDRAM_CORE_FREQ_50_100    0xC0000000
+#define EPI_SDRAM_LOW_POWER           0x00000200
+#define EPI_SDRAM_FULL_POWER          0x00000000
+#define EPI_SDRAM_SIZE_64MBIT         0x00000000
+#define EPI_SDRAM_SIZE_128MBIT        0x00000001
+#define EPI_SDRAM_SIZE_256MBIT        0x00000002
+#define EPI_SDRAM_SIZE_512MBIT        0x00000003
 
 //*****************************************************************************
 //
 // Values that can be passed to EPIConfigGPModeSet()
 //
 //*****************************************************************************
-#define EPI_GPMODE_CLKPIN      0x80000000
-#define EPI_GPMODE_CLKGATE     0x40000000
-#define EPI_GPMODE_FRAME50     0x04000000
-#define EPI_GPMODE_WRITE2CYCLE 0x00080000
-#define EPI_GPMODE_ASIZE_NONE  0x00000000
-#define EPI_GPMODE_ASIZE_4     0x00000010
-#define EPI_GPMODE_ASIZE_12    0x00000020
-#define EPI_GPMODE_ASIZE_20    0x00000030
-#define EPI_GPMODE_DSIZE_8     0x00000000
-#define EPI_GPMODE_DSIZE_16    0x00000001
-#define EPI_GPMODE_DSIZE_24    0x00000002
-#define EPI_GPMODE_DSIZE_32    0x00000003
+#define EPI_GPMODE_CLKPIN             0x80000000
+#define EPI_GPMODE_CLKGATE            0x40000000
+#define EPI_GPMODE_FRAME50            0x04000000
+#define EPI_GPMODE_WRITE2CYCLE        0x00080000
+#define EPI_GPMODE_ASIZE_NONE         0x00000000
+#define EPI_GPMODE_ASIZE_4            0x00000010
+#define EPI_GPMODE_ASIZE_12           0x00000020
+#define EPI_GPMODE_ASIZE_20           0x00000030
+#define EPI_GPMODE_DSIZE_8            0x00000000
+#define EPI_GPMODE_DSIZE_16           0x00000001
+#define EPI_GPMODE_DSIZE_24           0x00000002
+#define EPI_GPMODE_DSIZE_32           0x00000003
 
 //*****************************************************************************
 //
 // Values that can be passed to EPIConfigHB8ModeSet()
 //
 //*****************************************************************************
-#define EPI_HB8_USE_TXEMPTY         0x00800000
-#define EPI_HB8_USE_RXFULL          0x00400000
-#define EPI_HB8_WRHIGH              0x00200000
-#define EPI_HB8_RDHIGH              0x00100000
-#define EPI_HB8_ALE_HIGH            0x00080000
-#define EPI_HB8_ALE_LOW             0x00000000
-#define EPI_HB8_WRWAIT_0            0x00000000
-#define EPI_HB8_WRWAIT_1            0x00000040
-#define EPI_HB8_WRWAIT_2            0x00000080
-#define EPI_HB8_WRWAIT_3            0x000000C0
-#define EPI_HB8_RDWAIT_0            0x00000000
-#define EPI_HB8_RDWAIT_1            0x00000010
-#define EPI_HB8_RDWAIT_2            0x00000020
-#define EPI_HB8_RDWAIT_3            0x00000030
-#define EPI_HB8_MODE_ADMUX          0x00000000
-#define EPI_HB8_MODE_ADDEMUX        0x00000001
-#define EPI_HB8_MODE_SRAM           0x00000002
-#define EPI_HB8_MODE_FIFO           0x00000003
-#define EPI_HB8_WORD_ACCESS         0x00000100
-#define EPI_HB8_CSCFG_ALE           0x00000000
-#define EPI_HB8_CSCFG_CS            0x00000200
-#define EPI_HB8_CSCFG_DUAL_CS       0x00000400
-#define EPI_HB8_CSCFG_ALE_DUAL_CS   0x00000600
-#define EPI_HB8_CSCFG_ALE_SINGLE_CS 0x00001000
-#define EPI_HB8_CSCFG_QUAD_CS       0x00001200
-#define EPI_HB8_CSCFG_ALE_QUAD_CS   0x00001400
-#define EPI_HB8_CSBAUD              0x00000800
-#define EPI_HB8_CLOCK_GATE          0x80000000
-#define EPI_HB8_CLOCK_GATE_IDLE     0x40000000
-#define EPI_HB8_CLOCK_INVERT        0x20000000
-#define EPI_HB8_IN_READY_EN         0x10000000
-#define EPI_HB8_IN_READY_EN_INVERT  0x18000000
-#define EPI_HB8_CSCFG_MASK          0x00001600
+#define EPI_HB8_USE_TXEMPTY           0x00800000
+#define EPI_HB8_USE_RXFULL            0x00400000
+#define EPI_HB8_WRHIGH                0x00200000
+#define EPI_HB8_RDHIGH                0x00100000
+#define EPI_HB8_ALE_HIGH              0x00080000
+#define EPI_HB8_ALE_LOW               0x00000000
+#define EPI_HB8_WRWAIT_0              0x00000000
+#define EPI_HB8_WRWAIT_1              0x00000040
+#define EPI_HB8_WRWAIT_2              0x00000080
+#define EPI_HB8_WRWAIT_3              0x000000C0
+#define EPI_HB8_RDWAIT_0              0x00000000
+#define EPI_HB8_RDWAIT_1              0x00000010
+#define EPI_HB8_RDWAIT_2              0x00000020
+#define EPI_HB8_RDWAIT_3              0x00000030
+#define EPI_HB8_MODE_ADMUX            0x00000000
+#define EPI_HB8_MODE_ADDEMUX          0x00000001
+#define EPI_HB8_MODE_SRAM             0x00000002
+#define EPI_HB8_MODE_FIFO             0x00000003
+#define EPI_HB8_WORD_ACCESS           0x00000100
+#define EPI_HB8_CSCFG_ALE             0x00000000
+#define EPI_HB8_CSCFG_CS              0x00000200
+#define EPI_HB8_CSCFG_DUAL_CS         0x00000400
+#define EPI_HB8_CSCFG_ALE_DUAL_CS     0x00000600
+#define EPI_HB8_CSCFG_ALE_SINGLE_CS   0x00001000
+#define EPI_HB8_CSCFG_QUAD_CS         0x00001200
+#define EPI_HB8_CSCFG_ALE_QUAD_CS     0x00001400
+#define EPI_HB8_CSBAUD                0x00000800
+#define EPI_HB8_CLOCK_GATE            0x80000000
+#define EPI_HB8_CLOCK_GATE_IDLE       0x40000000
+#define EPI_HB8_CLOCK_INVERT          0x20000000
+#define EPI_HB8_IN_READY_EN           0x10000000
+#define EPI_HB8_IN_READY_EN_INVERT    0x18000000
+#define EPI_HB8_CSCFG_MASK            0x00001600
 
 //*****************************************************************************
 //
@@ -181,15 +181,15 @@ extern "C"
 // Values that can be passed to EPIConfigHB8TimingSet().
 //
 //*****************************************************************************
-#define EPI_HB8_IN_READY_DELAY_1     0x01000000
-#define EPI_HB8_IN_READY_DELAY_2     0x02000000
-#define EPI_HB8_IN_READY_DELAY_3     0x03000000
-#define EPI_HB8_CAP_WIDTH_1          0x00001000
-#define EPI_HB8_CAP_WIDTH_2          0x00002000
-#define EPI_HB8_WRWAIT_MINUS_DISABLE 0x00000000
-#define EPI_HB8_WRWAIT_MINUS_ENABLE  0x00000010
-#define EPI_HB8_RDWAIT_MINUS_DISABLE 0x00000000
-#define EPI_HB8_RDWAIT_MINUS_ENABLE  0x00000001
+#define EPI_HB8_IN_READY_DELAY_1      0x01000000
+#define EPI_HB8_IN_READY_DELAY_2      0x02000000
+#define EPI_HB8_IN_READY_DELAY_3      0x03000000
+#define EPI_HB8_CAP_WIDTH_1           0x00001000
+#define EPI_HB8_CAP_WIDTH_2           0x00002000
+#define EPI_HB8_WRWAIT_MINUS_DISABLE  0x00000000
+#define EPI_HB8_WRWAIT_MINUS_ENABLE   0x00000010
+#define EPI_HB8_RDWAIT_MINUS_DISABLE  0x00000000
+#define EPI_HB8_RDWAIT_MINUS_ENABLE   0x00000001
 
 //*****************************************************************************
 //
@@ -219,54 +219,54 @@ extern "C"
 // Values that can be passed to EPIAddressMapSet().
 //
 //*****************************************************************************
-#define EPI_ADDR_PER_SIZE_256B   0x00000000
-#define EPI_ADDR_PER_SIZE_64KB   0x00000040
-#define EPI_ADDR_PER_SIZE_16MB   0x00000080
-#define EPI_ADDR_PER_SIZE_256MB  0x000000C0
-#define EPI_ADDR_PER_BASE_NONE   0x00000000
-#define EPI_ADDR_PER_BASE_A      0x00000010
-#define EPI_ADDR_PER_BASE_C      0x00000020
-#define EPI_ADDR_RAM_SIZE_256B   0x00000000
-#define EPI_ADDR_RAM_SIZE_64KB   0x00000004
-#define EPI_ADDR_RAM_SIZE_16MB   0x00000008
-#define EPI_ADDR_RAM_SIZE_256MB  0x0000000C
-#define EPI_ADDR_RAM_BASE_NONE   0x00000000
-#define EPI_ADDR_RAM_BASE_6      0x00000001
-#define EPI_ADDR_RAM_BASE_8      0x00000002
-#define EPI_ADDR_QUAD_MODE       0x00000033
-#define EPI_ADDR_CODE_SIZE_256B  0x00000000
-#define EPI_ADDR_CODE_SIZE_64KB  0x00000400
-#define EPI_ADDR_CODE_SIZE_16MB  0x00000800
-#define EPI_ADDR_CODE_SIZE_256MB 0x00000C00
-#define EPI_ADDR_CODE_BASE_NONE  0x00000000
-#define EPI_ADDR_CODE_BASE_1     0x00000100
+#define EPI_ADDR_PER_SIZE_256B        0x00000000
+#define EPI_ADDR_PER_SIZE_64KB        0x00000040
+#define EPI_ADDR_PER_SIZE_16MB        0x00000080
+#define EPI_ADDR_PER_SIZE_256MB       0x000000C0
+#define EPI_ADDR_PER_BASE_NONE        0x00000000
+#define EPI_ADDR_PER_BASE_A           0x00000010
+#define EPI_ADDR_PER_BASE_C           0x00000020
+#define EPI_ADDR_RAM_SIZE_256B        0x00000000
+#define EPI_ADDR_RAM_SIZE_64KB        0x00000004
+#define EPI_ADDR_RAM_SIZE_16MB        0x00000008
+#define EPI_ADDR_RAM_SIZE_256MB       0x0000000C
+#define EPI_ADDR_RAM_BASE_NONE        0x00000000
+#define EPI_ADDR_RAM_BASE_6           0x00000001
+#define EPI_ADDR_RAM_BASE_8           0x00000002
+#define EPI_ADDR_QUAD_MODE            0x00000033
+#define EPI_ADDR_CODE_SIZE_256B       0x00000000
+#define EPI_ADDR_CODE_SIZE_64KB       0x00000400
+#define EPI_ADDR_CODE_SIZE_16MB       0x00000800
+#define EPI_ADDR_CODE_SIZE_256MB      0x00000C00
+#define EPI_ADDR_CODE_BASE_NONE       0x00000000
+#define EPI_ADDR_CODE_BASE_1          0x00000100
 
 //*****************************************************************************
 //
 // Values that can be passed to EPINonBlockingReadConfigure()
 //
 //*****************************************************************************
-#define EPI_NBCONFIG_SIZE_8  1
-#define EPI_NBCONFIG_SIZE_16 2
-#define EPI_NBCONFIG_SIZE_32 3
+#define EPI_NBCONFIG_SIZE_8           1
+#define EPI_NBCONFIG_SIZE_16          2
+#define EPI_NBCONFIG_SIZE_32          3
 
 //*****************************************************************************
 //
 // Values that can be passed to EPIFIFOConfig()
 //
 //*****************************************************************************
-#define EPI_FIFO_CONFIG_WTFULLERR 0x00020000
-#define EPI_FIFO_CONFIG_RSTALLERR 0x00010000
-#define EPI_FIFO_CONFIG_TX_EMPTY  0x00000000
-#define EPI_FIFO_CONFIG_TX_1_4    0x00000020
-#define EPI_FIFO_CONFIG_TX_1_2    0x00000030
-#define EPI_FIFO_CONFIG_TX_3_4    0x00000040
-#define EPI_FIFO_CONFIG_RX_1_8    0x00000001
-#define EPI_FIFO_CONFIG_RX_1_4    0x00000002
-#define EPI_FIFO_CONFIG_RX_1_2    0x00000003
-#define EPI_FIFO_CONFIG_RX_3_4    0x00000004
-#define EPI_FIFO_CONFIG_RX_7_8    0x00000005
-#define EPI_FIFO_CONFIG_RX_FULL   0x00000006
+#define EPI_FIFO_CONFIG_WTFULLERR     0x00020000
+#define EPI_FIFO_CONFIG_RSTALLERR     0x00010000
+#define EPI_FIFO_CONFIG_TX_EMPTY      0x00000000
+#define EPI_FIFO_CONFIG_TX_1_4        0x00000020
+#define EPI_FIFO_CONFIG_TX_1_2        0x00000030
+#define EPI_FIFO_CONFIG_TX_3_4        0x00000040
+#define EPI_FIFO_CONFIG_RX_1_8        0x00000001
+#define EPI_FIFO_CONFIG_RX_1_4        0x00000002
+#define EPI_FIFO_CONFIG_RX_1_2        0x00000003
+#define EPI_FIFO_CONFIG_RX_3_4        0x00000004
+#define EPI_FIFO_CONFIG_RX_7_8        0x00000005
+#define EPI_FIFO_CONFIG_RX_FULL       0x00000006
 
 //*****************************************************************************
 //
@@ -274,11 +274,11 @@ extern "C"
 // as flags from EPIIntStatus()
 //
 //*****************************************************************************
-#define EPI_INT_DMA_TX_DONE 0x00000010
-#define EPI_INT_DMA_RX_DONE 0x00000008
-#define EPI_INT_TXREQ       0x00000004
-#define EPI_INT_RXREQ       0x00000002
-#define EPI_INT_ERR         0x00000001
+#define EPI_INT_DMA_TX_DONE           0x00000010
+#define EPI_INT_DMA_RX_DONE           0x00000008
+#define EPI_INT_TXREQ                 0x00000004
+#define EPI_INT_RXREQ                 0x00000002
+#define EPI_INT_ERR                   0x00000001
 
 //*****************************************************************************
 //
@@ -286,11 +286,11 @@ extern "C"
 // EPIIntErrorStatus()
 //
 //*****************************************************************************
-#define EPI_INT_ERR_DMAWRIC 0x00000010
-#define EPI_INT_ERR_DMARDIC 0x00000008
-#define EPI_INT_ERR_WTFULL  0x00000004
-#define EPI_INT_ERR_RSTALL  0x00000002
-#define EPI_INT_ERR_TIMEOUT 0x00000001
+#define EPI_INT_ERR_DMAWRIC           0x00000010
+#define EPI_INT_ERR_DMARDIC           0x00000008
+#define EPI_INT_ERR_WTFULL            0x00000004
+#define EPI_INT_ERR_RSTALL            0x00000002
+#define EPI_INT_ERR_TIMEOUT           0x00000001
 
 #ifdef rvmdk
 //*****************************************************************************
@@ -622,27 +622,24 @@ inline uint8_t EPIWorkaroundByteRead(uint8_t* pui8Addr)
 // API Function prototypes
 //
 //*****************************************************************************
-extern void EPIModeSet(uint32_t ui32Base, uint32_t ui32Mode);
-extern void EPIDividerSet(uint32_t ui32Base, uint32_t ui32Divider);
-extern void EPIDividerCSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Divider);
-extern void EPIDMATxCount(uint32_t ui32Base, uint32_t ui32Count);
-extern void EPIConfigGPModeSet(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32FrameCount, uint32_t ui32MaxWait);
-extern void EPIConfigHB8Set(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxWait);
-extern void EPIConfigHB16Set(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxWait);
-extern void EPIConfigHB8CSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
-extern void EPIConfigHB16CSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
-extern void EPIConfigHB8TimingSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
-extern void EPIConfigHB16TimingSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
-extern void EPIPSRAMConfigRegSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32CR);
-extern void EPIPSRAMConfigRegRead(uint32_t ui32Base, uint32_t ui32CS);
-extern bool EPIPSRAMConfigRegGetNonBlocking(uint32_t ui32Base, uint32_t ui32CS, uint32_t* pui32CR);
+extern void     EPIModeSet(uint32_t ui32Base, uint32_t ui32Mode);
+extern void     EPIDividerSet(uint32_t ui32Base, uint32_t ui32Divider);
+extern void     EPIDividerCSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Divider);
+extern void     EPIDMATxCount(uint32_t ui32Base, uint32_t ui32Count);
+extern void     EPIConfigGPModeSet(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32FrameCount, uint32_t ui32MaxWait);
+extern void     EPIConfigHB8Set(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxWait);
+extern void     EPIConfigHB16Set(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxWait);
+extern void     EPIConfigHB8CSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
+extern void     EPIConfigHB16CSSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
+extern void     EPIConfigHB8TimingSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
+extern void     EPIConfigHB16TimingSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32Config);
+extern void     EPIPSRAMConfigRegSet(uint32_t ui32Base, uint32_t ui32CS, uint32_t ui32CR);
+extern void     EPIPSRAMConfigRegRead(uint32_t ui32Base, uint32_t ui32CS);
+extern bool     EPIPSRAMConfigRegGetNonBlocking(uint32_t ui32Base, uint32_t ui32CS, uint32_t* pui32CR);
 extern uint32_t EPIPSRAMConfigRegGet(uint32_t ui32Base, uint32_t ui32CS);
 extern void     EPIConfigSDRAMSet(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32Refresh);
 extern void     EPIAddressMapSet(uint32_t ui32Base, uint32_t ui32Map);
-extern void     EPINonBlockingReadConfigure(uint32_t ui32Base,
-                                            uint32_t ui32Channel,
-                                            uint32_t ui32DataSize,
-                                            uint32_t ui32Address);
+extern void     EPINonBlockingReadConfigure(uint32_t ui32Base, uint32_t ui32Channel, uint32_t ui32DataSize, uint32_t ui32Address);
 extern void     EPINonBlockingReadStart(uint32_t ui32Base, uint32_t ui32Channel, uint32_t ui32Count);
 extern void     EPINonBlockingReadStop(uint32_t ui32Base, uint32_t ui32Channel);
 extern uint32_t EPINonBlockingReadCount(uint32_t ui32Base, uint32_t ui32Channel);

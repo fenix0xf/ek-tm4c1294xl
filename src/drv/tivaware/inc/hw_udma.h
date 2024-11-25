@@ -46,87 +46,87 @@
 // addresses.
 //
 //*****************************************************************************
-#define UDMA_STAT        0x400FF000 // DMA Status
-#define UDMA_CFG         0x400FF004 // DMA Configuration
-#define UDMA_CTLBASE     0x400FF008 // DMA Channel Control Base Pointer
-#define UDMA_ALTBASE     0x400FF00C // DMA Alternate Channel Control Base Pointer
-#define UDMA_WAITSTAT    0x400FF010 // DMA Channel Wait-on-Request Status
-#define UDMA_SWREQ       0x400FF014 // DMA Channel Software Request
-#define UDMA_USEBURSTSET 0x400FF018 // DMA Channel Useburst Set
-#define UDMA_USEBURSTCLR 0x400FF01C // DMA Channel Useburst Clear
-#define UDMA_REQMASKSET  0x400FF020 // DMA Channel Request Mask Set
-#define UDMA_REQMASKCLR  0x400FF024 // DMA Channel Request Mask Clear
-#define UDMA_ENASET      0x400FF028 // DMA Channel Enable Set
-#define UDMA_ENACLR      0x400FF02C // DMA Channel Enable Clear
-#define UDMA_ALTSET      0x400FF030 // DMA Channel Primary Alternate Set
-#define UDMA_ALTCLR      0x400FF034 // DMA Channel Primary Alternate Clear
-#define UDMA_PRIOSET     0x400FF038 // DMA Channel Priority Set
-#define UDMA_PRIOCLR     0x400FF03C // DMA Channel Priority Clear
-#define UDMA_ERRCLR      0x400FF04C // DMA Bus Error Clear
-#define UDMA_CHASGN      0x400FF500 // DMA Channel Assignment
-#define UDMA_CHIS        0x400FF504 // DMA Channel Interrupt Status
-#define UDMA_CHMAP0      0x400FF510 // DMA Channel Map Select 0
-#define UDMA_CHMAP1      0x400FF514 // DMA Channel Map Select 1
-#define UDMA_CHMAP2      0x400FF518 // DMA Channel Map Select 2
-#define UDMA_CHMAP3      0x400FF51C // DMA Channel Map Select 3
+#define UDMA_STAT                    0x400FF000 // DMA Status
+#define UDMA_CFG                     0x400FF004 // DMA Configuration
+#define UDMA_CTLBASE                 0x400FF008 // DMA Channel Control Base Pointer
+#define UDMA_ALTBASE                 0x400FF00C // DMA Alternate Channel Control Base Pointer
+#define UDMA_WAITSTAT                0x400FF010 // DMA Channel Wait-on-Request Status
+#define UDMA_SWREQ                   0x400FF014 // DMA Channel Software Request
+#define UDMA_USEBURSTSET             0x400FF018 // DMA Channel Useburst Set
+#define UDMA_USEBURSTCLR             0x400FF01C // DMA Channel Useburst Clear
+#define UDMA_REQMASKSET              0x400FF020 // DMA Channel Request Mask Set
+#define UDMA_REQMASKCLR              0x400FF024 // DMA Channel Request Mask Clear
+#define UDMA_ENASET                  0x400FF028 // DMA Channel Enable Set
+#define UDMA_ENACLR                  0x400FF02C // DMA Channel Enable Clear
+#define UDMA_ALTSET                  0x400FF030 // DMA Channel Primary Alternate Set
+#define UDMA_ALTCLR                  0x400FF034 // DMA Channel Primary Alternate Clear
+#define UDMA_PRIOSET                 0x400FF038 // DMA Channel Priority Set
+#define UDMA_PRIOCLR                 0x400FF03C // DMA Channel Priority Clear
+#define UDMA_ERRCLR                  0x400FF04C // DMA Bus Error Clear
+#define UDMA_CHASGN                  0x400FF500 // DMA Channel Assignment
+#define UDMA_CHIS                    0x400FF504 // DMA Channel Interrupt Status
+#define UDMA_CHMAP0                  0x400FF510 // DMA Channel Map Select 0
+#define UDMA_CHMAP1                  0x400FF514 // DMA Channel Map Select 1
+#define UDMA_CHMAP2                  0x400FF518 // DMA Channel Map Select 2
+#define UDMA_CHMAP3                  0x400FF51C // DMA Channel Map Select 3
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_STAT register.
 //
 //*****************************************************************************
-#define UDMA_STAT_DMACHANS_M       0x001F0000 // Available uDMA Channels Minus 1
-#define UDMA_STAT_STATE_M          0x000000F0 // Control State Machine Status
-#define UDMA_STAT_STATE_IDLE       0x00000000 // Idle
-#define UDMA_STAT_STATE_RD_CTRL    0x00000010 // Reading channel controller data
-#define UDMA_STAT_STATE_RD_SRCENDP 0x00000020 // Reading source end pointer
-#define UDMA_STAT_STATE_RD_DSTENDP 0x00000030 // Reading destination end pointer
-#define UDMA_STAT_STATE_RD_SRCDAT  0x00000040 // Reading source data
-#define UDMA_STAT_STATE_WR_DSTDAT  0x00000050 // Writing destination data
-#define UDMA_STAT_STATE_WAIT       0x00000060 // Waiting for uDMA request to clear
-#define UDMA_STAT_STATE_WR_CTRL    0x00000070 // Writing channel controller data
-#define UDMA_STAT_STATE_STALL      0x00000080 // Stalled
-#define UDMA_STAT_STATE_DONE       0x00000090 // Done
-#define UDMA_STAT_STATE_UNDEF      0x000000A0 // Undefined
-#define UDMA_STAT_MASTEN           0x00000001 // Master Enable Status
-#define UDMA_STAT_DMACHANS_S       16
+#define UDMA_STAT_DMACHANS_M         0x001F0000 // Available uDMA Channels Minus 1
+#define UDMA_STAT_STATE_M            0x000000F0 // Control State Machine Status
+#define UDMA_STAT_STATE_IDLE         0x00000000 // Idle
+#define UDMA_STAT_STATE_RD_CTRL      0x00000010 // Reading channel controller data
+#define UDMA_STAT_STATE_RD_SRCENDP   0x00000020 // Reading source end pointer
+#define UDMA_STAT_STATE_RD_DSTENDP   0x00000030 // Reading destination end pointer
+#define UDMA_STAT_STATE_RD_SRCDAT    0x00000040 // Reading source data
+#define UDMA_STAT_STATE_WR_DSTDAT    0x00000050 // Writing destination data
+#define UDMA_STAT_STATE_WAIT         0x00000060 // Waiting for uDMA request to clear
+#define UDMA_STAT_STATE_WR_CTRL      0x00000070 // Writing channel controller data
+#define UDMA_STAT_STATE_STALL        0x00000080 // Stalled
+#define UDMA_STAT_STATE_DONE         0x00000090 // Done
+#define UDMA_STAT_STATE_UNDEF        0x000000A0 // Undefined
+#define UDMA_STAT_MASTEN             0x00000001 // Master Enable Status
+#define UDMA_STAT_DMACHANS_S         16
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CFG register.
 //
 //*****************************************************************************
-#define UDMA_CFG_MASTEN 0x00000001 // Controller Master Enable
+#define UDMA_CFG_MASTEN              0x00000001 // Controller Master Enable
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CTLBASE register.
 //
 //*****************************************************************************
-#define UDMA_CTLBASE_ADDR_M 0xFFFFFC00 // Channel Control Base Address
-#define UDMA_CTLBASE_ADDR_S 10
+#define UDMA_CTLBASE_ADDR_M          0xFFFFFC00 // Channel Control Base Address
+#define UDMA_CTLBASE_ADDR_S          10
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ALTBASE register.
 //
 //*****************************************************************************
-#define UDMA_ALTBASE_ADDR_M 0xFFFFFFFF // Alternate Channel Address Pointer
-#define UDMA_ALTBASE_ADDR_S 0
+#define UDMA_ALTBASE_ADDR_M          0xFFFFFFFF // Alternate Channel Address Pointer
+#define UDMA_ALTBASE_ADDR_S          0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_WAITSTAT register.
 //
 //*****************************************************************************
-#define UDMA_WAITSTAT_WAITREQ_M 0xFFFFFFFF // Channel [n] Wait Status
+#define UDMA_WAITSTAT_WAITREQ_M      0xFFFFFFFF // Channel [n] Wait Status
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_SWREQ register.
 //
 //*****************************************************************************
-#define UDMA_SWREQ_M 0xFFFFFFFF // Channel [n] Software Request
+#define UDMA_SWREQ_M                 0xFFFFFFFF // Channel [n] Software Request
 
 //*****************************************************************************
 //
@@ -134,7 +134,7 @@
 // register.
 //
 //*****************************************************************************
-#define UDMA_USEBURSTSET_SET_M 0xFFFFFFFF // Channel [n] Useburst Set
+#define UDMA_USEBURSTSET_SET_M       0xFFFFFFFF // Channel [n] Useburst Set
 
 //*****************************************************************************
 //
@@ -142,7 +142,7 @@
 // register.
 //
 //*****************************************************************************
-#define UDMA_USEBURSTCLR_CLR_M 0xFFFFFFFF // Channel [n] Useburst Clear
+#define UDMA_USEBURSTCLR_CLR_M       0xFFFFFFFF // Channel [n] Useburst Clear
 
 //*****************************************************************************
 //
@@ -150,7 +150,7 @@
 // register.
 //
 //*****************************************************************************
-#define UDMA_REQMASKSET_SET_M 0xFFFFFFFF // Channel [n] Request Mask Set
+#define UDMA_REQMASKSET_SET_M        0xFFFFFFFF // Channel [n] Request Mask Set
 
 //*****************************************************************************
 //
@@ -158,185 +158,185 @@
 // register.
 //
 //*****************************************************************************
-#define UDMA_REQMASKCLR_CLR_M 0xFFFFFFFF // Channel [n] Request Mask Clear
+#define UDMA_REQMASKCLR_CLR_M        0xFFFFFFFF // Channel [n] Request Mask Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ENASET register.
 //
 //*****************************************************************************
-#define UDMA_ENASET_SET_M 0xFFFFFFFF // Channel [n] Enable Set
+#define UDMA_ENASET_SET_M            0xFFFFFFFF // Channel [n] Enable Set
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ENACLR register.
 //
 //*****************************************************************************
-#define UDMA_ENACLR_CLR_M 0xFFFFFFFF // Clear Channel [n] Enable Clear
+#define UDMA_ENACLR_CLR_M            0xFFFFFFFF // Clear Channel [n] Enable Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ALTSET register.
 //
 //*****************************************************************************
-#define UDMA_ALTSET_SET_M 0xFFFFFFFF // Channel [n] Alternate Set
+#define UDMA_ALTSET_SET_M            0xFFFFFFFF // Channel [n] Alternate Set
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ALTCLR register.
 //
 //*****************************************************************************
-#define UDMA_ALTCLR_CLR_M 0xFFFFFFFF // Channel [n] Alternate Clear
+#define UDMA_ALTCLR_CLR_M            0xFFFFFFFF // Channel [n] Alternate Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_PRIOSET register.
 //
 //*****************************************************************************
-#define UDMA_PRIOSET_SET_M 0xFFFFFFFF // Channel [n] Priority Set
+#define UDMA_PRIOSET_SET_M           0xFFFFFFFF // Channel [n] Priority Set
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_PRIOCLR register.
 //
 //*****************************************************************************
-#define UDMA_PRIOCLR_CLR_M 0xFFFFFFFF // Channel [n] Priority Clear
+#define UDMA_PRIOCLR_CLR_M           0xFFFFFFFF // Channel [n] Priority Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_ERRCLR register.
 //
 //*****************************************************************************
-#define UDMA_ERRCLR_ERRCLR 0x00000001 // uDMA Bus Error Status
+#define UDMA_ERRCLR_ERRCLR           0x00000001 // uDMA Bus Error Status
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHASGN register.
 //
 //*****************************************************************************
-#define UDMA_CHASGN_M         0xFFFFFFFF // Channel [n] Assignment Select
-#define UDMA_CHASGN_PRIMARY   0x00000000 // Use the primary channel assignment
-#define UDMA_CHASGN_SECONDARY 0x00000001 // Use the secondary channel assignment
+#define UDMA_CHASGN_M                0xFFFFFFFF // Channel [n] Assignment Select
+#define UDMA_CHASGN_PRIMARY          0x00000000 // Use the primary channel assignment
+#define UDMA_CHASGN_SECONDARY        0x00000001 // Use the secondary channel assignment
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHIS register.
 //
 //*****************************************************************************
-#define UDMA_CHIS_M 0xFFFFFFFF // Channel [n] Interrupt Status
+#define UDMA_CHIS_M                  0xFFFFFFFF // Channel [n] Interrupt Status
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHMAP0 register.
 //
 //*****************************************************************************
-#define UDMA_CHMAP0_CH7SEL_M 0xF0000000 // uDMA Channel 7 Source Select
-#define UDMA_CHMAP0_CH6SEL_M 0x0F000000 // uDMA Channel 6 Source Select
-#define UDMA_CHMAP0_CH5SEL_M 0x00F00000 // uDMA Channel 5 Source Select
-#define UDMA_CHMAP0_CH4SEL_M 0x000F0000 // uDMA Channel 4 Source Select
-#define UDMA_CHMAP0_CH3SEL_M 0x0000F000 // uDMA Channel 3 Source Select
-#define UDMA_CHMAP0_CH2SEL_M 0x00000F00 // uDMA Channel 2 Source Select
-#define UDMA_CHMAP0_CH1SEL_M 0x000000F0 // uDMA Channel 1 Source Select
-#define UDMA_CHMAP0_CH0SEL_M 0x0000000F // uDMA Channel 0 Source Select
-#define UDMA_CHMAP0_CH7SEL_S 28
-#define UDMA_CHMAP0_CH6SEL_S 24
-#define UDMA_CHMAP0_CH5SEL_S 20
-#define UDMA_CHMAP0_CH4SEL_S 16
-#define UDMA_CHMAP0_CH3SEL_S 12
-#define UDMA_CHMAP0_CH2SEL_S 8
-#define UDMA_CHMAP0_CH1SEL_S 4
-#define UDMA_CHMAP0_CH0SEL_S 0
+#define UDMA_CHMAP0_CH7SEL_M         0xF0000000 // uDMA Channel 7 Source Select
+#define UDMA_CHMAP0_CH6SEL_M         0x0F000000 // uDMA Channel 6 Source Select
+#define UDMA_CHMAP0_CH5SEL_M         0x00F00000 // uDMA Channel 5 Source Select
+#define UDMA_CHMAP0_CH4SEL_M         0x000F0000 // uDMA Channel 4 Source Select
+#define UDMA_CHMAP0_CH3SEL_M         0x0000F000 // uDMA Channel 3 Source Select
+#define UDMA_CHMAP0_CH2SEL_M         0x00000F00 // uDMA Channel 2 Source Select
+#define UDMA_CHMAP0_CH1SEL_M         0x000000F0 // uDMA Channel 1 Source Select
+#define UDMA_CHMAP0_CH0SEL_M         0x0000000F // uDMA Channel 0 Source Select
+#define UDMA_CHMAP0_CH7SEL_S         28
+#define UDMA_CHMAP0_CH6SEL_S         24
+#define UDMA_CHMAP0_CH5SEL_S         20
+#define UDMA_CHMAP0_CH4SEL_S         16
+#define UDMA_CHMAP0_CH3SEL_S         12
+#define UDMA_CHMAP0_CH2SEL_S         8
+#define UDMA_CHMAP0_CH1SEL_S         4
+#define UDMA_CHMAP0_CH0SEL_S         0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHMAP1 register.
 //
 //*****************************************************************************
-#define UDMA_CHMAP1_CH15SEL_M 0xF0000000 // uDMA Channel 15 Source Select
-#define UDMA_CHMAP1_CH14SEL_M 0x0F000000 // uDMA Channel 14 Source Select
-#define UDMA_CHMAP1_CH13SEL_M 0x00F00000 // uDMA Channel 13 Source Select
-#define UDMA_CHMAP1_CH12SEL_M 0x000F0000 // uDMA Channel 12 Source Select
-#define UDMA_CHMAP1_CH11SEL_M 0x0000F000 // uDMA Channel 11 Source Select
-#define UDMA_CHMAP1_CH10SEL_M 0x00000F00 // uDMA Channel 10 Source Select
-#define UDMA_CHMAP1_CH9SEL_M  0x000000F0 // uDMA Channel 9 Source Select
-#define UDMA_CHMAP1_CH8SEL_M  0x0000000F // uDMA Channel 8 Source Select
-#define UDMA_CHMAP1_CH15SEL_S 28
-#define UDMA_CHMAP1_CH14SEL_S 24
-#define UDMA_CHMAP1_CH13SEL_S 20
-#define UDMA_CHMAP1_CH12SEL_S 16
-#define UDMA_CHMAP1_CH11SEL_S 12
-#define UDMA_CHMAP1_CH10SEL_S 8
-#define UDMA_CHMAP1_CH9SEL_S  4
-#define UDMA_CHMAP1_CH8SEL_S  0
+#define UDMA_CHMAP1_CH15SEL_M        0xF0000000 // uDMA Channel 15 Source Select
+#define UDMA_CHMAP1_CH14SEL_M        0x0F000000 // uDMA Channel 14 Source Select
+#define UDMA_CHMAP1_CH13SEL_M        0x00F00000 // uDMA Channel 13 Source Select
+#define UDMA_CHMAP1_CH12SEL_M        0x000F0000 // uDMA Channel 12 Source Select
+#define UDMA_CHMAP1_CH11SEL_M        0x0000F000 // uDMA Channel 11 Source Select
+#define UDMA_CHMAP1_CH10SEL_M        0x00000F00 // uDMA Channel 10 Source Select
+#define UDMA_CHMAP1_CH9SEL_M         0x000000F0 // uDMA Channel 9 Source Select
+#define UDMA_CHMAP1_CH8SEL_M         0x0000000F // uDMA Channel 8 Source Select
+#define UDMA_CHMAP1_CH15SEL_S        28
+#define UDMA_CHMAP1_CH14SEL_S        24
+#define UDMA_CHMAP1_CH13SEL_S        20
+#define UDMA_CHMAP1_CH12SEL_S        16
+#define UDMA_CHMAP1_CH11SEL_S        12
+#define UDMA_CHMAP1_CH10SEL_S        8
+#define UDMA_CHMAP1_CH9SEL_S         4
+#define UDMA_CHMAP1_CH8SEL_S         0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHMAP2 register.
 //
 //*****************************************************************************
-#define UDMA_CHMAP2_CH23SEL_M 0xF0000000 // uDMA Channel 23 Source Select
-#define UDMA_CHMAP2_CH22SEL_M 0x0F000000 // uDMA Channel 22 Source Select
-#define UDMA_CHMAP2_CH21SEL_M 0x00F00000 // uDMA Channel 21 Source Select
-#define UDMA_CHMAP2_CH20SEL_M 0x000F0000 // uDMA Channel 20 Source Select
-#define UDMA_CHMAP2_CH19SEL_M 0x0000F000 // uDMA Channel 19 Source Select
-#define UDMA_CHMAP2_CH18SEL_M 0x00000F00 // uDMA Channel 18 Source Select
-#define UDMA_CHMAP2_CH17SEL_M 0x000000F0 // uDMA Channel 17 Source Select
-#define UDMA_CHMAP2_CH16SEL_M 0x0000000F // uDMA Channel 16 Source Select
-#define UDMA_CHMAP2_CH23SEL_S 28
-#define UDMA_CHMAP2_CH22SEL_S 24
-#define UDMA_CHMAP2_CH21SEL_S 20
-#define UDMA_CHMAP2_CH20SEL_S 16
-#define UDMA_CHMAP2_CH19SEL_S 12
-#define UDMA_CHMAP2_CH18SEL_S 8
-#define UDMA_CHMAP2_CH17SEL_S 4
-#define UDMA_CHMAP2_CH16SEL_S 0
+#define UDMA_CHMAP2_CH23SEL_M        0xF0000000 // uDMA Channel 23 Source Select
+#define UDMA_CHMAP2_CH22SEL_M        0x0F000000 // uDMA Channel 22 Source Select
+#define UDMA_CHMAP2_CH21SEL_M        0x00F00000 // uDMA Channel 21 Source Select
+#define UDMA_CHMAP2_CH20SEL_M        0x000F0000 // uDMA Channel 20 Source Select
+#define UDMA_CHMAP2_CH19SEL_M        0x0000F000 // uDMA Channel 19 Source Select
+#define UDMA_CHMAP2_CH18SEL_M        0x00000F00 // uDMA Channel 18 Source Select
+#define UDMA_CHMAP2_CH17SEL_M        0x000000F0 // uDMA Channel 17 Source Select
+#define UDMA_CHMAP2_CH16SEL_M        0x0000000F // uDMA Channel 16 Source Select
+#define UDMA_CHMAP2_CH23SEL_S        28
+#define UDMA_CHMAP2_CH22SEL_S        24
+#define UDMA_CHMAP2_CH21SEL_S        20
+#define UDMA_CHMAP2_CH20SEL_S        16
+#define UDMA_CHMAP2_CH19SEL_S        12
+#define UDMA_CHMAP2_CH18SEL_S        8
+#define UDMA_CHMAP2_CH17SEL_S        4
+#define UDMA_CHMAP2_CH16SEL_S        0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_CHMAP3 register.
 //
 //*****************************************************************************
-#define UDMA_CHMAP3_CH31SEL_M 0xF0000000 // uDMA Channel 31 Source Select
-#define UDMA_CHMAP3_CH30SEL_M 0x0F000000 // uDMA Channel 30 Source Select
-#define UDMA_CHMAP3_CH29SEL_M 0x00F00000 // uDMA Channel 29 Source Select
-#define UDMA_CHMAP3_CH28SEL_M 0x000F0000 // uDMA Channel 28 Source Select
-#define UDMA_CHMAP3_CH27SEL_M 0x0000F000 // uDMA Channel 27 Source Select
-#define UDMA_CHMAP3_CH26SEL_M 0x00000F00 // uDMA Channel 26 Source Select
-#define UDMA_CHMAP3_CH25SEL_M 0x000000F0 // uDMA Channel 25 Source Select
-#define UDMA_CHMAP3_CH24SEL_M 0x0000000F // uDMA Channel 24 Source Select
-#define UDMA_CHMAP3_CH31SEL_S 28
-#define UDMA_CHMAP3_CH30SEL_S 24
-#define UDMA_CHMAP3_CH29SEL_S 20
-#define UDMA_CHMAP3_CH28SEL_S 16
-#define UDMA_CHMAP3_CH27SEL_S 12
-#define UDMA_CHMAP3_CH26SEL_S 8
-#define UDMA_CHMAP3_CH25SEL_S 4
-#define UDMA_CHMAP3_CH24SEL_S 0
+#define UDMA_CHMAP3_CH31SEL_M        0xF0000000 // uDMA Channel 31 Source Select
+#define UDMA_CHMAP3_CH30SEL_M        0x0F000000 // uDMA Channel 30 Source Select
+#define UDMA_CHMAP3_CH29SEL_M        0x00F00000 // uDMA Channel 29 Source Select
+#define UDMA_CHMAP3_CH28SEL_M        0x000F0000 // uDMA Channel 28 Source Select
+#define UDMA_CHMAP3_CH27SEL_M        0x0000F000 // uDMA Channel 27 Source Select
+#define UDMA_CHMAP3_CH26SEL_M        0x00000F00 // uDMA Channel 26 Source Select
+#define UDMA_CHMAP3_CH25SEL_M        0x000000F0 // uDMA Channel 25 Source Select
+#define UDMA_CHMAP3_CH24SEL_M        0x0000000F // uDMA Channel 24 Source Select
+#define UDMA_CHMAP3_CH31SEL_S        28
+#define UDMA_CHMAP3_CH30SEL_S        24
+#define UDMA_CHMAP3_CH29SEL_S        20
+#define UDMA_CHMAP3_CH28SEL_S        16
+#define UDMA_CHMAP3_CH27SEL_S        12
+#define UDMA_CHMAP3_CH26SEL_S        8
+#define UDMA_CHMAP3_CH25SEL_S        4
+#define UDMA_CHMAP3_CH24SEL_S        0
 
 //*****************************************************************************
 //
 // The following are defines for the Micro Direct Memory Access (uDMA) offsets.
 //
 //*****************************************************************************
-#define UDMA_O_SRCENDP 0x00000000 // DMA Channel Source Address End Pointer
-#define UDMA_O_DSTENDP 0x00000004 // DMA Channel Destination Address End Pointer
-#define UDMA_O_CHCTL   0x00000008 // DMA Channel Control Word
+#define UDMA_O_SRCENDP               0x00000000 // DMA Channel Source Address End Pointer
+#define UDMA_O_DSTENDP               0x00000004 // DMA Channel Destination Address End Pointer
+#define UDMA_O_CHCTL                 0x00000008 // DMA Channel Control Word
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_O_SRCENDP register.
 //
 //*****************************************************************************
-#define UDMA_SRCENDP_ADDR_M 0xFFFFFFFF // Source Address End Pointer
-#define UDMA_SRCENDP_ADDR_S 0
+#define UDMA_SRCENDP_ADDR_M          0xFFFFFFFF // Source Address End Pointer
+#define UDMA_SRCENDP_ADDR_S          0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the UDMA_O_DSTENDP register.
 //
 //*****************************************************************************
-#define UDMA_DSTENDP_ADDR_M 0xFFFFFFFF // Destination Address End Pointer
-#define UDMA_DSTENDP_ADDR_S 0
+#define UDMA_DSTENDP_ADDR_M          0xFFFFFFFF // Destination Address End Pointer
+#define UDMA_DSTENDP_ADDR_S          0
 
 //*****************************************************************************
 //

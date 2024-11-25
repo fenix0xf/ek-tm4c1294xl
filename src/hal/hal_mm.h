@@ -32,7 +32,7 @@
  * Memory Map.
  */
 
-#define MM_VTABLE_SP_NUM 1                                   ///< First item in ISR table is initial stack pointer.
+#define MM_VTABLE_SP_NUM 1 ///< First item in ISR table is initial stack pointer.
 
 #define MM_VTABLE_ALIGN  1024                                ///< ISR table align: 1024 for TM4C1294NCPDT.
 #define MM_VTABLE_ITEMS  (MM_VTABLE_SP_NUM + NUM_INTERRUPTS) ///< ISR table items number: 130 for TM4C1294NCPDT.

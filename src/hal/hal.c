@@ -29,6 +29,7 @@
 #include <hal/hal_crt.h>
 #include <hal/hal_con.h>
 #include <hal/hal_init.h>
+#include <hal/hal_version.h>
 #include <drv/tm4c129_int.h>
 #include <drv/tm4c129_uart_dbg.h>
 
@@ -142,17 +143,17 @@ void hal_print_version(void)
     /* Get MCU full hardware ID. */
     tm4c129_mcu_unique_id(&id0, &id1, &id2, &id3);
 
-    hal_printf("\n\n"
-               "%s (%s) %s!\n"
-               "Board: EK-TM4C1294XL Rev D\n"
-               "MCU  : %s [%u MHz]\n"
-               "SRAM : %u KiB\n"
-               "FLASH: %u/%u KiB\n"
-               "MCUID: 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
+    hal_printf("\n\n\n"
+               "Test Firmware v%u.%u rev %u build %u (%s) © 2024 Alexander Kotikov\n"
+               "Git hash  : %s\n"
+               "Build time: %s\n"
+               "Board     : EK-TM4C1294XL Rev D\n"
+               "MCU       : %s [%u MHz]\n"
+               "SRAM      : %u KiB\n"
+               "FLASH     : %u/%u KiB\n"
+               "MCUID     : 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
-               "Test Firmware", /* hal_version(), */
-               DEBUG ? "Debug" : "Release",
-               "© 2023 Alexander Kotikov", /* hal_copyright(), */
+               g_hal_version.major, g_hal_version.minor, g_hal_version.revision, g_hal_version.build, DEBUG ? "Debug" : "Release",
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,
                (unsigned)(hal_mcu_sram_size() / 1024),

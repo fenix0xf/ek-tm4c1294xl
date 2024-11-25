@@ -65,7 +65,7 @@ list(APPEND C_WARN
      -Wconversion
      -Wshadow
      -Wdouble-promotion
-     #     -Wc++-compat
+     # -Wc++-compat
      -Wno-unused-function
 )
 
@@ -144,6 +144,20 @@ file(GLOB_RECURSE HAL_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/hal/*.[h,c])
 ### TN Kernel.
 file(GLOB_RECURSE TN_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/tnkernel/*.[h,c,S,s])
 
+### Graphics Library
+file(GLOB_RECURSE GR_LIB_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/grlib/*.[h,c])
+list(APPEND GR_LIB_WARN
+     -Wno-conversion
+     -Wno-unused-parameter
+     -Wno-sign-compare
+     -Wno-sign-conversion
+)
+set_source_files_properties(${GR_LIB_FILES} PROPERTIES
+                            # INCLUDE_DIRECTORIES "${LIBC_INTERNAL_INCLUDES}"
+                            COMPILE_OPTIONS "${GR_LIB_WARN}"
+                            # COMPILE_DEFINITIONS ""
+)
+
 ### Other libs.
 file(GLOB LIB_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/*.[h,c])
 
@@ -164,6 +178,7 @@ add_executable(${FIRMWARE_TARGET_NAME}.elf
                ${DRV_FILES}
                ${HAL_FILES}
                ${TN_FILES}
+               ${GR_LIB_FILES}
                ${LIB_FILES}
                ${FIRMWARE_FILES}
 )
@@ -185,13 +200,17 @@ set_target_properties(${FIRMWARE_TARGET_NAME}.elf PROPERTIES LINK_FLAGS "-Wl,-T,
 target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lgcc) # Link with GCC library libgcc.a
 #target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lm) # Link with C math library libm.a
 
-add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} ARGS -Oihex ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.hex COMMENT "Generate HEX file...")
-add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} ARGS -Obinary ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.bin COMMENT "Generate BIN file...")
-#add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${PROJECT_SOURCE_DIR}/checksum.py -b ${FIRMWARE_TARGET_NAME}.bin -e ${FIRMWARE_TARGET_NAME}.elf COMMENT "Update checksum in BIN and ELF file...")
+#add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} ARGS -Oihex ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.hex COMMENT "Generate HEX file...")
+
+add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND python ${PROJECT_SOURCE_DIR}/build/checksum.py ${FIRMWARE_TARGET_NAME}.elf COMMENT "Update checksum in ELF file...")
+add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} -Obinary ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.bin COMMENT "Generate BIN file...")
+
 #add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${PROJECT_SOURCE_DIR}/aes-256-ctr.py 0x208 ${FIRMWARE_TARGET_NAME}.bin ${FIRMWARE_TARGET_NAME}.eff COMMENT "Generate encrypted firmware file (EFF)...")
 
-### Add the linker script file as depends of src/hal/hal.c for auto rebuild target on any ld script changes.
-set_source_files_properties(src/hal/hal.c PROPERTIES OBJECT_DEPENDS ${FIRMWARE_LD_SCRIPT})
+### Add the linker script file as depends of src/hal/hal_version.c for auto rebuild target on any ld script changes.
+set_source_files_properties(src/hal/hal_version.c PROPERTIES OBJECT_DEPENDS ${FIRMWARE_LD_SCRIPT})
 
-#add_custom_target(cmake_pre_build_update_build_date COMMAND ${PROJECT_SOURCE_DIR}/build-date.py ../src/build_date.h)
-#add_dependencies(${FIRMWARE_TARGET_NAME}.elf cmake_pre_build_update_build_date)
+### Generate src/version.h file.
+add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_COMMAND} -E touch_nocreate ${PROJECT_SOURCE_DIR}/src/version.h)
+add_custom_target(cmake_pre_build_target COMMAND python ${PROJECT_SOURCE_DIR}/build/version.py ${PROJECT_SOURCE_DIR}/src/version.h)
+add_dependencies(${FIRMWARE_TARGET_NAME}.elf cmake_pre_build_target)

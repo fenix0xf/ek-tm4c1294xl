@@ -35,7 +35,7 @@
  */
 #include <tivaware.h>
 
-#define TM4C129_PERIPH_OPT_DEFAULT    0u
+#define TM4C129_PERIPH_OPT_DEFAULT    0x00000000u
 #define TM4C129_PERIPH_OPT_RESET      0x00000001u ///< Resets a peripheral after enabling.
 #define TM4C129_PERIPH_OPT_SLEEP      0x00000002u ///< Enables a peripheral in sleep mode.
 #define TM4C129_PERIPH_OPT_DEEP_SLEEP 0x00000004u ///< Enables a peripheral in deep sleep mode.

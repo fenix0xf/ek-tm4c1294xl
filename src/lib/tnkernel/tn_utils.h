@@ -53,10 +53,10 @@ void        queue_insert_by_priority(CDLL_QUEUE* queue, CDLL_QUEUE* entry_to_ins
 
 //-- Singly-linked list queue --
 
-void       sll_init(SLLBASE* root);
-SLL_QUEUE* sll_remove_head(SLLBASE* root);
-void       sll_add_tail(SLLBASE* root, SLL_QUEUE* entry);
-void       sll_add_head(SLLBASE* root, SLL_QUEUE* entry);
+void        sll_init(SLLBASE* root);
+SLL_QUEUE*  sll_remove_head(SLLBASE* root);
+void        sll_add_tail(SLLBASE* root, SLL_QUEUE* entry);
+void        sll_add_head(SLLBASE* root, SLL_QUEUE* entry);
 
 #ifdef __cplusplus
 }

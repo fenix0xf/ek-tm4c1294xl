@@ -84,7 +84,7 @@ static const uint32_t g_ppui32TimerIntMap[][2] = {
 };
 static const uint_fast8_t g_ui8TimerIntMapRows = sizeof(g_ppui32TimerIntMap) / sizeof(g_ppui32TimerIntMap[0]);
 
-static const uint32_t g_ppui32TimerIntMapSnowflake[][2] = {
+static const uint32_t     g_ppui32TimerIntMapSnowflake[][2] = {
     {TIMER0_BASE, INT_TIMER0A_TM4C129},
     {TIMER1_BASE, INT_TIMER1A_TM4C129},
     {TIMER2_BASE, INT_TIMER2A_TM4C129},
@@ -94,8 +94,7 @@ static const uint32_t g_ppui32TimerIntMapSnowflake[][2] = {
     {TIMER6_BASE, INT_TIMER6A_TM4C129},
     {TIMER7_BASE, INT_TIMER7A_TM4C129},
 };
-static const uint_fast8_t g_ui8TimerIntMapRowsSnowflake =
-    sizeof(g_ppui32TimerIntMapSnowflake) / sizeof(g_ppui32TimerIntMapSnowflake[0]);
+static const uint_fast8_t g_ui8TimerIntMapRowsSnowflake = sizeof(g_ppui32TimerIntMapSnowflake) / sizeof(g_ppui32TimerIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -113,10 +112,9 @@ static const uint_fast8_t g_ui8TimerIntMapRowsSnowflake =
 #if DEBUG
 static bool _TimerBaseValid(uint32_t ui32Base)
 {
-    return ((ui32Base == TIMER0_BASE) || (ui32Base == TIMER1_BASE) || (ui32Base == TIMER2_BASE) ||
-            (ui32Base == TIMER3_BASE) || (ui32Base == TIMER4_BASE) || (ui32Base == TIMER5_BASE) ||
-            (ui32Base == TIMER6_BASE) || (ui32Base == TIMER7_BASE) || (ui32Base == WTIMER0_BASE) ||
-            (ui32Base == WTIMER1_BASE) || (ui32Base == WTIMER2_BASE) || (ui32Base == WTIMER3_BASE) ||
+    return ((ui32Base == TIMER0_BASE) || (ui32Base == TIMER1_BASE) || (ui32Base == TIMER2_BASE) || (ui32Base == TIMER3_BASE) ||
+            (ui32Base == TIMER4_BASE) || (ui32Base == TIMER5_BASE) || (ui32Base == TIMER6_BASE) || (ui32Base == TIMER7_BASE) ||
+            (ui32Base == WTIMER0_BASE) || (ui32Base == WTIMER1_BASE) || (ui32Base == WTIMER2_BASE) || (ui32Base == WTIMER3_BASE) ||
             (ui32Base == WTIMER4_BASE) || (ui32Base == WTIMER5_BASE));
 }
 #endif
@@ -340,26 +338,17 @@ void TimerConfigure(uint32_t ui32Base, uint32_t ui32Config)
     ASSERT(((ui32Config & 0xfff0ffff) == TIMER_CFG_ONE_SHOT) || ((ui32Config & 0xfff0ffff) == TIMER_CFG_ONE_SHOT_UP) ||
            ((ui32Config & 0xfff0ffff) == TIMER_CFG_PERIODIC) || ((ui32Config & 0xfff0ffff) == TIMER_CFG_PERIODIC_UP) ||
            ((ui32Config & 0xfff0ffff) == TIMER_CFG_RTC) || ((ui32Config & 0xff000000) == TIMER_CFG_SPLIT_PAIR));
-    ASSERT(
-        ((ui32Config & 0xff000000) != TIMER_CFG_SPLIT_PAIR) ||
-        ((((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT_UP) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_PERIODIC) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_PERIODIC_UP) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_COUNT) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_COUNT_UP) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_TIME) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_TIME_UP) ||
-          ((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT_PWM) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_PWM)) &&
-         (((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT_UP) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PERIODIC) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PERIODIC_UP) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_COUNT) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_COUNT_UP) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_TIME) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_TIME_UP) ||
-          ((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT_PWM) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PWM))));
+    ASSERT(((ui32Config & 0xff000000) != TIMER_CFG_SPLIT_PAIR) ||
+           ((((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT_UP) ||
+             ((ui32Config & 0x000000ff) == TIMER_CFG_A_PERIODIC) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_PERIODIC_UP) ||
+             ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_COUNT) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_COUNT_UP) ||
+             ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_TIME) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_CAP_TIME_UP) ||
+             ((ui32Config & 0x000000ff) == TIMER_CFG_A_ONE_SHOT_PWM) || ((ui32Config & 0x000000ff) == TIMER_CFG_A_PWM)) &&
+            (((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT_UP) ||
+             ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PERIODIC) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PERIODIC_UP) ||
+             ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_COUNT) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_COUNT_UP) ||
+             ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_TIME) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_CAP_TIME_UP) ||
+             ((ui32Config & 0x0000ff00) == TIMER_CFG_B_ONE_SHOT_PWM) || ((ui32Config & 0x0000ff00) == TIMER_CFG_B_PWM))));
 
     //
     // Disable the timers.
@@ -379,8 +368,7 @@ void TimerConfigure(uint32_t ui32Base, uint32_t ui32Config)
     if (NEW_TIMER_CONFIGURATION)
     {
         HWREG(ui32Base + TIMER_O_TAMR) = (((ui32Config & 0x000f0000) >> 4) | (ui32Config & 0xff) | TIMER_TAMR_TAPWMIE);
-        HWREG(ui32Base + TIMER_O_TBMR) =
-            (((ui32Config & 0x00f00000) >> 8) | ((ui32Config >> 8) & 0xff) | TIMER_TBMR_TBPWMIE);
+        HWREG(ui32Base + TIMER_O_TBMR) = (((ui32Config & 0x00f00000) >> 8) | ((ui32Config >> 8) & 0xff) | TIMER_TBMR_TBPWMIE);
     }
     else
     {
@@ -537,8 +525,7 @@ void TimerControlStall(uint32_t ui32Base, uint32_t ui32Timer, bool bStall)
     // Set the stall mode.
     //
     ui32Timer &= TIMER_CTL_TASTALL | TIMER_CTL_TBSTALL;
-    HWREG(ui32Base + TIMER_O_CTL) =
-        (bStall ? (HWREG(ui32Base + TIMER_O_CTL) | ui32Timer) : (HWREG(ui32Base + TIMER_O_CTL) & ~(ui32Timer)));
+    HWREG(ui32Base + TIMER_O_CTL) = (bStall ? (HWREG(ui32Base + TIMER_O_CTL) | ui32Timer) : (HWREG(ui32Base + TIMER_O_CTL) & ~(ui32Timer)));
 }
 
 //*****************************************************************************

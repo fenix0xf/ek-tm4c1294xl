@@ -36,7 +36,7 @@
  * TM4C129 MCU core frequency in Hz.
  *
  */
-#define TM4C129_MCU_FREQUENCY 120000000
+#define TM4C129_MCU_FREQUENCY    120000000
 
 /**
  * TM4C129 MCU ticks values:
@@ -60,15 +60,15 @@ HAL_NORETURN void tm4c129_mcu_reset(void);
  *
  * @param frequency is SysTick interrupt frequency in Hz.
  */
-void tm4c129_mcu_systick_on(size_t frequency);
+void              tm4c129_mcu_systick_on(size_t frequency);
 
 /**
  * TM4C129 MCU information part.
  */
-const char* tm4c129_mcu_name(void);
-size_t      tm4c129_mcu_sram_size(void);
-size_t      tm4c129_mcu_flash_size(void);
-size_t      tm4c129_mcu_flash_sector_size(void);
+const char*       tm4c129_mcu_name(void);
+size_t            tm4c129_mcu_sram_size(void);
+size_t            tm4c129_mcu_flash_size(void);
+size_t            tm4c129_mcu_flash_sector_size(void);
 
 /**
  * TM4C129 MCU interrupts.
@@ -94,7 +94,7 @@ size_t      tm4c129_mcu_flash_sector_size(void);
 /**
  * TM4C129 MCU delay loop.
  */
-void tm4c129_mcu_3cycles_delay(uint32_t count);
+void            tm4c129_mcu_3cycles_delay(uint32_t count);
 
 HAL_INLINE void tm4c129_mcu_mdelay(size_t milliseconds)
 {
@@ -122,55 +122,55 @@ void tm4c129_mcu_unique_id(uint32_t* id0, uint32_t* id1, uint32_t* id2, uint32_t
 /**
  * Break into the debugger.
  */
-#define TM4C129_MCU_BKPT() __asm volatile("bkpt #0\n")
+#define TM4C129_MCU_BKPT()                    __asm volatile("bkpt #0\n")
 
 /**
  * No operation. This instruction can be used for code alignment purposes.
  */
-#define TM4C129_MCU_XNOP() __asm volatile("nop\n")
+#define TM4C129_MCU_XNOP()                    __asm volatile("nop\n")
 
 /**
  * Wait For Interrupt is a hint instruction that suspends execution until one of a number of events occurs.
  */
-#define TM4C129_MCU_XWFI() __asm volatile("wfi\n")
+#define TM4C129_MCU_XWFI()                    __asm volatile("wfi\n")
 
 /**
  * Wait For Event is a hint instruction that permits the processor to enter a low-power state
  * until one of a number of events occurs.
  */
-#define TM4C129_MCU_XWFE() __asm volatile("wfe\n")
+#define TM4C129_MCU_XWFE()                    __asm volatile("wfe\n")
 
 /**
  * Send Event is a hint instruction. It causes an event to be signaled to the CPU.
  */
-#define TM4C129_MCU_XSEV() __asm volatile("sev\n")
+#define TM4C129_MCU_XSEV()                    __asm volatile("sev\n")
 
 /**
  * Instruction Synchronization Barrier flushes the pipeline in the processor,
  * so that all instructions following the ISB are fetched from cache or memory,
  * after the instruction has been completed.
  */
-#define TM4C129_MCU_XISB() __asm volatile("isb 0xF\n" ::: "memory")
+#define TM4C129_MCU_XISB()                    __asm volatile("isb 0xF\n" ::: "memory")
 
 /**
  * Data Synchronization Barrier.
  * Acts as a special kind of Data Memory Barrier.
  * It completes when all explicit memory accesses before this instruction complete.
  */
-#define TM4C129_MCU_XDSB() __asm volatile("dsb 0xF\n" ::: "memory")
+#define TM4C129_MCU_XDSB()                    __asm volatile("dsb 0xF\n" ::: "memory")
 
 /**
  * Data Memory Barrier.
  * Ensures the apparent order of the explicit memory operations before
  * and after the instruction, without ensuring their completion.
  */
-#define TM4C129_MCU_XDMB() __asm volatile("dmb 0xF\n" ::: "memory")
+#define TM4C129_MCU_XDMB()                    __asm volatile("dmb 0xF\n" ::: "memory")
 
 /**
  * LDR Exclusive (32 bit).
  * Executes a exclusive LDR instruction for 32 bit values.
  */
-#define TM4C129_MCU_XLDREXW(result, addr) __asm volatile("ldrex %0, [%1]\n" : "=r"(result) : "r"(addr) : "memory")
+#define TM4C129_MCU_XLDREXW(result, addr)     __asm volatile("ldrex %0, [%1]\n" : "=r"(result) : "r"(addr) : "memory")
 
 /**
  * STR Exclusive (32 bit).
@@ -178,11 +178,10 @@ void tm4c129_mcu_unique_id(uint32_t* id0, uint32_t* id1, uint32_t* id2, uint32_t
  * err == 0, succeeded,
  * err != 0, failed.
  */
-#define TM4C129_MCU_XSTREXW(err, value, addr) \
-    __asm volatile("strex %0, %1, [%2]\n" : "=r"(err) : "r"(value), "r"(addr) : "memory")
+#define TM4C129_MCU_XSTREXW(err, value, addr) __asm volatile("strex %0, %1, [%2]\n" : "=r"(err) : "r"(value), "r"(addr) : "memory")
 
 /**
  * Remove the exclusive lock.
  * Removes the exclusive lock which is created by LDREX.
  */
-#define TM4C129_MCU_XCLREX() __asm volatile("clrex\n")
+#define TM4C129_MCU_XCLREX()                  __asm volatile("clrex\n")

@@ -69,7 +69,7 @@ static struct tm4c129_timer_entry g_tm4c129_timers[TM4C129_TMR_COUNT] = {
     {SYSCTL_PERIPH_TIMER7, TIMER7_BASE, INT_TIMER7A, TM4C129_TMR_MODE_ONE_SHOT, 0, 0, NULL}
 };
 
-static bool g_isr_is_init;
+static bool     g_isr_is_init;
 
 /**
  * Local functions.
@@ -116,7 +116,7 @@ static void tm4c129_isr_timer7(void);
  * Driver interface functions.
  *
  */
-bool tm4c129_tmr_init(enum tm4c129_tmr_id id, enum tm4c129_tmr_mode mode, void (*isr_callback)(size_t timeout_uS))
+bool        tm4c129_tmr_init(enum tm4c129_tmr_id id, enum tm4c129_tmr_mode mode, void (*isr_callback)(size_t timeout_uS))
 {
     if (isr_callback == NULL)
     {

@@ -32,8 +32,8 @@
 
 //-- OS Timers
 
-int  tn_os_timer_start(TN_TCB* task, unsigned long timeout);
-void tn_os_timer_cancel(TN_TCB* task);
+int                     tn_os_timer_start(TN_TCB* task, unsigned long timeout);
+void                    tn_os_timer_cancel(TN_TCB* task);
 
 //----------------------------------------------------------------------------
 TN_INLINE unsigned long os_tick_list_index(unsigned long timeout)
@@ -237,7 +237,7 @@ void task_to_non_runnable(TN_TCB* task) // v 3.0
 
         find_next_task_to_run(); //-- v.2.6
     }
-    else                         //-- There are 'ready to run' task(s) for the curr priority
+    else //-- There are 'ready to run' task(s) for the curr priority
     {
         if (tn_next_task_to_run == task)
         {

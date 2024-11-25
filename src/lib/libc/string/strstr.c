@@ -4,7 +4,9 @@
 static char* twobyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint16_t nw = n[0] << 8 | n[1], hw = h[0] << 8 | h[1];
-    for (h++; *h && hw != nw; hw = hw << 8 | *++h) {}
+    for (h++; *h && hw != nw; hw = hw << 8 | *++h)
+    {
+    }
     return *h ? (char*)h - 1 : 0;
 }
 
@@ -12,7 +14,9 @@ static char* threebyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8;
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8;
-    for (h += 2; *h && hw != nw; hw = (hw | *++h) << 8) {}
+    for (h += 2; *h && hw != nw; hw = (hw | *++h) << 8)
+    {
+    }
     return *h ? (char*)h - 2 : 0;
 }
 
@@ -20,7 +24,9 @@ static char* fourbyte_strstr(const unsigned char* h, const unsigned char* n)
 {
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3];
-    for (h += 3; *h && hw != nw; hw = hw << 8 | *++h) {}
+    for (h += 3; *h && hw != nw; hw = hw << 8 | *++h)
+    {
+    }
     return *h ? (char*)h - 3 : 0;
 }
 
@@ -37,7 +43,10 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
     size_t               shift[256];
 
     /* Computing length of needle and fill shift table */
-    for (l = 0; n[l] && h[l]; l++) { BITOP(byteset, n[l], |=), shift[n[l]] = l + 1; }
+    for (l = 0; n[l] && h[l]; l++)
+    {
+        BITOP(byteset, n[l], |=), shift[n[l]] = l + 1;
+    }
 
     if (n[l])
     {
@@ -183,7 +192,9 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
         }
 
         /* Compare right half */
-        for (k = MAX(ms + 1, mem); n[k] && n[k] == h[k]; k++) {}
+        for (k = MAX(ms + 1, mem); n[k] && n[k] == h[k]; k++)
+        {
+        }
 
         if (n[k])
         {
@@ -193,7 +204,9 @@ static char* twoway_strstr(const unsigned char* h, const unsigned char* n)
         }
 
         /* Compare left half */
-        for (k = ms + 1; k > mem && n[k - 1] == h[k - 1]; k--) {}
+        for (k = ms + 1; k > mem && n[k - 1] == h[k - 1]; k--)
+        {
+        }
 
         if (k <= mem)
         {

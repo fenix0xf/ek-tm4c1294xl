@@ -95,7 +95,7 @@ __asm uint32_t CPUcpsid(void)
     //
     mrs   r0, PRIMASK;
     cpsid i;
-    bx    lr
+    bx lr
 }
 #endif
 #if defined(ccs)
@@ -170,7 +170,7 @@ __asm uint32_t CPUprimask(void)
     // Read PRIMASK and disable interrupts.
     //
     mrs r0, PRIMASK;
-    bx  lr
+    bx lr
 }
 #endif
 #if defined(ccs)
@@ -247,7 +247,7 @@ __asm uint32_t CPUcpsie(void)
     //
     mrs   r0, PRIMASK;
     cpsie i;
-    bx    lr
+    bx lr
 }
 #endif
 #if defined(ccs)
@@ -346,7 +346,7 @@ __asm void CPUbasepriSet(uint32_t ui32NewBasepri)
     // Set the BASEPRI register
     //
     msr BASEPRI, r0;
-    bx  lr
+    bx lr
 }
 #endif
 #if defined(ccs)
@@ -409,7 +409,7 @@ __asm uint32_t CPUbasepriGet(void)
     // Read BASEPRI
     //
     mrs r0, BASEPRI;
-    bx  lr
+    bx lr
 }
 #endif
 #if defined(ccs)

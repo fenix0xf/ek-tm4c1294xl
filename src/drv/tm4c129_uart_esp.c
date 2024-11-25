@@ -112,68 +112,70 @@ bool tx_buf_swap_try(void)
         size_t next_idx = next_idx_get(idx);
 
         hal_ll_cr_sect_enter();
-        g_buf_tx.len[next_idx] = 0;        *//* Reset full buffer. *//*
-        g_buf_tx.idx           = next_idx; *//* Swap full and empty buffers. *//*
-        hal_ll_cr_sect_leave();
+        g_buf_tx.len[next_idx] = 0;        */
+/* Reset full buffer. */           /*
+g_buf_tx.idx           = next_idx; */
+/* Swap full and empty buffers. */ /*
+hal_ll_cr_sect_leave();
 
-        return true;
-    }
+return true;
+}
 
-    return false;
+return false;
 }
 
 bool tx_bufs_is_empty(void)
 {
-    size_t idx = g_buf_tx.idx;
-    return !g_buf_tx.len[idx] && !g_buf_tx.len[next_idx_get(idx)];
+size_t idx = g_buf_tx.idx;
+return !g_buf_tx.len[idx] && !g_buf_tx.len[next_idx_get(idx)];
 }
 
 static void __dma_transfer_restart(void)
 {
-    if (!uDMAChannelIsEnabled(UART_UDMA_TX_CH) && tx_buf_swap_try())
-    {
-        uint8_t* tx_buf;
-        size_t   len = tx_buf_full_get(&tx_buf);
+if (!uDMAChannelIsEnabled(UART_UDMA_TX_CH) && tx_buf_swap_try())
+{
+uint8_t* tx_buf;
+size_t   len = tx_buf_full_get(&tx_buf);
 
-        uDMAChannelTransferSet(UART_UDMA_TX_CH | UDMA_PRI_SELECT,
-                               UDMA_MODE_BASIC,
-                               tx_buf,
-                               (void*)(UART_BASE + UART_O_DR),
-                               len);
+uDMAChannelTransferSet(UART_UDMA_TX_CH | UDMA_PRI_SELECT,
+UDMA_MODE_BASIC,
+tx_buf,
+(void*)(UART_BASE + UART_O_DR),
+len);
 
-        uDMAChannelEnable(UART_UDMA_TX_CH);
-    }
+uDMAChannelEnable(UART_UDMA_TX_CH);
+}
 }
 
 static void __uart_isr(void)
 {
-    uint32_t status = UARTIntStatus(UART_BASE, true);
+uint32_t status = UARTIntStatus(UART_BASE, true);
 
-    UARTIntClear(UART_BASE, status);
+UARTIntClear(UART_BASE, status);
 
-    __dma_transfer_restart();
+__dma_transfer_restart();
 }
 
 static void tm4c129_uart_dbg_init_dma(void)
 {
-    UARTFIFOEnable(UART_BASE);
-    UARTFIFOLevelSet(UART_BASE, UART_FIFO_TX1_8, UART_FIFO_RX4_8);
+UARTFIFOEnable(UART_BASE);
+UARTFIFOLevelSet(UART_BASE, UART_FIFO_TX1_8, UART_FIFO_RX4_8);
 
-    UARTDMAEnable(UART_BASE, UART_DMA_TX);
+UARTDMAEnable(UART_BASE, UART_DMA_TX);
 
-    uDMAChannelAssign(UART_UDMA_TX_CH);
+uDMAChannelAssign(UART_UDMA_TX_CH);
 
-    uDMAChannelAttributeDisable(UART_UDMA_TX_CH, UDMA_ATTR_ALL);
-    uDMAChannelAttributeEnable(UART_UDMA_TX_CH, UDMA_ATTR_USEBURST);
+uDMAChannelAttributeDisable(UART_UDMA_TX_CH, UDMA_ATTR_ALL);
+uDMAChannelAttributeEnable(UART_UDMA_TX_CH, UDMA_ATTR_USEBURST);
 
-    uDMAChannelControlSet(UART_UDMA_TX_CH | UDMA_PRI_SELECT,
-                          UDMA_SIZE_8 | UDMA_SRC_INC_8 | UDMA_DST_INC_NONE | UDMA_ARB_4);
+uDMAChannelControlSet(UART_UDMA_TX_CH | UDMA_PRI_SELECT,
+UDMA_SIZE_8 | UDMA_SRC_INC_8 | UDMA_DST_INC_NONE | UDMA_ARB_4);
 
-    UARTIntEnable(UART_BASE, UART_INT_DMATX);
-    UARTTxIntModeSet(UART_BASE, UART_TXINT_MODE_FIFO);
+UARTIntEnable(UART_BASE, UART_INT_DMATX);
+UARTTxIntModeSet(UART_BASE, UART_TXINT_MODE_FIFO);
 
-    tm4c129_int_register(UART_INT, __uart_isr);
-    tm4c129_int_nvic_enable(UART_INT);
+tm4c129_int_register(UART_INT, __uart_isr);
+tm4c129_int_nvic_enable(UART_INT);
 }*/
 
 /**
@@ -216,14 +218,20 @@ intptr_t tm4c129_uart_esp_puts(const char* s)
 intptr_t tm4c129_uart_esp_print(const char* s)
 {
     const char* const p = s;
-    while (*s) { UARTCharPut(UART_BASE, (uint8_t)(*s++)); }
+    while (*s)
+    {
+        UARTCharPut(UART_BASE, (uint8_t)(*s++));
+    }
     return (intptr_t)(s - p);
 }
 
 void tm4c129_uart_esp_send_buf(const void* buf, size_t len)
 {
     const uint8_t* p = (uint8_t*)buf;
-    while (len--) { UARTCharPut(UART_BASE, (uint8_t)(*p++)); }
+    while (len--)
+    {
+        UARTCharPut(UART_BASE, (uint8_t)(*p++));
+    }
 }
 
 void tm4c129_uart_esp_send_byte(uint8_t b)
@@ -234,7 +242,9 @@ void tm4c129_uart_esp_send_byte(uint8_t b)
 void tm4c129_uart_esp_flush(void)
 {
     /// Wait for end of TX.
-    while (HWREG(UART_BASE + UART_O_FR) & UART_FR_BUSY) {}
+    while (HWREG(UART_BASE + UART_O_FR) & UART_FR_BUSY)
+    {
+    }
 }
 
 /*
@@ -277,31 +287,31 @@ void tm4c129_uart_dbg_send_buf(const void* buf, size_t size)
         if (len)
         {
             */
-/* Waiting for free space in FIFO or DMA buffer. *//*
+/* Waiting for free space in FIFO or DMA buffer. */ /*
 
-            continue;
-        }
+             continue;
+         }
 
-        if (size > DMA_BUF_SIZE)
-        {
-            memcpy(tx_buf, u8buf, DMA_BUF_SIZE);
-            size  -= DMA_BUF_SIZE;
-            u8buf += DMA_BUF_SIZE;
+         if (size > DMA_BUF_SIZE)
+         {
+             memcpy(tx_buf, u8buf, DMA_BUF_SIZE);
+             size  -= DMA_BUF_SIZE;
+             u8buf += DMA_BUF_SIZE;
 
-            tx_buf_empty_set_len(DMA_BUF_SIZE);
-            __dma_transfer_restart();
-        }
-        else if (size > UART_FIFO_SIZE)
-        {
-            size_t aligned_size = size & ~(DMA_BUF_ALIGN - 1);
+             tx_buf_empty_set_len(DMA_BUF_SIZE);
+             __dma_transfer_restart();
+         }
+         else if (size > UART_FIFO_SIZE)
+         {
+             size_t aligned_size = size & ~(DMA_BUF_ALIGN - 1);
 
-            memcpy(tx_buf, u8buf, aligned_size);
-            size  -= aligned_size;
-            u8buf += aligned_size;
+             memcpy(tx_buf, u8buf, aligned_size);
+             size  -= aligned_size;
+             u8buf += aligned_size;
 
-            tx_buf_empty_set_len(aligned_size);
-            __dma_transfer_restart();
-        }
-    }
-}
-*/
+             tx_buf_empty_set_len(aligned_size);
+             __dma_transfer_restart();
+         }
+     }
+ }
+ */

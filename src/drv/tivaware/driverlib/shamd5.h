@@ -57,14 +57,14 @@ extern "C"
 // SHA/MD5 module.
 //
 //*****************************************************************************
-#define SHAMD5_ALGO_MD5         0x00000018
-#define SHAMD5_ALGO_SHA1        0x0000001a
-#define SHAMD5_ALGO_SHA224      0x0000001c
-#define SHAMD5_ALGO_SHA256      0x0000001e
-#define SHAMD5_ALGO_HMAC_MD5    0x00000000
-#define SHAMD5_ALGO_HMAC_SHA1   0x00000002
-#define SHAMD5_ALGO_HMAC_SHA224 0x00000004
-#define SHAMD5_ALGO_HMAC_SHA256 0x00000006
+#define SHAMD5_ALGO_MD5            0x00000018
+#define SHAMD5_ALGO_SHA1           0x0000001a
+#define SHAMD5_ALGO_SHA224         0x0000001c
+#define SHAMD5_ALGO_SHA256         0x0000001e
+#define SHAMD5_ALGO_HMAC_MD5       0x00000000
+#define SHAMD5_ALGO_HMAC_SHA1      0x00000002
+#define SHAMD5_ALGO_HMAC_SHA224    0x00000004
+#define SHAMD5_ALGO_HMAC_SHA256    0x00000006
 
 //*****************************************************************************
 //
@@ -87,10 +87,7 @@ extern "C"
 //
 //*****************************************************************************
 extern void     SHAMD5ConfigSet(uint32_t ui32Base, uint32_t ui32Mode);
-extern void     SHAMD5DataProcess(uint32_t  ui32Base,
-                                  uint32_t* pui32DataSrc,
-                                  uint32_t  ui32DataLength,
-                                  uint32_t* pui32HashResult);
+extern void     SHAMD5DataProcess(uint32_t ui32Base, uint32_t* pui32DataSrc, uint32_t ui32DataLength, uint32_t* pui32HashResult);
 extern void     SHAMD5DataWrite(uint32_t ui32Base, uint32_t* pui32Src);
 extern bool     SHAMD5DataWriteNonBlocking(uint32_t ui32Base, uint32_t* pui32Src);
 extern void     SHAMD5DMADisable(uint32_t ui32Base);
@@ -99,10 +96,7 @@ extern void     SHAMD5HashLengthSet(uint32_t ui32Base, uint32_t ui32Length);
 extern void     SHAMD5HMACKeySet(uint32_t ui32Base, uint32_t* pui32Src);
 extern void     SHAMD5HMACPPKeyGenerate(uint32_t ui32Base, uint32_t* pui32Key, uint32_t* pui32PPKey);
 extern void     SHAMD5HMACPPKeySet(uint32_t ui32Base, uint32_t* pui32Src);
-extern void     SHAMD5HMACProcess(uint32_t  ui32Base,
-                                  uint32_t* pui32DataSrc,
-                                  uint32_t  ui32DataLength,
-                                  uint32_t* pui32HashResult);
+extern void     SHAMD5HMACProcess(uint32_t ui32Base, uint32_t* pui32DataSrc, uint32_t ui32DataLength, uint32_t* pui32HashResult);
 extern void     SHAMD5IntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern void     SHAMD5IntDisable(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern void     SHAMD5IntEnable(uint32_t ui32Base, uint32_t ui32IntFlags);

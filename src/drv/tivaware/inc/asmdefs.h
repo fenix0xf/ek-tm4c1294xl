@@ -66,10 +66,10 @@
 //
 // Assembler nmenonics.
 //
-#define __ALIGN__  .balign 4
-#define __END__    .end
-#define __EXPORT__ .globl
-#define __IMPORT__ .extern
+#define __ALIGN__       .balign 4
+#define __END__         .end
+#define __EXPORT__      .globl
+#define __IMPORT__      .extern
 #define __LABEL__               :
 #define __STR__         .ascii
 #define __THUMB_LABEL__ .thumb_func
@@ -97,10 +97,10 @@
 //
 // Assembler nmenonics.
 //
-#define __ALIGN__  alignrom 2
-#define __END__    end
-#define __EXPORT__ export
-#define __IMPORT__ import
+#define __ALIGN__       alignrom 2
+#define __END__         end
+#define __EXPORT__      export
+#define __IMPORT__      import
 #define __LABEL__
 #define __STR__         dcb
 #define __THUMB_LABEL__ thumb
@@ -135,10 +135,10 @@
 //
 // Assembler nmenonics.
 //
-#define __ALIGN__  .balign 4
-#define __END__    .end
-#define __EXPORT__ .globl
-#define __IMPORT__ .extern
+#define __ALIGN__       .balign 4
+#define __END__         .end
+#define __EXPORT__      .globl
+#define __IMPORT__      .extern
 #define __LABEL__               :
 #define __STR__         .ascii
 #define __THUMB_LABEL__ .thumb_func
@@ -172,10 +172,10 @@
 //
 // Assembler nmenonics.
 //
-#define __ALIGN__  align 4
-#define __END__    end
-#define __EXPORT__ export
-#define __IMPORT__ import
+#define __ALIGN__       align 4
+#define __END__         end
+#define __EXPORT__      export
+#define __IMPORT__      import
 #define __LABEL__
 #define __STR__ dcb
 #define __THUMB_LABEL__
@@ -209,10 +209,10 @@
 //
 // Assembler nmenonics.
 //
-#define __ALIGN__  .balign 4
-#define __END__    .end
-#define __EXPORT__ .globl
-#define __IMPORT__ .extern
+#define __ALIGN__       .balign 4
+#define __END__         .end
+#define __EXPORT__      .globl
+#define __IMPORT__      .extern
 #define __LABEL__               :
 #define __STR__         .ascii
 #define __THUMB_LABEL__ .thumb_func

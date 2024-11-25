@@ -155,4 +155,4 @@
     0x00000001 // Floating-Point Input Denormal
                // Exception Interrupt Clear
 
-#endif         // __HW_SYSEXC_H__
+#endif // __HW_SYSEXC_H__

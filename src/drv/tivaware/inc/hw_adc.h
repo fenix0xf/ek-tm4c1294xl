@@ -45,126 +45,126 @@
 // The following are defines for the ADC register offsets.
 //
 //*****************************************************************************
-#define ADC_O_ACTSS 0x00000000  // ADC Active Sample Sequencer
-#define ADC_O_RIS   0x00000004  // ADC Raw Interrupt Status
-#define ADC_O_IM    0x00000008  // ADC Interrupt Mask
-#define ADC_O_ISC   0x0000000C  // ADC Interrupt Status and Clear
-#define ADC_O_OSTAT 0x00000010  // ADC Overflow Status
-#define ADC_O_EMUX  0x00000014  // ADC Event Multiplexer Select
-#define ADC_O_USTAT 0x00000018  // ADC Underflow Status
-#define ADC_O_TSSEL 0x0000001C  // ADC Trigger Source Select
-#define ADC_O_SSPRI 0x00000020  // ADC Sample Sequencer Priority
-#define ADC_O_SPC   0x00000024  // ADC Sample Phase Control
+#define ADC_O_ACTSS 0x00000000 // ADC Active Sample Sequencer
+#define ADC_O_RIS   0x00000004 // ADC Raw Interrupt Status
+#define ADC_O_IM    0x00000008 // ADC Interrupt Mask
+#define ADC_O_ISC   0x0000000C // ADC Interrupt Status and Clear
+#define ADC_O_OSTAT 0x00000010 // ADC Overflow Status
+#define ADC_O_EMUX  0x00000014 // ADC Event Multiplexer Select
+#define ADC_O_USTAT 0x00000018 // ADC Underflow Status
+#define ADC_O_TSSEL 0x0000001C // ADC Trigger Source Select
+#define ADC_O_SSPRI 0x00000020 // ADC Sample Sequencer Priority
+#define ADC_O_SPC   0x00000024 // ADC Sample Phase Control
 #define ADC_O_PSSI \
-    0x00000028                  // ADC Processor Sample Sequence
-                                // Initiate
-#define ADC_O_SAC 0x00000030    // ADC Sample Averaging Control
+    0x00000028               // ADC Processor Sample Sequence
+                             // Initiate
+#define ADC_O_SAC 0x00000030 // ADC Sample Averaging Control
 #define ADC_O_DCISC \
-    0x00000034                  // ADC Digital Comparator Interrupt
-                                // Status and Clear
-#define ADC_O_CTL 0x00000038    // ADC Control
+    0x00000034               // ADC Digital Comparator Interrupt
+                             // Status and Clear
+#define ADC_O_CTL 0x00000038 // ADC Control
 #define ADC_O_SSMUX0 \
     0x00000040                  // ADC Sample Sequence Input
                                 // Multiplexer Select 0
 #define ADC_O_SSCTL0 0x00000044 // ADC Sample Sequence Control 0
 #define ADC_O_SSFIFO0 \
-    0x00000048                  // ADC Sample Sequence Result FIFO
-                                // 0
+    0x00000048 // ADC Sample Sequence Result FIFO
+               // 0
 #define ADC_O_SSFSTAT0 \
-    0x0000004C                  // ADC Sample Sequence FIFO 0
-                                // Status
-#define ADC_O_SSOP0 0x00000050  // ADC Sample Sequence 0 Operation
+    0x0000004C                 // ADC Sample Sequence FIFO 0
+                               // Status
+#define ADC_O_SSOP0 0x00000050 // ADC Sample Sequence 0 Operation
 #define ADC_O_SSDC0 \
-    0x00000054                  // ADC Sample Sequence 0 Digital
-                                // Comparator Select
+    0x00000054 // ADC Sample Sequence 0 Digital
+               // Comparator Select
 #define ADC_O_SSEMUX0 \
-    0x00000058                  // ADC Sample Sequence Extended
-                                // Input Multiplexer Select 0
+    0x00000058 // ADC Sample Sequence Extended
+               // Input Multiplexer Select 0
 #define ADC_O_SSTSH0 \
-    0x0000005C                  // ADC Sample Sequence 0 Sample and
-                                // Hold Time
+    0x0000005C // ADC Sample Sequence 0 Sample and
+               // Hold Time
 #define ADC_O_SSMUX1 \
     0x00000060                  // ADC Sample Sequence Input
                                 // Multiplexer Select 1
 #define ADC_O_SSCTL1 0x00000064 // ADC Sample Sequence Control 1
 #define ADC_O_SSFIFO1 \
-    0x00000068                  // ADC Sample Sequence Result FIFO
-                                // 1
+    0x00000068 // ADC Sample Sequence Result FIFO
+               // 1
 #define ADC_O_SSFSTAT1 \
-    0x0000006C                  // ADC Sample Sequence FIFO 1
-                                // Status
-#define ADC_O_SSOP1 0x00000070  // ADC Sample Sequence 1 Operation
+    0x0000006C                 // ADC Sample Sequence FIFO 1
+                               // Status
+#define ADC_O_SSOP1 0x00000070 // ADC Sample Sequence 1 Operation
 #define ADC_O_SSDC1 \
-    0x00000074                  // ADC Sample Sequence 1 Digital
-                                // Comparator Select
+    0x00000074 // ADC Sample Sequence 1 Digital
+               // Comparator Select
 #define ADC_O_SSEMUX1 \
-    0x00000078                  // ADC Sample Sequence Extended
-                                // Input Multiplexer Select 1
+    0x00000078 // ADC Sample Sequence Extended
+               // Input Multiplexer Select 1
 #define ADC_O_SSTSH1 \
-    0x0000007C                  // ADC Sample Sequence 1 Sample and
-                                // Hold Time
+    0x0000007C // ADC Sample Sequence 1 Sample and
+               // Hold Time
 #define ADC_O_SSMUX2 \
     0x00000080                  // ADC Sample Sequence Input
                                 // Multiplexer Select 2
 #define ADC_O_SSCTL2 0x00000084 // ADC Sample Sequence Control 2
 #define ADC_O_SSFIFO2 \
-    0x00000088                  // ADC Sample Sequence Result FIFO
-                                // 2
+    0x00000088 // ADC Sample Sequence Result FIFO
+               // 2
 #define ADC_O_SSFSTAT2 \
-    0x0000008C                  // ADC Sample Sequence FIFO 2
-                                // Status
-#define ADC_O_SSOP2 0x00000090  // ADC Sample Sequence 2 Operation
+    0x0000008C                 // ADC Sample Sequence FIFO 2
+                               // Status
+#define ADC_O_SSOP2 0x00000090 // ADC Sample Sequence 2 Operation
 #define ADC_O_SSDC2 \
-    0x00000094                  // ADC Sample Sequence 2 Digital
-                                // Comparator Select
+    0x00000094 // ADC Sample Sequence 2 Digital
+               // Comparator Select
 #define ADC_O_SSEMUX2 \
-    0x00000098                  // ADC Sample Sequence Extended
-                                // Input Multiplexer Select 2
+    0x00000098 // ADC Sample Sequence Extended
+               // Input Multiplexer Select 2
 #define ADC_O_SSTSH2 \
-    0x0000009C                  // ADC Sample Sequence 2 Sample and
-                                // Hold Time
+    0x0000009C // ADC Sample Sequence 2 Sample and
+               // Hold Time
 #define ADC_O_SSMUX3 \
     0x000000A0                  // ADC Sample Sequence Input
                                 // Multiplexer Select 3
 #define ADC_O_SSCTL3 0x000000A4 // ADC Sample Sequence Control 3
 #define ADC_O_SSFIFO3 \
-    0x000000A8                  // ADC Sample Sequence Result FIFO
-                                // 3
+    0x000000A8 // ADC Sample Sequence Result FIFO
+               // 3
 #define ADC_O_SSFSTAT3 \
-    0x000000AC                  // ADC Sample Sequence FIFO 3
-                                // Status
-#define ADC_O_SSOP3 0x000000B0  // ADC Sample Sequence 3 Operation
+    0x000000AC                 // ADC Sample Sequence FIFO 3
+                               // Status
+#define ADC_O_SSOP3 0x000000B0 // ADC Sample Sequence 3 Operation
 #define ADC_O_SSDC3 \
-    0x000000B4                  // ADC Sample Sequence 3 Digital
-                                // Comparator Select
+    0x000000B4 // ADC Sample Sequence 3 Digital
+               // Comparator Select
 #define ADC_O_SSEMUX3 \
-    0x000000B8                  // ADC Sample Sequence Extended
-                                // Input Multiplexer Select 3
+    0x000000B8 // ADC Sample Sequence Extended
+               // Input Multiplexer Select 3
 #define ADC_O_SSTSH3 \
-    0x000000BC                  // ADC Sample Sequence 3 Sample and
-                                // Hold Time
+    0x000000BC // ADC Sample Sequence 3 Sample and
+               // Hold Time
 #define ADC_O_DCRIC \
-    0x00000D00                  // ADC Digital Comparator Reset
-                                // Initial Conditions
-#define ADC_O_DCCTL0 0x00000E00 // ADC Digital Comparator Control 0
-#define ADC_O_DCCTL1 0x00000E04 // ADC Digital Comparator Control 1
-#define ADC_O_DCCTL2 0x00000E08 // ADC Digital Comparator Control 2
-#define ADC_O_DCCTL3 0x00000E0C // ADC Digital Comparator Control 3
-#define ADC_O_DCCTL4 0x00000E10 // ADC Digital Comparator Control 4
-#define ADC_O_DCCTL5 0x00000E14 // ADC Digital Comparator Control 5
-#define ADC_O_DCCTL6 0x00000E18 // ADC Digital Comparator Control 6
-#define ADC_O_DCCTL7 0x00000E1C // ADC Digital Comparator Control 7
-#define ADC_O_DCCMP0 0x00000E40 // ADC Digital Comparator Range 0
-#define ADC_O_DCCMP1 0x00000E44 // ADC Digital Comparator Range 1
-#define ADC_O_DCCMP2 0x00000E48 // ADC Digital Comparator Range 2
-#define ADC_O_DCCMP3 0x00000E4C // ADC Digital Comparator Range 3
-#define ADC_O_DCCMP4 0x00000E50 // ADC Digital Comparator Range 4
-#define ADC_O_DCCMP5 0x00000E54 // ADC Digital Comparator Range 5
-#define ADC_O_DCCMP6 0x00000E58 // ADC Digital Comparator Range 6
-#define ADC_O_DCCMP7 0x00000E5C // ADC Digital Comparator Range 7
-#define ADC_O_PP     0x00000FC0 // ADC Peripheral Properties
-#define ADC_O_PC     0x00000FC4 // ADC Peripheral Configuration
-#define ADC_O_CC     0x00000FC8 // ADC Clock Configuration
+    0x00000D00                     // ADC Digital Comparator Reset
+                                   // Initial Conditions
+#define ADC_O_DCCTL0    0x00000E00 // ADC Digital Comparator Control 0
+#define ADC_O_DCCTL1    0x00000E04 // ADC Digital Comparator Control 1
+#define ADC_O_DCCTL2    0x00000E08 // ADC Digital Comparator Control 2
+#define ADC_O_DCCTL3    0x00000E0C // ADC Digital Comparator Control 3
+#define ADC_O_DCCTL4    0x00000E10 // ADC Digital Comparator Control 4
+#define ADC_O_DCCTL5    0x00000E14 // ADC Digital Comparator Control 5
+#define ADC_O_DCCTL6    0x00000E18 // ADC Digital Comparator Control 6
+#define ADC_O_DCCTL7    0x00000E1C // ADC Digital Comparator Control 7
+#define ADC_O_DCCMP0    0x00000E40 // ADC Digital Comparator Range 0
+#define ADC_O_DCCMP1    0x00000E44 // ADC Digital Comparator Range 1
+#define ADC_O_DCCMP2    0x00000E48 // ADC Digital Comparator Range 2
+#define ADC_O_DCCMP3    0x00000E4C // ADC Digital Comparator Range 3
+#define ADC_O_DCCMP4    0x00000E50 // ADC Digital Comparator Range 4
+#define ADC_O_DCCMP5    0x00000E54 // ADC Digital Comparator Range 5
+#define ADC_O_DCCMP6    0x00000E58 // ADC Digital Comparator Range 6
+#define ADC_O_DCCMP7    0x00000E5C // ADC Digital Comparator Range 7
+#define ADC_O_PP        0x00000FC0 // ADC Peripheral Properties
+#define ADC_O_PC        0x00000FC4 // ADC Peripheral Configuration
+#define ADC_O_CC        0x00000FC8 // ADC Clock Configuration
 
 //*****************************************************************************
 //
@@ -204,14 +204,14 @@
 //
 //*****************************************************************************
 #define ADC_IM_DCONSS3 \
-    0x00080000                     // Digital Comparator Interrupt on
-                                   // SS3
+    0x00080000 // Digital Comparator Interrupt on
+               // SS3
 #define ADC_IM_DCONSS2 \
-    0x00040000                     // Digital Comparator Interrupt on
-                                   // SS2
+    0x00040000 // Digital Comparator Interrupt on
+               // SS2
 #define ADC_IM_DCONSS1 \
-    0x00020000                     // Digital Comparator Interrupt on
-                                   // SS1
+    0x00020000 // Digital Comparator Interrupt on
+               // SS1
 #define ADC_IM_DCONSS0 \
     0x00010000                     // Digital Comparator Interrupt on
                                    // SS0
@@ -230,43 +230,43 @@
 //
 //*****************************************************************************
 #define ADC_ISC_DCINSS3 \
-    0x00080000                 // Digital Comparator Interrupt
-                               // Status on SS3
+    0x00080000 // Digital Comparator Interrupt
+               // Status on SS3
 #define ADC_ISC_DCINSS2 \
-    0x00040000                 // Digital Comparator Interrupt
-                               // Status on SS2
+    0x00040000 // Digital Comparator Interrupt
+               // Status on SS2
 #define ADC_ISC_DCINSS1 \
-    0x00020000                 // Digital Comparator Interrupt
-                               // Status on SS1
+    0x00020000 // Digital Comparator Interrupt
+               // Status on SS1
 #define ADC_ISC_DCINSS0 \
-    0x00010000                 // Digital Comparator Interrupt
-                               // Status on SS0
+    0x00010000 // Digital Comparator Interrupt
+               // Status on SS0
 #define ADC_ISC_DMAIN3 \
-    0x00000800                 // SS3 DMA Interrupt Status and
-                               // Clear
+    0x00000800 // SS3 DMA Interrupt Status and
+               // Clear
 #define ADC_ISC_DMAIN2 \
-    0x00000400                 // SS2 DMA Interrupt Status and
-                               // Clear
+    0x00000400 // SS2 DMA Interrupt Status and
+               // Clear
 #define ADC_ISC_DMAIN1 \
-    0x00000200                 // SS1 DMA Interrupt Status and
-                               // Clear
+    0x00000200 // SS1 DMA Interrupt Status and
+               // Clear
 #define ADC_ISC_DMAIN0 \
-    0x00000100                 // SS0 DMA Interrupt Status and
-                               // Clear
-#define ADC_ISC_IN3 0x00000008 // SS3 Interrupt Status and Clear
-#define ADC_ISC_IN2 0x00000004 // SS2 Interrupt Status and Clear
-#define ADC_ISC_IN1 0x00000002 // SS1 Interrupt Status and Clear
-#define ADC_ISC_IN0 0x00000001 // SS0 Interrupt Status and Clear
+    0x00000100                            // SS0 DMA Interrupt Status and
+                                          // Clear
+#define ADC_ISC_IN3            0x00000008 // SS3 Interrupt Status and Clear
+#define ADC_ISC_IN2            0x00000004 // SS2 Interrupt Status and Clear
+#define ADC_ISC_IN1            0x00000002 // SS1 Interrupt Status and Clear
+#define ADC_ISC_IN0            0x00000001 // SS0 Interrupt Status and Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_OSTAT register.
 //
 //*****************************************************************************
-#define ADC_OSTAT_OV3 0x00000008 // SS3 FIFO Overflow
-#define ADC_OSTAT_OV2 0x00000004 // SS2 FIFO Overflow
-#define ADC_OSTAT_OV1 0x00000002 // SS1 FIFO Overflow
-#define ADC_OSTAT_OV0 0x00000001 // SS0 FIFO Overflow
+#define ADC_OSTAT_OV3          0x00000008 // SS3 FIFO Overflow
+#define ADC_OSTAT_OV2          0x00000004 // SS2 FIFO Overflow
+#define ADC_OSTAT_OV1          0x00000002 // SS1 FIFO Overflow
+#define ADC_OSTAT_OV0          0x00000001 // SS0 FIFO Overflow
 
 //*****************************************************************************
 //
@@ -331,10 +331,10 @@
 // The following are defines for the bit fields in the ADC_O_USTAT register.
 //
 //*****************************************************************************
-#define ADC_USTAT_UV3 0x00000008 // SS3 FIFO Underflow
-#define ADC_USTAT_UV2 0x00000004 // SS2 FIFO Underflow
-#define ADC_USTAT_UV1 0x00000002 // SS1 FIFO Underflow
-#define ADC_USTAT_UV0 0x00000001 // SS0 FIFO Underflow
+#define ADC_USTAT_UV3          0x00000008 // SS3 FIFO Underflow
+#define ADC_USTAT_UV2          0x00000004 // SS2 FIFO Underflow
+#define ADC_USTAT_UV1          0x00000002 // SS1 FIFO Underflow
+#define ADC_USTAT_UV0          0x00000001 // SS0 FIFO Underflow
 
 //*****************************************************************************
 //
@@ -383,10 +383,10 @@
 // The following are defines for the bit fields in the ADC_O_SSPRI register.
 //
 //*****************************************************************************
-#define ADC_SSPRI_SS3_M 0x00003000 // SS3 Priority
-#define ADC_SSPRI_SS2_M 0x00000300 // SS2 Priority
-#define ADC_SSPRI_SS1_M 0x00000030 // SS1 Priority
-#define ADC_SSPRI_SS0_M 0x00000003 // SS0 Priority
+#define ADC_SSPRI_SS3_M     0x00003000 // SS3 Priority
+#define ADC_SSPRI_SS2_M     0x00000300 // SS2 Priority
+#define ADC_SSPRI_SS1_M     0x00000030 // SS1 Priority
+#define ADC_SSPRI_SS0_M     0x00000003 // SS0 Priority
 
 //*****************************************************************************
 //
@@ -416,26 +416,26 @@
 // The following are defines for the bit fields in the ADC_O_PSSI register.
 //
 //*****************************************************************************
-#define ADC_PSSI_GSYNC    0x80000000 // Global Synchronize
-#define ADC_PSSI_SYNCWAIT 0x08000000 // Synchronize Wait
-#define ADC_PSSI_SS3      0x00000008 // SS3 Initiate
-#define ADC_PSSI_SS2      0x00000004 // SS2 Initiate
-#define ADC_PSSI_SS1      0x00000002 // SS1 Initiate
-#define ADC_PSSI_SS0      0x00000001 // SS0 Initiate
+#define ADC_PSSI_GSYNC      0x80000000 // Global Synchronize
+#define ADC_PSSI_SYNCWAIT   0x08000000 // Synchronize Wait
+#define ADC_PSSI_SS3        0x00000008 // SS3 Initiate
+#define ADC_PSSI_SS2        0x00000004 // SS2 Initiate
+#define ADC_PSSI_SS1        0x00000002 // SS1 Initiate
+#define ADC_PSSI_SS0        0x00000001 // SS0 Initiate
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SAC register.
 //
 //*****************************************************************************
-#define ADC_SAC_AVG_M   0x00000007 // Hardware Averaging Control
-#define ADC_SAC_AVG_OFF 0x00000000 // No hardware oversampling
-#define ADC_SAC_AVG_2X  0x00000001 // 2x hardware oversampling
-#define ADC_SAC_AVG_4X  0x00000002 // 4x hardware oversampling
-#define ADC_SAC_AVG_8X  0x00000003 // 8x hardware oversampling
-#define ADC_SAC_AVG_16X 0x00000004 // 16x hardware oversampling
-#define ADC_SAC_AVG_32X 0x00000005 // 32x hardware oversampling
-#define ADC_SAC_AVG_64X 0x00000006 // 64x hardware oversampling
+#define ADC_SAC_AVG_M       0x00000007 // Hardware Averaging Control
+#define ADC_SAC_AVG_OFF     0x00000000 // No hardware oversampling
+#define ADC_SAC_AVG_2X      0x00000001 // 2x hardware oversampling
+#define ADC_SAC_AVG_4X      0x00000002 // 4x hardware oversampling
+#define ADC_SAC_AVG_8X      0x00000003 // 8x hardware oversampling
+#define ADC_SAC_AVG_16X     0x00000004 // 16x hardware oversampling
+#define ADC_SAC_AVG_32X     0x00000005 // 32x hardware oversampling
+#define ADC_SAC_AVG_64X     0x00000006 // 64x hardware oversampling
 
 //*****************************************************************************
 //
@@ -474,12 +474,12 @@
 //*****************************************************************************
 #define ADC_CTL_VREF_M 0x00000003 // Voltage Reference Select
 #define ADC_CTL_VREF_INTERNAL \
-    0x00000000                    // VDDA and GNDA are the voltage
-                                  // references
+    0x00000000 // VDDA and GNDA are the voltage
+               // references
 #define ADC_CTL_VREF_EXT_3V \
-    0x00000001                    // The external VREFA+ and VREFA-
-                                  // inputs are the voltage
-                                  // references
+    0x00000001 // The external VREFA+ and VREFA-
+               // inputs are the voltage
+               // references
 
 //*****************************************************************************
 //
@@ -508,9 +508,9 @@
 // The following are defines for the bit fields in the ADC_O_SSCTL0 register.
 //
 //*****************************************************************************
-#define ADC_SSCTL0_TS7  0x80000000 // 8th Sample Temp Sensor Select
-#define ADC_SSCTL0_IE7  0x40000000 // 8th Sample Interrupt Enable
-#define ADC_SSCTL0_END7 0x20000000 // 8th Sample is End of Sequence
+#define ADC_SSCTL0_TS7    0x80000000 // 8th Sample Temp Sensor Select
+#define ADC_SSCTL0_IE7    0x40000000 // 8th Sample Interrupt Enable
+#define ADC_SSCTL0_END7   0x20000000 // 8th Sample is End of Sequence
 #define ADC_SSCTL0_D7 \
     0x10000000                     // 8th Sample Differential Input
                                    // Select
@@ -554,16 +554,16 @@
 #define ADC_SSCTL0_IE0  0x00000004 // 1st Sample Interrupt Enable
 #define ADC_SSCTL0_END0 0x00000002 // 1st Sample is End of Sequence
 #define ADC_SSCTL0_D0 \
-    0x00000001                     // 1st Sample Differential Input
-                                   // Select
+    0x00000001 // 1st Sample Differential Input
+               // Select
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSFIFO0 register.
 //
 //*****************************************************************************
-#define ADC_SSFIFO0_DATA_M 0x00000FFF // Conversion Result Data
-#define ADC_SSFIFO0_DATA_S 0
+#define ADC_SSFIFO0_DATA_M  0x00000FFF // Conversion Result Data
+#define ADC_SSFIFO0_DATA_S  0
 
 //*****************************************************************************
 //
@@ -731,9 +731,9 @@
 // The following are defines for the bit fields in the ADC_O_SSCTL1 register.
 //
 //*****************************************************************************
-#define ADC_SSCTL1_TS3  0x00008000 // 4th Sample Temp Sensor Select
-#define ADC_SSCTL1_IE3  0x00004000 // 4th Sample Interrupt Enable
-#define ADC_SSCTL1_END3 0x00002000 // 4th Sample is End of Sequence
+#define ADC_SSCTL1_TS3    0x00008000 // 4th Sample Temp Sensor Select
+#define ADC_SSCTL1_IE3    0x00004000 // 4th Sample Interrupt Enable
+#define ADC_SSCTL1_END3   0x00002000 // 4th Sample is End of Sequence
 #define ADC_SSCTL1_D3 \
     0x00001000                     // 4th Sample Differential Input
                                    // Select
@@ -753,16 +753,16 @@
 #define ADC_SSCTL1_IE0  0x00000004 // 1st Sample Interrupt Enable
 #define ADC_SSCTL1_END0 0x00000002 // 1st Sample is End of Sequence
 #define ADC_SSCTL1_D0 \
-    0x00000001                     // 1st Sample Differential Input
-                                   // Select
+    0x00000001 // 1st Sample Differential Input
+               // Select
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSFIFO1 register.
 //
 //*****************************************************************************
-#define ADC_SSFIFO1_DATA_M 0x00000FFF // Conversion Result Data
-#define ADC_SSFIFO1_DATA_S 0
+#define ADC_SSFIFO1_DATA_M  0x00000FFF // Conversion Result Data
+#define ADC_SSFIFO1_DATA_S  0
 
 //*****************************************************************************
 //
@@ -874,9 +874,9 @@
 // The following are defines for the bit fields in the ADC_O_SSCTL2 register.
 //
 //*****************************************************************************
-#define ADC_SSCTL2_TS3  0x00008000 // 4th Sample Temp Sensor Select
-#define ADC_SSCTL2_IE3  0x00004000 // 4th Sample Interrupt Enable
-#define ADC_SSCTL2_END3 0x00002000 // 4th Sample is End of Sequence
+#define ADC_SSCTL2_TS3    0x00008000 // 4th Sample Temp Sensor Select
+#define ADC_SSCTL2_IE3    0x00004000 // 4th Sample Interrupt Enable
+#define ADC_SSCTL2_END3   0x00002000 // 4th Sample is End of Sequence
 #define ADC_SSCTL2_D3 \
     0x00001000                     // 4th Sample Differential Input
                                    // Select
@@ -896,16 +896,16 @@
 #define ADC_SSCTL2_IE0  0x00000004 // 1st Sample Interrupt Enable
 #define ADC_SSCTL2_END0 0x00000002 // 1st Sample is End of Sequence
 #define ADC_SSCTL2_D0 \
-    0x00000001                     // 1st Sample Differential Input
-                                   // Select
+    0x00000001 // 1st Sample Differential Input
+               // Select
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSFIFO2 register.
 //
 //*****************************************************************************
-#define ADC_SSFIFO2_DATA_M 0x00000FFF // Conversion Result Data
-#define ADC_SSFIFO2_DATA_S 0
+#define ADC_SSFIFO2_DATA_M  0x00000FFF // Conversion Result Data
+#define ADC_SSFIFO2_DATA_S  0
 
 //*****************************************************************************
 //
@@ -993,36 +993,36 @@
 #define ADC_SSTSH2_TSH0_M \
     0x0000000F // 1st Sample and Hold Period
                // Select
-#define ADC_SSTSH2_TSH3_S 12
-#define ADC_SSTSH2_TSH2_S 8
-#define ADC_SSTSH2_TSH1_S 4
-#define ADC_SSTSH2_TSH0_S 0
+#define ADC_SSTSH2_TSH3_S   12
+#define ADC_SSTSH2_TSH2_S   8
+#define ADC_SSTSH2_TSH1_S   4
+#define ADC_SSTSH2_TSH0_S   0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSMUX3 register.
 //
 //*****************************************************************************
-#define ADC_SSMUX3_MUX0_M 0x0000000F // 1st Sample Input Select
-#define ADC_SSMUX3_MUX0_S 0
+#define ADC_SSMUX3_MUX0_M   0x0000000F // 1st Sample Input Select
+#define ADC_SSMUX3_MUX0_S   0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSCTL3 register.
 //
 //*****************************************************************************
-#define ADC_SSCTL3_TS0  0x00000008 // 1st Sample Temp Sensor Select
-#define ADC_SSCTL3_IE0  0x00000004 // Sample Interrupt Enable
-#define ADC_SSCTL3_END0 0x00000002 // End of Sequence
-#define ADC_SSCTL3_D0   0x00000001 // Sample Differential Input Select
+#define ADC_SSCTL3_TS0      0x00000008 // 1st Sample Temp Sensor Select
+#define ADC_SSCTL3_IE0      0x00000004 // Sample Interrupt Enable
+#define ADC_SSCTL3_END0     0x00000002 // End of Sequence
+#define ADC_SSCTL3_D0       0x00000001 // Sample Differential Input Select
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSFIFO3 register.
 //
 //*****************************************************************************
-#define ADC_SSFIFO3_DATA_M 0x00000FFF // Conversion Result Data
-#define ADC_SSFIFO3_DATA_S 0
+#define ADC_SSFIFO3_DATA_M  0x00000FFF // Conversion Result Data
+#define ADC_SSFIFO3_DATA_S  0
 
 //*****************************************************************************
 //
@@ -1071,29 +1071,29 @@
 #define ADC_SSTSH3_TSH0_M \
     0x0000000F // 1st Sample and Hold Period
                // Select
-#define ADC_SSTSH3_TSH0_S 0
+#define ADC_SSTSH3_TSH0_S      0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCRIC register.
 //
 //*****************************************************************************
-#define ADC_DCRIC_DCTRIG7 0x00800000 // Digital Comparator Trigger 7
-#define ADC_DCRIC_DCTRIG6 0x00400000 // Digital Comparator Trigger 6
-#define ADC_DCRIC_DCTRIG5 0x00200000 // Digital Comparator Trigger 5
-#define ADC_DCRIC_DCTRIG4 0x00100000 // Digital Comparator Trigger 4
-#define ADC_DCRIC_DCTRIG3 0x00080000 // Digital Comparator Trigger 3
-#define ADC_DCRIC_DCTRIG2 0x00040000 // Digital Comparator Trigger 2
-#define ADC_DCRIC_DCTRIG1 0x00020000 // Digital Comparator Trigger 1
-#define ADC_DCRIC_DCTRIG0 0x00010000 // Digital Comparator Trigger 0
-#define ADC_DCRIC_DCINT7  0x00000080 // Digital Comparator Interrupt 7
-#define ADC_DCRIC_DCINT6  0x00000040 // Digital Comparator Interrupt 6
-#define ADC_DCRIC_DCINT5  0x00000020 // Digital Comparator Interrupt 5
-#define ADC_DCRIC_DCINT4  0x00000010 // Digital Comparator Interrupt 4
-#define ADC_DCRIC_DCINT3  0x00000008 // Digital Comparator Interrupt 3
-#define ADC_DCRIC_DCINT2  0x00000004 // Digital Comparator Interrupt 2
-#define ADC_DCRIC_DCINT1  0x00000002 // Digital Comparator Interrupt 1
-#define ADC_DCRIC_DCINT0  0x00000001 // Digital Comparator Interrupt 0
+#define ADC_DCRIC_DCTRIG7      0x00800000 // Digital Comparator Trigger 7
+#define ADC_DCRIC_DCTRIG6      0x00400000 // Digital Comparator Trigger 6
+#define ADC_DCRIC_DCTRIG5      0x00200000 // Digital Comparator Trigger 5
+#define ADC_DCRIC_DCTRIG4      0x00100000 // Digital Comparator Trigger 4
+#define ADC_DCRIC_DCTRIG3      0x00080000 // Digital Comparator Trigger 3
+#define ADC_DCRIC_DCTRIG2      0x00040000 // Digital Comparator Trigger 2
+#define ADC_DCRIC_DCTRIG1      0x00020000 // Digital Comparator Trigger 1
+#define ADC_DCRIC_DCTRIG0      0x00010000 // Digital Comparator Trigger 0
+#define ADC_DCRIC_DCINT7       0x00000080 // Digital Comparator Interrupt 7
+#define ADC_DCRIC_DCINT6       0x00000040 // Digital Comparator Interrupt 6
+#define ADC_DCRIC_DCINT5       0x00000020 // Digital Comparator Interrupt 5
+#define ADC_DCRIC_DCINT4       0x00000010 // Digital Comparator Interrupt 4
+#define ADC_DCRIC_DCINT3       0x00000008 // Digital Comparator Interrupt 3
+#define ADC_DCRIC_DCINT2       0x00000004 // Digital Comparator Interrupt 2
+#define ADC_DCRIC_DCINT1       0x00000002 // Digital Comparator Interrupt 1
+#define ADC_DCRIC_DCINT0       0x00000001 // Digital Comparator Interrupt 0
 
 //*****************************************************************************
 //
@@ -1308,80 +1308,80 @@
 // The following are defines for the bit fields in the ADC_O_DCCMP0 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP0_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP0_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP0_COMP1_S 16
-#define ADC_DCCMP0_COMP0_S 0
+#define ADC_DCCMP0_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP0_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP0_COMP1_S     16
+#define ADC_DCCMP0_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP1 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP1_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP1_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP1_COMP1_S 16
-#define ADC_DCCMP1_COMP0_S 0
+#define ADC_DCCMP1_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP1_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP1_COMP1_S     16
+#define ADC_DCCMP1_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP2 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP2_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP2_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP2_COMP1_S 16
-#define ADC_DCCMP2_COMP0_S 0
+#define ADC_DCCMP2_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP2_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP2_COMP1_S     16
+#define ADC_DCCMP2_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP3 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP3_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP3_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP3_COMP1_S 16
-#define ADC_DCCMP3_COMP0_S 0
+#define ADC_DCCMP3_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP3_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP3_COMP1_S     16
+#define ADC_DCCMP3_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP4 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP4_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP4_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP4_COMP1_S 16
-#define ADC_DCCMP4_COMP0_S 0
+#define ADC_DCCMP4_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP4_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP4_COMP1_S     16
+#define ADC_DCCMP4_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP5 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP5_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP5_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP5_COMP1_S 16
-#define ADC_DCCMP5_COMP0_S 0
+#define ADC_DCCMP5_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP5_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP5_COMP1_S     16
+#define ADC_DCCMP5_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP6 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP6_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP6_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP6_COMP1_S 16
-#define ADC_DCCMP6_COMP0_S 0
+#define ADC_DCCMP6_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP6_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP6_COMP1_S     16
+#define ADC_DCCMP6_COMP0_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_DCCMP7 register.
 //
 //*****************************************************************************
-#define ADC_DCCMP7_COMP1_M 0x0FFF0000 // Compare 1
-#define ADC_DCCMP7_COMP0_M 0x00000FFF // Compare 0
-#define ADC_DCCMP7_COMP1_S 16
-#define ADC_DCCMP7_COMP0_S 0
+#define ADC_DCCMP7_COMP1_M     0x0FFF0000 // Compare 1
+#define ADC_DCCMP7_COMP0_M     0x00000FFF // Compare 0
+#define ADC_DCCMP7_COMP1_S     16
+#define ADC_DCCMP7_COMP0_S     0
 
 //*****************************************************************************
 //
@@ -1415,33 +1415,33 @@
 // The following are defines for the bit fields in the ADC_O_PC register.
 //
 //*****************************************************************************
-#define ADC_PC_SR_M    0x0000000F // ADC Sample Rate
-#define ADC_PC_SR_125K 0x00000001 // 125 ksps
-#define ADC_PC_SR_250K 0x00000003 // 250 ksps
-#define ADC_PC_SR_500K 0x00000005 // 500 ksps
-#define ADC_PC_SR_1M   0x00000007 // 1 Msps
-#define ADC_PC_MCR_M   0x0000000F // Conversion Rate
+#define ADC_PC_SR_M     0x0000000F // ADC Sample Rate
+#define ADC_PC_SR_125K  0x00000001 // 125 ksps
+#define ADC_PC_SR_250K  0x00000003 // 250 ksps
+#define ADC_PC_SR_500K  0x00000005 // 500 ksps
+#define ADC_PC_SR_1M    0x00000007 // 1 Msps
+#define ADC_PC_MCR_M    0x0000000F // Conversion Rate
 #define ADC_PC_MCR_1_8 \
-    0x00000001                    // Eighth conversion rate. After a
-                                  // conversion completes, the logic
-                                  // pauses for 112 TADC periods
-                                  // before starting the next
-                                  // conversion
+    0x00000001 // Eighth conversion rate. After a
+               // conversion completes, the logic
+               // pauses for 112 TADC periods
+               // before starting the next
+               // conversion
 #define ADC_PC_MCR_1_4 \
-    0x00000003                    // Quarter conversion rate. After a
-                                  // conversion completes, the logic
-                                  // pauses for 48 TADC periods
-                                  // before starting the next
-                                  // conversion
+    0x00000003 // Quarter conversion rate. After a
+               // conversion completes, the logic
+               // pauses for 48 TADC periods
+               // before starting the next
+               // conversion
 #define ADC_PC_MCR_1_2 \
-    0x00000005                    // Half conversion rate. After a
-                                  // conversion completes, the logic
-                                  // pauses for 16 TADC periods
-                                  // before starting the next
-                                  // conversion
+    0x00000005 // Half conversion rate. After a
+               // conversion completes, the logic
+               // pauses for 16 TADC periods
+               // before starting the next
+               // conversion
 #define ADC_PC_MCR_FULL \
-    0x00000007                    // Full conversion rate (FCONV) as
-                                  // defined by TADC and NSH
+    0x00000007 // Full conversion rate (FCONV) as
+               // defined by TADC and NSH
 
 //*****************************************************************************
 //

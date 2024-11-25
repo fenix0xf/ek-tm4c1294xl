@@ -10,7 +10,10 @@ char* gets(char* s)
 
     FLOCK(stdin);
 
-    while ((c = getc_unlocked(stdin)) != EOF && c != '\n') { s[i++] = c; }
+    while ((c = getc_unlocked(stdin)) != EOF && c != '\n')
+    {
+        s[i++] = c;
+    }
 
     s[i] = 0;
 

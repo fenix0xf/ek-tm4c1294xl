@@ -63,14 +63,14 @@
 // register.
 //
 //*****************************************************************************
-#define ONEWIRE_TXN_MASK (ONEWIRE_CS_OP_M | ONEWIRE_CS_SZ_M | ONEWIRE_CS_BSIZE_M)
+#define ONEWIRE_TXN_MASK         (ONEWIRE_CS_OP_M | ONEWIRE_CS_SZ_M | ONEWIRE_CS_BSIZE_M)
 
 //*****************************************************************************
 //
 // Left-shift value for the control register's transaction size.
 //
 //*****************************************************************************
-#define ONEWIRE_TXN_SIZE_LSHIFT 3
+#define ONEWIRE_TXN_SIZE_LSHIFT  3
 
 //*****************************************************************************
 //
@@ -197,7 +197,9 @@ void OneWireDataGet(uint32_t ui32Base, uint32_t* pui32Data)
     //
     // Wait for any active operations to complete.
     //
-    while (HWREG(ui32Base + ONEWIRE_O_CS) & ONEWIRE_CS_BUSY) {}
+    while (HWREG(ui32Base + ONEWIRE_O_CS) & ONEWIRE_CS_BUSY)
+    {
+    }
 
     //
     // Copy the data into the provided storage.
@@ -288,8 +290,7 @@ void OneWireIntClear(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the argument.
     //
     ASSERT(ui32Base == ONEWIRE0_BASE);
-    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) ==
-           0);
+    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) == 0);
 
     //
     // Clear the requested interrupts.
@@ -324,8 +325,7 @@ void OneWireIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == ONEWIRE0_BASE);
-    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) ==
-           0);
+    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) == 0);
 
     //
     // Disable the requested interrupts.
@@ -362,8 +362,7 @@ void OneWireIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == ONEWIRE0_BASE);
-    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) ==
-           0);
+    ASSERT((ui32IntFlags & ~(ONEWIRE_IM_RST | ONEWIRE_IM_OPC | ONEWIRE_IM_DMA | ONEWIRE_IM_NOATR | ONEWIRE_IM_STUCK)) == 0);
 
     //
     // Enable the requested interrupts.
@@ -708,8 +707,7 @@ void OneWireTransaction(uint32_t ui32Base, uint32_t ui32OpMode, uint32_t ui32Dat
         // specified as 1-4 bytes and the specific bit size for the last
         // byte therein.
         //
-        ui32Transaction |=
-            ((((ui32BitCnt % 8) ? (ui32BitCnt / 8) + 1 : (ui32BitCnt / 8)) - 1) << ONEWIRE_TXN_SIZE_LSHIFT);
+        ui32Transaction |= ((((ui32BitCnt % 8) ? (ui32BitCnt / 8) + 1 : (ui32BitCnt / 8)) - 1) << ONEWIRE_TXN_SIZE_LSHIFT);
         ui32Transaction |= ((ui32BitCnt % 8) << ONEWIRE_TXN_BSIZE_LSHIFT);
 
         //

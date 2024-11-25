@@ -608,9 +608,8 @@ void uDMAChannelControlSet(uint32_t ui32ChannelStructIndex, uint32_t ui32Control
     // changed, then OR in the new settings.
     //
     psCtl[ui32ChannelStructIndex].ui32Control =
-        ((psCtl[ui32ChannelStructIndex].ui32Control &
-          ~(UDMA_CHCTL_DSTINC_M | UDMA_CHCTL_DSTSIZE_M | UDMA_CHCTL_SRCINC_M | UDMA_CHCTL_SRCSIZE_M |
-            UDMA_CHCTL_ARBSIZE_M | UDMA_CHCTL_NXTUSEBURST)) |
+        ((psCtl[ui32ChannelStructIndex].ui32Control & ~(UDMA_CHCTL_DSTINC_M | UDMA_CHCTL_DSTSIZE_M | UDMA_CHCTL_SRCINC_M |
+                                                        UDMA_CHCTL_SRCSIZE_M | UDMA_CHCTL_ARBSIZE_M | UDMA_CHCTL_NXTUSEBURST)) |
          ui32Control);
 }
 
@@ -683,11 +682,7 @@ void uDMAChannelControlSet(uint32_t ui32ChannelStructIndex, uint32_t ui32Control
 //! \return None.
 //
 //*****************************************************************************
-void uDMAChannelTransferSet(uint32_t ui32ChannelStructIndex,
-                            uint32_t ui32Mode,
-                            void*    pvSrcAddr,
-                            void*    pvDstAddr,
-                            uint32_t ui32TransferSize)
+void uDMAChannelTransferSet(uint32_t ui32ChannelStructIndex, uint32_t ui32Mode, void* pvSrcAddr, void* pvDstAddr, uint32_t ui32TransferSize)
 {
     tDMAControlTable* psControlTable;
     uint32_t          ui32Control;
@@ -720,8 +715,7 @@ void uDMAChannelTransferSet(uint32_t ui32ChannelStructIndex,
     // Get the current control word value and mask off the mode and size
     // fields.
     //
-    ui32Control =
-        (psControlTable[ui32ChannelStructIndex].ui32Control & ~(UDMA_CHCTL_XFERSIZE_M | UDMA_CHCTL_XFERMODE_M));
+    ui32Control = (psControlTable[ui32ChannelStructIndex].ui32Control & ~(UDMA_CHCTL_XFERSIZE_M | UDMA_CHCTL_XFERMODE_M));
 
     //
     // Adjust the mode if the alt control structure is selected.
@@ -831,10 +825,7 @@ void uDMAChannelTransferSet(uint32_t ui32ChannelStructIndex,
 //! \return None.
 //
 //*****************************************************************************
-void uDMAChannelScatterGatherSet(uint32_t ui32ChannelNum,
-                                 uint32_t ui32TaskCount,
-                                 void*    pvTaskList,
-                                 uint32_t ui32IsPeriphSG)
+void uDMAChannelScatterGatherSet(uint32_t ui32ChannelNum, uint32_t ui32TaskCount, void* pvTaskList, uint32_t ui32IsPeriphSG)
 {
     tDMAControlTable* psControlTable;
     tDMAControlTable* psTaskTable;
@@ -884,9 +875,8 @@ void uDMAChannelScatterGatherSet(uint32_t ui32ChannelNum,
     // times 4 (4 words per task).
     //
     psControlTable[ui32ChannelNum].ui32Control =
-        (UDMA_CHCTL_DSTINC_32 | UDMA_CHCTL_DSTSIZE_32 | UDMA_CHCTL_SRCINC_32 | UDMA_CHCTL_SRCSIZE_32 |
-         UDMA_CHCTL_ARBSIZE_4 | (((ui32TaskCount * 4) - 1) << UDMA_CHCTL_XFERSIZE_S) |
-         (ui32IsPeriphSG ? UDMA_CHCTL_XFERMODE_PER_SG : UDMA_CHCTL_XFERMODE_MEM_SG));
+        (UDMA_CHCTL_DSTINC_32 | UDMA_CHCTL_DSTSIZE_32 | UDMA_CHCTL_SRCINC_32 | UDMA_CHCTL_SRCSIZE_32 | UDMA_CHCTL_ARBSIZE_4 |
+         (((ui32TaskCount * 4) - 1) << UDMA_CHCTL_XFERSIZE_S) | (ui32IsPeriphSG ? UDMA_CHCTL_XFERMODE_PER_SG : UDMA_CHCTL_XFERMODE_MEM_SG));
 
     //
     // Scatter-gather operations can leave the alt bit set.  So if doing
@@ -941,8 +931,7 @@ uint32_t uDMAChannelSizeGet(uint32_t ui32ChannelStructIndex)
     // Get the current control word value and mask off all but the size field
     // and the mode field.
     //
-    ui32Control =
-        (psControlTable[ui32ChannelStructIndex].ui32Control & (UDMA_CHCTL_XFERSIZE_M | UDMA_CHCTL_XFERMODE_M));
+    ui32Control = (psControlTable[ui32ChannelStructIndex].ui32Control & (UDMA_CHCTL_XFERSIZE_M | UDMA_CHCTL_XFERMODE_M));
 
     //
     // If the size field and mode field are 0 then the transfer is finished

@@ -46,14 +46,14 @@
 //
 //*****************************************************************************
 #define COMP_O_ACMIS \
-    0x00000000                    // Analog Comparator Masked
-                                  // Interrupt Status
+    0x00000000 // Analog Comparator Masked
+               // Interrupt Status
 #define COMP_O_ACRIS \
-    0x00000004                    // Analog Comparator Raw Interrupt
-                                  // Status
+    0x00000004 // Analog Comparator Raw Interrupt
+               // Status
 #define COMP_O_ACINTEN \
-    0x00000008                    // Analog Comparator Interrupt
-                                  // Enable
+    0x00000008 // Analog Comparator Interrupt
+               // Enable
 #define COMP_O_ACREFCTL \
     0x00000010                    // Analog Comparator Reference
                                   // Voltage Control
@@ -64,8 +64,8 @@
 #define COMP_O_ACSTAT2 0x00000060 // Analog Comparator Status 2
 #define COMP_O_ACCTL2  0x00000064 // Analog Comparator Control 2
 #define COMP_O_PP \
-    0x00000FC0                    // Analog Comparator Peripheral
-                                  // Properties
+    0x00000FC0 // Analog Comparator Peripheral
+               // Properties
 
 //*****************************************************************************
 //
@@ -87,18 +87,18 @@
 // The following are defines for the bit fields in the COMP_O_ACRIS register.
 //
 //*****************************************************************************
-#define COMP_ACRIS_IN2 0x00000004 // Comparator 2 Interrupt Status
-#define COMP_ACRIS_IN1 0x00000002 // Comparator 1 Interrupt Status
-#define COMP_ACRIS_IN0 0x00000001 // Comparator 0 Interrupt Status
+#define COMP_ACRIS_IN2         0x00000004 // Comparator 2 Interrupt Status
+#define COMP_ACRIS_IN1         0x00000002 // Comparator 1 Interrupt Status
+#define COMP_ACRIS_IN0         0x00000001 // Comparator 0 Interrupt Status
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the COMP_O_ACINTEN register.
 //
 //*****************************************************************************
-#define COMP_ACINTEN_IN2 0x00000004 // Comparator 2 Interrupt Enable
-#define COMP_ACINTEN_IN1 0x00000002 // Comparator 1 Interrupt Enable
-#define COMP_ACINTEN_IN0 0x00000001 // Comparator 0 Interrupt Enable
+#define COMP_ACINTEN_IN2       0x00000004 // Comparator 2 Interrupt Enable
+#define COMP_ACINTEN_IN1       0x00000002 // Comparator 1 Interrupt Enable
+#define COMP_ACINTEN_IN0       0x00000001 // Comparator 0 Interrupt Enable
 
 //*****************************************************************************
 //
@@ -106,17 +106,17 @@
 // register.
 //
 //*****************************************************************************
-#define COMP_ACREFCTL_EN     0x00000200 // Resistor Ladder Enable
-#define COMP_ACREFCTL_RNG    0x00000100 // Resistor Ladder Range
-#define COMP_ACREFCTL_VREF_M 0x0000000F // Resistor Ladder Voltage Ref
-#define COMP_ACREFCTL_VREF_S 0
+#define COMP_ACREFCTL_EN       0x00000200 // Resistor Ladder Enable
+#define COMP_ACREFCTL_RNG      0x00000100 // Resistor Ladder Range
+#define COMP_ACREFCTL_VREF_M   0x0000000F // Resistor Ladder Voltage Ref
+#define COMP_ACREFCTL_VREF_S   0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the COMP_O_ACSTAT0 register.
 //
 //*****************************************************************************
-#define COMP_ACSTAT0_OVAL 0x00000002 // Comparator Output Value
+#define COMP_ACSTAT0_OVAL      0x00000002 // Comparator Output Value
 
 //*****************************************************************************
 //
@@ -147,7 +147,7 @@
 // The following are defines for the bit fields in the COMP_O_ACSTAT1 register.
 //
 //*****************************************************************************
-#define COMP_ACSTAT1_OVAL 0x00000002 // Comparator Output Value
+#define COMP_ACSTAT1_OVAL      0x00000002 // Comparator Output Value
 
 //*****************************************************************************
 //
@@ -178,7 +178,7 @@
 // The following are defines for the bit fields in the COMP_O_ACSTAT2 register.
 //
 //*****************************************************************************
-#define COMP_ACSTAT2_OVAL 0x00000002 // Comparator Output Value
+#define COMP_ACSTAT2_OVAL      0x00000002 // Comparator Output Value
 
 //*****************************************************************************
 //
@@ -209,11 +209,11 @@
 // The following are defines for the bit fields in the COMP_O_PP register.
 //
 //*****************************************************************************
-#define COMP_PP_C2O  0x00040000 // Comparator Output 2 Present
-#define COMP_PP_C1O  0x00020000 // Comparator Output 1 Present
-#define COMP_PP_C0O  0x00010000 // Comparator Output 0 Present
-#define COMP_PP_CMP2 0x00000004 // Comparator 2 Present
-#define COMP_PP_CMP1 0x00000002 // Comparator 1 Present
-#define COMP_PP_CMP0 0x00000001 // Comparator 0 Present
+#define COMP_PP_C2O            0x00040000 // Comparator Output 2 Present
+#define COMP_PP_C1O            0x00020000 // Comparator Output 1 Present
+#define COMP_PP_C0O            0x00010000 // Comparator Output 0 Present
+#define COMP_PP_CMP2           0x00000004 // Comparator 2 Present
+#define COMP_PP_CMP1           0x00000002 // Comparator 1 Present
+#define COMP_PP_CMP0           0x00000001 // Comparator 0 Present
 
-#endif                          // __HW_COMP_H__
+#endif // __HW_COMP_H__

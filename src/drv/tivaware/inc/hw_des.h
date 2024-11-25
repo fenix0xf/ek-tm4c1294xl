@@ -45,28 +45,28 @@
 // The following are defines for the DES register offsets.
 //
 //*****************************************************************************
-#define DES_O_KEY3_L    0x00000000 // DES Key 3 LSW for 192-Bit Key
-#define DES_O_KEY3_H    0x00000004 // DES Key 3 MSW for 192-Bit Key
-#define DES_O_KEY2_L    0x00000008 // DES Key 2 LSW for 128-Bit Key
-#define DES_O_KEY2_H    0x0000000C // DES Key 2 MSW for 128-Bit Key
-#define DES_O_KEY1_L    0x00000010 // DES Key 1 LSW for 64-Bit Key
-#define DES_O_KEY1_H    0x00000014 // DES Key 1 MSW for 64-Bit Key
-#define DES_O_IV_L      0x00000018 // DES Initialization Vector
-#define DES_O_IV_H      0x0000001C // DES Initialization Vector
-#define DES_O_CTRL      0x00000020 // DES Control
-#define DES_O_LENGTH    0x00000024 // DES Cryptographic Data Length
-#define DES_O_DATA_L    0x00000028 // DES LSW Data RW
-#define DES_O_DATA_H    0x0000002C // DES MSW Data RW
-#define DES_O_REVISION  0x00000030 // DES Revision Number
-#define DES_O_SYSCONFIG 0x00000034 // DES System Configuration
-#define DES_O_SYSSTATUS 0x00000038 // DES System Status
-#define DES_O_IRQSTATUS 0x0000003C // DES Interrupt Status
-#define DES_O_IRQENABLE 0x00000040 // DES Interrupt Enable
-#define DES_O_DIRTYBITS 0x00000044 // DES Dirty Bits
-#define DES_O_DMAIM     0xFFFF8030 // DES DMA Interrupt Mask
-#define DES_O_DMARIS    0xFFFF8034 // DES DMA Raw Interrupt Status
-#define DES_O_DMAMIS    0xFFFF8038 // DES DMA Masked Interrupt Status
-#define DES_O_DMAIC     0xFFFF803C // DES DMA Interrupt Clear
+#define DES_O_KEY3_L     0x00000000 // DES Key 3 LSW for 192-Bit Key
+#define DES_O_KEY3_H     0x00000004 // DES Key 3 MSW for 192-Bit Key
+#define DES_O_KEY2_L     0x00000008 // DES Key 2 LSW for 128-Bit Key
+#define DES_O_KEY2_H     0x0000000C // DES Key 2 MSW for 128-Bit Key
+#define DES_O_KEY1_L     0x00000010 // DES Key 1 LSW for 64-Bit Key
+#define DES_O_KEY1_H     0x00000014 // DES Key 1 MSW for 64-Bit Key
+#define DES_O_IV_L       0x00000018 // DES Initialization Vector
+#define DES_O_IV_H       0x0000001C // DES Initialization Vector
+#define DES_O_CTRL       0x00000020 // DES Control
+#define DES_O_LENGTH     0x00000024 // DES Cryptographic Data Length
+#define DES_O_DATA_L     0x00000028 // DES LSW Data RW
+#define DES_O_DATA_H     0x0000002C // DES MSW Data RW
+#define DES_O_REVISION   0x00000030 // DES Revision Number
+#define DES_O_SYSCONFIG  0x00000034 // DES System Configuration
+#define DES_O_SYSSTATUS  0x00000038 // DES System Status
+#define DES_O_IRQSTATUS  0x0000003C // DES Interrupt Status
+#define DES_O_IRQENABLE  0x00000040 // DES Interrupt Enable
+#define DES_O_DIRTYBITS  0x00000044 // DES Dirty Bits
+#define DES_O_DMAIM      0xFFFF8030 // DES DMA Interrupt Mask
+#define DES_O_DMARIS     0xFFFF8034 // DES DMA Raw Interrupt Status
+#define DES_O_DMAMIS     0xFFFF8038 // DES DMA Masked Interrupt Status
+#define DES_O_DMAIC      0xFFFF803C // DES DMA Interrupt Clear
 
 //*****************************************************************************
 //
@@ -194,15 +194,15 @@
 #define DES_DATA_H_M \
     0xFFFFFFFF // Data for encryption/decryption,
                // MSW
-#define DES_DATA_H_S 0
+#define DES_DATA_H_S                        0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the DES_O_REVISION register.
 //
 //*****************************************************************************
-#define DES_REVISION_M 0xFFFFFFFF // Revision number
-#define DES_REVISION_S 0
+#define DES_REVISION_M                      0xFFFFFFFF // Revision number
+#define DES_REVISION_S                      0
 
 //*****************************************************************************
 //
@@ -223,7 +223,7 @@
 // register.
 //
 //*****************************************************************************
-#define DES_SYSSTATUS_RESETDONE 0x00000001 // Reset Done
+#define DES_SYSSTATUS_RESETDONE             0x00000001 // Reset Done
 
 //*****************************************************************************
 //
@@ -283,8 +283,8 @@
 #define DES_DMAIM_DOUT 0x00000004 // Data Out DMA Done Interrupt Mask
 #define DES_DMAIM_DIN  0x00000002 // Data In DMA Done Interrupt Mask
 #define DES_DMAIM_CIN \
-    0x00000001                    // Context In DMA Done Interrupt
-                                  // Mask
+    0x00000001 // Context In DMA Done Interrupt
+               // Mask
 
 //*****************************************************************************
 //
@@ -326,7 +326,7 @@
                                  // Clear
 #define DES_DMAIC_DIN 0x00000002 // Data In DMA Done Interrupt Clear
 #define DES_DMAIC_CIN \
-    0x00000001                   // Context In DMA Done Raw
-                                 // Interrupt Status
+    0x00000001 // Context In DMA Done Raw
+               // Interrupt Status
 
-#endif                           // __HW_DES_H__
+#endif // __HW_DES_H__

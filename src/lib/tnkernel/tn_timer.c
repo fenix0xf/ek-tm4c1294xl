@@ -74,7 +74,7 @@ static void tn_user_timer_start(TN_TIMER* tmr);
 //----------------------------------------------------------------------------
 //   Structure's field tmr->id_trigger have to be set to 0
 //----------------------------------------------------------------------------
-int tn_timer_create(TN_TIMER* tmr, timer_func_handler timer_func, void* param)
+int         tn_timer_create(TN_TIMER* tmr, timer_func_handler timer_func, void* param)
 {
     int rc = TERR_NO_ERR;
 
@@ -321,9 +321,9 @@ bool tn_user_timers_tick_proc(void)
     CDLL_QUEUE* p_cur_timer_list;
     CDLL_QUEUE  periodic_que;
 
-    TN_TIMER* tmr;
-    int       tick_list_index;
-    int       rc = false;
+    TN_TIMER*   tmr;
+    int         tick_list_index;
+    int         rc = false;
 
     queue_reset(&periodic_que);
 

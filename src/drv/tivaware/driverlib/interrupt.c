@@ -75,11 +75,10 @@ static const uint32_t g_pui32Priority[] = {NVIC_APINT_PRIGROUP_0_8,
 //
 //*****************************************************************************
 static const uint32_t g_pui32Regs[] = {
-    0,          NVIC_SYS_PRI1, NVIC_SYS_PRI2, NVIC_SYS_PRI3, NVIC_PRI0,  NVIC_PRI1,  NVIC_PRI2,  NVIC_PRI3,
-    NVIC_PRI4,  NVIC_PRI5,     NVIC_PRI6,     NVIC_PRI7,     NVIC_PRI8,  NVIC_PRI9,  NVIC_PRI10, NVIC_PRI11,
-    NVIC_PRI12, NVIC_PRI13,    NVIC_PRI14,    NVIC_PRI15,    NVIC_PRI16, NVIC_PRI17, NVIC_PRI18, NVIC_PRI19,
-    NVIC_PRI20, NVIC_PRI21,    NVIC_PRI22,    NVIC_PRI23,    NVIC_PRI24, NVIC_PRI25, NVIC_PRI26, NVIC_PRI27,
-    NVIC_PRI28, NVIC_PRI29,    NVIC_PRI30,    NVIC_PRI31,    NVIC_PRI32, NVIC_PRI33, NVIC_PRI34};
+    0,          NVIC_SYS_PRI1, NVIC_SYS_PRI2, NVIC_SYS_PRI3, NVIC_PRI0,  NVIC_PRI1,  NVIC_PRI2,  NVIC_PRI3,  NVIC_PRI4,  NVIC_PRI5,
+    NVIC_PRI6,  NVIC_PRI7,     NVIC_PRI8,     NVIC_PRI9,     NVIC_PRI10, NVIC_PRI11, NVIC_PRI12, NVIC_PRI13, NVIC_PRI14, NVIC_PRI15,
+    NVIC_PRI16, NVIC_PRI17,    NVIC_PRI18,    NVIC_PRI19,    NVIC_PRI20, NVIC_PRI21, NVIC_PRI22, NVIC_PRI23, NVIC_PRI24, NVIC_PRI25,
+    NVIC_PRI26, NVIC_PRI27,    NVIC_PRI28,    NVIC_PRI29,    NVIC_PRI30, NVIC_PRI31, NVIC_PRI32, NVIC_PRI33, NVIC_PRI34};
 
 //*****************************************************************************
 //
@@ -129,12 +128,14 @@ static const uint32_t g_pui32UnpendRegs[] = {NVIC_UNPEND0, NVIC_UNPEND1, NVIC_UN
 //! \return None.
 //
 //*****************************************************************************
-static void _IntDefaultHandler(void)
+static void           _IntDefaultHandler(void)
 {
     //
     // Go into an infinite loop.
     //
-    while (1) {}
+    while (1)
+    {
+    }
 }
 
 //*****************************************************************************
@@ -157,8 +158,7 @@ static void _IntDefaultHandler(void)
 #pragma data_alignment = 1024
 static __no_init void (*g_pfnRAMVectors[NUM_INTERRUPTS])(void) @ "VTABLE";
 #elif defined(sourcerygxx)
-static __attribute__((section(".cs3.region-head.ram"))) void (*g_pfnRAMVectors[NUM_INTERRUPTS])(void)
-    __attribute__((aligned(1024)));
+static __attribute__((section(".cs3.region-head.ram"))) void (*g_pfnRAMVectors[NUM_INTERRUPTS])(void) __attribute__((aligned(1024)));
 #elif defined(ccs) || defined(DOXYGEN)
 #pragma DATA_ALIGN(g_pfnRAMVectors, 1024)
 #pragma DATA_SECTION(g_pfnRAMVectors, ".vtable")

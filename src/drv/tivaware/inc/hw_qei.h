@@ -45,17 +45,17 @@
 // The following are defines for the QEI register offsets.
 //
 //*****************************************************************************
-#define QEI_O_CTL    0x00000000 // QEI Control
-#define QEI_O_STAT   0x00000004 // QEI Status
-#define QEI_O_POS    0x00000008 // QEI Position
-#define QEI_O_MAXPOS 0x0000000C // QEI Maximum Position
-#define QEI_O_LOAD   0x00000010 // QEI Timer Load
-#define QEI_O_TIME   0x00000014 // QEI Timer
-#define QEI_O_COUNT  0x00000018 // QEI Velocity Counter
-#define QEI_O_SPEED  0x0000001C // QEI Velocity
-#define QEI_O_INTEN  0x00000020 // QEI Interrupt Enable
-#define QEI_O_RIS    0x00000024 // QEI Raw Interrupt Status
-#define QEI_O_ISC    0x00000028 // QEI Interrupt Status and Clear
+#define QEI_O_CTL          0x00000000 // QEI Control
+#define QEI_O_STAT         0x00000004 // QEI Status
+#define QEI_O_POS          0x00000008 // QEI Position
+#define QEI_O_MAXPOS       0x0000000C // QEI Maximum Position
+#define QEI_O_LOAD         0x00000010 // QEI Timer Load
+#define QEI_O_TIME         0x00000014 // QEI Timer
+#define QEI_O_COUNT        0x00000018 // QEI Velocity Counter
+#define QEI_O_SPEED        0x0000001C // QEI Velocity
+#define QEI_O_INTEN        0x00000020 // QEI Interrupt Enable
+#define QEI_O_RIS          0x00000024 // QEI Raw Interrupt Status
+#define QEI_O_ISC          0x00000028 // QEI Interrupt Status and Clear
 
 //*****************************************************************************
 //
@@ -111,39 +111,39 @@
 #define QEI_MAXPOS_M \
     0xFFFFFFFF // Maximum Position Integrator
                // Value
-#define QEI_MAXPOS_S 0
+#define QEI_MAXPOS_S    0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the QEI_O_LOAD register.
 //
 //*****************************************************************************
-#define QEI_LOAD_M 0xFFFFFFFF // Velocity Timer Load Value
-#define QEI_LOAD_S 0
+#define QEI_LOAD_M      0xFFFFFFFF // Velocity Timer Load Value
+#define QEI_LOAD_S      0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the QEI_O_TIME register.
 //
 //*****************************************************************************
-#define QEI_TIME_M 0xFFFFFFFF // Velocity Timer Current Value
-#define QEI_TIME_S 0
+#define QEI_TIME_M      0xFFFFFFFF // Velocity Timer Current Value
+#define QEI_TIME_S      0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the QEI_O_COUNT register.
 //
 //*****************************************************************************
-#define QEI_COUNT_M 0xFFFFFFFF // Velocity Pulse Count
-#define QEI_COUNT_S 0
+#define QEI_COUNT_M     0xFFFFFFFF // Velocity Pulse Count
+#define QEI_COUNT_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the QEI_O_SPEED register.
 //
 //*****************************************************************************
-#define QEI_SPEED_M 0xFFFFFFFF // Velocity
-#define QEI_SPEED_S 0
+#define QEI_SPEED_M     0xFFFFFFFF // Velocity
+#define QEI_SPEED_S     0
 
 //*****************************************************************************
 //
@@ -156,8 +156,8 @@
                                    // Enable
 #define QEI_INTEN_TIMER 0x00000002 // Timer Expires Interrupt Enable
 #define QEI_INTEN_INDEX \
-    0x00000001                     // Index Pulse Detected Interrupt
-                                   // Enable
+    0x00000001 // Index Pulse Detected Interrupt
+               // Enable
 
 //*****************************************************************************
 //
@@ -179,4 +179,4 @@
 #define QEI_ISC_TIMER 0x00000002 // Velocity Timer Expired Interrupt
 #define QEI_ISC_INDEX 0x00000001 // Index Pulse Interrupt
 
-#endif                           // __HW_QEI_H__
+#endif // __HW_QEI_H__

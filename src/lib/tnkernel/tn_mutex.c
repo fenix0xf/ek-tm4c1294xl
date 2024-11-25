@@ -462,7 +462,7 @@ void do_set_mutex_holder_max_priority(TN_TCB* task)
         if (is_queue_empty(&(mutex->wait_queue)) == false)
         {
             //-- first in 'wait_queue' - highest priority
-            que       = mutex->wait_queue.next;             // get first, not remove
+            que       = mutex->wait_queue.next; // get first, not remove
             wait_task = get_task_by_tsk_queue(que);
             if (wait_task != NULL && mutex->holder != NULL) // Sanity
             {
@@ -488,7 +488,7 @@ void do_set_mutex_holder_max_priority(TN_TCB* task)
                 mutex->holder->priority = priority;
             }
         }
-        else                           // No more tasks wait a lock - restore the holder original priority
+        else // No more tasks wait a lock - restore the holder original priority
         {
             if (mutex->holder != NULL) // Sanity
             {

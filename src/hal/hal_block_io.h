@@ -39,11 +39,11 @@ struct hal_block_io
     size_t rd_align; /// Block device read and write align.
     size_t pg_size;  /// Block device align for erase() function (sector size). pg_size >= rd_align.
 
-    void* pg_buf;    /// Buffer for unaligned read/write operations. Size of pg_buf == [pg_size].
+    void*  pg_buf; /// Buffer for unaligned read/write operations. Size of pg_buf == [pg_size].
 
     bool (*read)(uintptr_t addr, void* buf, size_t len);           /// Block device aligned read function.
     bool (*pg_write)(uintptr_t addr, const void* buf, size_t len); /// Block device aligned write function.
-    bool (*pg_erase)(uintptr_t addr); /// Block device aligned erase function with [ealign] block size.
+    bool (*pg_erase)(uintptr_t addr);                              /// Block device aligned erase function with [ealign] block size.
 };
 
 bool hal_block_io_is_correct(const struct hal_block_io* io);

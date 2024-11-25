@@ -89,8 +89,7 @@ static const uint32_t     g_ppui32UARTIntMapSnowflake[][2] = {
     {UART6_BASE, INT_UART6_TM4C129},
     {UART7_BASE, INT_UART7_TM4C129},
 };
-static const uint_fast8_t g_ui8UARTIntMapRowsSnowflake =
-    sizeof(g_ppui32UARTIntMapSnowflake) / sizeof(g_ppui32UARTIntMapSnowflake[0]);
+static const uint_fast8_t g_ui8UARTIntMapRowsSnowflake = sizeof(g_ppui32UARTIntMapSnowflake) / sizeof(g_ppui32UARTIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -108,9 +107,8 @@ static const uint_fast8_t g_ui8UARTIntMapRowsSnowflake =
 #if DEBUG
 static bool _UARTBaseValid(uint32_t ui32Base)
 {
-    return ((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||
-            (ui32Base == UART3_BASE) || (ui32Base == UART4_BASE) || (ui32Base == UART5_BASE) ||
-            (ui32Base == UART6_BASE) || (ui32Base == UART7_BASE));
+    return ((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) || (ui32Base == UART3_BASE) ||
+            (ui32Base == UART4_BASE) || (ui32Base == UART5_BASE) || (ui32Base == UART6_BASE) || (ui32Base == UART7_BASE));
 }
 #endif
 
@@ -191,15 +189,13 @@ void UARTParityModeSet(uint32_t ui32Base, uint32_t ui32Parity)
     // Check the arguments.
     //
     ASSERT(_UARTBaseValid(ui32Base));
-    ASSERT((ui32Parity == UART_CONFIG_PAR_NONE) || (ui32Parity == UART_CONFIG_PAR_EVEN) ||
-           (ui32Parity == UART_CONFIG_PAR_ODD) || (ui32Parity == UART_CONFIG_PAR_ONE) ||
-           (ui32Parity == UART_CONFIG_PAR_ZERO));
+    ASSERT((ui32Parity == UART_CONFIG_PAR_NONE) || (ui32Parity == UART_CONFIG_PAR_EVEN) || (ui32Parity == UART_CONFIG_PAR_ODD) ||
+           (ui32Parity == UART_CONFIG_PAR_ONE) || (ui32Parity == UART_CONFIG_PAR_ZERO));
 
     //
     // Set the parity mode.
     //
-    HWREG(ui32Base + UART_O_LCRH) =
-        ((HWREG(ui32Base + UART_O_LCRH) & ~(UART_LCRH_SPS | UART_LCRH_EPS | UART_LCRH_PEN)) | ui32Parity);
+    HWREG(ui32Base + UART_O_LCRH) = ((HWREG(ui32Base + UART_O_LCRH) & ~(UART_LCRH_SPS | UART_LCRH_EPS | UART_LCRH_PEN)) | ui32Parity);
 }
 
 //*****************************************************************************
@@ -476,8 +472,7 @@ void UARTConfigGetExpClk(uint32_t ui32Base, uint32_t ui32UARTClk, uint32_t* pui3
     //
     // Get the parity, data length, and number of stop bits.
     //
-    *pui32Config = (HWREG(ui32Base + UART_O_LCRH) &
-                    (UART_LCRH_SPS | UART_LCRH_WLEN_M | UART_LCRH_STP2 | UART_LCRH_EPS | UART_LCRH_PEN));
+    *pui32Config = (HWREG(ui32Base + UART_O_LCRH) & (UART_LCRH_SPS | UART_LCRH_WLEN_M | UART_LCRH_STP2 | UART_LCRH_EPS | UART_LCRH_PEN));
 }
 
 //*****************************************************************************
@@ -531,7 +526,9 @@ void UARTDisable(uint32_t ui32Base)
     //
     // Wait for end of TX.
     //
-    while (HWREG(ui32Base + UART_O_FR) & UART_FR_BUSY) {}
+    while (HWREG(ui32Base + UART_O_FR) & UART_FR_BUSY)
+    {
+    }
 
     //
     // Disable the FIFO.
@@ -772,8 +769,8 @@ void UARTModemControlSet(uint32_t ui32Base, uint32_t ui32Control)
     defined(TARGET_IS_TM4C123_RB0) || defined(TARGET_IS_TM4C123_RB1)
     ASSERT(ui32Base == UART1_BASE);
 #else
-    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||
-           (ui32Base == UART3_BASE) || (ui32Base == UART4_BASE));
+    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) || (ui32Base == UART3_BASE) ||
+           (ui32Base == UART4_BASE));
 #endif
     ASSERT((ui32Control & ~(UART_OUTPUT_RTS | UART_OUTPUT_DTR)) == 0);
 
@@ -819,8 +816,8 @@ void UARTModemControlClear(uint32_t ui32Base, uint32_t ui32Control)
     defined(TARGET_IS_TM4C123_RB0) || defined(TARGET_IS_TM4C123_RB1)
     ASSERT(ui32Base == UART1_BASE);
 #else
-    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||
-           (ui32Base == UART3_BASE) || (ui32Base == UART4_BASE));
+    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) || (ui32Base == UART3_BASE) ||
+           (ui32Base == UART4_BASE));
 #endif
     ASSERT((ui32Control & ~(UART_OUTPUT_RTS | UART_OUTPUT_DTR)) == 0);
 
@@ -860,8 +857,8 @@ uint32_t UARTModemControlGet(uint32_t ui32Base)
     defined(TARGET_IS_TM4C123_RB0) || defined(TARGET_IS_TM4C123_RB1)
     ASSERT(ui32Base == UART1_BASE);
 #else
-    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||
-           (ui32Base == UART3_BASE) || (ui32Base == UART4_BASE));
+    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) || (ui32Base == UART3_BASE) ||
+           (ui32Base == UART4_BASE));
 #endif
 
     return (HWREG(ui32Base + UART_O_CTL) & (UART_OUTPUT_RTS | UART_OUTPUT_DTR));
@@ -895,8 +892,8 @@ uint32_t UARTModemStatusGet(uint32_t ui32Base)
     defined(TARGET_IS_TM4C123_RB0) || defined(TARGET_IS_TM4C123_RB1)
     ASSERT(ui32Base == UART1_BASE);
 #else
-    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) ||
-           (ui32Base == UART3_BASE) || (ui32Base == UART4_BASE));
+    ASSERT((ui32Base == UART0_BASE) || (ui32Base == UART1_BASE) || (ui32Base == UART2_BASE) || (ui32Base == UART3_BASE) ||
+           (ui32Base == UART4_BASE));
 #endif
 
     return (HWREG(ui32Base + UART_O_FR) & (UART_INPUT_RI | UART_INPUT_DCD | UART_INPUT_CTS | UART_INPUT_DSR));
@@ -938,8 +935,7 @@ void UARTFlowControlSet(uint32_t ui32Base, uint32_t ui32Mode)
     //
     // Set the flow control mode as requested.
     //
-    HWREG(ui32Base + UART_O_CTL) =
-        ((HWREG(ui32Base + UART_O_CTL) & ~(UART_FLOWCONTROL_TX | UART_FLOWCONTROL_RX)) | ui32Mode);
+    HWREG(ui32Base + UART_O_CTL) = ((HWREG(ui32Base + UART_O_CTL) & ~(UART_FLOWCONTROL_TX | UART_FLOWCONTROL_RX)) | ui32Mode);
 }
 
 //*****************************************************************************
@@ -1007,8 +1003,7 @@ void UARTTxIntModeSet(uint32_t ui32Base, uint32_t ui32Mode)
     //
     // Set or clear the EOT bit of the UART control register as appropriate.
     //
-    HWREG(ui32Base + UART_O_CTL) =
-        ((HWREG(ui32Base + UART_O_CTL) & ~(UART_TXINT_MODE_EOT | UART_TXINT_MODE_FIFO)) | ui32Mode);
+    HWREG(ui32Base + UART_O_CTL) = ((HWREG(ui32Base + UART_O_CTL) & ~(UART_TXINT_MODE_EOT | UART_TXINT_MODE_FIFO)) | ui32Mode);
 }
 
 //*****************************************************************************
@@ -1162,7 +1157,9 @@ int32_t UARTCharGet(uint32_t ui32Base)
     //
     // Wait until a char is available.
     //
-    while (HWREG(ui32Base + UART_O_FR) & UART_FR_RXFE) {}
+    while (HWREG(ui32Base + UART_O_FR) & UART_FR_RXFE)
+    {
+    }
 
     //
     // Now get the char.
@@ -1242,7 +1239,9 @@ void UARTCharPut(uint32_t ui32Base, unsigned char ucData)
     //
     // Wait until space is available.
     //
-    while (HWREG(ui32Base + UART_O_FR) & UART_FR_TXFF) {}
+    while (HWREG(ui32Base + UART_O_FR) & UART_FR_TXFF)
+    {
+    }
 
     //
     // Send the char.
@@ -1275,8 +1274,8 @@ void UARTBreakCtl(uint32_t ui32Base, bool bBreakState)
     //
     // Set the break condition as requested.
     //
-    HWREG(ui32Base + UART_O_LCRH) = (bBreakState ? (HWREG(ui32Base + UART_O_LCRH) | UART_LCRH_BRK)
-                                                 : (HWREG(ui32Base + UART_O_LCRH) & ~(UART_LCRH_BRK)));
+    HWREG(ui32Base + UART_O_LCRH) =
+        (bBreakState ? (HWREG(ui32Base + UART_O_LCRH) | UART_LCRH_BRK) : (HWREG(ui32Base + UART_O_LCRH) & ~(UART_LCRH_BRK)));
 }
 
 //*****************************************************************************
@@ -1862,7 +1861,9 @@ void UART9BitAddrSend(uint32_t ui32Base, uint8_t ui8Addr)
     //
     // Wait until the FIFO is empty and the UART is not busy.
     //
-    while ((HWREG(ui32Base + UART_O_FR) & (UART_FR_TXFE | UART_FR_BUSY)) != UART_FR_TXFE) {}
+    while ((HWREG(ui32Base + UART_O_FR) & (UART_FR_TXFE | UART_FR_BUSY)) != UART_FR_TXFE)
+    {
+    }
 
     //
     // Force the address/data bit to 1 to indicate this is an address byte.
@@ -1878,7 +1879,9 @@ void UART9BitAddrSend(uint32_t ui32Base, uint8_t ui8Addr)
     //
     // Wait until the address has been sent.
     //
-    while ((HWREG(ui32Base + UART_O_FR) & (UART_FR_TXFE | UART_FR_BUSY)) != UART_FR_TXFE) {}
+    while ((HWREG(ui32Base + UART_O_FR) & (UART_FR_TXFE | UART_FR_BUSY)) != UART_FR_TXFE)
+    {
+    }
 
     //
     // Restore the address/data setting.

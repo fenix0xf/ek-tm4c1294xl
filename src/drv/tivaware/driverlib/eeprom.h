@@ -69,7 +69,7 @@ extern "C"
 //! no previous write operations were interrupted by a reset event and that the
 //! EEPROM peripheral is ready for use.
 //
-#define EEPROM_INIT_OK 0
+#define EEPROM_INIT_OK                 0
 
 //
 //! This value may be returned from a call to EEPROMInit().  It indicates that
@@ -80,7 +80,7 @@ extern "C"
 //! the part is unstable, retrying once the voltage has stabilized may clear
 //! the error.
 //
-#define EEPROM_INIT_ERROR 2
+#define EEPROM_INIT_ERROR              2
 
 //*****************************************************************************
 //
@@ -93,7 +93,7 @@ extern "C"
 //! This return code bit indicates that an attempt was made to read from
 //! the EEPROM while a write operation was in progress.
 //
-#define EEPROM_RC_WRBUSY 0x00000020
+#define EEPROM_RC_WRBUSY               0x00000020
 
 //
 //! This return code bit indicates that an attempt was made to write a
@@ -102,7 +102,7 @@ extern "C"
 //! to prohibit writes or an attempt to write a password when one is already
 //! written.
 //
-#define EEPROM_RC_NOPERM 0x00000010
+#define EEPROM_RC_NOPERM               0x00000010
 
 //
 //! This return code bit indicates that the EEPROM programming state machine
@@ -110,21 +110,21 @@ extern "C"
 //! a newly written value.  It is provided as a status indicator and does not
 //! indicate an error.
 //
-#define EEPROM_RC_WKCOPY 0x00000008
+#define EEPROM_RC_WKCOPY               0x00000008
 
 //
 //! This return code bit indicates that the EEPROM programming state machine
 //! is currently erasing the internal copy buffer.  It is provided as a
 //! status indicator and does not indicate an error.
 //
-#define EEPROM_RC_WKERASE 0x00000004
+#define EEPROM_RC_WKERASE              0x00000004
 
 //
 //! This return code bit indicates that the EEPROM programming state machine
 //! is currently working.  No new write operations should be attempted until
 //! this bit is clear.
 //
-#define EEPROM_RC_WORKING 0x00000001
+#define EEPROM_RC_WORKING              0x00000001
 
 //*****************************************************************************
 //
@@ -139,7 +139,7 @@ extern "C"
 //! restricts EEPROM access to threads running in supervisor mode and prevents
 //! access to an EEPROM block when the CPU is in user mode.
 //
-#define EEPROM_PROT_SUPERVISOR_ONLY 0x00000008
+#define EEPROM_PROT_SUPERVISOR_ONLY    0x00000008
 
 //
 //! This value may be passed to EEPROMBlockProtectSet() or returned from
@@ -148,14 +148,14 @@ extern "C"
 //! the block is unlocked, and read-only access when a password is set but
 //! the block is locked.
 //
-#define EEPROM_PROT_RW_LRO_URW 0x00000000
+#define EEPROM_PROT_RW_LRO_URW         0x00000000
 
 //
 //! This value may be passed to EEPROMBlockProtectSet() or returned from
 //! EEPROMBlockProtectGet().  It indicates that the block should offer neither
 //! read nor write access unless it is protected by a password and unlocked.
 //
-#define EEPROM_PROT_NA_LNA_URW 0x00000001
+#define EEPROM_PROT_NA_LNA_URW         0x00000001
 
 //
 //! This value may be passed to EEPROMBlockProtectSet() or returned from
@@ -164,7 +164,7 @@ extern "C"
 //! block is unlocked.  When a password is set and the block is locked, neither
 //! read nor write access is permitted.
 //
-#define EEPROM_PROT_RO_LNA_URO 0x00000002
+#define EEPROM_PROT_RO_LNA_URO         0x00000002
 
 //*****************************************************************************
 //
@@ -173,7 +173,7 @@ extern "C"
 //! signaled.
 //
 //*****************************************************************************
-#define EEPROM_INT_PROGRAM 0x00000004
+#define EEPROM_INT_PROGRAM             0x00000004
 
 //*****************************************************************************
 //
@@ -192,7 +192,7 @@ extern "C"
 //! address.
 //
 //*****************************************************************************
-#define EEPROMBlockFromAddr(ui32Addr) ((ui32Addr) >> 6)
+#define EEPROMBlockFromAddr(ui32Addr)  ((ui32Addr) >> 6)
 
 //*****************************************************************************
 //
@@ -259,7 +259,7 @@ extern void     EEPROMIntClear(uint32_t ui32IntFlags);
 //
 // This return code is not available from any Tiva part and has been removed.
 //
-#define EEPROM_RC_INVPL 0x00000100
+#define EEPROM_RC_INVPL   0x00000100
 
 #endif
 

@@ -45,13 +45,13 @@
 // The following are defines for the FLASH register offsets.
 //
 //*****************************************************************************
-#define FLASH_FMA 0x400FD000      // Flash Memory Address
-#define FLASH_FMD 0x400FD004      // Flash Memory Data
-#define FLASH_FMC 0x400FD008      // Flash Memory Control
+#define FLASH_FMA 0x400FD000 // Flash Memory Address
+#define FLASH_FMD 0x400FD004 // Flash Memory Data
+#define FLASH_FMC 0x400FD008 // Flash Memory Control
 #define FLASH_FCRIS \
-    0x400FD00C                    // Flash Controller Raw Interrupt
-                                  // Status
-#define FLASH_FCIM 0x400FD010     // Flash Controller Interrupt Mask
+    0x400FD00C                // Flash Controller Raw Interrupt
+                              // Status
+#define FLASH_FCIM 0x400FD010 // Flash Controller Interrupt Mask
 #define FLASH_FCMISC \
     0x400FD014                    // Flash Controller Masked
                                   // Interrupt Status and Clear
@@ -74,101 +74,101 @@
 #define FLASH_USERREG2 0x400FE1E8 // User Register 2
 #define FLASH_USERREG3 0x400FE1EC // User Register 3
 #define FLASH_FMPRE0 \
-    0x400FE200                    // Flash Memory Protection Read
-                                  // Enable 0
+    0x400FE200 // Flash Memory Protection Read
+               // Enable 0
 #define FLASH_FMPRE1 \
-    0x400FE204                    // Flash Memory Protection Read
-                                  // Enable 1
+    0x400FE204 // Flash Memory Protection Read
+               // Enable 1
 #define FLASH_FMPRE2 \
-    0x400FE208                    // Flash Memory Protection Read
-                                  // Enable 2
+    0x400FE208 // Flash Memory Protection Read
+               // Enable 2
 #define FLASH_FMPRE3 \
-    0x400FE20C                    // Flash Memory Protection Read
-                                  // Enable 3
+    0x400FE20C // Flash Memory Protection Read
+               // Enable 3
 #define FLASH_FMPRE4 \
-    0x400FE210                    // Flash Memory Protection Read
-                                  // Enable 4
+    0x400FE210 // Flash Memory Protection Read
+               // Enable 4
 #define FLASH_FMPRE5 \
-    0x400FE214                    // Flash Memory Protection Read
-                                  // Enable 5
+    0x400FE214 // Flash Memory Protection Read
+               // Enable 5
 #define FLASH_FMPRE6 \
-    0x400FE218                    // Flash Memory Protection Read
-                                  // Enable 6
+    0x400FE218 // Flash Memory Protection Read
+               // Enable 6
 #define FLASH_FMPRE7 \
-    0x400FE21C                    // Flash Memory Protection Read
-                                  // Enable 7
+    0x400FE21C // Flash Memory Protection Read
+               // Enable 7
 #define FLASH_FMPRE8 \
-    0x400FE220                    // Flash Memory Protection Read
-                                  // Enable 8
+    0x400FE220 // Flash Memory Protection Read
+               // Enable 8
 #define FLASH_FMPRE9 \
-    0x400FE224                    // Flash Memory Protection Read
-                                  // Enable 9
+    0x400FE224 // Flash Memory Protection Read
+               // Enable 9
 #define FLASH_FMPRE10 \
-    0x400FE228                    // Flash Memory Protection Read
-                                  // Enable 10
+    0x400FE228 // Flash Memory Protection Read
+               // Enable 10
 #define FLASH_FMPRE11 \
-    0x400FE22C                    // Flash Memory Protection Read
-                                  // Enable 11
+    0x400FE22C // Flash Memory Protection Read
+               // Enable 11
 #define FLASH_FMPRE12 \
-    0x400FE230                    // Flash Memory Protection Read
-                                  // Enable 12
+    0x400FE230 // Flash Memory Protection Read
+               // Enable 12
 #define FLASH_FMPRE13 \
-    0x400FE234                    // Flash Memory Protection Read
-                                  // Enable 13
+    0x400FE234 // Flash Memory Protection Read
+               // Enable 13
 #define FLASH_FMPRE14 \
-    0x400FE238                    // Flash Memory Protection Read
-                                  // Enable 14
+    0x400FE238 // Flash Memory Protection Read
+               // Enable 14
 #define FLASH_FMPRE15 \
-    0x400FE23C                    // Flash Memory Protection Read
-                                  // Enable 15
+    0x400FE23C // Flash Memory Protection Read
+               // Enable 15
 #define FLASH_FMPPE0 \
-    0x400FE400                    // Flash Memory Protection Program
-                                  // Enable 0
+    0x400FE400 // Flash Memory Protection Program
+               // Enable 0
 #define FLASH_FMPPE1 \
-    0x400FE404                    // Flash Memory Protection Program
-                                  // Enable 1
+    0x400FE404 // Flash Memory Protection Program
+               // Enable 1
 #define FLASH_FMPPE2 \
-    0x400FE408                    // Flash Memory Protection Program
-                                  // Enable 2
+    0x400FE408 // Flash Memory Protection Program
+               // Enable 2
 #define FLASH_FMPPE3 \
-    0x400FE40C                    // Flash Memory Protection Program
-                                  // Enable 3
+    0x400FE40C // Flash Memory Protection Program
+               // Enable 3
 #define FLASH_FMPPE4 \
-    0x400FE410                    // Flash Memory Protection Program
-                                  // Enable 4
+    0x400FE410 // Flash Memory Protection Program
+               // Enable 4
 #define FLASH_FMPPE5 \
-    0x400FE414                    // Flash Memory Protection Program
-                                  // Enable 5
+    0x400FE414 // Flash Memory Protection Program
+               // Enable 5
 #define FLASH_FMPPE6 \
-    0x400FE418                    // Flash Memory Protection Program
-                                  // Enable 6
+    0x400FE418 // Flash Memory Protection Program
+               // Enable 6
 #define FLASH_FMPPE7 \
-    0x400FE41C                    // Flash Memory Protection Program
-                                  // Enable 7
+    0x400FE41C // Flash Memory Protection Program
+               // Enable 7
 #define FLASH_FMPPE8 \
-    0x400FE420                    // Flash Memory Protection Program
-                                  // Enable 8
+    0x400FE420 // Flash Memory Protection Program
+               // Enable 8
 #define FLASH_FMPPE9 \
-    0x400FE424                    // Flash Memory Protection Program
-                                  // Enable 9
+    0x400FE424 // Flash Memory Protection Program
+               // Enable 9
 #define FLASH_FMPPE10 \
-    0x400FE428                    // Flash Memory Protection Program
-                                  // Enable 10
+    0x400FE428 // Flash Memory Protection Program
+               // Enable 10
 #define FLASH_FMPPE11 \
-    0x400FE42C                    // Flash Memory Protection Program
-                                  // Enable 11
+    0x400FE42C // Flash Memory Protection Program
+               // Enable 11
 #define FLASH_FMPPE12 \
-    0x400FE430                    // Flash Memory Protection Program
-                                  // Enable 12
+    0x400FE430 // Flash Memory Protection Program
+               // Enable 12
 #define FLASH_FMPPE13 \
-    0x400FE434                    // Flash Memory Protection Program
-                                  // Enable 13
+    0x400FE434 // Flash Memory Protection Program
+               // Enable 13
 #define FLASH_FMPPE14 \
-    0x400FE438                    // Flash Memory Protection Program
-                                  // Enable 14
+    0x400FE438 // Flash Memory Protection Program
+               // Enable 14
 #define FLASH_FMPPE15 \
-    0x400FE43C                    // Flash Memory Protection Program
-                                  // Enable 15
+    0x400FE43C // Flash Memory Protection Program
+               // Enable 15
 
 //*****************************************************************************
 //
@@ -183,19 +183,19 @@
 // The following are defines for the bit fields in the FLASH_FMD register.
 //
 //*****************************************************************************
-#define FLASH_FMD_DATA_M 0xFFFFFFFF // Data Value
-#define FLASH_FMD_DATA_S 0
+#define FLASH_FMD_DATA_M   0xFFFFFFFF // Data Value
+#define FLASH_FMD_DATA_S   0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FMC register.
 //
 //*****************************************************************************
-#define FLASH_FMC_WRKEY  0xA4420000 // FLASH write key
-#define FLASH_FMC_COMT   0x00000008 // Commit Register Value
-#define FLASH_FMC_MERASE 0x00000004 // Mass Erase Flash Memory
-#define FLASH_FMC_ERASE  0x00000002 // Erase a Page of Flash Memory
-#define FLASH_FMC_WRITE  0x00000001 // Write a Word into Flash Memory
+#define FLASH_FMC_WRKEY    0xA4420000 // FLASH write key
+#define FLASH_FMC_COMT     0x00000008 // Commit Register Value
+#define FLASH_FMC_MERASE   0x00000004 // Mass Erase Flash Memory
+#define FLASH_FMC_ERASE    0x00000002 // Erase a Page of Flash Memory
+#define FLASH_FMC_WRITE    0x00000001 // Write a Word into Flash Memory
 
 //*****************************************************************************
 //
@@ -203,20 +203,20 @@
 //
 //*****************************************************************************
 #define FLASH_FCRIS_PROGRIS \
-    0x00002000                      // Program Verify Error Raw
-                                    // Interrupt Status
+    0x00002000 // Program Verify Error Raw
+               // Interrupt Status
 #define FLASH_FCRIS_ERRIS \
-    0x00000800                      // Erase Verify Error Raw Interrupt
-                                    // Status
+    0x00000800 // Erase Verify Error Raw Interrupt
+               // Status
 #define FLASH_FCRIS_INVDRIS \
-    0x00000400                      // Invalid Data Raw Interrupt
-                                    // Status
+    0x00000400 // Invalid Data Raw Interrupt
+               // Status
 #define FLASH_FCRIS_VOLTRIS \
-    0x00000200                      // Pump Voltage Raw Interrupt
-                                    // Status
-#define FLASH_FCRIS_ERIS 0x00000004 // EEPROM Raw Interrupt Status
-#define FLASH_FCRIS_PRIS 0x00000002 // Programming Raw Interrupt Status
-#define FLASH_FCRIS_ARIS 0x00000001 // Access Raw Interrupt Status
+    0x00000200                         // Pump Voltage Raw Interrupt
+                                       // Status
+#define FLASH_FCRIS_ERIS    0x00000004 // EEPROM Raw Interrupt Status
+#define FLASH_FCRIS_PRIS    0x00000002 // Programming Raw Interrupt Status
+#define FLASH_FCRIS_ARIS    0x00000001 // Access Raw Interrupt Status
 
 //*****************************************************************************
 //
@@ -263,15 +263,15 @@
 // The following are defines for the bit fields in the FLASH_FMC2 register.
 //
 //*****************************************************************************
-#define FLASH_FMC2_WRKEY 0xA4420000 // FLASH write key
-#define FLASH_FMC2_WRBUF 0x00000001 // Buffered Flash Memory Write
+#define FLASH_FMC2_WRKEY      0xA4420000 // FLASH write key
+#define FLASH_FMC2_WRBUF      0x00000001 // Buffered Flash Memory Write
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FWBVAL register.
 //
 //*****************************************************************************
-#define FLASH_FWBVAL_FWB_M 0xFFFFFFFF // Flash Memory Write Buffer
+#define FLASH_FWBVAL_FWB_M    0xFFFFFFFF // Flash Memory Write Buffer
 
 //*****************************************************************************
 //
@@ -286,75 +286,75 @@
 // The following are defines for the bit fields in the FLASH_FWBN register.
 //
 //*****************************************************************************
-#define FLASH_FWBN_DATA_M 0xFFFFFFFF // Data
+#define FLASH_FWBN_DATA_M     0xFFFFFFFF // Data
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_PP register.
 //
 //*****************************************************************************
-#define FLASH_PP_PFC 0x40000000         // Prefetch Buffer Mode
-#define FLASH_PP_FMM 0x20000000         // Flash Mirror Mode
-#define FLASH_PP_DFA 0x10000000         // DMA Flash Access
+#define FLASH_PP_PFC          0x40000000 // Prefetch Buffer Mode
+#define FLASH_PP_FMM          0x20000000 // Flash Mirror Mode
+#define FLASH_PP_DFA          0x10000000 // DMA Flash Access
 #define FLASH_PP_EESS_M \
-    0x00780000                          // EEPROM Sector Size of the
-                                        // physical bank
-#define FLASH_PP_EESS_1KB 0x00000000    // 1 KB
-#define FLASH_PP_EESS_2KB 0x00080000    // 2 KB
-#define FLASH_PP_EESS_4KB 0x00100000    // 4 KB
-#define FLASH_PP_EESS_8KB 0x00180000    // 8 KB
+    0x00780000                       // EEPROM Sector Size of the
+                                     // physical bank
+#define FLASH_PP_EESS_1KB 0x00000000 // 1 KB
+#define FLASH_PP_EESS_2KB 0x00080000 // 2 KB
+#define FLASH_PP_EESS_4KB 0x00100000 // 4 KB
+#define FLASH_PP_EESS_8KB 0x00180000 // 8 KB
 #define FLASH_PP_MAINSS_M \
-    0x00070000                          // Flash Sector Size of the
-                                        // physical bank
-#define FLASH_PP_MAINSS_1KB  0x00000000 // 1 KB
-#define FLASH_PP_MAINSS_2KB  0x00010000 // 2 KB
-#define FLASH_PP_MAINSS_4KB  0x00020000 // 4 KB
-#define FLASH_PP_MAINSS_8KB  0x00030000 // 8 KB
-#define FLASH_PP_MAINSS_16KB 0x00040000 // 16 KB
-#define FLASH_PP_SIZE_M      0x0000FFFF // Flash Size
-#define FLASH_PP_SIZE_512KB  0x000000FF // 512 KB of Flash
-#define FLASH_PP_SIZE_1MB    0x000001FF // 1024 KB of Flash
+    0x00070000                             // Flash Sector Size of the
+                                           // physical bank
+#define FLASH_PP_MAINSS_1KB     0x00000000 // 1 KB
+#define FLASH_PP_MAINSS_2KB     0x00010000 // 2 KB
+#define FLASH_PP_MAINSS_4KB     0x00020000 // 4 KB
+#define FLASH_PP_MAINSS_8KB     0x00030000 // 8 KB
+#define FLASH_PP_MAINSS_16KB    0x00040000 // 16 KB
+#define FLASH_PP_SIZE_M         0x0000FFFF // Flash Size
+#define FLASH_PP_SIZE_512KB     0x000000FF // 512 KB of Flash
+#define FLASH_PP_SIZE_1MB       0x000001FF // 1024 KB of Flash
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FSIZE register.
 //
 //*****************************************************************************
-#define FLASH_FSIZE_SIZE_M     0x0000FFFF // Flash Size
-#define FLASH_FSIZE_SIZE_32KB  0x0000000F // 32 KB of Flash
-#define FLASH_FSIZE_SIZE_64KB  0x0000001F // 64 KB of Flash
-#define FLASH_FSIZE_SIZE_128KB 0x0000003F // 128 KB of Flash
-#define FLASH_FSIZE_SIZE_256KB 0x0000007F // 256 KB of Flash
+#define FLASH_FSIZE_SIZE_M      0x0000FFFF // Flash Size
+#define FLASH_FSIZE_SIZE_32KB   0x0000000F // 32 KB of Flash
+#define FLASH_FSIZE_SIZE_64KB   0x0000001F // 64 KB of Flash
+#define FLASH_FSIZE_SIZE_128KB  0x0000003F // 128 KB of Flash
+#define FLASH_FSIZE_SIZE_256KB  0x0000007F // 256 KB of Flash
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_SSIZE register.
 //
 //*****************************************************************************
-#define FLASH_SSIZE_SIZE_M     0x0000FFFF // SRAM Size
-#define FLASH_SSIZE_SIZE_12KB  0x0000002F // 12 KB of SRAM
-#define FLASH_SSIZE_SIZE_24KB  0x0000005F // 24 KB of SRAM
-#define FLASH_SSIZE_SIZE_32KB  0x0000007F // 32 KB of SRAM
-#define FLASH_SSIZE_SIZE_256KB 0x000003FF // 256 KB of SRAM
+#define FLASH_SSIZE_SIZE_M      0x0000FFFF // SRAM Size
+#define FLASH_SSIZE_SIZE_12KB   0x0000002F // 12 KB of SRAM
+#define FLASH_SSIZE_SIZE_24KB   0x0000005F // 24 KB of SRAM
+#define FLASH_SSIZE_SIZE_32KB   0x0000007F // 32 KB of SRAM
+#define FLASH_SSIZE_SIZE_256KB  0x000003FF // 256 KB of SRAM
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_CONF register.
 //
 //*****************************************************************************
-#define FLASH_CONF_FMME   0x40000000 // Flash Mirror Mode Enable
-#define FLASH_CONF_SPFE   0x20000000 // Single Prefetch Mode Enable
-#define FLASH_CONF_CLRTV  0x00100000 // Clear Valid Tags
-#define FLASH_CONF_FPFON  0x00020000 // Force Prefetch On
-#define FLASH_CONF_FPFOFF 0x00010000 // Force Prefetch Off
+#define FLASH_CONF_FMME         0x40000000 // Flash Mirror Mode Enable
+#define FLASH_CONF_SPFE         0x20000000 // Single Prefetch Mode Enable
+#define FLASH_CONF_CLRTV        0x00100000 // Clear Valid Tags
+#define FLASH_CONF_FPFON        0x00020000 // Force Prefetch On
+#define FLASH_CONF_FPFOFF       0x00010000 // Force Prefetch Off
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_ROMSWMAP register.
 //
 //*****************************************************************************
-#define FLASH_ROMSWMAP_SAFERTOS 0x00000001   // SafeRTOS Present
-#define FLASH_ROMSWMAP_SW0EN_M  0x00000003   // ROM SW Region 0 Availability
+#define FLASH_ROMSWMAP_SAFERTOS 0x00000001 // SafeRTOS Present
+#define FLASH_ROMSWMAP_SW0EN_M  0x00000003 // ROM SW Region 0 Availability
 #define FLASH_ROMSWMAP_SW0EN_NOTVIS \
     0x00000000                               // Software region not available to
                                              // the core
@@ -400,8 +400,8 @@
 // The following are defines for the bit fields in the FLASH_DMASZ register.
 //
 //*****************************************************************************
-#define FLASH_DMASZ_SIZE_M 0x0003FFFF // uDMA-accessible Memory Size
-#define FLASH_DMASZ_SIZE_S 0
+#define FLASH_DMASZ_SIZE_M        0x0003FFFF // uDMA-accessible Memory Size
+#define FLASH_DMASZ_SIZE_S        0
 
 //*****************************************************************************
 //
@@ -413,100 +413,100 @@
                // the flash region accessible by
                // uDMA if the FLASHPP register DFA
                // bit is set
-#define FLASH_DMAST_ADDR_S 11
+#define FLASH_DMAST_ADDR_S          11
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_RVP register.
 //
 //*****************************************************************************
-#define FLASH_RVP_RV_M 0xFFFFFFFF // Reset Vector Pointer Address
-#define FLASH_RVP_RV_S 0
+#define FLASH_RVP_RV_M              0xFFFFFFFF // Reset Vector Pointer Address
+#define FLASH_RVP_RV_S              0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_RMCTL register.
 //
 //*****************************************************************************
-#define FLASH_RMCTL_BA 0x00000001 // Boot Alias
+#define FLASH_RMCTL_BA              0x00000001 // Boot Alias
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_BOOTCFG register.
 //
 //*****************************************************************************
-#define FLASH_BOOTCFG_NW     0x80000000 // Not Written
-#define FLASH_BOOTCFG_PORT_M 0x0000E000 // Boot GPIO Port
-#define FLASH_BOOTCFG_PORT_A 0x00000000 // Port A
-#define FLASH_BOOTCFG_PORT_B 0x00002000 // Port B
-#define FLASH_BOOTCFG_PORT_C 0x00004000 // Port C
-#define FLASH_BOOTCFG_PORT_D 0x00006000 // Port D
-#define FLASH_BOOTCFG_PORT_E 0x00008000 // Port E
-#define FLASH_BOOTCFG_PORT_F 0x0000A000 // Port F
-#define FLASH_BOOTCFG_PORT_G 0x0000C000 // Port G
-#define FLASH_BOOTCFG_PORT_H 0x0000E000 // Port H
-#define FLASH_BOOTCFG_PIN_M  0x00001C00 // Boot GPIO Pin
-#define FLASH_BOOTCFG_PIN_0  0x00000000 // Pin 0
-#define FLASH_BOOTCFG_PIN_1  0x00000400 // Pin 1
-#define FLASH_BOOTCFG_PIN_2  0x00000800 // Pin 2
-#define FLASH_BOOTCFG_PIN_3  0x00000C00 // Pin 3
-#define FLASH_BOOTCFG_PIN_4  0x00001000 // Pin 4
-#define FLASH_BOOTCFG_PIN_5  0x00001400 // Pin 5
-#define FLASH_BOOTCFG_PIN_6  0x00001800 // Pin 6
-#define FLASH_BOOTCFG_PIN_7  0x00001C00 // Pin 7
-#define FLASH_BOOTCFG_POL    0x00000200 // Boot GPIO Polarity
-#define FLASH_BOOTCFG_EN     0x00000100 // Boot GPIO Enable
-#define FLASH_BOOTCFG_KEY    0x00000010 // KEY Select
-#define FLASH_BOOTCFG_DBG1   0x00000002 // Debug Control 1
-#define FLASH_BOOTCFG_DBG0   0x00000001 // Debug Control 0
+#define FLASH_BOOTCFG_NW            0x80000000 // Not Written
+#define FLASH_BOOTCFG_PORT_M        0x0000E000 // Boot GPIO Port
+#define FLASH_BOOTCFG_PORT_A        0x00000000 // Port A
+#define FLASH_BOOTCFG_PORT_B        0x00002000 // Port B
+#define FLASH_BOOTCFG_PORT_C        0x00004000 // Port C
+#define FLASH_BOOTCFG_PORT_D        0x00006000 // Port D
+#define FLASH_BOOTCFG_PORT_E        0x00008000 // Port E
+#define FLASH_BOOTCFG_PORT_F        0x0000A000 // Port F
+#define FLASH_BOOTCFG_PORT_G        0x0000C000 // Port G
+#define FLASH_BOOTCFG_PORT_H        0x0000E000 // Port H
+#define FLASH_BOOTCFG_PIN_M         0x00001C00 // Boot GPIO Pin
+#define FLASH_BOOTCFG_PIN_0         0x00000000 // Pin 0
+#define FLASH_BOOTCFG_PIN_1         0x00000400 // Pin 1
+#define FLASH_BOOTCFG_PIN_2         0x00000800 // Pin 2
+#define FLASH_BOOTCFG_PIN_3         0x00000C00 // Pin 3
+#define FLASH_BOOTCFG_PIN_4         0x00001000 // Pin 4
+#define FLASH_BOOTCFG_PIN_5         0x00001400 // Pin 5
+#define FLASH_BOOTCFG_PIN_6         0x00001800 // Pin 6
+#define FLASH_BOOTCFG_PIN_7         0x00001C00 // Pin 7
+#define FLASH_BOOTCFG_POL           0x00000200 // Boot GPIO Polarity
+#define FLASH_BOOTCFG_EN            0x00000100 // Boot GPIO Enable
+#define FLASH_BOOTCFG_KEY           0x00000010 // KEY Select
+#define FLASH_BOOTCFG_DBG1          0x00000002 // Debug Control 1
+#define FLASH_BOOTCFG_DBG0          0x00000001 // Debug Control 0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_USERREG0 register.
 //
 //*****************************************************************************
-#define FLASH_USERREG0_DATA_M 0xFFFFFFFF // User Data
-#define FLASH_USERREG0_DATA_S 0
+#define FLASH_USERREG0_DATA_M       0xFFFFFFFF // User Data
+#define FLASH_USERREG0_DATA_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_USERREG1 register.
 //
 //*****************************************************************************
-#define FLASH_USERREG1_DATA_M 0xFFFFFFFF // User Data
-#define FLASH_USERREG1_DATA_S 0
+#define FLASH_USERREG1_DATA_M       0xFFFFFFFF // User Data
+#define FLASH_USERREG1_DATA_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_USERREG2 register.
 //
 //*****************************************************************************
-#define FLASH_USERREG2_DATA_M 0xFFFFFFFF // User Data
-#define FLASH_USERREG2_DATA_S 0
+#define FLASH_USERREG2_DATA_M       0xFFFFFFFF // User Data
+#define FLASH_USERREG2_DATA_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_USERREG3 register.
 //
 //*****************************************************************************
-#define FLASH_USERREG3_DATA_M 0xFFFFFFFF // User Data
-#define FLASH_USERREG3_DATA_S 0
+#define FLASH_USERREG3_DATA_M       0xFFFFFFFF // User Data
+#define FLASH_USERREG3_DATA_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FMPRE8 register.
 //
 //*****************************************************************************
-#define FLASH_FMPRE8_READ_ENABLE_M 0xFFFFFFFF // Flash Read Enable
-#define FLASH_FMPRE8_READ_ENABLE_S 0
+#define FLASH_FMPRE8_READ_ENABLE_M  0xFFFFFFFF // Flash Read Enable
+#define FLASH_FMPRE8_READ_ENABLE_S  0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FMPRE9 register.
 //
 //*****************************************************************************
-#define FLASH_FMPRE9_READ_ENABLE_M 0xFFFFFFFF // Flash Read Enable
-#define FLASH_FMPRE9_READ_ENABLE_S 0
+#define FLASH_FMPRE9_READ_ENABLE_M  0xFFFFFFFF // Flash Read Enable
+#define FLASH_FMPRE9_READ_ENABLE_S  0
 
 //*****************************************************************************
 //
@@ -561,16 +561,16 @@
 // The following are defines for the bit fields in the FLASH_FMPPE8 register.
 //
 //*****************************************************************************
-#define FLASH_FMPPE8_PROG_ENABLE_M 0xFFFFFFFF // Flash Programming Enable
-#define FLASH_FMPPE8_PROG_ENABLE_S 0
+#define FLASH_FMPPE8_PROG_ENABLE_M  0xFFFFFFFF // Flash Programming Enable
+#define FLASH_FMPPE8_PROG_ENABLE_S  0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the FLASH_FMPPE9 register.
 //
 //*****************************************************************************
-#define FLASH_FMPPE9_PROG_ENABLE_M 0xFFFFFFFF // Flash Programming Enable
-#define FLASH_FMPPE9_PROG_ENABLE_S 0
+#define FLASH_FMPPE9_PROG_ENABLE_M  0xFFFFFFFF // Flash Programming Enable
+#define FLASH_FMPPE9_PROG_ENABLE_S  0
 
 //*****************************************************************************
 //
@@ -627,7 +627,7 @@
 // block that is protected by each protection register.
 //
 //*****************************************************************************
-#define FLASH_PROTECT_SIZE 0x00000800
-#define FLASH_ERASE_SIZE   0x00000400
+#define FLASH_PROTECT_SIZE          0x00000800
+#define FLASH_ERASE_SIZE            0x00000400
 
 #endif // __HW_FLASH_H__

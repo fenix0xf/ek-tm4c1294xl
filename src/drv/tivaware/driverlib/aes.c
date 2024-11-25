@@ -83,7 +83,9 @@ void AESReset(uint32_t ui32Base)
     //
     // Wait for the reset to finish.
     //
-    while ((HWREG(ui32Base + AES_O_SYSSTATUS) & AES_SYSSTATUS_RESETDONE) == 0) {}
+    while ((HWREG(ui32Base + AES_O_SYSSTATUS) & AES_SYSSTATUS_RESETDONE) == 0)
+    {
+    }
 }
 
 //*****************************************************************************
@@ -182,20 +184,17 @@ void AESConfigSet(uint32_t ui32Base, uint32_t ui32Config)
     //
     ASSERT(ui32Base == AES_BASE);
     ASSERT((ui32Config & AES_CFG_DIR_ENCRYPT) || (ui32Config & AES_CFG_DIR_DECRYPT));
-    ASSERT((ui32Config & AES_CFG_KEY_SIZE_128BIT) || (ui32Config & AES_CFG_KEY_SIZE_192BIT) ||
-           (ui32Config & AES_CFG_KEY_SIZE_256BIT));
+    ASSERT((ui32Config & AES_CFG_KEY_SIZE_128BIT) || (ui32Config & AES_CFG_KEY_SIZE_192BIT) || (ui32Config & AES_CFG_KEY_SIZE_256BIT));
     ASSERT((ui32Config & AES_CFG_MODE_ECB) || (ui32Config & AES_CFG_MODE_CBC) || (ui32Config & AES_CFG_MODE_CTR) ||
-           (ui32Config & AES_CFG_MODE_ICM) || (ui32Config & AES_CFG_MODE_CFB) ||
-           (ui32Config & AES_CFG_MODE_XTS_TWEAKJL) || (ui32Config & AES_CFG_MODE_XTS_K2IJL) ||
-           (ui32Config & AES_CFG_MODE_XTS_K2ILJ0) || (ui32Config & AES_CFG_MODE_F8) || (ui32Config & AES_CFG_MODE_F9) ||
-           (ui32Config & AES_CFG_MODE_CTR) || (ui32Config & AES_CFG_MODE_CBCMAC) ||
+           (ui32Config & AES_CFG_MODE_ICM) || (ui32Config & AES_CFG_MODE_CFB) || (ui32Config & AES_CFG_MODE_XTS_TWEAKJL) ||
+           (ui32Config & AES_CFG_MODE_XTS_K2IJL) || (ui32Config & AES_CFG_MODE_XTS_K2ILJ0) || (ui32Config & AES_CFG_MODE_F8) ||
+           (ui32Config & AES_CFG_MODE_F9) || (ui32Config & AES_CFG_MODE_CTR) || (ui32Config & AES_CFG_MODE_CBCMAC) ||
            (ui32Config & AES_CFG_MODE_GCM_HLY0ZERO) || (ui32Config & AES_CFG_MODE_GCM_HLY0CALC) ||
            (ui32Config & AES_CFG_MODE_GCM_HY0CALC) || (ui32Config & AES_CFG_MODE_CCM));
-    ASSERT(((ui32Config & AES_CFG_MODE_CTR) || (ui32Config & AES_CFG_MODE_GCM_HLY0ZERO) ||
-            (ui32Config & AES_CFG_MODE_GCM_HLY0CALC) || (ui32Config & AES_CFG_MODE_GCM_HY0CALC) ||
-            (ui32Config & AES_CFG_MODE_CCM)) &&
-           ((ui32Config & AES_CFG_CTR_WIDTH_32) || (ui32Config & AES_CFG_CTR_WIDTH_64) ||
-            (ui32Config & AES_CFG_CTR_WIDTH_96) || (ui32Config & AES_CFG_CTR_WIDTH_128)));
+    ASSERT(((ui32Config & AES_CFG_MODE_CTR) || (ui32Config & AES_CFG_MODE_GCM_HLY0ZERO) || (ui32Config & AES_CFG_MODE_GCM_HLY0CALC) ||
+            (ui32Config & AES_CFG_MODE_GCM_HY0CALC) || (ui32Config & AES_CFG_MODE_CCM)) &&
+           ((ui32Config & AES_CFG_CTR_WIDTH_32) || (ui32Config & AES_CFG_CTR_WIDTH_64) || (ui32Config & AES_CFG_CTR_WIDTH_96) ||
+            (ui32Config & AES_CFG_CTR_WIDTH_128)));
     ASSERT((ui32Config & AES_CFG_MODE_CCM) &&
            ((ui32Config & AES_CFG_CCM_L_1) || (ui32Config & AES_CFG_CCM_L_2) || (ui32Config & AES_CFG_CCM_L_3) ||
             (ui32Config & AES_CFG_CCM_L_4) || (ui32Config & AES_CFG_CCM_L_5) || (ui32Config & AES_CFG_CCM_L_6) ||
@@ -410,7 +409,9 @@ void AESIVRead(uint32_t ui32Base, uint32_t* pui32IVData)
     //
     // Wait for the output context to be ready.
     //
-    while ((AES_CTRL_SVCTXTRDY & (HWREG(ui32Base + AES_O_CTRL))) == 0) {}
+    while ((AES_CTRL_SVCTXTRDY & (HWREG(ui32Base + AES_O_CTRL))) == 0)
+    {
+    }
 
     //
     // Read the tag data.
@@ -445,7 +446,9 @@ void AESTagRead(uint32_t ui32Base, uint32_t* pui32TagData)
     //
     // Wait for the output context to be ready.
     //
-    while ((AES_CTRL_SVCTXTRDY & (HWREG(ui32Base + AES_O_CTRL))) == 0) {}
+    while ((AES_CTRL_SVCTXTRDY & (HWREG(ui32Base + AES_O_CTRL))) == 0)
+    {
+    }
 
     //
     // Read the tag data.
@@ -597,7 +600,9 @@ void AESDataRead(uint32_t ui32Base, uint32_t* pui32Dest)
     //
     // Wait for the output to be ready before reading the data.
     //
-    while ((AES_CTRL_OUTPUT_READY & (HWREG(ui32Base + AES_O_CTRL))) == 0) {}
+    while ((AES_CTRL_OUTPUT_READY & (HWREG(ui32Base + AES_O_CTRL))) == 0)
+    {
+    }
 
     //
     // Read a block of data from the data registers
@@ -676,7 +681,9 @@ void AESDataWrite(uint32_t ui32Base, uint32_t* pui32Src)
     //
     // Wait for input ready.
     //
-    while ((AES_CTRL_INPUT_READY & (HWREG(ui32Base + AES_O_CTRL))) == 0) {}
+    while ((AES_CTRL_INPUT_READY & (HWREG(ui32Base + AES_O_CTRL))) == 0)
+    {
+    }
 
     //
     // Write a block of data into the data registers.
@@ -942,8 +949,7 @@ uint32_t AESIntStatus(uint32_t ui32Base, bool bMasked)
     else
     {
         ui32Temp = HWREG(ui32Base + AES_O_DMARIS);
-        return (ui32Status |
-                (((ui32Temp & 0x00000001) << 16) | ((ui32Temp & 0x00000002) << 18) | ((ui32Temp & 0x0000000c) << 15)));
+        return (ui32Status | (((ui32Temp & 0x00000001) << 16) | ((ui32Temp & 0x00000002) << 18) | ((ui32Temp & 0x0000000c) << 15)));
     }
 }
 
@@ -979,16 +985,15 @@ void AESIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == AES_BASE);
-    ASSERT((ui32IntFlags == AES_INT_CONTEXT_IN) || (ui32IntFlags == AES_INT_CONTEXT_OUT) ||
-           (ui32IntFlags == AES_INT_DATA_IN) || (ui32IntFlags == AES_INT_DATA_OUT) ||
-           (ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) ||
+    ASSERT((ui32IntFlags == AES_INT_CONTEXT_IN) || (ui32IntFlags == AES_INT_CONTEXT_OUT) || (ui32IntFlags == AES_INT_DATA_IN) ||
+           (ui32IntFlags == AES_INT_DATA_OUT) || (ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) ||
            (ui32IntFlags == AES_INT_DMA_DATA_IN) || (ui32IntFlags == AES_INT_DMA_DATA_OUT));
 
     //
     // Set the flags.
     //
-    HWREG(ui32Base + AES_O_DMAIM)     |= (((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) |
-                                      ((ui32IntFlags & 0x00080000) >> 18));
+    HWREG(ui32Base + AES_O_DMAIM) |=
+        (((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) | ((ui32IntFlags & 0x00080000) >> 18));
     HWREG(ui32Base + AES_O_IRQENABLE) |= ui32IntFlags & 0x0000ffff;
 }
 
@@ -1024,16 +1029,15 @@ void AESIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == AES_BASE);
-    ASSERT((ui32IntFlags == AES_INT_CONTEXT_IN) || (ui32IntFlags == AES_INT_CONTEXT_OUT) ||
-           (ui32IntFlags == AES_INT_DATA_IN) || (ui32IntFlags == AES_INT_DATA_OUT) ||
-           (ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) ||
+    ASSERT((ui32IntFlags == AES_INT_CONTEXT_IN) || (ui32IntFlags == AES_INT_CONTEXT_OUT) || (ui32IntFlags == AES_INT_DATA_IN) ||
+           (ui32IntFlags == AES_INT_DATA_OUT) || (ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) ||
            (ui32IntFlags == AES_INT_DMA_DATA_IN) || (ui32IntFlags == AES_INT_DMA_DATA_OUT));
 
     //
     // Clear the flags.
     //
-    HWREG(ui32Base + AES_O_DMAIM)     &= ~(((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) |
-                                       ((ui32IntFlags & 0x00080000) >> 18));
+    HWREG(ui32Base + AES_O_DMAIM) &=
+        ~(((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) | ((ui32IntFlags & 0x00080000) >> 18));
     HWREG(ui32Base + AES_O_IRQENABLE) &= ~(ui32IntFlags & 0x0000ffff);
 }
 
@@ -1065,11 +1069,11 @@ void AESIntClear(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == AES_BASE);
-    ASSERT((ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) ||
-           (ui32IntFlags == AES_INT_DMA_DATA_IN) || (ui32IntFlags == AES_INT_DMA_DATA_OUT));
+    ASSERT((ui32IntFlags == AES_INT_DMA_CONTEXT_IN) || (ui32IntFlags == AES_INT_DMA_CONTEXT_OUT) || (ui32IntFlags == AES_INT_DMA_DATA_IN) ||
+           (ui32IntFlags == AES_INT_DMA_DATA_OUT));
 
-    HWREG(ui32Base + AES_O_DMAIC) = (((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) |
-                                     ((ui32IntFlags & 0x00080000) >> 18));
+    HWREG(ui32Base + AES_O_DMAIC) =
+        (((ui32IntFlags & 0x00010000) >> 16) | ((ui32IntFlags & 0x00060000) >> 15) | ((ui32IntFlags & 0x00080000) >> 18));
 }
 
 //*****************************************************************************

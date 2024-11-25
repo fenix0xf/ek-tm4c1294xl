@@ -67,8 +67,7 @@ void FPUEnable(void)
     //
     // Enable the coprocessors used by the floating-point unit.
     //
-    HWREG(NVIC_CPAC) =
-        ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_FULL | NVIC_CPAC_CP11_FULL);
+    HWREG(NVIC_CPAC) = ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_FULL | NVIC_CPAC_CP11_FULL);
 }
 
 //*****************************************************************************
@@ -86,8 +85,7 @@ void FPUDisable(void)
     //
     // Disable the coprocessors used by the floating-point unit.
     //
-    HWREG(NVIC_CPAC) =
-        ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_DIS | NVIC_CPAC_CP11_DIS);
+    HWREG(NVIC_CPAC) = ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_DIS | NVIC_CPAC_CP11_DIS);
 }
 
 //*****************************************************************************

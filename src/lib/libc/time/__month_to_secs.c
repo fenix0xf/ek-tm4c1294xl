@@ -13,7 +13,7 @@ int __month_to_secs(int month, int is_leap)
                                              304 * 86400,
                                              334 * 86400};
 
-    int t = secs_through_month[month];
+    int              t = secs_through_month[month];
 
     if (is_leap && month >= 2)
     {

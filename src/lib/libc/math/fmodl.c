@@ -74,8 +74,7 @@ long double fmodl(long double x, long double y)
         }
         mx = i;
     }
-    for (; mx >> 63 == 0; mx *= 2, ex--)
-        ;
+    for (; mx >> 63 == 0; mx *= 2, ex--);
     ux.i.m = mx;
 #elif LDBL_MANT_DIG == 113
     uint64_t hi, lo, xhi, xlo, yhi, ylo;
@@ -121,8 +120,7 @@ long double fmodl(long double x, long double y)
         xhi = hi;
         xlo = lo;
     }
-    for (; xhi >> 48 == 0; xhi = 2 * xhi + (xlo >> 63), xlo = 2 * xlo, ex--)
-        ;
+    for (; xhi >> 48 == 0; xhi = 2 * xhi + (xlo >> 63), xlo = 2 * xlo, ex--);
     ux.i2.hi = xhi;
     ux.i2.lo = xlo;
 #endif

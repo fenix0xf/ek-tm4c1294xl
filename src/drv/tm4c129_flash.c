@@ -33,7 +33,10 @@
 
 typedef uint32_t tm4c129_flash_aligned_t;
 
-enum { TM4C129_FLASH_ADDR_ALIGN = sizeof(tm4c129_flash_aligned_t) };
+enum
+{
+    TM4C129_FLASH_ADDR_ALIGN = sizeof(tm4c129_flash_aligned_t)
+};
 
 bool tm4c129_flash_init(void)
 {
@@ -126,6 +129,8 @@ void tm4c129_flash_jtag_permanently_off(void)
         HWREG(FLASH_FMD) = HWREG(FLASH_BOOTCFG) & ~(uint32_t)FLASH_BOOTCFG_DBG1;
         HWREG(FLASH_FMC) = FLASH_FMC_WRKEY | FLASH_FMC_COMT;
 
-        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT) {}
+        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT)
+        {
+        }
     }
 }

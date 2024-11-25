@@ -72,14 +72,14 @@ extern CRITICAL_SECTION g_cs_mem;
 #define M_ALIG        sizeof(MEMHDR) // 8UL
 #define MIN_POOL_SIZE 48UL
 
-void soft_reset(void);
+void         soft_reset(void);
 
 static int   do_deallocate(MEMINFO* mi, void* p_mem);
 static void* do_allocate(MEMINFO* mi, unsigned long need_size);
 static void* do_reallocate(MEMINFO* mi, void* p_mem, unsigned long new_size);
 
 //----------------------------------------------------------------------------
-int tn_alloc_init(MEMINFO* mi, unsigned char* buf, unsigned int buf_size)
+int          tn_alloc_init(MEMINFO* mi, unsigned char* buf, unsigned int buf_size)
 {
     int           rc;
     unsigned long tmp;
@@ -90,14 +90,14 @@ int tn_alloc_init(MEMINFO* mi, unsigned char* buf, unsigned int buf_size)
     }
     else
     {
-        tmp = (unsigned long)buf;
+        tmp                 = (unsigned long)buf;
         // actual buf start addr must be aligned
-        mi->buf_start_addr = (tmp + (M_ALIG - 1UL)) & (~(M_ALIG - 1UL));
+        mi->buf_start_addr  = (tmp + (M_ALIG - 1UL)) & (~(M_ALIG - 1UL));
         // after align, the buf start addr may be increased and an actual buf size
         // will be reduced in this case
-        a_buf_size         = buf_size - (tmp - mi->buf_start_addr);
-        a_buf_size        &= ~(M_ALIG - 1UL); // actual buf size is also aligned
-        mi->buf_last_addr  = mi->buf_start_addr + a_buf_size - M_ALIG;
+        a_buf_size          = buf_size - (tmp - mi->buf_start_addr);
+        a_buf_size         &= ~(M_ALIG - 1UL); // actual buf size is also aligned
+        mi->buf_last_addr   = mi->buf_start_addr + a_buf_size - M_ALIG;
 
         mi->f_next       = (MEMHDR*)(mi->buf_start_addr);
         mi->f_next->next = NULL;
@@ -114,7 +114,7 @@ int tn_alloc_init(MEMINFO* mi, unsigned char* buf, unsigned int buf_size)
     return rc;
 }
 
-int u_printf(const char* fmt, ...);
+int   u_printf(const char* fmt, ...);
 
 //----------------------------------------------------------------------------
 void* tn_alloc(MEMINFO* mi, unsigned long alloc_size)
@@ -278,14 +278,14 @@ static int do_deallocate(MEMINFO* mi, void* p_mem)
                                             mi->t_free += block->size;
                                             // B3 merge begin of the block with end of current and
                                             // merge end of block with begin  of next
-                                            ptr->size += block->size;
-                                            tmp        = ptr->next->size;
-                                            ptr->size += tmp;
-                                            ptr->next  = ptr->next->next;
+                                            ptr->size  += block->size;
+                                            tmp         = ptr->next->size;
+                                            ptr->size  += tmp;
+                                            ptr->next   = ptr->next->next;
                                         }
                                         else
                                         {
-                                            mi->t_free += block->size;
+                                            mi->t_free      += block->size;
                                             // B4 merge end of block with begin  of next
                                             tmp              = ptr->next->size;
                                             ptr_tmp          = ptr->next->next;
@@ -300,22 +300,22 @@ static int do_deallocate(MEMINFO* mi, void* p_mem)
                                         {
                                             mi->t_free += block->size;
                                             // B5 merge start of the block with end of the current
-                                            ptr->size += block->size;
+                                            ptr->size  += block->size;
                                         }
                                         else
                                         {
-                                            mi->t_free += block->size;
+                                            mi->t_free  += block->size;
                                             // B6 insert block after current
-                                            ptr_tmp     = ptr->next;
-                                            ptr->next   = block;
-                                            block->next = ptr_tmp;
+                                            ptr_tmp      = ptr->next;
+                                            ptr->next    = block;
+                                            block->next  = ptr_tmp;
                                         }
                                     }
                                 }
                                 fExit = true;
                             } // if not,continue
                         }
-                        else  // == 0  there is no next free block in the list
+                        else // == 0  there is no next free block in the list
                         {
                             if (block_start_addr > curr_last_addr)
                             {
@@ -323,15 +323,15 @@ static int do_deallocate(MEMINFO* mi, void* p_mem)
                                 {
                                     mi->t_free += block->size;
                                     // B7 merge start of the block with end of the current
-                                    ptr->size += block->size;
+                                    ptr->size  += block->size;
                                 }
                                 else
                                 {
-                                    mi->t_free += block->size;
+                                    mi->t_free  += block->size;
                                     // B8 insert block after current
-                                    ptr_tmp     = ptr->next;
-                                    ptr->next   = block;
-                                    block->next = ptr_tmp;
+                                    ptr_tmp      = ptr->next;
+                                    ptr->next    = block;
+                                    block->next  = ptr_tmp;
                                 }
                             }
                             else
@@ -492,7 +492,7 @@ static void* do_reallocate(MEMINFO* mi, void* p_mem, unsigned long new_size)
     unsigned long block_start_addr;
     unsigned long nbytes_to_copy;
 
-    void* ret_ptr;     // = NULL;
+    void*         ret_ptr; // = NULL;
 
     if (p_mem == NULL) // just call do_allocate()
     {

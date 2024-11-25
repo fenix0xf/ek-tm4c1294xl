@@ -44,7 +44,7 @@ static void __dma_error_isr(void)
 {
     static size_t error_count;
 
-    uint32_t status = uDMAErrorStatusGet();
+    uint32_t      status = uDMAErrorStatusGet();
 
     if (status)
     {

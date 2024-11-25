@@ -45,38 +45,38 @@
 // The following are defines for the EC register offsets.
 //
 //*****************************************************************************
-#define CCM_O_CRCCTRL   0x00000400 // CRC Control
-#define CCM_O_CRCSEED   0x00000410 // CRC SEED/Context
-#define CCM_O_CRCDIN    0x00000414 // CRC Data Input
-#define CCM_O_CRCRSLTPP 0x00000418 // CRC Post Processing Result
+#define CCM_O_CRCCTRL      0x00000400 // CRC Control
+#define CCM_O_CRCSEED      0x00000410 // CRC SEED/Context
+#define CCM_O_CRCDIN       0x00000414 // CRC Data Input
+#define CCM_O_CRCRSLTPP    0x00000418 // CRC Post Processing Result
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the CCM_O_CRCCTRL register.
 //
 //*****************************************************************************
-#define CCM_CRCCTRL_INIT_M 0x00006000         // CRC Initialization
+#define CCM_CRCCTRL_INIT_M 0x00006000 // CRC Initialization
 #define CCM_CRCCTRL_INIT_SEED \
-    0x00000000                                // Use the CRCSEED register context
-                                              // as the starting value
-#define CCM_CRCCTRL_INIT_0   0x00004000       // Initialize to all '0s'
-#define CCM_CRCCTRL_INIT_1   0x00006000       // Initialize to all '1s'
-#define CCM_CRCCTRL_SIZE     0x00001000       // Input Data Size
-#define CCM_CRCCTRL_RESINV   0x00000200       // Result Inverse Enable
-#define CCM_CRCCTRL_OBR      0x00000100       // Output Reverse Enable
-#define CCM_CRCCTRL_BR       0x00000080       // Bit reverse enable
-#define CCM_CRCCTRL_ENDIAN_M 0x00000030       // Endian Control
+    0x00000000                          // Use the CRCSEED register context
+                                        // as the starting value
+#define CCM_CRCCTRL_INIT_0   0x00004000 // Initialize to all '0s'
+#define CCM_CRCCTRL_INIT_1   0x00006000 // Initialize to all '1s'
+#define CCM_CRCCTRL_SIZE     0x00001000 // Input Data Size
+#define CCM_CRCCTRL_RESINV   0x00000200 // Result Inverse Enable
+#define CCM_CRCCTRL_OBR      0x00000100 // Output Reverse Enable
+#define CCM_CRCCTRL_BR       0x00000080 // Bit reverse enable
+#define CCM_CRCCTRL_ENDIAN_M 0x00000030 // Endian Control
 #define CCM_CRCCTRL_ENDIAN_SBHW \
-    0x00000000                                // Configuration unchanged. (B3,
-                                              // B2, B1, B0)
+    0x00000000 // Configuration unchanged. (B3,
+               // B2, B1, B0)
 #define CCM_CRCCTRL_ENDIAN_SHW \
-    0x00000010                                // Bytes are swapped in half-words
-                                              // but half-words are not swapped
-                                              // (B2, B3, B0, B1)
+    0x00000010 // Bytes are swapped in half-words
+               // but half-words are not swapped
+               // (B2, B3, B0, B1)
 #define CCM_CRCCTRL_ENDIAN_SHWNB \
-    0x00000020                                // Half-words are swapped but bytes
-                                              // are not swapped in half-word.
-                                              // (B1, B0, B3, B2)
+    0x00000020 // Half-words are swapped but bytes
+               // are not swapped in half-word.
+               // (B1, B0, B3, B2)
 #define CCM_CRCCTRL_ENDIAN_SBSW \
     0x00000030                                // Bytes are swapped in half-words
                                               // and half-words are swapped. (B0,
@@ -93,16 +93,16 @@
 // The following are defines for the bit fields in the CCM_O_CRCSEED register.
 //
 //*****************************************************************************
-#define CCM_CRCSEED_SEED_M 0xFFFFFFFF // SEED/Context Value
-#define CCM_CRCSEED_SEED_S 0
+#define CCM_CRCSEED_SEED_M         0xFFFFFFFF // SEED/Context Value
+#define CCM_CRCSEED_SEED_S         0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the CCM_O_CRCDIN register.
 //
 //*****************************************************************************
-#define CCM_CRCDIN_DATAIN_M 0xFFFFFFFF // Data Input
-#define CCM_CRCDIN_DATAIN_S 0
+#define CCM_CRCDIN_DATAIN_M        0xFFFFFFFF // Data Input
+#define CCM_CRCDIN_DATAIN_S        0
 
 //*****************************************************************************
 //
@@ -110,7 +110,7 @@
 // register.
 //
 //*****************************************************************************
-#define CCM_CRCRSLTPP_RSLTPP_M 0xFFFFFFFF // Post Processing Result
-#define CCM_CRCRSLTPP_RSLTPP_S 0
+#define CCM_CRCRSLTPP_RSLTPP_M     0xFFFFFFFF // Post Processing Result
+#define CCM_CRCRSLTPP_RSLTPP_S     0
 
 #endif // __HW_CCM_H__

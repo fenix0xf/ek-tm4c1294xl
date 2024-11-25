@@ -45,12 +45,12 @@
 // The following are defines for the Hibernation module register addresses.
 //
 //*****************************************************************************
-#define HIB_RTCC  0x400FC000  // Hibernation RTC Counter
-#define HIB_RTCM0 0x400FC004  // Hibernation RTC Match 0
-#define HIB_RTCLD 0x400FC00C  // Hibernation RTC Load
-#define HIB_CTL   0x400FC010  // Hibernation Control
-#define HIB_IM    0x400FC014  // Hibernation Interrupt Mask
-#define HIB_RIS   0x400FC018  // Hibernation Raw Interrupt Status
+#define HIB_RTCC  0x400FC000 // Hibernation RTC Counter
+#define HIB_RTCM0 0x400FC004 // Hibernation RTC Match 0
+#define HIB_RTCLD 0x400FC00C // Hibernation RTC Load
+#define HIB_CTL   0x400FC010 // Hibernation Control
+#define HIB_IM    0x400FC014 // Hibernation Interrupt Mask
+#define HIB_RIS   0x400FC018 // Hibernation Raw Interrupt Status
 #define HIB_MIS \
     0x400FC01C                // Hibernation Masked Interrupt
                               // Status
@@ -79,44 +79,44 @@
 #define HIB_TPLOG6 0x400FC4F8 // HIB Tamper Log 6
 #define HIB_TPLOG7 0x400FC4FC // HIB Tamper Log 7
 #define HIB_PP \
-    0x400FCFC0                // Hibernation Peripheral
-                              // Properties
-#define HIB_CC 0x400FCFC8     // Hibernation Clock Control
+    0x400FCFC0                    // Hibernation Peripheral
+                                  // Properties
+#define HIB_CC         0x400FCFC8 // Hibernation Clock Control
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_RTCC register.
 //
 //*****************************************************************************
-#define HIB_RTCC_M 0xFFFFFFFF // RTC Counter
-#define HIB_RTCC_S 0
+#define HIB_RTCC_M     0xFFFFFFFF // RTC Counter
+#define HIB_RTCC_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_RTCM0 register.
 //
 //*****************************************************************************
-#define HIB_RTCM0_M 0xFFFFFFFF // RTC Match 0
-#define HIB_RTCM0_S 0
+#define HIB_RTCM0_M    0xFFFFFFFF // RTC Match 0
+#define HIB_RTCM0_S    0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_RTCLD register.
 //
 //*****************************************************************************
-#define HIB_RTCLD_M 0xFFFFFFFF // RTC Load
-#define HIB_RTCLD_S 0
+#define HIB_RTCLD_M    0xFFFFFFFF // RTC Load
+#define HIB_RTCLD_S    0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CTL register.
 //
 //*****************************************************************************
-#define HIB_CTL_WRC    0x80000000       // Write Complete/Capable
-#define HIB_CTL_RETCLR 0x40000000       // GPIO Retention/Clear
-#define HIB_CTL_OSCSEL 0x00080000       // Oscillator Select
-#define HIB_CTL_OSCDRV 0x00020000       // Oscillator Drive Capability
-#define HIB_CTL_OSCBYP 0x00010000       // Oscillator Bypass
+#define HIB_CTL_WRC    0x80000000 // Write Complete/Capable
+#define HIB_CTL_RETCLR 0x40000000 // GPIO Retention/Clear
+#define HIB_CTL_OSCSEL 0x00080000 // Oscillator Select
+#define HIB_CTL_OSCDRV 0x00020000 // Oscillator Drive Capability
+#define HIB_CTL_OSCBYP 0x00010000 // Oscillator Bypass
 #define HIB_CTL_VBATSEL_M \
     0x00006000                          // Select for Low-Battery
                                         // Comparator
@@ -139,19 +139,19 @@
 // The following are defines for the bit fields in the HIB_IM register.
 //
 //*****************************************************************************
-#define HIB_IM_VDDFAIL 0x00000080 // VDD Fail Interrupt Mask
+#define HIB_IM_VDDFAIL       0x00000080 // VDD Fail Interrupt Mask
 #define HIB_IM_RSTWK \
     0x00000040                    // Reset Pad I/O Wake-Up Interrupt
                                   // Mask
 #define HIB_IM_PADIOWK 0x00000020 // Pad I/O Wake-Up Interrupt Mask
 #define HIB_IM_WC \
-    0x00000010                    // External Write Complete/Capable
-                                  // Interrupt Mask
-#define HIB_IM_EXTW 0x00000008    // External Wake-Up Interrupt Mask
+    0x00000010                 // External Write Complete/Capable
+                               // Interrupt Mask
+#define HIB_IM_EXTW 0x00000008 // External Wake-Up Interrupt Mask
 #define HIB_IM_LOWBAT \
-    0x00000004                    // Low Battery Voltage Interrupt
-                                  // Mask
-#define HIB_IM_RTCALT0 0x00000001 // RTC Alert 0 Interrupt Mask
+    0x00000004                     // Low Battery Voltage Interrupt
+                                   // Mask
+#define HIB_IM_RTCALT0  0x00000001 // RTC Alert 0 Interrupt Mask
 
 //*****************************************************************************
 //
@@ -160,17 +160,17 @@
 //*****************************************************************************
 #define HIB_RIS_VDDFAIL 0x00000080 // VDD Fail Raw Interrupt Status
 #define HIB_RIS_RSTWK \
-    0x00000040                     // Reset Pad I/O Wake-Up Raw
-                                   // Interrupt Status
+    0x00000040 // Reset Pad I/O Wake-Up Raw
+               // Interrupt Status
 #define HIB_RIS_PADIOWK \
-    0x00000020                     // Pad I/O Wake-Up Raw Interrupt
-                                   // Status
+    0x00000020 // Pad I/O Wake-Up Raw Interrupt
+               // Status
 #define HIB_RIS_WC \
-    0x00000010                     // Write Complete/Capable Raw
-                                   // Interrupt Status
+    0x00000010 // Write Complete/Capable Raw
+               // Interrupt Status
 #define HIB_RIS_EXTW \
-    0x00000008                     // External Wake-Up Raw Interrupt
-                                   // Status
+    0x00000008 // External Wake-Up Raw Interrupt
+               // Status
 #define HIB_RIS_LOWBAT \
     0x00000004                     // Low Battery Voltage Raw
                                    // Interrupt Status
@@ -187,17 +187,17 @@
                                    // Mask
 #define HIB_MIS_PADIOWK 0x00000020 // Pad I/O Wake-Up Interrupt Mask
 #define HIB_MIS_WC \
-    0x00000010                     // Write Complete/Capable Masked
-                                   // Interrupt Status
+    0x00000010 // Write Complete/Capable Masked
+               // Interrupt Status
 #define HIB_MIS_EXTW \
-    0x00000008                     // External Wake-Up Masked
-                                   // Interrupt Status
+    0x00000008 // External Wake-Up Masked
+               // Interrupt Status
 #define HIB_MIS_LOWBAT \
-    0x00000004                     // Low Battery Voltage Masked
-                                   // Interrupt Status
+    0x00000004 // Low Battery Voltage Masked
+               // Interrupt Status
 #define HIB_MIS_RTCALT0 \
-    0x00000001                     // RTC Alert 0 Masked Interrupt
-                                   // Status
+    0x00000001 // RTC Alert 0 Masked Interrupt
+               // Status
 
 //*****************************************************************************
 //
@@ -210,23 +210,23 @@
                                   // Clear
 #define HIB_IC_PADIOWK 0x00000020 // Pad I/O Wake-Up Interrupt Clear
 #define HIB_IC_WC \
-    0x00000010                    // Write Complete/Capable Interrupt
-                                  // Clear
-#define HIB_IC_EXTW 0x00000008    // External Wake-Up Interrupt Clear
+    0x00000010                 // Write Complete/Capable Interrupt
+                               // Clear
+#define HIB_IC_EXTW 0x00000008 // External Wake-Up Interrupt Clear
 #define HIB_IC_LOWBAT \
-    0x00000004                    // Low Battery Voltage Interrupt
-                                  // Clear
+    0x00000004 // Low Battery Voltage Interrupt
+               // Clear
 #define HIB_IC_RTCALT0 \
-    0x00000001                    // RTC Alert0 Masked Interrupt
-                                  // Clear
+    0x00000001 // RTC Alert0 Masked Interrupt
+               // Clear
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_RTCT register.
 //
 //*****************************************************************************
-#define HIB_RTCT_TRIM_M 0x0000FFFF // RTC Trim Value
-#define HIB_RTCT_TRIM_S 0
+#define HIB_RTCT_TRIM_M    0x0000FFFF // RTC Trim Value
+#define HIB_RTCT_TRIM_S    0
 
 //*****************************************************************************
 //
@@ -243,104 +243,104 @@
 // The following are defines for the bit fields in the HIB_IO register.
 //
 //*****************************************************************************
-#define HIB_IO_IOWRC   0x80000000 // I/O Write Complete
-#define HIB_IO_WURSTEN 0x00000010 // Reset Wake Source Enable
+#define HIB_IO_IOWRC       0x80000000 // I/O Write Complete
+#define HIB_IO_WURSTEN     0x00000010 // Reset Wake Source Enable
 #define HIB_IO_WUUNLK \
-    0x00000001                    // I/O Wake Pad Configuration
-                                  // Enable
+    0x00000001 // I/O Wake Pad Configuration
+               // Enable
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_DATA register.
 //
 //*****************************************************************************
-#define HIB_DATA_RTD_M 0xFFFFFFFF // Hibernation Module NV Data
-#define HIB_DATA_RTD_S 0
+#define HIB_DATA_RTD_M       0xFFFFFFFF // Hibernation Module NV Data
+#define HIB_DATA_RTD_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CALCTL register.
 //
 //*****************************************************************************
-#define HIB_CALCTL_CAL24 0x00000004 // Calendar Mode
-#define HIB_CALCTL_CALEN 0x00000001 // RTC Calendar/Counter Mode Select
+#define HIB_CALCTL_CAL24     0x00000004 // Calendar Mode
+#define HIB_CALCTL_CALEN     0x00000001 // RTC Calendar/Counter Mode Select
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CAL0 register.
 //
 //*****************************************************************************
-#define HIB_CAL0_VALID 0x80000000 // Valid Calendar Load
-#define HIB_CAL0_AMPM  0x00400000 // AM/PM Designation
-#define HIB_CAL0_HR_M  0x001F0000 // Hours
-#define HIB_CAL0_MIN_M 0x00003F00 // Minutes
-#define HIB_CAL0_SEC_M 0x0000003F // Seconds
-#define HIB_CAL0_HR_S  16
-#define HIB_CAL0_MIN_S 8
-#define HIB_CAL0_SEC_S 0
+#define HIB_CAL0_VALID       0x80000000 // Valid Calendar Load
+#define HIB_CAL0_AMPM        0x00400000 // AM/PM Designation
+#define HIB_CAL0_HR_M        0x001F0000 // Hours
+#define HIB_CAL0_MIN_M       0x00003F00 // Minutes
+#define HIB_CAL0_SEC_M       0x0000003F // Seconds
+#define HIB_CAL0_HR_S        16
+#define HIB_CAL0_MIN_S       8
+#define HIB_CAL0_SEC_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CAL1 register.
 //
 //*****************************************************************************
-#define HIB_CAL1_VALID  0x80000000 // Valid Calendar Load
-#define HIB_CAL1_DOW_M  0x07000000 // Day of Week
-#define HIB_CAL1_YEAR_M 0x007F0000 // Year Value
-#define HIB_CAL1_MON_M  0x00000F00 // Month
-#define HIB_CAL1_DOM_M  0x0000001F // Day of Month
-#define HIB_CAL1_DOW_S  24
-#define HIB_CAL1_YEAR_S 16
-#define HIB_CAL1_MON_S  8
-#define HIB_CAL1_DOM_S  0
+#define HIB_CAL1_VALID       0x80000000 // Valid Calendar Load
+#define HIB_CAL1_DOW_M       0x07000000 // Day of Week
+#define HIB_CAL1_YEAR_M      0x007F0000 // Year Value
+#define HIB_CAL1_MON_M       0x00000F00 // Month
+#define HIB_CAL1_DOM_M       0x0000001F // Day of Month
+#define HIB_CAL1_DOW_S       24
+#define HIB_CAL1_YEAR_S      16
+#define HIB_CAL1_MON_S       8
+#define HIB_CAL1_DOM_S       0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CALLD0 register.
 //
 //*****************************************************************************
-#define HIB_CALLD0_AMPM  0x00400000 // AM/PM Designation
-#define HIB_CALLD0_HR_M  0x001F0000 // Hours
-#define HIB_CALLD0_MIN_M 0x00003F00 // Minutes
-#define HIB_CALLD0_SEC_M 0x0000003F // Seconds
-#define HIB_CALLD0_HR_S  16
-#define HIB_CALLD0_MIN_S 8
-#define HIB_CALLD0_SEC_S 0
+#define HIB_CALLD0_AMPM      0x00400000 // AM/PM Designation
+#define HIB_CALLD0_HR_M      0x001F0000 // Hours
+#define HIB_CALLD0_MIN_M     0x00003F00 // Minutes
+#define HIB_CALLD0_SEC_M     0x0000003F // Seconds
+#define HIB_CALLD0_HR_S      16
+#define HIB_CALLD0_MIN_S     8
+#define HIB_CALLD0_SEC_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CALLD1 register.
 //
 //*****************************************************************************
-#define HIB_CALLD1_DOW_M  0x07000000 // Day of Week
-#define HIB_CALLD1_YEAR_M 0x007F0000 // Year Value
-#define HIB_CALLD1_MON_M  0x00000F00 // Month
-#define HIB_CALLD1_DOM_M  0x0000001F // Day of Month
-#define HIB_CALLD1_DOW_S  24
-#define HIB_CALLD1_YEAR_S 16
-#define HIB_CALLD1_MON_S  8
-#define HIB_CALLD1_DOM_S  0
+#define HIB_CALLD1_DOW_M     0x07000000 // Day of Week
+#define HIB_CALLD1_YEAR_M    0x007F0000 // Year Value
+#define HIB_CALLD1_MON_M     0x00000F00 // Month
+#define HIB_CALLD1_DOM_M     0x0000001F // Day of Month
+#define HIB_CALLD1_DOW_S     24
+#define HIB_CALLD1_YEAR_S    16
+#define HIB_CALLD1_MON_S     8
+#define HIB_CALLD1_DOM_S     0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CALM0 register.
 //
 //*****************************************************************************
-#define HIB_CALM0_AMPM  0x00400000 // AM/PM Designation
-#define HIB_CALM0_HR_M  0x001F0000 // Hours
-#define HIB_CALM0_MIN_M 0x00003F00 // Minutes
-#define HIB_CALM0_SEC_M 0x0000003F // Seconds
-#define HIB_CALM0_HR_S  16
-#define HIB_CALM0_MIN_S 8
-#define HIB_CALM0_SEC_S 0
+#define HIB_CALM0_AMPM       0x00400000 // AM/PM Designation
+#define HIB_CALM0_HR_M       0x001F0000 // Hours
+#define HIB_CALM0_MIN_M      0x00003F00 // Minutes
+#define HIB_CALM0_SEC_M      0x0000003F // Seconds
+#define HIB_CALM0_HR_S       16
+#define HIB_CALM0_MIN_S      8
+#define HIB_CALM0_SEC_S      0
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CALM1 register.
 //
 //*****************************************************************************
-#define HIB_CALM1_DOM_M 0x0000001F // Day of Month
-#define HIB_CALM1_DOM_S 0
+#define HIB_CALM1_DOM_M      0x0000001F // Day of Month
+#define HIB_CALM1_DOM_S      0
 
 //*****************************************************************************
 //
@@ -361,19 +361,19 @@
                                       // Event
 #define HIB_TPCTL_MEMCLR_M 0x00000300 // HIB Memory Clear on Tamper Event
 #define HIB_TPCTL_MEMCLR_NONE \
-    0x00000000                        // Do not Clear HIB memory on
-                                      // tamper event
+    0x00000000 // Do not Clear HIB memory on
+               // tamper event
 #define HIB_TPCTL_MEMCLR_LOW32 \
-    0x00000100                        // Clear Lower 32 Bytes of HIB
-                                      // memory on tamper event
+    0x00000100 // Clear Lower 32 Bytes of HIB
+               // memory on tamper event
 #define HIB_TPCTL_MEMCLR_HIGH32 \
-    0x00000200                        // Clear upper 32 Bytes of HIB
-                                      // memory on tamper event
+    0x00000200 // Clear upper 32 Bytes of HIB
+               // memory on tamper event
 #define HIB_TPCTL_MEMCLR_ALL \
-    0x00000300                        // Clear all HIB memory on tamper
-                                      // event
-#define HIB_TPCTL_TPCLR 0x00000010    // Tamper Event Clear
-#define HIB_TPCTL_TPEN  0x00000001    // Tamper Module Enable
+    0x00000300                               // Clear all HIB memory on tamper
+                                             // event
+#define HIB_TPCTL_TPCLR           0x00000010 // Tamper Event Clear
+#define HIB_TPCTL_TPEN            0x00000001 // Tamper Module Enable
 
 //*****************************************************************************
 //
@@ -392,7 +392,7 @@
 // The following are defines for the bit fields in the HIB_TPIO register.
 //
 //*****************************************************************************
-#define HIB_TPIO_GFLTR3 0x08000000 // TMPR3 Glitch Filtering
+#define HIB_TPIO_GFLTR3           0x08000000 // TMPR3 Glitch Filtering
 #define HIB_TPIO_PUEN3 \
     0x04000000                     // TMPR3 Internal Weak Pull-up
                                    // Enable
@@ -412,10 +412,10 @@
 #define HIB_TPIO_EN1    0x00000100 // TMPR1Enable
 #define HIB_TPIO_GFLTR0 0x00000008 // TMPR0 Glitch Filtering
 #define HIB_TPIO_PUEN0 \
-    0x00000004                     // TMPR0 Internal Weak Pull-up
-                                   // Enable
-#define HIB_TPIO_LEV0 0x00000002   // TMPR0 Trigger Level
-#define HIB_TPIO_EN0  0x00000001   // TMPR0 Enable
+    0x00000004                       // TMPR0 Internal Weak Pull-up
+                                     // Enable
+#define HIB_TPIO_LEV0     0x00000002 // TMPR0 Trigger Level
+#define HIB_TPIO_EN0      0x00000001 // TMPR0 Enable
 
 //*****************************************************************************
 //
@@ -430,11 +430,11 @@
 // The following are defines for the bit fields in the HIB_TPLOG1 register.
 //
 //*****************************************************************************
-#define HIB_TPLOG1_XOSC  0x00010000 // Status of external 32
-#define HIB_TPLOG1_TRIG3 0x00000008 // Status of TMPR[3] Trigger
-#define HIB_TPLOG1_TRIG2 0x00000004 // Status of TMPR[2] Trigger
-#define HIB_TPLOG1_TRIG1 0x00000002 // Status of TMPR[1] Trigger
-#define HIB_TPLOG1_TRIG0 0x00000001 // Status of TMPR[0] Trigger
+#define HIB_TPLOG1_XOSC   0x00010000 // Status of external 32
+#define HIB_TPLOG1_TRIG3  0x00000008 // Status of TMPR[3] Trigger
+#define HIB_TPLOG1_TRIG2  0x00000004 // Status of TMPR[2] Trigger
+#define HIB_TPLOG1_TRIG1  0x00000002 // Status of TMPR[1] Trigger
+#define HIB_TPLOG1_TRIG0  0x00000001 // Status of TMPR[0] Trigger
 
 //*****************************************************************************
 //
@@ -449,11 +449,11 @@
 // The following are defines for the bit fields in the HIB_TPLOG3 register.
 //
 //*****************************************************************************
-#define HIB_TPLOG3_XOSC  0x00010000 // Status of external 32
-#define HIB_TPLOG3_TRIG3 0x00000008 // Status of TMPR[3] Trigger
-#define HIB_TPLOG3_TRIG2 0x00000004 // Status of TMPR[2] Trigger
-#define HIB_TPLOG3_TRIG1 0x00000002 // Status of TMPR[1] Trigger
-#define HIB_TPLOG3_TRIG0 0x00000001 // Status of TMPR[0] Trigger
+#define HIB_TPLOG3_XOSC   0x00010000 // Status of external 32
+#define HIB_TPLOG3_TRIG3  0x00000008 // Status of TMPR[3] Trigger
+#define HIB_TPLOG3_TRIG2  0x00000004 // Status of TMPR[2] Trigger
+#define HIB_TPLOG3_TRIG1  0x00000002 // Status of TMPR[1] Trigger
+#define HIB_TPLOG3_TRIG0  0x00000001 // Status of TMPR[0] Trigger
 
 //*****************************************************************************
 //
@@ -468,11 +468,11 @@
 // The following are defines for the bit fields in the HIB_TPLOG5 register.
 //
 //*****************************************************************************
-#define HIB_TPLOG5_XOSC  0x00010000 // Status of external 32
-#define HIB_TPLOG5_TRIG3 0x00000008 // Status of TMPR[3] Trigger
-#define HIB_TPLOG5_TRIG2 0x00000004 // Status of TMPR[2] Trigger
-#define HIB_TPLOG5_TRIG1 0x00000002 // Status of TMPR[1] Trigger
-#define HIB_TPLOG5_TRIG0 0x00000001 // Status of TMPR[0] Trigger
+#define HIB_TPLOG5_XOSC   0x00010000 // Status of external 32
+#define HIB_TPLOG5_TRIG3  0x00000008 // Status of TMPR[3] Trigger
+#define HIB_TPLOG5_TRIG2  0x00000004 // Status of TMPR[2] Trigger
+#define HIB_TPLOG5_TRIG1  0x00000002 // Status of TMPR[1] Trigger
+#define HIB_TPLOG5_TRIG0  0x00000001 // Status of TMPR[0] Trigger
 
 //*****************************************************************************
 //
@@ -487,25 +487,25 @@
 // The following are defines for the bit fields in the HIB_TPLOG7 register.
 //
 //*****************************************************************************
-#define HIB_TPLOG7_XOSC  0x00010000 // Status of external 32
-#define HIB_TPLOG7_TRIG3 0x00000008 // Status of TMPR[3] Trigger
-#define HIB_TPLOG7_TRIG2 0x00000004 // Status of TMPR[2] Trigger
-#define HIB_TPLOG7_TRIG1 0x00000002 // Status of TMPR[1] Trigger
-#define HIB_TPLOG7_TRIG0 0x00000001 // Status of TMPR[0] Trigger
+#define HIB_TPLOG7_XOSC   0x00010000 // Status of external 32
+#define HIB_TPLOG7_TRIG3  0x00000008 // Status of TMPR[3] Trigger
+#define HIB_TPLOG7_TRIG2  0x00000004 // Status of TMPR[2] Trigger
+#define HIB_TPLOG7_TRIG1  0x00000002 // Status of TMPR[1] Trigger
+#define HIB_TPLOG7_TRIG0  0x00000001 // Status of TMPR[0] Trigger
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_PP register.
 //
 //*****************************************************************************
-#define HIB_PP_TAMPER 0x00000002 // Tamper Pin Presence
-#define HIB_PP_WAKENC 0x00000001 // Wake Pin Presence
+#define HIB_PP_TAMPER     0x00000002 // Tamper Pin Presence
+#define HIB_PP_WAKENC     0x00000001 // Wake Pin Presence
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the HIB_CC register.
 //
 //*****************************************************************************
-#define HIB_CC_SYSCLKEN 0x00000001 // RTCOSC to System Clock Enable
+#define HIB_CC_SYSCLKEN   0x00000001 // RTCOSC to System Clock Enable
 
-#endif                             // __HW_HIBERNATE_H__
+#endif // __HW_HIBERNATE_H__

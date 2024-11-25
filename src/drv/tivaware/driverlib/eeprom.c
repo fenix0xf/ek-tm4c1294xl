@@ -63,15 +63,15 @@
 // device and the total EEPROM storage in bytes from the EESIZE register.
 //
 //*****************************************************************************
-#define BLOCKS_FROM_EESIZE(x) (((x)&EEPROM_EESIZE_BLKCNT_M) >> EEPROM_EESIZE_BLKCNT_S)
-#define SIZE_FROM_EESIZE(x)   ((((x)&EEPROM_EESIZE_WORDCNT_M) >> EEPROM_EESIZE_WORDCNT_S) * 4)
+#define BLOCKS_FROM_EESIZE(x) (((x) & EEPROM_EESIZE_BLKCNT_M) >> EEPROM_EESIZE_BLKCNT_S)
+#define SIZE_FROM_EESIZE(x)   ((((x) & EEPROM_EESIZE_WORDCNT_M) >> EEPROM_EESIZE_WORDCNT_S) * 4)
 
 //*****************************************************************************
 //
 // Useful macro to extract the offset from a linear address.
 //
 //*****************************************************************************
-#define OFFSET_FROM_ADDR(x) (((x) >> 2) & 0x0F)
+#define OFFSET_FROM_ADDR(x)   (((x) >> 2) & 0x0F)
 
 //*****************************************************************************
 //

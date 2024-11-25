@@ -78,7 +78,7 @@
 // sequencers.
 //
 //*****************************************************************************
-static uint8_t g_pui8OversampleFactor[2][3];
+static uint8_t      g_pui8OversampleFactor[2][3];
 
 //*****************************************************************************
 //
@@ -104,13 +104,11 @@ static uint_fast8_t _ADCIntNumberGet(uint32_t ui32Base, uint32_t ui32SequenceNum
     //
     if (CLASS_IS_TM4C123)
     {
-        ui8Int = ((ui32Base == ADC0_BASE) ? (INT_ADC0SS0_TM4C123 + ui32SequenceNum)
-                                          : (INT_ADC1SS0_TM4C123 + ui32SequenceNum));
+        ui8Int = ((ui32Base == ADC0_BASE) ? (INT_ADC0SS0_TM4C123 + ui32SequenceNum) : (INT_ADC1SS0_TM4C123 + ui32SequenceNum));
     }
     else if (CLASS_IS_TM4C129)
     {
-        ui8Int = ((ui32Base == ADC0_BASE) ? (INT_ADC0SS0_TM4C129 + ui32SequenceNum)
-                                          : (INT_ADC1SS0_TM4C129 + ui32SequenceNum));
+        ui8Int = ((ui32Base == ADC0_BASE) ? (INT_ADC0SS0_TM4C129 + ui32SequenceNum) : (INT_ADC1SS0_TM4C129 + ui32SequenceNum));
     }
     else
     {
@@ -511,8 +509,7 @@ void ADCSequenceConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t 
     //
     // Set the trigger event for this sample sequence.
     //
-    HWREG(ui32Base + ADC_O_EMUX) =
-        ((HWREG(ui32Base + ADC_O_EMUX) & ~(0xf << ui32SequenceNum)) | ((ui32Trigger & 0xf) << ui32SequenceNum));
+    HWREG(ui32Base + ADC_O_EMUX) = ((HWREG(ui32Base + ADC_O_EMUX) & ~(0xf << ui32SequenceNum)) | ((ui32Trigger & 0xf) << ui32SequenceNum));
 
     //
     // Set the priority for this sample sequence.
@@ -531,8 +528,7 @@ void ADCSequenceConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t 
         //
         ui32Gen = (ui32Gen - ADC_TRIGGER_PWM0) * 8;
 
-        HWREG(ui32Base + ADC_O_TSSEL) =
-            ((HWREG(ui32Base + ADC_O_TSSEL) & ~(0x30 << ui32Gen)) | ((ui32Trigger & 0x30) << ui32Gen));
+        HWREG(ui32Base + ADC_O_TSSEL) = ((HWREG(ui32Base + ADC_O_TSSEL) & ~(0x30 << ui32Gen)) | ((ui32Trigger & 0x30) << ui32Gen));
     }
 }
 
@@ -615,20 +611,17 @@ void ADCSequenceStepConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum, uint3
     //
     // Set the analog mux value for this step.
     //
-    HWREG(ui32Base + ADC_SSMUX) =
-        ((HWREG(ui32Base + ADC_SSMUX) & ~(0x0000000f << ui32Step)) | ((ui32Config & 0x0f) << ui32Step));
+    HWREG(ui32Base + ADC_SSMUX) = ((HWREG(ui32Base + ADC_SSMUX) & ~(0x0000000f << ui32Step)) | ((ui32Config & 0x0f) << ui32Step));
 
     //
     // Set the upper bits of the analog mux value for this step.
     //
-    HWREG(ui32Base + ADC_SSEMUX) =
-        ((HWREG(ui32Base + ADC_SSEMUX) & ~(0x0000000f << ui32Step)) | (((ui32Config & 0xf00) >> 8) << ui32Step));
+    HWREG(ui32Base + ADC_SSEMUX) = ((HWREG(ui32Base + ADC_SSEMUX) & ~(0x0000000f << ui32Step)) | (((ui32Config & 0xf00) >> 8) << ui32Step));
 
     //
     // Set the control value for this step.
     //
-    HWREG(ui32Base + ADC_SSCTL) =
-        ((HWREG(ui32Base + ADC_SSCTL) & ~(0x0000000f << ui32Step)) | (((ui32Config & 0xf0) >> 4) << ui32Step));
+    HWREG(ui32Base + ADC_SSCTL) = ((HWREG(ui32Base + ADC_SSCTL) & ~(0x0000000f << ui32Step)) | (((ui32Config & 0xf0) >> 4) << ui32Step));
 
     //
     // Set the sample and hold time for this step.  This is not available on
@@ -901,13 +894,14 @@ void ADCSoftwareOversampleConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum,
     //
     ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
     ASSERT(ui32SequenceNum < 3);
-    ASSERT(((ui32Factor == 2) || (ui32Factor == 4) || (ui32Factor == 8)) &&
-           ((ui32SequenceNum == 0) || (ui32Factor != 8)));
+    ASSERT(((ui32Factor == 2) || (ui32Factor == 4) || (ui32Factor == 8)) && ((ui32SequenceNum == 0) || (ui32Factor != 8)));
 
     //
     // Convert the oversampling factor to a shift factor.
     //
-    for (ui32Value = 0, ui32Factor >>= 1; ui32Factor; ui32Value++, ui32Factor >>= 1) {}
+    for (ui32Value = 0, ui32Factor >>= 1; ui32Factor; ui32Value++, ui32Factor >>= 1)
+    {
+    }
 
     //
     // Evaluate the ADC Instance.
@@ -944,10 +938,7 @@ void ADCSoftwareOversampleConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum,
 //! \return None.
 //
 //*****************************************************************************
-void ADCSoftwareOversampleStepConfigure(uint32_t ui32Base,
-                                        uint32_t ui32SequenceNum,
-                                        uint32_t ui32Step,
-                                        uint32_t ui32Config)
+void ADCSoftwareOversampleStepConfigure(uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Step, uint32_t ui32Config)
 {
     uint32_t ui32ADCInst;
 
@@ -985,14 +976,12 @@ void ADCSoftwareOversampleStepConfigure(uint32_t ui32Base,
     // Loop through the hardware steps that make up this step of the software
     // oversampled sequence.
     //
-    for (ui32SequenceNum = (1 << g_pui8OversampleFactor[ui32ADCInst][ui32SequenceNum]); ui32SequenceNum;
-         ui32SequenceNum--)
+    for (ui32SequenceNum = (1 << g_pui8OversampleFactor[ui32ADCInst][ui32SequenceNum]); ui32SequenceNum; ui32SequenceNum--)
     {
         //
         // Set the analog mux value for this step.
         //
-        HWREG(ui32Base + ADC_SSMUX) =
-            ((HWREG(ui32Base + ADC_SSMUX) & ~(0x0000000f << ui32Step)) | ((ui32Config & 0x0f) << ui32Step));
+        HWREG(ui32Base + ADC_SSMUX) = ((HWREG(ui32Base + ADC_SSMUX) & ~(0x0000000f << ui32Step)) | ((ui32Config & 0x0f) << ui32Step));
 
         //
         // Set the upper bits of the analog mux value for this step.
@@ -1037,10 +1026,7 @@ void ADCSoftwareOversampleStepConfigure(uint32_t ui32Base,
 //! \return None.
 //
 //*****************************************************************************
-void ADCSoftwareOversampleDataGet(uint32_t  ui32Base,
-                                  uint32_t  ui32SequenceNum,
-                                  uint32_t* pui32Buffer,
-                                  uint32_t  ui32Count)
+void ADCSoftwareOversampleDataGet(uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t* pui32Buffer, uint32_t ui32Count)
 {
     uint32_t ui32Idx, ui32Accum;
     uint32_t ui32ADCInst;
@@ -1128,13 +1114,15 @@ void ADCHardwareOversampleConfigure(uint32_t ui32Base, uint32_t ui32Factor)
     // Check the arguments.
     //
     ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-    ASSERT(((ui32Factor == 0) || (ui32Factor == 2) || (ui32Factor == 4) || (ui32Factor == 8) || (ui32Factor == 16) ||
-            (ui32Factor == 32) || (ui32Factor == 64)));
+    ASSERT(((ui32Factor == 0) || (ui32Factor == 2) || (ui32Factor == 4) || (ui32Factor == 8) || (ui32Factor == 16) || (ui32Factor == 32) ||
+            (ui32Factor == 64)));
 
     //
     // Convert the oversampling factor to a shift factor.
     //
-    for (ui32Value = 0, ui32Factor >>= 1; ui32Factor; ui32Value++, ui32Factor >>= 1) {}
+    for (ui32Value = 0, ui32Factor >>= 1; ui32Factor; ui32Value++, ui32Factor >>= 1)
+    {
+    }
 
     //
     // Write the shift factor to the ADC to configure the hardware oversampler.
@@ -1687,12 +1675,11 @@ void ADCPhaseDelaySet(uint32_t ui32Base, uint32_t ui32Phase)
     // Check the arguments.
     //
     ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-    ASSERT((ui32Phase == ADC_PHASE_0) || (ui32Phase == ADC_PHASE_22_5) || (ui32Phase == ADC_PHASE_45) ||
-           (ui32Phase == ADC_PHASE_67_5) || (ui32Phase == ADC_PHASE_90) || (ui32Phase == ADC_PHASE_112_5) ||
-           (ui32Phase == ADC_PHASE_135) || (ui32Phase == ADC_PHASE_157_5) || (ui32Phase == ADC_PHASE_180) ||
-           (ui32Phase == ADC_PHASE_202_5) || (ui32Phase == ADC_PHASE_225) || (ui32Phase == ADC_PHASE_247_5) ||
-           (ui32Phase == ADC_PHASE_270) || (ui32Phase == ADC_PHASE_292_5) || (ui32Phase == ADC_PHASE_315) ||
-           (ui32Phase == ADC_PHASE_337_5));
+    ASSERT((ui32Phase == ADC_PHASE_0) || (ui32Phase == ADC_PHASE_22_5) || (ui32Phase == ADC_PHASE_45) || (ui32Phase == ADC_PHASE_67_5) ||
+           (ui32Phase == ADC_PHASE_90) || (ui32Phase == ADC_PHASE_112_5) || (ui32Phase == ADC_PHASE_135) ||
+           (ui32Phase == ADC_PHASE_157_5) || (ui32Phase == ADC_PHASE_180) || (ui32Phase == ADC_PHASE_202_5) ||
+           (ui32Phase == ADC_PHASE_225) || (ui32Phase == ADC_PHASE_247_5) || (ui32Phase == ADC_PHASE_270) ||
+           (ui32Phase == ADC_PHASE_292_5) || (ui32Phase == ADC_PHASE_315) || (ui32Phase == ADC_PHASE_337_5));
 
     //
     // Set the phase delay.

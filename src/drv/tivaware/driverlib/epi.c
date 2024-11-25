@@ -60,8 +60,7 @@
 // Helper masks for chip select configuration options.
 //
 //*****************************************************************************
-#define EPI_HB8_CS_MASK \
-    (EPI_HB8_MODE_FIFO | EPI_HB8_RDWAIT_3 | EPI_HB8_WRWAIT_3 | EPI_HB8_RDHIGH | EPI_HB8_WRHIGH | EPI_HB8_ALE_HIGH)
+#define EPI_HB8_CS_MASK  (EPI_HB8_MODE_FIFO | EPI_HB8_RDWAIT_3 | EPI_HB8_WRWAIT_3 | EPI_HB8_RDHIGH | EPI_HB8_WRHIGH | EPI_HB8_ALE_HIGH)
 
 #define EPI_HB16_CS_MASK (EPI_HB8_CS_MASK | EPI_HB16_BURST_TRAFFIC)
 
@@ -96,7 +95,7 @@
 //! \return None.
 //
 //*****************************************************************************
-extern void EPIWorkaroundWordWrite(uint32_t* pui32Addr, uint32_t ui32Value);
+extern void     EPIWorkaroundWordWrite(uint32_t* pui32Addr, uint32_t ui32Value);
 
 //*****************************************************************************
 //
@@ -147,7 +146,7 @@ extern uint32_t EPIWorkaroundWordRead(uint32_t* pui32Addr);
 //! \return None.
 //
 //*****************************************************************************
-extern void EPIWorkaroundHWordWrite(uint16_t* pui16Addr, uint16_t ui16Value);
+extern void     EPIWorkaroundHWordWrite(uint16_t* pui16Addr, uint16_t ui16Value);
 
 //*****************************************************************************
 //
@@ -198,7 +197,7 @@ extern uint16_t EPIWorkaroundHWordRead(uint16_t* pui16Addr);
 //! \return None.
 //
 //*****************************************************************************
-extern void EPIWorkaroundByteWrite(uint8_t* pui8Addr, uint8_t ui8Value);
+extern void     EPIWorkaroundByteWrite(uint8_t* pui8Addr, uint8_t ui8Value);
 
 //*****************************************************************************
 //
@@ -223,7 +222,7 @@ extern void EPIWorkaroundByteWrite(uint8_t* pui8Addr, uint8_t ui8Value);
 //! \return The 8-bit byte stored at address \e pui8Addr.
 //
 //*****************************************************************************
-extern uint8_t EPIWorkaroundByteRead(uint8_t* pui8Addr);
+extern uint8_t  EPIWorkaroundByteRead(uint8_t* pui8Addr);
 
 //*****************************************************************************
 //
@@ -247,14 +246,14 @@ extern uint8_t EPIWorkaroundByteRead(uint8_t* pui8Addr);
 //! \return None.
 //
 //*****************************************************************************
-void EPIModeSet(uint32_t ui32Base, uint32_t ui32Mode)
+void            EPIModeSet(uint32_t ui32Base, uint32_t ui32Mode)
 {
     //
     // Check the arguments.
     //
     ASSERT(ui32Base == EPI0_BASE);
-    ASSERT((ui32Mode == EPI_MODE_GENERAL) || (ui32Mode == EPI_MODE_SDRAM) || (ui32Mode == EPI_MODE_HB8) ||
-           (ui32Mode == EPI_MODE_HB16) || (ui32Mode == EPI_MODE_DISABLE));
+    ASSERT((ui32Mode == EPI_MODE_GENERAL) || (ui32Mode == EPI_MODE_SDRAM) || (ui32Mode == EPI_MODE_HB8) || (ui32Mode == EPI_MODE_HB16) ||
+           (ui32Mode == EPI_MODE_DISABLE));
 
     //
     // Write the mode word to the register.
@@ -564,8 +563,7 @@ void EPIConfigHB8Set(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxWai
     //
     // Determine the CS and word access modes.
     //
-    HWREG(ui32Base + EPI_O_HB8CFG2) =
-        ((ui32Config & EPI_HB8_CSBAUD) ? EPI_HB8CFG2_CSBAUD : 0) | ((ui32Config & EPI_HB8_CSCFG_MASK) << 15);
+    HWREG(ui32Base + EPI_O_HB8CFG2) = ((ui32Config & EPI_HB8_CSBAUD) ? EPI_HB8CFG2_CSBAUD : 0) | ((ui32Config & EPI_HB8_CSCFG_MASK) << 15);
 
     //
     // Fill in the max wait field of the configuration word.
@@ -1254,7 +1252,9 @@ uint32_t EPIPSRAMConfigRegGet(uint32_t ui32Base, uint32_t ui32CS)
     //
     // Wait for PSRAM read enable to deassert if necessary.
     //
-    while (HWREG(ui32Base + ui32Offset) & EPI_HB16CFG_RDCRE) {}
+    while (HWREG(ui32Base + ui32Offset) & EPI_HB16CFG_RDCRE)
+    {
+    }
 
     //
     // Return the EPI PSRAM configuration register contents.

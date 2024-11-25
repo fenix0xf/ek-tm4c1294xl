@@ -21,9 +21,12 @@ __used void* memcpy(void* restrict dest, const void* restrict src, size_t n)
 #endif
 
     typedef uint32_t __attribute__((__may_alias__)) u32;
-    uint32_t w, x;
+    uint32_t                                        w, x;
 
-    for (; (uintptr_t)s % 4 && n; n--) { *d++ = *s++; }
+    for (; (uintptr_t)s % 4 && n; n--)
+    {
+        *d++ = *s++;
+    }
 
     if ((uintptr_t)d % 4 == 0)
     {
@@ -177,7 +180,10 @@ __used void* memcpy(void* restrict dest, const void* restrict src, size_t n)
     return dest;
 
 #else  /* __GNUC__ */
-    for (; n; n--) { *d++ = *s++; }
+    for (; n; n--)
+    {
+        *d++ = *s++;
+    }
     return dest;
 #endif /* __GNUC__ */
 }

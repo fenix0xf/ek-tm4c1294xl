@@ -61,12 +61,12 @@ extern uintptr_t g_ld_ebss;
  * Global heap for system malloc() function.
  */
 HAL_HEAP_SECTION(g_heap)
-static char g_heap[64 * 1024];
+static char                  g_heap[64 * 1024];
 
 static intptr_t              g_heap_brk;
 static hal_crt_stdout_func_t g_stdout_func, g_stderr_func;
 
-void hal_crt_init(hal_crt_stdout_func_t stdout_func, hal_crt_stdout_func_t stderr_func)
+void                         hal_crt_init(hal_crt_stdout_func_t stdout_func, hal_crt_stdout_func_t stderr_func)
 {
     /* Copy the data segment initializers from FLASH to SRAM. */
     memcpy(&g_ld_data, &g_ld_ldata, LD_VAR(g_ld_edata) - LD_VAR(g_ld_data));
@@ -171,10 +171,7 @@ void* sbrk(intptr_t incr)
     {
         hal_ll_cr_sect_leave();
 
-        hal_errorf(SYSCALL_PREFIX "NO HEAP MEMORY! sbrk(%d bytes), used/total: %d/%u bytes",
-                   (int)incr,
-                   used,
-                   sizeof(g_heap));
+        hal_errorf(SYSCALL_PREFIX "NO HEAP MEMORY! sbrk(%d bytes), used/total: %d/%u bytes", (int)incr, used, sizeof(g_heap));
 
         errno = ENOMEM;
         return (void*)(-1);
@@ -186,10 +183,7 @@ void* sbrk(intptr_t incr)
 
     if (HAL_UNLIKELY(g_heap_brk < (ptrdiff_t)g_heap))
     {
-        hal_errorf(SYSCALL_PREFIX "HEAP FREE ERROR! _sbrk(%d bytes), used/total: %d/%u bytes",
-                   (int)incr,
-                   used,
-                   sizeof(g_heap));
+        hal_errorf(SYSCALL_PREFIX "HEAP FREE ERROR! _sbrk(%d bytes), used/total: %d/%u bytes", (int)incr, used, sizeof(g_heap));
 
         hal_mcu_halt();
     }

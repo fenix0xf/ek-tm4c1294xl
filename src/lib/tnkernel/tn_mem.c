@@ -40,7 +40,7 @@ static int   fm_put(TN_FMP* fmp, void* mem);
 //----------------------------------------------------------------------------
 //  Structure's field fmp->id_fmp have to be set to 0
 //----------------------------------------------------------------------------
-int tn_fmem_create(TN_FMP* fmp, unsigned char* start_addr, unsigned long block_size, unsigned long num_blocks)
+int          tn_fmem_create(TN_FMP* fmp, unsigned char* start_addr, unsigned long block_size, unsigned long num_blocks)
 {
     unsigned char** p_tmp;
     unsigned char*  p_block;

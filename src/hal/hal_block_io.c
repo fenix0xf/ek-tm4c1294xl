@@ -72,8 +72,7 @@ bool hal_block_io_is_correct(const struct hal_block_io* io)
         return false;
     }
 
-    if ((io->size == 0) || (io->size < io->pg_size) || (io->size < io->rd_align) || (io->size % io->pg_size) ||
-        (io->size % io->rd_align))
+    if ((io->size == 0) || (io->size < io->pg_size) || (io->size < io->rd_align) || (io->size % io->pg_size) || (io->size % io->rd_align))
     {
         hal_error("incorrect io->size!");
         return false;
@@ -124,7 +123,7 @@ bool hal_block_io_read(const struct hal_block_io* io, uintptr_t addr, void* buf,
 
     const uintptr_t aligned_addr = addr & ~(io->rd_align - 1);
 
-    uint8_t* pbuf = (uint8_t*)buf;
+    uint8_t*        pbuf = (uint8_t*)buf;
 
     if (addr != aligned_addr)
     {
@@ -140,7 +139,10 @@ bool hal_block_io_read(const struct hal_block_io* io, uintptr_t addr, void* buf,
 
         addr += tlen;
 
-        for (; len && tlen; len--, tlen--) { *pbuf++ = *tbuf++; }
+        for (; len && tlen; len--, tlen--)
+        {
+            *pbuf++ = *tbuf++;
+        }
     }
 
     if (len >= io->rd_align)
@@ -171,7 +173,10 @@ bool hal_block_io_read(const struct hal_block_io* io, uintptr_t addr, void* buf,
 
     const uint8_t* tbuf = (uint8_t*)io->pg_buf;
 
-    while (len--) { *pbuf++ = *tbuf++; }
+    while (len--)
+    {
+        *pbuf++ = *tbuf++;
+    }
 
     return true;
 }
@@ -201,7 +206,10 @@ bool hal_block_io_write(const struct hal_block_io* io, uintptr_t addr, const voi
 
             uint8_t* bbuf = (uint8_t*)io->pg_buf + bdata_addr;
 
-            for (size_t i = 0; i < blen; ++i) { *bbuf++ = *pbuf++; }
+            for (size_t i = 0; i < blen; ++i)
+            {
+                *bbuf++ = *pbuf++;
+            }
 
             if (!pg_erase_write(io, block_addr, io->pg_buf))
             {

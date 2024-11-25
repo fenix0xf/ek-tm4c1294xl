@@ -44,13 +44,13 @@
 #define ALIGN_SIZE(size, align) (((size) + (align) - (size_t)1) & ~((align) - (size_t)1))
 
 /* Alignment of allocated block */
-#define MALLOC_ALIGN   (8u)
-#define CHUNK_ALIGN    (sizeof(void*))
-#define MALLOC_PADDING ((MAX(MALLOC_ALIGN, CHUNK_ALIGN)) - CHUNK_ALIGN)
+#define MALLOC_ALIGN            (8u)
+#define CHUNK_ALIGN             (sizeof(void*))
+#define MALLOC_PADDING          ((MAX(MALLOC_ALIGN, CHUNK_ALIGN)) - CHUNK_ALIGN)
 
 /* As well as the minimal allocation size to hold a free pointer. */
-#define MALLOC_MINSIZE (sizeof(void*))
-#define MAX_ALLOC_SIZE (0x80000000u)
+#define MALLOC_MINSIZE          (sizeof(void*))
+#define MAX_ALLOC_SIZE          (0x80000000u)
 
 struct malloc_chunk
 {
@@ -75,18 +75,18 @@ struct malloc_chunk
      */
 
     /* Size of the allocated payload area, including size before CHUNK_OFFSET. */
-    ssize_t size;
+    ssize_t              size;
 
     /* Since here, the memory is either the next free block, or data load. */
     struct malloc_chunk* next;
 };
 
-void* __libc_malloc_lock = NULL;                 /* OS mutex primitive, use libc_set_malloc_lock() to set it. */
+void*                       __libc_malloc_lock = NULL; /* OS mutex primitive, use libc_set_malloc_lock() to set it. */
 
 static struct malloc_chunk* g_free_list  = NULL; /* List header of free blocks. */
 static char*                g_sbrk_start = NULL; /* Starting point of memory allocated from system. */
 
-#define CHUNK_OFFSET ((size_t)(&(((struct malloc_chunk*)0)->next)))
+#define CHUNK_OFFSET    ((size_t)(&(((struct malloc_chunk*)0)->next)))
 
 /* Size of smallest possible chunk. A memory piece smaller than this size won't be able to create a chunk. */
 #define MALLOC_MINCHUNK (CHUNK_OFFSET + MALLOC_PADDING + MALLOC_MINSIZE)
@@ -181,7 +181,7 @@ void* malloc(size_t s)
     char *               ptr, *align_ptr;
     int                  offset;
 
-    size_t alloc_size;
+    size_t               alloc_size;
 
     alloc_size  = ALIGN_SIZE(s, CHUNK_ALIGN); /* Size of aligned data load. */
     alloc_size += MALLOC_PADDING;             /* Padding. */
@@ -282,7 +282,10 @@ void* malloc(size_t s)
                     else
                     {
                         /* Search for the chunk before the one to be removed. */
-                        while (p != r->next) { r = r->next; }
+                        while (p != r->next)
+                        {
+                            r = r->next;
+                        }
                         r->next = NULL;
                     }
 

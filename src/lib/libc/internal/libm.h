@@ -80,7 +80,7 @@ union ldshape
 /* Support non-nearest rounding mode.  */
 #define WANT_ROUNDING 1
 /* Support signaling NaNs.  */
-#define WANT_SNAN 0
+#define WANT_SNAN     0
 
 #if WANT_SNAN
 #error SNaN is unsupported
@@ -102,7 +102,7 @@ static double_t roundtoint(double_t);
 /* Convert x to nearest int in all rounding modes, ties have to be rounded
    consistently with roundtoint.  If the result is not representible in an
    int32_t then the semantics is unspecified.  */
-static int32_t converttoint(double_t);
+static int32_t  converttoint(double_t);
 #endif
 
 /* Evaluate an expression as the specified type. With standard excess
@@ -269,19 +269,19 @@ static inline void fp_force_evall(long double x)
         (d) = asfloat(w);    \
     } while (0)
 
-int __rem_pio2_large(double*, double*, int, int, int);
+int         __rem_pio2_large(double*, double*, int, int, int);
 
-int    __rem_pio2(double, double*);
-double __sin(double, double, int);
-double __cos(double, double);
-double __tan(double, double, int);
-double __expo2(double, double);
+int         __rem_pio2(double, double*);
+double      __sin(double, double, int);
+double      __cos(double, double);
+double      __tan(double, double, int);
+double      __expo2(double, double);
 
-int   __rem_pio2f(float, double*);
-float __sindf(double);
-float __cosdf(double);
-float __tandf(double, int);
-float __expo2f(float, float);
+int         __rem_pio2f(float, double*);
+float       __sindf(double);
+float       __cosdf(double);
+float       __tandf(double, int);
+float       __expo2f(float, float);
 
 int         __rem_pio2l(long double, long double*);
 long double __sinl(long double, long double, int);
@@ -291,21 +291,21 @@ long double __tanl(long double, long double, int);
 long double __polevll(long double, const long double*, int);
 long double __p1evll(long double, const long double*, int);
 
-extern int __signgam;
-double     __lgamma_r(double, int*);
-float      __lgammaf_r(float, int*);
+extern int  __signgam;
+double      __lgamma_r(double, int*);
+float       __lgammaf_r(float, int*);
 
 /* error handling functions */
-float  __math_xflowf(uint32_t, float);
-float  __math_uflowf(uint32_t);
-float  __math_oflowf(uint32_t);
-float  __math_divzerof(uint32_t);
-float  __math_invalidf(float);
-double __math_xflow(uint32_t, double);
-double __math_uflow(uint32_t);
-double __math_oflow(uint32_t);
-double __math_divzero(uint32_t);
-double __math_invalid(double);
+float       __math_xflowf(uint32_t, float);
+float       __math_uflowf(uint32_t);
+float       __math_oflowf(uint32_t);
+float       __math_divzerof(uint32_t);
+float       __math_invalidf(float);
+double      __math_xflow(uint32_t, double);
+double      __math_uflow(uint32_t);
+double      __math_oflow(uint32_t);
+double      __math_divzero(uint32_t);
+double      __math_invalid(double);
 #if LDBL_MANT_DIG != DBL_MANT_DIG
 long double __math_invalidl(long double);
 #endif

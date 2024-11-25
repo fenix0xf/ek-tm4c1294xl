@@ -329,8 +329,8 @@ void MPURegionSet(uint32_t ui32Region, uint32_t ui32Addr, uint32_t ui32Flags)
     // and B bits to fixed values that are suitable for all Tiva C and
     // E Series memory.
     //
-    HWREG(NVIC_MPU_ATTR) = ((ui32Flags & ~(NVIC_MPU_ATTR_TEX_M | NVIC_MPU_ATTR_CACHEABLE)) | NVIC_MPU_ATTR_SHAREABLE |
-                            NVIC_MPU_ATTR_BUFFRABLE);
+    HWREG(NVIC_MPU_ATTR) =
+        ((ui32Flags & ~(NVIC_MPU_ATTR_TEX_M | NVIC_MPU_ATTR_CACHEABLE)) | NVIC_MPU_ATTR_SHAREABLE | NVIC_MPU_ATTR_BUFFRABLE);
 }
 
 //*****************************************************************************

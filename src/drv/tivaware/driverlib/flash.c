@@ -145,7 +145,9 @@ int32_t FlashErase(uint32_t ui32Address)
     //
     // Wait until the block has been erased.
     //
-    while (HWREG(FLASH_FMC) & FLASH_FMC_ERASE) {}
+    while (HWREG(FLASH_FMC) & FLASH_FMC_ERASE)
+    {
+    }
 
     //
     // Return an error if an access violation or erase error occurred.
@@ -225,7 +227,9 @@ int32_t FlashProgram(uint32_t* pui32Data, uint32_t ui32Address, uint32_t ui32Cou
         //
         // Wait until the write buffer has been programmed.
         //
-        while (HWREG(FLASH_FMC2) & FLASH_FMC2_WRBUF) {}
+        while (HWREG(FLASH_FMC2) & FLASH_FMC2_WRBUF)
+        {
+        }
     }
 
     //
@@ -287,8 +291,7 @@ tFlashProtection FlashProtectGet(uint32_t ui32Address)
     // Check the appropriate protection bits for the block of memory that
     // is specified by the address.
     //
-    switch ((((ui32FMPRE >> (ui32Address / FLASH_PROTECT_SIZE)) & 0x1) << 1) |
-            ((ui32FMPPE >> (ui32Address / FLASH_PROTECT_SIZE)) & 0x1))
+    switch ((((ui32FMPRE >> (ui32Address / FLASH_PROTECT_SIZE)) & 0x1) << 1) | ((ui32FMPPE >> (ui32Address / FLASH_PROTECT_SIZE)) & 0x1))
     {
         //
         // This block is marked as execute only (that is, it can not be erased
@@ -488,7 +491,9 @@ int32_t FlashProtectSave(void)
         //
         // Wait until the write has completed.
         //
-        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT) {}
+        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT)
+        {
+        }
     }
 
     //
@@ -652,7 +657,9 @@ int32_t FlashUserSave(void)
     //
     // Wait until the write has completed.
     //
-    while (HWREG(FLASH_FMC) & FLASH_FMC_COMT) {}
+    while (HWREG(FLASH_FMC) & FLASH_FMC_COMT)
+    {
+    }
 
     //
     // Tell the flash controller to write the USER1 Register.
@@ -663,7 +670,9 @@ int32_t FlashUserSave(void)
     //
     // Wait until the write has completed.
     //
-    while (HWREG(FLASH_FMC) & FLASH_FMC_COMT) {}
+    while (HWREG(FLASH_FMC) & FLASH_FMC_COMT)
+    {
+    }
 
     //
     // Success.
@@ -711,7 +720,9 @@ int32_t FlashAllUserRegisterSave(void)
         //
         // Wait until the write has completed.
         //
-        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT) {}
+        while (HWREG(FLASH_FMC) & FLASH_FMC_COMT)
+        {
+        }
     }
 
     //

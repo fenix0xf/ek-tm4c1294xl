@@ -18,19 +18,20 @@
 /* Convenient bit representation for modifier flags, which all fall
  * within 31 codepoints of the space character. */
 
-#define ALT_FORM (1U << '#' - ' ')
-#define ZERO_PAD (1U << '0' - ' ')
-#define LEFT_ADJ (1U << '-' - ' ')
-#define PAD_POS  (1U << ' ' - ' ')
-#define MARK_POS (1U << '+' - ' ')
-#define GROUPED  (1U << '\'' - ' ')
+#define ALT_FORM  (1U << '#' - ' ')
+#define ZERO_PAD  (1U << '0' - ' ')
+#define LEFT_ADJ  (1U << '-' - ' ')
+#define PAD_POS   (1U << ' ' - ' ')
+#define MARK_POS  (1U << '+' - ' ')
+#define GROUPED   (1U << '\'' - ' ')
 
-#define FLAGMASK (ALT_FORM | ZERO_PAD | LEFT_ADJ | PAD_POS | MARK_POS | GROUPED)
+#define FLAGMASK  (ALT_FORM | ZERO_PAD | LEFT_ADJ | PAD_POS | MARK_POS | GROUPED)
 
 /* State machine to accept length modifiers + conversion specifiers.
  * Result is 0 on failure, or an argument type to pop on success. */
 
-enum {
+enum
+{
     BARE,
     LPRE,
     LLPRE,
@@ -209,29 +210,44 @@ static void pad(FILE* f, char c, int w, int l, int fl)
     }
     l = w - l;
     memset(pad, c, l > sizeof pad ? sizeof pad : l);
-    for (; l >= sizeof pad; l -= sizeof pad) { out(f, pad, sizeof pad); }
+    for (; l >= sizeof pad; l -= sizeof pad)
+    {
+        out(f, pad, sizeof pad);
+    }
     out(f, pad, l);
 }
 
 static const char xdigits[16 + 1] = {"0123456789ABCDEF"};
 
-static char* fmt_x(uintmax_t x, char* s, int lower)
+static char*      fmt_x(uintmax_t x, char* s, int lower)
 {
-    for (; x; x >>= 4) { *--s = xdigits[(x & 15)] | lower; }
+    for (; x; x >>= 4)
+    {
+        *--s = xdigits[(x & 15)] | lower;
+    }
     return s;
 }
 
 static char* fmt_o(uintmax_t x, char* s)
 {
-    for (; x; x >>= 3) { *--s = '0' + (x & 7); }
+    for (; x; x >>= 3)
+    {
+        *--s = '0' + (x & 7);
+    }
     return s;
 }
 
 static char* fmt_u(uintmax_t x, char* s)
 {
     unsigned long y;
-    for (; x > ULONG_MAX; x /= 10) { *--s = '0' + x % 10; }
-    for (y = x; y; y /= 10) { *--s = '0' + y % 10; }
+    for (; x > ULONG_MAX; x /= 10)
+    {
+        *--s = '0' + x % 10;
+    }
+    for (y = x; y; y /= 10)
+    {
+        *--s = '0' + y % 10;
+    }
     return s;
 }
 
@@ -318,7 +334,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
         if (re)
         {
             round *= 1 << (LDBL_MANT_DIG % 4);
-            while (re--) { round *= 16; }
+            while (re--)
+            {
+                round *= 16;
+            }
             if (*prefix == '-')
             {
                 y  = -y;
@@ -412,7 +431,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
         {
             *--a = carry;
         }
-        while (z > a && !z[-1]) { z--; }
+        while (z > a && !z[-1])
+        {
+            z--;
+        }
         e2 -= sh;
     }
     while (e2 < 0)
@@ -444,8 +466,7 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
 
     if (a < z)
     {
-        for (i = 10, e = 9 * (r - a); *a >= i; i *= 10, e++)
-            ;
+        for (i = 10, e = 9 * (r - a); *a >= i; i *= 10, e++);
     }
     else
     {
@@ -461,8 +482,7 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
         d  = r + 1 + ((j + 9 * LDBL_MAX_EXP) / 9 - LDBL_MAX_EXP);
         j += 9 * LDBL_MAX_EXP;
         j %= 9;
-        for (i = 10, j++; j < 9; i *= 10, j++)
-            ;
+        for (i = 10, j++; j < 9; i *= 10, j++);
         x = *d % i;
         /* Are there any significant digits past j? */
         if (x || d + 1 != z)
@@ -503,8 +523,7 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
                     }
                     (*d)++;
                 }
-                for (i = 10, e = 9 * (r - a); *a >= i; i *= 10, e++)
-                    ;
+                for (i = 10, e = 9 * (r - a); *a >= i; i *= 10, e++);
             }
         }
         if (z > d + 1)
@@ -512,8 +531,7 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
             z = d + 1;
         }
     }
-    for (; z > a && !z[-1]; z--)
-        ;
+    for (; z > a && !z[-1]; z--);
 
     if ((t | 32) == 'g')
     {
@@ -536,8 +554,7 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
             /* Count trailing zeros in last place */
             if (z > a && z[-1])
             {
-                for (i = 10, j = 0; z[-1] % i == 0; i *= 10, j++)
-                    ;
+                for (i = 10, j = 0; z[-1] % i == 0; i *= 10, j++);
             }
             else
             {
@@ -572,7 +589,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
     else
     {
         estr = fmt_u(e < 0 ? -e : e, ebuf);
-        while (ebuf - estr < 2) { *--estr = '0'; }
+        while (ebuf - estr < 2)
+        {
+            *--estr = '0';
+        }
         *--estr = (e < 0 ? '-' : '+');
         *--estr = t;
         if (ebuf - estr > INT_MAX - l)
@@ -601,7 +621,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
             char* s = fmt_u(*d, buf + 9);
             if (d != a)
             {
-                while (s > buf) { *--s = '0'; }
+                while (s > buf)
+                {
+                    *--s = '0';
+                }
             }
             else if (s == buf + 9)
             {
@@ -616,7 +639,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
         for (; d < z && p > 0; d++, p -= 9)
         {
             char* s = fmt_u(*d, buf + 9);
-            while (s > buf) { *--s = '0'; }
+            while (s > buf)
+            {
+                *--s = '0';
+            }
             out(f, s, MIN(9, p));
         }
         pad(f, '0', p + 9, 9, 0);
@@ -636,7 +662,10 @@ static int fmt_fp(FILE* f, long double y, int w, int p, int fl, int t)
             }
             if (d != a)
             {
-                while (s > buf) { *--s = '0'; }
+                while (s > buf)
+                {
+                    *--s = '0';
+                }
             }
             else
             {
@@ -708,9 +737,13 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
         }
 
         /* Handle literal text and %% format specifiers */
-        for (a = s; *s && *s != '%'; s++) {}
+        for (a = s; *s && *s != '%'; s++)
+        {
+        }
 
-        for (z = s; s[0] == '%' && s[1] == '%'; z++, s += 2) {}
+        for (z = s; s[0] == '%' && s[1] == '%'; z++, s += 2)
+        {
+        }
 
         if (z - a > INT_MAX - cnt)
         {
@@ -742,7 +775,10 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
         }
 
         /* Read modifier flags */
-        for (fl = 0; (unsigned)*s - ' ' < 32 && (FLAGMASK & (1U << *s - ' ')); s++) { fl |= 1U << *s - ' '; }
+        for (fl = 0; (unsigned)*s - ' ' < 32 && (FLAGMASK & (1U << *s - ' ')); s++)
+        {
+            fl |= 1U << *s - ' ';
+        }
 
         /* Read field width */
         if (*s == '*')
@@ -1059,8 +1095,13 @@ static int printf_core(FILE* f, const char* fmt, va_list* ap, union arg* nl_arg,
         return 0;
     }
 
-    for (i = 1; i <= NL_ARGMAX && nl_type[i]; i++) { pop_arg(nl_arg + i, nl_type[i], ap); }
-    for (; i <= NL_ARGMAX && !nl_type[i]; i++) {}
+    for (i = 1; i <= NL_ARGMAX && nl_type[i]; i++)
+    {
+        pop_arg(nl_arg + i, nl_type[i], ap);
+    }
+    for (; i <= NL_ARGMAX && !nl_type[i]; i++)
+    {
+    }
 
     if (i <= NL_ARGMAX)
     {

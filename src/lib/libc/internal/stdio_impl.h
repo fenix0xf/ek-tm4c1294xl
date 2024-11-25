@@ -44,10 +44,10 @@ struct _IO_FILE
 size_t __stdio_read(FILE*, unsigned char*, size_t);
 size_t __stdio_write(FILE*, const unsigned char*, size_t);
 
-int __toread(FILE*);
-int __towrite(FILE*);
-int __overflow(FILE*, int);
-int __uflow(FILE*);
+int    __toread(FILE*);
+int    __towrite(FILE*);
+int    __overflow(FILE*, int);
+int    __uflow(FILE*);
 
 size_t __fwritex(const unsigned char*, size_t, FILE*);
 
@@ -56,7 +56,6 @@ size_t __fwritex(const unsigned char*, size_t, FILE*);
 
 #define getc_unlocked(f) (((f)->rpos != (f)->rend) ? *(f)->rpos++ : __uflow((f)))
 
-#define putc_unlocked(c, f)                                                                           \
-    ((((unsigned char)(c) != (f)->lbf && (f)->wpos != (f)->wend)) ? *(f)->wpos++ = (unsigned char)(c) \
-                                                                  : __overflow((f), (unsigned char)(c)))
+#define putc_unlocked(c, f) \
+    ((((unsigned char)(c) != (f)->lbf && (f)->wpos != (f)->wend)) ? *(f)->wpos++ = (unsigned char)(c) : __overflow((f), (unsigned char)(c)))
 #endif

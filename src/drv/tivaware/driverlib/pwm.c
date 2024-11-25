@@ -62,9 +62,9 @@
 //
 //*****************************************************************************
 #define PWM_GEN_BADDR(_mod_, _gen_)     ((_mod_) + (_gen_))
-#define PWM_GEN_EXT_BADDR(_mod_, _gen_) ((_mod_) + PWM_GEN_EXT_0 + ((_gen_)-PWM_GEN_0) * 2)
-#define PWM_OUT_BADDR(_mod_, _out_)     ((_mod_) + ((_out_)&0xFFFFFFC0))
-#define PWM_IS_OUTPUT_ODD(_out_)        ((_out_)&0x00000001)
+#define PWM_GEN_EXT_BADDR(_mod_, _gen_) ((_mod_) + PWM_GEN_EXT_0 + ((_gen_) - PWM_GEN_0) * 2)
+#define PWM_OUT_BADDR(_mod_, _out_)     ((_mod_) + ((_out_) & 0xFFFFFFC0))
+#define PWM_IS_OUTPUT_ODD(_out_)        ((_out_) & 0x00000001)
 
 //*****************************************************************************
 //
@@ -102,9 +102,8 @@ static bool _PWMGenValid(uint32_t ui32Gen)
 #if DEBUG
 static bool _PWMOutValid(uint32_t ui32PWMOut)
 {
-    return ((ui32PWMOut == PWM_OUT_0) || (ui32PWMOut == PWM_OUT_1) || (ui32PWMOut == PWM_OUT_2) ||
-            (ui32PWMOut == PWM_OUT_3) || (ui32PWMOut == PWM_OUT_4) || (ui32PWMOut == PWM_OUT_5) ||
-            (ui32PWMOut == PWM_OUT_6) || (ui32PWMOut == PWM_OUT_7));
+    return ((ui32PWMOut == PWM_OUT_0) || (ui32PWMOut == PWM_OUT_1) || (ui32PWMOut == PWM_OUT_2) || (ui32PWMOut == PWM_OUT_3) ||
+            (ui32PWMOut == PWM_OUT_4) || (ui32PWMOut == PWM_OUT_5) || (ui32PWMOut == PWM_OUT_6) || (ui32PWMOut == PWM_OUT_7));
 }
 #endif
 
@@ -204,10 +203,9 @@ void PWMGenConfigure(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Config)
     // Change the global configuration of the generator.
     //
     HWREG(ui32Gen + PWM_O_X_CTL) =
-        ((HWREG(ui32Gen + PWM_O_X_CTL) &
-          ~(PWM_X_CTL_MODE | PWM_X_CTL_DEBUG | PWM_X_CTL_LATCH | PWM_X_CTL_MINFLTPER | PWM_X_CTL_FLTSRC |
-            PWM_X_CTL_DBFALLUPD_M | PWM_X_CTL_DBRISEUPD_M | PWM_X_CTL_DBCTLUPD_M | PWM_X_CTL_GENBUPD_M |
-            PWM_X_CTL_GENAUPD_M | PWM_X_CTL_LOADUPD | PWM_X_CTL_CMPAUPD | PWM_X_CTL_CMPBUPD)) |
+        ((HWREG(ui32Gen + PWM_O_X_CTL) & ~(PWM_X_CTL_MODE | PWM_X_CTL_DEBUG | PWM_X_CTL_LATCH | PWM_X_CTL_MINFLTPER | PWM_X_CTL_FLTSRC |
+                                           PWM_X_CTL_DBFALLUPD_M | PWM_X_CTL_DBRISEUPD_M | PWM_X_CTL_DBCTLUPD_M | PWM_X_CTL_GENBUPD_M |
+                                           PWM_X_CTL_GENAUPD_M | PWM_X_CTL_LOADUPD | PWM_X_CTL_CMPAUPD | PWM_X_CTL_CMPBUPD)) |
          ui32Config);
 
     //
@@ -691,8 +689,8 @@ void PWMOutputState(uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bEnable)
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT |
-                                PWM_OUT_5_BIT | PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
+    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT | PWM_OUT_5_BIT |
+                                PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
 
     //
     // Read the module's ENABLE output control register and set or clear the
@@ -736,8 +734,8 @@ void PWMOutputInvert(uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bInvert)
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT |
-                                PWM_OUT_5_BIT | PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
+    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT | PWM_OUT_5_BIT |
+                                PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
 
     //
     // Read the module's INVERT output control register and set or clear the
@@ -789,8 +787,8 @@ void PWMOutputFaultLevel(uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bDrive
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT |
-                                PWM_OUT_5_BIT | PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
+    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT | PWM_OUT_5_BIT |
+                                PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
 
     //
     // Read the module's FAULT output control register and set or clear the
@@ -839,8 +837,8 @@ void PWMOutputFault(uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bFaultSuppr
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT |
-                                PWM_OUT_5_BIT | PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
+    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT | PWM_OUT_5_BIT |
+                                PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
 
     //
     // Read the module's FAULT output control register and set or clear the
@@ -1261,9 +1259,8 @@ void PWMGenIntTrigEnable(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32IntTr
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
     ASSERT(_PWMGenValid(ui32Gen));
-    ASSERT((ui32IntTrig &
-            ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU | PWM_INT_CNT_BD |
-              PWM_TR_CNT_ZERO | PWM_TR_CNT_LOAD | PWM_TR_CNT_AU | PWM_TR_CNT_AD | PWM_TR_CNT_BU | PWM_TR_CNT_BD)) == 0);
+    ASSERT((ui32IntTrig & ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU | PWM_INT_CNT_BD |
+                            PWM_TR_CNT_ZERO | PWM_TR_CNT_LOAD | PWM_TR_CNT_AU | PWM_TR_CNT_AD | PWM_TR_CNT_BU | PWM_TR_CNT_BD)) == 0);
 
     //
     // Enable the specified interrupts/triggers.
@@ -1299,9 +1296,8 @@ void PWMGenIntTrigDisable(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32IntT
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
     ASSERT(_PWMGenValid(ui32Gen));
-    ASSERT((ui32IntTrig &
-            ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU | PWM_INT_CNT_BD |
-              PWM_TR_CNT_ZERO | PWM_TR_CNT_LOAD | PWM_TR_CNT_AU | PWM_TR_CNT_AD | PWM_TR_CNT_BU | PWM_TR_CNT_BD)) == 0);
+    ASSERT((ui32IntTrig & ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU | PWM_INT_CNT_BD |
+                            PWM_TR_CNT_ZERO | PWM_TR_CNT_LOAD | PWM_TR_CNT_AU | PWM_TR_CNT_AD | PWM_TR_CNT_BU | PWM_TR_CNT_BD)) == 0);
 
     //
     // Disable the specified interrupts/triggers.
@@ -1388,8 +1384,7 @@ void PWMGenIntClear(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Ints)
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
     ASSERT(_PWMGenValid(ui32Gen));
-    ASSERT((ui32Ints & ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU |
-                         PWM_INT_CNT_BD)) == 0);
+    ASSERT((ui32Ints & ~(PWM_INT_CNT_ZERO | PWM_INT_CNT_LOAD | PWM_INT_CNT_AU | PWM_INT_CNT_AD | PWM_INT_CNT_BU | PWM_INT_CNT_BD)) == 0);
 
     //
     // Clear the requested interrupts by writing ones to the specified bit
@@ -1420,8 +1415,8 @@ void PWMIntEnable(uint32_t ui32Base, uint32_t ui32GenFault)
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT((ui32GenFault & ~(PWM_INT_GEN_0 | PWM_INT_GEN_1 | PWM_INT_GEN_2 | PWM_INT_GEN_3 | PWM_INT_FAULT0 |
-                             PWM_INT_FAULT1 | PWM_INT_FAULT2 | PWM_INT_FAULT3)) == 0);
+    ASSERT((ui32GenFault & ~(PWM_INT_GEN_0 | PWM_INT_GEN_1 | PWM_INT_GEN_2 | PWM_INT_GEN_3 | PWM_INT_FAULT0 | PWM_INT_FAULT1 |
+                             PWM_INT_FAULT2 | PWM_INT_FAULT3)) == 0);
 
     //
     // Read the module's interrupt enable register and enable interrupts
@@ -1452,8 +1447,8 @@ void PWMIntDisable(uint32_t ui32Base, uint32_t ui32GenFault)
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT((ui32GenFault & ~(PWM_INT_GEN_0 | PWM_INT_GEN_1 | PWM_INT_GEN_2 | PWM_INT_GEN_3 | PWM_INT_FAULT0 |
-                             PWM_INT_FAULT1 | PWM_INT_FAULT2 | PWM_INT_FAULT3)) == 0);
+    ASSERT((ui32GenFault & ~(PWM_INT_GEN_0 | PWM_INT_GEN_1 | PWM_INT_GEN_2 | PWM_INT_GEN_3 | PWM_INT_FAULT0 | PWM_INT_FAULT1 |
+                             PWM_INT_FAULT2 | PWM_INT_FAULT3)) == 0);
 
     //
     // Read the module's interrupt enable register and disable interrupts
@@ -1619,9 +1614,8 @@ void PWMGenFaultConfigure(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32MinF
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
     ASSERT(_PWMGenValid(ui32Gen));
     ASSERT(ui32MinFaultPeriod < PWM_X_MINFLTPER_M);
-    ASSERT((ui32FaultSenses &
-            ~(PWM_FAULT0_SENSE_HIGH | PWM_FAULT0_SENSE_LOW | PWM_FAULT1_SENSE_HIGH | PWM_FAULT1_SENSE_LOW |
-              PWM_FAULT2_SENSE_HIGH | PWM_FAULT2_SENSE_LOW | PWM_FAULT3_SENSE_HIGH | PWM_FAULT3_SENSE_LOW)) == 0);
+    ASSERT((ui32FaultSenses & ~(PWM_FAULT0_SENSE_HIGH | PWM_FAULT0_SENSE_LOW | PWM_FAULT1_SENSE_HIGH | PWM_FAULT1_SENSE_LOW |
+                                PWM_FAULT2_SENSE_HIGH | PWM_FAULT2_SENSE_LOW | PWM_FAULT3_SENSE_HIGH | PWM_FAULT3_SENSE_LOW)) == 0);
 
     //
     // Write the minimum fault period.
@@ -1683,8 +1677,8 @@ void PWMGenFaultTriggerSet(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Gro
     ASSERT((ui32Group == PWM_FAULT_GROUP_0) &&
            ((ui32FaultTriggers & ~(PWM_FAULT_FAULT0 | PWM_FAULT_FAULT1 | PWM_FAULT_FAULT2 | PWM_FAULT_FAULT3)) == 0));
     ASSERT((ui32Group == PWM_FAULT_GROUP_1) &&
-           ((ui32FaultTriggers & ~(PWM_FAULT_DCMP0 | PWM_FAULT_DCMP1 | PWM_FAULT_DCMP2 | PWM_FAULT_DCMP3 |
-                                   PWM_FAULT_DCMP4 | PWM_FAULT_DCMP5 | PWM_FAULT_DCMP6 | PWM_FAULT_DCMP7)) == 0));
+           ((ui32FaultTriggers & ~(PWM_FAULT_DCMP0 | PWM_FAULT_DCMP1 | PWM_FAULT_DCMP2 | PWM_FAULT_DCMP3 | PWM_FAULT_DCMP4 |
+                                   PWM_FAULT_DCMP5 | PWM_FAULT_DCMP6 | PWM_FAULT_DCMP7)) == 0));
 
     //
     // Write the fault triggers to the appropriate register.
@@ -1839,8 +1833,8 @@ void PWMGenFaultClear(uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Group, u
     ASSERT((ui32Group == PWM_FAULT_GROUP_0) &&
            ((ui32FaultTriggers & ~(PWM_FAULT_FAULT0 | PWM_FAULT_FAULT1 | PWM_FAULT_FAULT2 | PWM_FAULT_FAULT3)) == 0));
     ASSERT((ui32Group == PWM_FAULT_GROUP_1) &&
-           ((ui32FaultTriggers & ~(PWM_FAULT_DCMP0 | PWM_FAULT_DCMP1 | PWM_FAULT_DCMP2 | PWM_FAULT_DCMP3 |
-                                   PWM_FAULT_DCMP4 | PWM_FAULT_DCMP5 | PWM_FAULT_DCMP6 | PWM_FAULT_DCMP7)) == 0));
+           ((ui32FaultTriggers & ~(PWM_FAULT_DCMP0 | PWM_FAULT_DCMP1 | PWM_FAULT_DCMP2 | PWM_FAULT_DCMP3 | PWM_FAULT_DCMP4 |
+                                   PWM_FAULT_DCMP5 | PWM_FAULT_DCMP6 | PWM_FAULT_DCMP7)) == 0));
 
     //
     // Clear the given faults.
@@ -1982,10 +1976,9 @@ void PWMOutputUpdateMode(uint32_t ui32Base, uint32_t ui32PWMOutBits, uint32_t ui
     // Check the arguments.
     //
     ASSERT((ui32Base == PWM0_BASE) || (ui32Base == PWM1_BASE));
-    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT |
-                                PWM_OUT_5_BIT | PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
-    ASSERT((ui32Mode == PWM_OUTPUT_MODE_NO_SYNC) || (ui32Mode == PWM_OUTPUT_MODE_SYNC_LOCAL) ||
-           (ui32Mode == PWM_OUTPUT_MODE_SYNC_GLOBAL));
+    ASSERT(!(ui32PWMOutBits & ~(PWM_OUT_0_BIT | PWM_OUT_1_BIT | PWM_OUT_2_BIT | PWM_OUT_3_BIT | PWM_OUT_4_BIT | PWM_OUT_5_BIT |
+                                PWM_OUT_6_BIT | PWM_OUT_7_BIT)));
+    ASSERT((ui32Mode == PWM_OUTPUT_MODE_NO_SYNC) || (ui32Mode == PWM_OUTPUT_MODE_SYNC_LOCAL) || (ui32Mode == PWM_OUTPUT_MODE_SYNC_GLOBAL));
 
     //
     // Initialize the local variables

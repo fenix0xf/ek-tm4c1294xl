@@ -97,19 +97,31 @@ intptr_t tm4c129_uart_dbg_puts(const char* s)
 intptr_t tm4c129_uart_dbg_print(const char* s)
 {
     uint8_t* p = (uint8_t*)s;
-    while (*p) { UARTCharPut(UART_BASE, *p++); }
+
+    while (*p)
+    {
+        UARTCharPut(UART_BASE, *p++);
+    }
+
     return (intptr_t)(p - (uint8_t*)s);
 }
 
 intptr_t tm4c129_uart_dbg_send_buf(const void* buf, size_t size)
 {
     uint8_t* p = (uint8_t*)buf;
-    while (size--) { UARTCharPut(UART_BASE, *p++); }
+
+    while (size--)
+    {
+        UARTCharPut(UART_BASE, *p++);
+    }
+
     return (intptr_t)(p - (uint8_t*)buf);
 }
 
 void tm4c129_uart_dbg_flush(void)
 {
     /* Wait for end of TX. */
-    while (HWREG(UART_BASE + UART_O_FR) & UART_FR_BUSY) {}
+    while (HWREG(UART_BASE + UART_O_FR) & UART_FR_BUSY)
+    {
+    }
 }

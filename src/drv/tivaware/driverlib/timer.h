@@ -56,11 +56,11 @@ extern "C"
 // Values that can be passed to TimerConfigure as the ui32Config parameter.
 //
 //*****************************************************************************
-#define TIMER_CFG_ONE_SHOT 0x00000021       // Full-width one-shot timer
+#define TIMER_CFG_ONE_SHOT 0x00000021 // Full-width one-shot timer
 #define TIMER_CFG_ONE_SHOT_UP \
-    0x00000031                              // Full-width one-shot up-count
-                                            // timer
-#define TIMER_CFG_PERIODIC 0x00000022       // Full-width periodic timer
+    0x00000031                        // Full-width one-shot up-count
+                                      // timer
+#define TIMER_CFG_PERIODIC 0x00000022 // Full-width periodic timer
 #define TIMER_CFG_PERIODIC_UP \
     0x00000032                              // Full-width periodic up-count
                                             // timer
@@ -87,51 +87,51 @@ extern "C"
 #define TIMER_CFG_B_ONE_SHOT_PWM 0x00000900 // Timer B one-shot PWM output
 #define TIMER_CFG_B_PWM          0x00000A00 // Timer B PWM output
 #define TIMER_CFG_A_ACT_TOINTD \
-    0x00010000                              // Timer A compare action disable
-                                            // time-out interrupt.
-#define TIMER_CFG_A_ACT_NONE   0x00000000   // Timer A compare action none.
-#define TIMER_CFG_A_ACT_TOGGLE 0x00020000   // Timer A compare action toggle.
+    0x00010000                            // Timer A compare action disable
+                                          // time-out interrupt.
+#define TIMER_CFG_A_ACT_NONE   0x00000000 // Timer A compare action none.
+#define TIMER_CFG_A_ACT_TOGGLE 0x00020000 // Timer A compare action toggle.
 #define TIMER_CFG_A_ACT_CLRTO \
-    0x00040000                              // Timer A compare action CCP
-                                            // clear on time-out.
+    0x00040000 // Timer A compare action CCP
+               // clear on time-out.
 #define TIMER_CFG_A_ACT_SETTO \
-    0x00060000                              // Timer A compare action CCP set
-                                            // on time-out.
+    0x00060000 // Timer A compare action CCP set
+               // on time-out.
 #define TIMER_CFG_A_ACT_SETTOGTO \
-    0x00080000                              // Timer A compare action set CCP
-                                            // toggle on time-out.
+    0x00080000 // Timer A compare action set CCP
+               // toggle on time-out.
 #define TIMER_CFG_A_ACT_CLRTOGTO \
-    0x000A0000                              // Timer A compare action clear
-                                            // CCP toggle on time-out.
+    0x000A0000 // Timer A compare action clear
+               // CCP toggle on time-out.
 #define TIMER_CFG_A_ACT_SETCLRTO \
-    0x000C0000                              // Timer A compare action set CCP
-                                            // clear on time-out.
+    0x000C0000 // Timer A compare action set CCP
+               // clear on time-out.
 #define TIMER_CFG_A_ACT_CLRSETTO \
-    0x000E0000                              // Timer A compare action clear
-                                            // CCP set on time-out.
+    0x000E0000 // Timer A compare action clear
+               // CCP set on time-out.
 #define TIMER_CFG_B_ACT_TOINTD \
-    0x00100000                              // Timer B compare action disable
-                                            // time-out interrupt.
-#define TIMER_CFG_B_ACT_NONE   0x00000000   // Timer A compare action none.
-#define TIMER_CFG_B_ACT_TOGGLE 0x00200000   // Timer A compare action toggle.
+    0x00100000                            // Timer B compare action disable
+                                          // time-out interrupt.
+#define TIMER_CFG_B_ACT_NONE   0x00000000 // Timer A compare action none.
+#define TIMER_CFG_B_ACT_TOGGLE 0x00200000 // Timer A compare action toggle.
 #define TIMER_CFG_B_ACT_CLRTO \
-    0x00400000                              // Timer A compare action CCP
-                                            // clear on time-out.
+    0x00400000 // Timer A compare action CCP
+               // clear on time-out.
 #define TIMER_CFG_B_ACT_SETTO \
-    0x00600000                              // Timer A compare action CCP set
-                                            // on time-out.
+    0x00600000 // Timer A compare action CCP set
+               // on time-out.
 #define TIMER_CFG_B_ACT_SETTOGTO \
-    0x00800000                              // Timer A compare action set CCP
-                                            // toggle on time-out.
+    0x00800000 // Timer A compare action set CCP
+               // toggle on time-out.
 #define TIMER_CFG_B_ACT_CLRTOGTO \
-    0x00A00000                              // Timer A compare action clear
-                                            // CCP toggle on time-out.
+    0x00A00000 // Timer A compare action clear
+               // CCP toggle on time-out.
 #define TIMER_CFG_B_ACT_SETCLRTO \
-    0x00C00000                              // Timer A compare action set CCP
-                                            // clear on time-out.
+    0x00C00000 // Timer A compare action set CCP
+               // clear on time-out.
 #define TIMER_CFG_B_ACT_CLRSETTO \
-    0x0000E000                              // Timer A compare action clear
-                                            // CCP set on time-out.
+    0x0000E000 // Timer A compare action clear
+               // CCP set on time-out.
 
 //*****************************************************************************
 //
@@ -140,26 +140,26 @@ extern "C"
 // TimerIntStatus.
 //
 //*****************************************************************************
-#define TIMER_TIMB_DMA     0x00002000 // TimerB DMA Complete Interrupt.
-#define TIMER_TIMB_MATCH   0x00000800 // TimerB match interrupt
-#define TIMER_CAPB_EVENT   0x00000400 // CaptureB event interrupt
-#define TIMER_CAPB_MATCH   0x00000200 // CaptureB match interrupt
-#define TIMER_TIMB_TIMEOUT 0x00000100 // TimerB time out interrupt
-#define TIMER_TIMA_DMA     0x00000020 // TimerA DMA Complete Interrupt.
-#define TIMER_TIMA_MATCH   0x00000010 // TimerA match interrupt
-#define TIMER_RTC_MATCH    0x00000008 // RTC interrupt mask
-#define TIMER_CAPA_EVENT   0x00000004 // CaptureA event interrupt
-#define TIMER_CAPA_MATCH   0x00000002 // CaptureA match interrupt
-#define TIMER_TIMA_TIMEOUT 0x00000001 // TimerA time out interrupt
+#define TIMER_TIMB_DMA           0x00002000 // TimerB DMA Complete Interrupt.
+#define TIMER_TIMB_MATCH         0x00000800 // TimerB match interrupt
+#define TIMER_CAPB_EVENT         0x00000400 // CaptureB event interrupt
+#define TIMER_CAPB_MATCH         0x00000200 // CaptureB match interrupt
+#define TIMER_TIMB_TIMEOUT       0x00000100 // TimerB time out interrupt
+#define TIMER_TIMA_DMA           0x00000020 // TimerA DMA Complete Interrupt.
+#define TIMER_TIMA_MATCH         0x00000010 // TimerA match interrupt
+#define TIMER_RTC_MATCH          0x00000008 // RTC interrupt mask
+#define TIMER_CAPA_EVENT         0x00000004 // CaptureA event interrupt
+#define TIMER_CAPA_MATCH         0x00000002 // CaptureA match interrupt
+#define TIMER_TIMA_TIMEOUT       0x00000001 // TimerA time out interrupt
 
 //*****************************************************************************
 //
 // Values that can be passed to TimerControlEvent as the ui32Event parameter.
 //
 //*****************************************************************************
-#define TIMER_EVENT_POS_EDGE   0x00000000 // Count positive edges
-#define TIMER_EVENT_NEG_EDGE   0x00000404 // Count negative edges
-#define TIMER_EVENT_BOTH_EDGES 0x00000C0C // Count both edges
+#define TIMER_EVENT_POS_EDGE     0x00000000 // Count positive edges
+#define TIMER_EVENT_NEG_EDGE     0x00000404 // Count negative edges
+#define TIMER_EVENT_BOTH_EDGES   0x00000C0C // Count both edges
 
 //*****************************************************************************
 //
@@ -167,39 +167,39 @@ extern "C"
 // parameter.
 //
 //*****************************************************************************
-#define TIMER_A    0x000000ff // Timer A
-#define TIMER_B    0x0000ff00 // Timer B
-#define TIMER_BOTH 0x0000ffff // Timer Both
+#define TIMER_A                  0x000000ff // Timer A
+#define TIMER_B                  0x0000ff00 // Timer B
+#define TIMER_BOTH               0x0000ffff // Timer Both
 
 //*****************************************************************************
 //
 // Values that can be passed to TimerSynchronize as the ui32Timers parameter.
 //
 //*****************************************************************************
-#define TIMER_0A_SYNC  0x00000001 // Synchronize Timer 0A
-#define TIMER_0B_SYNC  0x00000002 // Synchronize Timer 0B
-#define TIMER_1A_SYNC  0x00000004 // Synchronize Timer 1A
-#define TIMER_1B_SYNC  0x00000008 // Synchronize Timer 1B
-#define TIMER_2A_SYNC  0x00000010 // Synchronize Timer 2A
-#define TIMER_2B_SYNC  0x00000020 // Synchronize Timer 2B
-#define TIMER_3A_SYNC  0x00000040 // Synchronize Timer 3A
-#define TIMER_3B_SYNC  0x00000080 // Synchronize Timer 3B
-#define TIMER_4A_SYNC  0x00000100 // Synchronize Timer 4A
-#define TIMER_4B_SYNC  0x00000200 // Synchronize Timer 4B
-#define TIMER_5A_SYNC  0x00000400 // Synchronize Timer 5A
-#define TIMER_5B_SYNC  0x00000800 // Synchronize Timer 5B
-#define WTIMER_0A_SYNC 0x00001000 // Synchronize Wide Timer 0A
-#define WTIMER_0B_SYNC 0x00002000 // Synchronize Wide Timer 0B
-#define WTIMER_1A_SYNC 0x00004000 // Synchronize Wide Timer 1A
-#define WTIMER_1B_SYNC 0x00008000 // Synchronize Wide Timer 1B
-#define WTIMER_2A_SYNC 0x00010000 // Synchronize Wide Timer 2A
-#define WTIMER_2B_SYNC 0x00020000 // Synchronize Wide Timer 2B
-#define WTIMER_3A_SYNC 0x00040000 // Synchronize Wide Timer 3A
-#define WTIMER_3B_SYNC 0x00080000 // Synchronize Wide Timer 3B
-#define WTIMER_4A_SYNC 0x00100000 // Synchronize Wide Timer 4A
-#define WTIMER_4B_SYNC 0x00200000 // Synchronize Wide Timer 4B
-#define WTIMER_5A_SYNC 0x00400000 // Synchronize Wide Timer 5A
-#define WTIMER_5B_SYNC 0x00800000 // Synchronize Wide Timer 5B
+#define TIMER_0A_SYNC            0x00000001 // Synchronize Timer 0A
+#define TIMER_0B_SYNC            0x00000002 // Synchronize Timer 0B
+#define TIMER_1A_SYNC            0x00000004 // Synchronize Timer 1A
+#define TIMER_1B_SYNC            0x00000008 // Synchronize Timer 1B
+#define TIMER_2A_SYNC            0x00000010 // Synchronize Timer 2A
+#define TIMER_2B_SYNC            0x00000020 // Synchronize Timer 2B
+#define TIMER_3A_SYNC            0x00000040 // Synchronize Timer 3A
+#define TIMER_3B_SYNC            0x00000080 // Synchronize Timer 3B
+#define TIMER_4A_SYNC            0x00000100 // Synchronize Timer 4A
+#define TIMER_4B_SYNC            0x00000200 // Synchronize Timer 4B
+#define TIMER_5A_SYNC            0x00000400 // Synchronize Timer 5A
+#define TIMER_5B_SYNC            0x00000800 // Synchronize Timer 5B
+#define WTIMER_0A_SYNC           0x00001000 // Synchronize Wide Timer 0A
+#define WTIMER_0B_SYNC           0x00002000 // Synchronize Wide Timer 0B
+#define WTIMER_1A_SYNC           0x00004000 // Synchronize Wide Timer 1A
+#define WTIMER_1B_SYNC           0x00008000 // Synchronize Wide Timer 1B
+#define WTIMER_2A_SYNC           0x00010000 // Synchronize Wide Timer 2A
+#define WTIMER_2B_SYNC           0x00020000 // Synchronize Wide Timer 2B
+#define WTIMER_3A_SYNC           0x00040000 // Synchronize Wide Timer 3A
+#define WTIMER_3B_SYNC           0x00080000 // Synchronize Wide Timer 3B
+#define WTIMER_4A_SYNC           0x00100000 // Synchronize Wide Timer 4A
+#define WTIMER_4B_SYNC           0x00200000 // Synchronize Wide Timer 4B
+#define WTIMER_5A_SYNC           0x00400000 // Synchronize Wide Timer 5A
+#define WTIMER_5B_SYNC           0x00800000 // Synchronize Wide Timer 5B
 
 //*****************************************************************************
 //
@@ -207,8 +207,8 @@ extern "C"
 // TimerClockSourceGet().
 //
 //*****************************************************************************
-#define TIMER_CLOCK_SYSTEM 0x00000000
-#define TIMER_CLOCK_PIOSC  0x00000001
+#define TIMER_CLOCK_SYSTEM       0x00000000
+#define TIMER_CLOCK_PIOSC        0x00000001
 
 //*****************************************************************************
 //
@@ -216,15 +216,15 @@ extern "C"
 // TimerDMAEventGet().
 //
 //*****************************************************************************
-#define TIMER_DMA_MODEMATCH_B 0x00000800
-#define TIMER_DMA_CAPEVENT_B  0x00000400
-#define TIMER_DMA_CAPMATCH_B  0x00000200
-#define TIMER_DMA_TIMEOUT_B   0x00000100
-#define TIMER_DMA_MODEMATCH_A 0x00000010
-#define TIMER_DMA_RTC_A       0x00000008
-#define TIMER_DMA_CAPEVENT_A  0x00000004
-#define TIMER_DMA_CAPMATCH_A  0x00000002
-#define TIMER_DMA_TIMEOUT_A   0x00000001
+#define TIMER_DMA_MODEMATCH_B    0x00000800
+#define TIMER_DMA_CAPEVENT_B     0x00000400
+#define TIMER_DMA_CAPMATCH_B     0x00000200
+#define TIMER_DMA_TIMEOUT_B      0x00000100
+#define TIMER_DMA_MODEMATCH_A    0x00000010
+#define TIMER_DMA_RTC_A          0x00000008
+#define TIMER_DMA_CAPEVENT_A     0x00000004
+#define TIMER_DMA_CAPMATCH_A     0x00000002
+#define TIMER_DMA_TIMEOUT_A      0x00000001
 
 //*****************************************************************************
 //
@@ -232,15 +232,15 @@ extern "C"
 // TimerADCEventGet().
 //
 //*****************************************************************************
-#define TIMER_ADC_MODEMATCH_B 0x00000800
-#define TIMER_ADC_CAPEVENT_B  0x00000400
-#define TIMER_ADC_CAPMATCH_B  0x00000200
-#define TIMER_ADC_TIMEOUT_B   0x00000100
-#define TIMER_ADC_MODEMATCH_A 0x00000010
-#define TIMER_ADC_RTC_A       0x00000008
-#define TIMER_ADC_CAPEVENT_A  0x00000004
-#define TIMER_ADC_CAPMATCH_A  0x00000002
-#define TIMER_ADC_TIMEOUT_A   0x00000001
+#define TIMER_ADC_MODEMATCH_B    0x00000800
+#define TIMER_ADC_CAPEVENT_B     0x00000400
+#define TIMER_ADC_CAPMATCH_B     0x00000200
+#define TIMER_ADC_TIMEOUT_B      0x00000100
+#define TIMER_ADC_MODEMATCH_A    0x00000010
+#define TIMER_ADC_RTC_A          0x00000008
+#define TIMER_ADC_CAPEVENT_A     0x00000004
+#define TIMER_ADC_CAPMATCH_A     0x00000002
+#define TIMER_ADC_TIMEOUT_A      0x00000001
 
 //*****************************************************************************
 //

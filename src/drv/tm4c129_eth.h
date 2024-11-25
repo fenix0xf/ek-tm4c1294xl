@@ -30,9 +30,8 @@
 #include <stdbool.h>
 #include <drv/tm4c129.h>
 
-#define TM4C129_ETH_EMAC_INTERRUPTS                                                                             \
-    (EMAC_INT_RECEIVE | EMAC_INT_TRANSMIT | EMAC_INT_TX_STOPPED | EMAC_INT_RX_NO_BUFFER | EMAC_INT_RX_STOPPED | \
-     EMAC_INT_PHY)
+#define TM4C129_ETH_EMAC_INTERRUPTS \
+    (EMAC_INT_RECEIVE | EMAC_INT_TRANSMIT | EMAC_INT_TX_STOPPED | EMAC_INT_RX_NO_BUFFER | EMAC_INT_RX_STOPPED | EMAC_INT_PHY)
 
 #define TM4C129_ETH_MAC_ADDR_SIZE 6
 
@@ -45,7 +44,7 @@
  * @param [sys_clk] MCU Clock in Hz.
  * @param [mac] is uint8_t buf[TM4C129_ETH_MAC_ADDR_SIZE] MAC hardware address, if mac == NULL, then using default MAC.
  */
-bool tm4c129_eth_init(size_t sys_clk, const uint8_t* mac);
+bool     tm4c129_eth_init(size_t sys_clk, const uint8_t* mac);
 
 /**
  * @return pointer to static uint8_t buf[TM4C129_ETH_MAC_ADDR_SIZE] with real MAC hardware address.

@@ -113,44 +113,44 @@
 #define GPIO_PORTP_BASE     0x40065000 // GPIO Port P
 #define GPIO_PORTQ_BASE     0x40066000 // GPIO Port Q
 #define GPIO_PORTR_BASE \
-    0x40067000                         // General-Purpose Input/Outputs
-                                       // (GPIOs)
+    0x40067000 // General-Purpose Input/Outputs
+               // (GPIOs)
 #define GPIO_PORTS_BASE \
-    0x40068000                         // General-Purpose Input/Outputs
-                                       // (GPIOs)
+    0x40068000 // General-Purpose Input/Outputs
+               // (GPIOs)
 #define GPIO_PORTT_BASE \
-    0x40069000                         // General-Purpose Input/Outputs
-                                       // (GPIOs)
-#define EEPROM_BASE     0x400AF000     // EEPROM memory
-#define ONEWIRE0_BASE   0x400B6000     // 1-Wire Master Module
-#define I2C8_BASE       0x400B8000     // I2C8
-#define I2C9_BASE       0x400B9000     // I2C9
-#define I2C4_BASE       0x400C0000     // I2C4
-#define I2C5_BASE       0x400C1000     // I2C5
-#define I2C6_BASE       0x400C2000     // I2C6
-#define I2C7_BASE       0x400C3000     // I2C7
-#define EPI0_BASE       0x400D0000     // EPI0
-#define TIMER6_BASE     0x400E0000     // General-Purpose Timers
-#define TIMER7_BASE     0x400E1000     // General-Purpose Timers
-#define EMAC0_BASE      0x400EC000     // Ethernet Controller
-#define SYSEXC_BASE     0x400F9000     // System Exception Module
-#define HIB_BASE        0x400FC000     // Hibernation Module
-#define FLASH_CTRL_BASE 0x400FD000     // FLASH Controller
-#define SYSCTL_BASE     0x400FE000     // System Control
-#define UDMA_BASE       0x400FF000     // uDMA Controller
-#define CCM0_BASE       0x44030000     // Cyclical Redundancy Check (CRC)
-#define SHAMD5_BASE     0x44034000     // SHA/MD5 Accelerator
+    0x40069000                     // General-Purpose Input/Outputs
+                                   // (GPIOs)
+#define EEPROM_BASE     0x400AF000 // EEPROM memory
+#define ONEWIRE0_BASE   0x400B6000 // 1-Wire Master Module
+#define I2C8_BASE       0x400B8000 // I2C8
+#define I2C9_BASE       0x400B9000 // I2C9
+#define I2C4_BASE       0x400C0000 // I2C4
+#define I2C5_BASE       0x400C1000 // I2C5
+#define I2C6_BASE       0x400C2000 // I2C6
+#define I2C7_BASE       0x400C3000 // I2C7
+#define EPI0_BASE       0x400D0000 // EPI0
+#define TIMER6_BASE     0x400E0000 // General-Purpose Timers
+#define TIMER7_BASE     0x400E1000 // General-Purpose Timers
+#define EMAC0_BASE      0x400EC000 // Ethernet Controller
+#define SYSEXC_BASE     0x400F9000 // System Exception Module
+#define HIB_BASE        0x400FC000 // Hibernation Module
+#define FLASH_CTRL_BASE 0x400FD000 // FLASH Controller
+#define SYSCTL_BASE     0x400FE000 // System Control
+#define UDMA_BASE       0x400FF000 // uDMA Controller
+#define CCM0_BASE       0x44030000 // Cyclical Redundancy Check (CRC)
+#define SHAMD5_BASE     0x44034000 // SHA/MD5 Accelerator
 #define AES_BASE \
-    0x44036000                         // Advance Encryption
-                                       // Hardware-Accelerated Module
+    0x44036000 // Advance Encryption
+               // Hardware-Accelerated Module
 #define DES_BASE \
-    0x44038000                         // Data Encryption Standard
-                                       // Accelerator (DES)
-#define LCD0_BASE 0x44050000           // LCD Controller
-#define ITM_BASE  0xE0000000           // Instrumentation Trace Macrocell
-#define DWT_BASE  0xE0001000           // Data Watchpoint and Trace
-#define FPB_BASE  0xE0002000           // FLASH Patch and Breakpoint
-#define NVIC_BASE 0xE000E000           // Nested Vectored Interrupt Ctrl
-#define TPIU_BASE 0xE0040000           // Trace Port Interface Unit
+    0x44038000               // Data Encryption Standard
+                             // Accelerator (DES)
+#define LCD0_BASE 0x44050000 // LCD Controller
+#define ITM_BASE  0xE0000000 // Instrumentation Trace Macrocell
+#define DWT_BASE  0xE0001000 // Data Watchpoint and Trace
+#define FPB_BASE  0xE0002000 // FLASH Patch and Breakpoint
+#define NVIC_BASE 0xE000E000 // Nested Vectored Interrupt Ctrl
+#define TPIU_BASE 0xE0040000 // Trace Port Interface Unit
 
-#endif                                 // __HW_MEMMAP_H__
+#endif // __HW_MEMMAP_H__

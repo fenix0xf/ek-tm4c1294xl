@@ -36,10 +36,16 @@ void* memmove(void* dest, const void* src, size_t n)
                 *d++ = *s++;
             }
 
-            for (; n >= WS; n -= WS, d += WS, s += WS) { *(WT*)d = *(WT*)s; }
+            for (; n >= WS; n -= WS, d += WS, s += WS)
+            {
+                *(WT*)d = *(WT*)s;
+            }
         }
 #endif
-        for (; n; n--) { *d++ = *s++; }
+        for (; n; n--)
+        {
+            *d++ = *s++;
+        }
     }
     else
     {
@@ -56,10 +62,16 @@ void* memmove(void* dest, const void* src, size_t n)
                 d[n] = s[n];
             }
 
-            while (n >= WS) { n -= WS, *(WT*)(d + n) = *(WT*)(s + n); }
+            while (n >= WS)
+            {
+                n -= WS, *(WT*)(d + n) = *(WT*)(s + n);
+            }
         }
 #endif
-        while (n) { n--, d[n] = s[n]; }
+        while (n)
+        {
+            n--, d[n] = s[n];
+        }
     }
 
     return dest;

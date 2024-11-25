@@ -58,37 +58,37 @@ extern "C"
 // Macros need to configure wake events for HibernateWakeSet()
 //
 //*****************************************************************************
-#define HIBERNATE_WAKE_PIN     0x00000010
-#define HIBERNATE_WAKE_RTC     0x00000008
-#define HIBERNATE_WAKE_LOW_BAT 0x00000200
-#define HIBERNATE_WAKE_GPIO    0x00000010
-#define HIBERNATE_WAKE_RESET   0x00100010
-#define HIBERNATE_WAKE_TAMPER  0x08000010
+#define HIBERNATE_WAKE_PIN                         0x00000010
+#define HIBERNATE_WAKE_RTC                         0x00000008
+#define HIBERNATE_WAKE_LOW_BAT                     0x00000200
+#define HIBERNATE_WAKE_GPIO                        0x00000010
+#define HIBERNATE_WAKE_RESET                       0x00100010
+#define HIBERNATE_WAKE_TAMPER                      0x08000010
 
 //*****************************************************************************
 //
 // Macros needed to configure low battery detect for HibernateLowBatSet()
 //
 //*****************************************************************************
-#define HIBERNATE_LOW_BAT_DETECT 0x00000020
-#define HIBERNATE_LOW_BAT_ABORT  0x000000A0
-#define HIBERNATE_LOW_BAT_1_9V   0x00000000
-#define HIBERNATE_LOW_BAT_2_1V   0x00002000
-#define HIBERNATE_LOW_BAT_2_3V   0x00004000
-#define HIBERNATE_LOW_BAT_2_5V   0x00006000
+#define HIBERNATE_LOW_BAT_DETECT                   0x00000020
+#define HIBERNATE_LOW_BAT_ABORT                    0x000000A0
+#define HIBERNATE_LOW_BAT_1_9V                     0x00000000
+#define HIBERNATE_LOW_BAT_2_1V                     0x00002000
+#define HIBERNATE_LOW_BAT_2_3V                     0x00004000
+#define HIBERNATE_LOW_BAT_2_5V                     0x00006000
 
 //*****************************************************************************
 //
 // Macros defining interrupt source bits for the interrupt functions.
 //
 //*****************************************************************************
-#define HIBERNATE_INT_VDDFAIL     0x00000080
-#define HIBERNATE_INT_RESET_WAKE  0x00000040
-#define HIBERNATE_INT_GPIO_WAKE   0x00000020
-#define HIBERNATE_INT_WR_COMPLETE 0x00000010
-#define HIBERNATE_INT_PIN_WAKE    0x00000008
-#define HIBERNATE_INT_LOW_BAT     0x00000004
-#define HIBERNATE_INT_RTC_MATCH_0 0x00000001
+#define HIBERNATE_INT_VDDFAIL                      0x00000080
+#define HIBERNATE_INT_RESET_WAKE                   0x00000040
+#define HIBERNATE_INT_GPIO_WAKE                    0x00000020
+#define HIBERNATE_INT_WR_COMPLETE                  0x00000010
+#define HIBERNATE_INT_PIN_WAKE                     0x00000008
+#define HIBERNATE_INT_LOW_BAT                      0x00000004
+#define HIBERNATE_INT_RTC_MATCH_0                  0x00000001
 
 //*****************************************************************************
 //
@@ -96,21 +96,21 @@ extern "C"
 // HibernateClockConfig() function.
 //
 //*****************************************************************************
-#define HIBERNATE_OSC_LFIOSC    0x00080000
-#define HIBERNATE_OSC_LOWDRIVE  0x00000000
-#define HIBERNATE_OSC_HIGHDRIVE 0x00020000
-#define HIBERNATE_OSC_DISABLE   0x00010000
-#define HIBERNATE_OUT_WRSTALL   0x20000000
-#define HIBERNATE_OUT_SYSCLK    0x00000001
+#define HIBERNATE_OSC_LFIOSC                       0x00080000
+#define HIBERNATE_OSC_LOWDRIVE                     0x00000000
+#define HIBERNATE_OSC_HIGHDRIVE                    0x00020000
+#define HIBERNATE_OSC_DISABLE                      0x00010000
+#define HIBERNATE_OUT_WRSTALL                      0x20000000
+#define HIBERNATE_OUT_SYSCLK                       0x00000001
 
 //*****************************************************************************
 //
 // The following defines are used with the HibernateCounterMode() API.
 //
 //*****************************************************************************
-#define HIBERNATE_COUNTER_RTC  0x00000000
-#define HIBERNATE_COUNTER_12HR 0x00000001
-#define HIBERNATE_COUNTER_24HR 0x00000005
+#define HIBERNATE_COUNTER_RTC                      0x00000000
+#define HIBERNATE_COUNTER_12HR                     0x00000001
+#define HIBERNATE_COUNTER_24HR                     0x00000005
 
 //*****************************************************************************
 //
@@ -129,36 +129,36 @@ extern "C"
 // Status flags returned by the HibernateTamperStatus() function.
 //
 //*****************************************************************************
-#define HIBERNATE_TAMPER_STATUS_INACTIVE         0x00000010
-#define HIBERNATE_TAMPER_STATUS_ACTIVE           0x00000020
-#define HIBERNATE_TAMPER_STATUS_EVENT            0x00000040
-#define HIBERNATE_TAMPER_STATUS_EXT_OSC_ACTIVE   0x00000008
-#define HIBERNATE_TAMPER_STATUS_EXT_OSC_INACTIVE 0x00000002
-#define HIBERNATE_TAMPER_STATUS_EXT_OSC_VALID    0x00000004
-#define HIBERNATE_TAMPER_STATUS_EXT_OSC_FAILED   0x00000001
+#define HIBERNATE_TAMPER_STATUS_INACTIVE           0x00000010
+#define HIBERNATE_TAMPER_STATUS_ACTIVE             0x00000020
+#define HIBERNATE_TAMPER_STATUS_EVENT              0x00000040
+#define HIBERNATE_TAMPER_STATUS_EXT_OSC_ACTIVE     0x00000008
+#define HIBERNATE_TAMPER_STATUS_EXT_OSC_INACTIVE   0x00000002
+#define HIBERNATE_TAMPER_STATUS_EXT_OSC_VALID      0x00000004
+#define HIBERNATE_TAMPER_STATUS_EXT_OSC_FAILED     0x00000001
 
 //*****************************************************************************
 //
 // Configuration options used with HibernateTamperIOEnable().
 //
 //*****************************************************************************
-#define HIBERNATE_TAMPER_IO_TRIGGER_LOW  0x00000000
-#define HIBERNATE_TAMPER_IO_TRIGGER_HIGH 0x00000002
-#define HIBERNATE_TAMPER_IO_WPU_DISABLED 0x00000000
-#define HIBERNATE_TAMPER_IO_WPU_ENABLED  0x00000004
-#define HIBERNATE_TAMPER_IO_MATCH_SHORT  0x00000000
-#define HIBERNATE_TAMPER_IO_MATCH_LONG   0x00000008
+#define HIBERNATE_TAMPER_IO_TRIGGER_LOW            0x00000000
+#define HIBERNATE_TAMPER_IO_TRIGGER_HIGH           0x00000002
+#define HIBERNATE_TAMPER_IO_WPU_DISABLED           0x00000000
+#define HIBERNATE_TAMPER_IO_WPU_ENABLED            0x00000004
+#define HIBERNATE_TAMPER_IO_MATCH_SHORT            0x00000000
+#define HIBERNATE_TAMPER_IO_MATCH_LONG             0x00000008
 
 //*****************************************************************************
 //
 // Tamper log event flags.
 //
 //*****************************************************************************
-#define HIBERNATE_TAMPER_EVENT_0       0x00000001
-#define HIBERNATE_TAMPER_EVENT_1       0x00000002
-#define HIBERNATE_TAMPER_EVENT_2       0x00000004
-#define HIBERNATE_TAMPER_EVENT_3       0x00000008
-#define HIBERNATE_TAMPER_EVENT_EXT_OSC 0x00010000
+#define HIBERNATE_TAMPER_EVENT_0                   0x00000001
+#define HIBERNATE_TAMPER_EVENT_1                   0x00000002
+#define HIBERNATE_TAMPER_EVENT_2                   0x00000004
+#define HIBERNATE_TAMPER_EVENT_3                   0x00000008
+#define HIBERNATE_TAMPER_EVENT_EXT_OSC             0x00010000
 
 //*****************************************************************************
 //

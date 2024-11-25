@@ -57,8 +57,8 @@ extern "C"
 // ui32Config argument in the AESConfig function.  Only one is permitted.
 //
 //*****************************************************************************
-#define AES_CFG_DIR_ENCRYPT 0x00000004
-#define AES_CFG_DIR_DECRYPT 0x00000000
+#define AES_CFG_DIR_ENCRYPT       0x00000004
+#define AES_CFG_DIR_DECRYPT       0x00000000
 
 //*****************************************************************************
 //
@@ -66,9 +66,9 @@ extern "C"
 // argument in the AESConfig function.  Only one is permitted.
 //
 //*****************************************************************************
-#define AES_CFG_KEY_SIZE_128BIT 0x00000008
-#define AES_CFG_KEY_SIZE_192BIT 0x00000010
-#define AES_CFG_KEY_SIZE_256BIT 0x00000018
+#define AES_CFG_KEY_SIZE_128BIT   0x00000008
+#define AES_CFG_KEY_SIZE_192BIT   0x00000010
+#define AES_CFG_KEY_SIZE_256BIT   0x00000018
 
 //*****************************************************************************
 //
@@ -100,10 +100,10 @@ extern "C"
 // be defined when using CTR, CCM, or GCM modes.  Only one length is permitted.
 //
 //*****************************************************************************
-#define AES_CFG_CTR_WIDTH_32  0x00000000
-#define AES_CFG_CTR_WIDTH_64  0x00000080
-#define AES_CFG_CTR_WIDTH_96  0x00000100
-#define AES_CFG_CTR_WIDTH_128 0x00000180
+#define AES_CFG_CTR_WIDTH_32      0x00000000
+#define AES_CFG_CTR_WIDTH_64      0x00000080
+#define AES_CFG_CTR_WIDTH_96      0x00000100
+#define AES_CFG_CTR_WIDTH_128     0x00000180
 
 //*****************************************************************************
 //
@@ -112,14 +112,14 @@ extern "C"
 // This value is also known as L.  Only one is permitted.
 //
 //*****************************************************************************
-#define AES_CFG_CCM_L_1 0x00000000
-#define AES_CFG_CCM_L_2 0x00080000
-#define AES_CFG_CCM_L_3 0x00100000
-#define AES_CFG_CCM_L_4 0x00180000
-#define AES_CFG_CCM_L_5 0x00200000
-#define AES_CFG_CCM_L_6 0x00280000
-#define AES_CFG_CCM_L_7 0x00300000
-#define AES_CFG_CCM_L_8 0x00380000
+#define AES_CFG_CCM_L_1           0x00000000
+#define AES_CFG_CCM_L_2           0x00080000
+#define AES_CFG_CCM_L_3           0x00100000
+#define AES_CFG_CCM_L_4           0x00180000
+#define AES_CFG_CCM_L_5           0x00200000
+#define AES_CFG_CCM_L_6           0x00280000
+#define AES_CFG_CCM_L_7           0x00300000
+#define AES_CFG_CCM_L_8           0x00380000
 
 //*****************************************************************************
 //
@@ -128,13 +128,13 @@ extern "C"
 // function.  This value is also known as M.  Only one is permitted.
 //
 //*****************************************************************************
-#define AES_CFG_CCM_M_4  0x00400000
-#define AES_CFG_CCM_M_6  0x00800000
-#define AES_CFG_CCM_M_8  0x00c00000
-#define AES_CFG_CCM_M_10 0x01000000
-#define AES_CFG_CCM_M_12 0x01400000
-#define AES_CFG_CCM_M_14 0x01800000
-#define AES_CFG_CCM_M_16 0x01c00000
+#define AES_CFG_CCM_M_4           0x00400000
+#define AES_CFG_CCM_M_6           0x00800000
+#define AES_CFG_CCM_M_8           0x00c00000
+#define AES_CFG_CCM_M_10          0x01000000
+#define AES_CFG_CCM_M_12          0x01400000
+#define AES_CFG_CCM_M_14          0x01800000
+#define AES_CFG_CCM_M_16          0x01c00000
 
 //*****************************************************************************
 //
@@ -142,14 +142,14 @@ extern "C"
 // AESIntStatus functions.
 //
 //*****************************************************************************
-#define AES_INT_CONTEXT_IN      0x00000001
-#define AES_INT_CONTEXT_OUT     0x00000008
-#define AES_INT_DATA_IN         0x00000002
-#define AES_INT_DATA_OUT        0x00000004
-#define AES_INT_DMA_CONTEXT_IN  0x00010000
-#define AES_INT_DMA_CONTEXT_OUT 0x00080000
-#define AES_INT_DMA_DATA_IN     0x00020000
-#define AES_INT_DMA_DATA_OUT    0x00040000
+#define AES_INT_CONTEXT_IN        0x00000001
+#define AES_INT_CONTEXT_OUT       0x00000008
+#define AES_INT_DATA_IN           0x00000002
+#define AES_INT_DATA_OUT          0x00000004
+#define AES_INT_DMA_CONTEXT_IN    0x00010000
+#define AES_INT_DMA_CONTEXT_OUT   0x00080000
+#define AES_INT_DMA_DATA_IN       0x00020000
+#define AES_INT_DMA_DATA_OUT      0x00040000
 
 //*****************************************************************************
 //
@@ -157,10 +157,10 @@ extern "C"
 // AESEnableDMA and AESDisableDMA functions.
 //
 //*****************************************************************************
-#define AES_DMA_DATA_IN     0x00000020
-#define AES_DMA_DATA_OUT    0x00000040
-#define AES_DMA_CONTEXT_IN  0x00000080
-#define AES_DMA_CONTEXT_OUT 0x00000100
+#define AES_DMA_DATA_IN           0x00000020
+#define AES_DMA_DATA_OUT          0x00000040
+#define AES_DMA_CONTEXT_IN        0x00000080
+#define AES_DMA_CONTEXT_OUT       0x00000100
 
 //*****************************************************************************
 //

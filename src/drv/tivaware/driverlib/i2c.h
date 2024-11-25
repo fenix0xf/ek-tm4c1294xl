@@ -62,8 +62,8 @@ extern "C"
 // Interrupt defines.
 //
 //*****************************************************************************
-#define I2C_INT_MASTER 0x00000001
-#define I2C_INT_SLAVE  0x00000002
+#define I2C_INT_MASTER                               0x00000001
+#define I2C_INT_SLAVE                                0x00000002
 
 //*****************************************************************************
 //
@@ -99,130 +99,130 @@ extern "C"
 // I2C Master glitch filter configuration.
 //
 //*****************************************************************************
-#define I2C_MASTER_GLITCH_FILTER_DISABLED 0
-#define I2C_MASTER_GLITCH_FILTER_1        0x00010000
-#define I2C_MASTER_GLITCH_FILTER_2        0x00020000
-#define I2C_MASTER_GLITCH_FILTER_3        0x00030000
-#define I2C_MASTER_GLITCH_FILTER_4        0x00040000
-#define I2C_MASTER_GLITCH_FILTER_8        0x00050000
-#define I2C_MASTER_GLITCH_FILTER_16       0x00060000
-#define I2C_MASTER_GLITCH_FILTER_32       0x00070000
+#define I2C_MASTER_GLITCH_FILTER_DISABLED            0
+#define I2C_MASTER_GLITCH_FILTER_1                   0x00010000
+#define I2C_MASTER_GLITCH_FILTER_2                   0x00020000
+#define I2C_MASTER_GLITCH_FILTER_3                   0x00030000
+#define I2C_MASTER_GLITCH_FILTER_4                   0x00040000
+#define I2C_MASTER_GLITCH_FILTER_8                   0x00050000
+#define I2C_MASTER_GLITCH_FILTER_16                  0x00060000
+#define I2C_MASTER_GLITCH_FILTER_32                  0x00070000
 
 //*****************************************************************************
 //
 // I2C Master error status.
 //
 //*****************************************************************************
-#define I2C_MASTER_ERR_NONE     0
-#define I2C_MASTER_ERR_ADDR_ACK 0x00000004
-#define I2C_MASTER_ERR_DATA_ACK 0x00000008
-#define I2C_MASTER_ERR_ARB_LOST 0x00000010
-#define I2C_MASTER_ERR_CLK_TOUT 0x00000080
+#define I2C_MASTER_ERR_NONE                          0
+#define I2C_MASTER_ERR_ADDR_ACK                      0x00000004
+#define I2C_MASTER_ERR_DATA_ACK                      0x00000008
+#define I2C_MASTER_ERR_ARB_LOST                      0x00000010
+#define I2C_MASTER_ERR_CLK_TOUT                      0x00000080
 
 //*****************************************************************************
 //
 // I2C Slave action requests
 //
 //*****************************************************************************
-#define I2C_SLAVE_ACT_NONE      0
-#define I2C_SLAVE_ACT_RREQ      0x00000001 // Master has sent data
-#define I2C_SLAVE_ACT_TREQ      0x00000002 // Master has requested data
-#define I2C_SLAVE_ACT_RREQ_FBR  0x00000005 // Master has sent first byte
-#define I2C_SLAVE_ACT_OWN2SEL   0x00000008 // Master requested secondary slave
-#define I2C_SLAVE_ACT_QCMD      0x00000010 // Master has sent a Quick Command
-#define I2C_SLAVE_ACT_QCMD_DATA 0x00000020 // Master Quick Command value
+#define I2C_SLAVE_ACT_NONE                           0
+#define I2C_SLAVE_ACT_RREQ                           0x00000001 // Master has sent data
+#define I2C_SLAVE_ACT_TREQ                           0x00000002 // Master has requested data
+#define I2C_SLAVE_ACT_RREQ_FBR                       0x00000005 // Master has sent first byte
+#define I2C_SLAVE_ACT_OWN2SEL                        0x00000008 // Master requested secondary slave
+#define I2C_SLAVE_ACT_QCMD                           0x00000010 // Master has sent a Quick Command
+#define I2C_SLAVE_ACT_QCMD_DATA                      0x00000020 // Master Quick Command value
 
 //*****************************************************************************
 //
 // Miscellaneous I2C driver definitions.
 //
 //*****************************************************************************
-#define I2C_MASTER_MAX_RETRIES 1000 // Number of retries
+#define I2C_MASTER_MAX_RETRIES                       1000 // Number of retries
 
 //*****************************************************************************
 //
 // I2C Master interrupts.
 //
 //*****************************************************************************
-#define I2C_MASTER_INT_RX_FIFO_FULL  0x00000800 // RX FIFO Full Interrupt
-#define I2C_MASTER_INT_TX_FIFO_EMPTY 0x00000400 // TX FIFO Empty Interrupt
-#define I2C_MASTER_INT_RX_FIFO_REQ   0x00000200 // RX FIFO Request Interrupt
-#define I2C_MASTER_INT_TX_FIFO_REQ   0x00000100 // TX FIFO Request Interrupt
-#define I2C_MASTER_INT_ARB_LOST      0x00000080 // Arb Lost Interrupt
-#define I2C_MASTER_INT_STOP          0x00000040 // Stop Condition Interrupt
-#define I2C_MASTER_INT_START         0x00000020 // Start Condition Interrupt
-#define I2C_MASTER_INT_NACK          0x00000010 // Addr/Data NACK Interrupt
-#define I2C_MASTER_INT_TX_DMA_DONE   0x00000008 // TX DMA Complete Interrupt
-#define I2C_MASTER_INT_RX_DMA_DONE   0x00000004 // RX DMA Complete Interrupt
-#define I2C_MASTER_INT_TIMEOUT       0x00000002 // Clock Timeout Interrupt
-#define I2C_MASTER_INT_DATA          0x00000001 // Data Interrupt
+#define I2C_MASTER_INT_RX_FIFO_FULL                  0x00000800 // RX FIFO Full Interrupt
+#define I2C_MASTER_INT_TX_FIFO_EMPTY                 0x00000400 // TX FIFO Empty Interrupt
+#define I2C_MASTER_INT_RX_FIFO_REQ                   0x00000200 // RX FIFO Request Interrupt
+#define I2C_MASTER_INT_TX_FIFO_REQ                   0x00000100 // TX FIFO Request Interrupt
+#define I2C_MASTER_INT_ARB_LOST                      0x00000080 // Arb Lost Interrupt
+#define I2C_MASTER_INT_STOP                          0x00000040 // Stop Condition Interrupt
+#define I2C_MASTER_INT_START                         0x00000020 // Start Condition Interrupt
+#define I2C_MASTER_INT_NACK                          0x00000010 // Addr/Data NACK Interrupt
+#define I2C_MASTER_INT_TX_DMA_DONE                   0x00000008 // TX DMA Complete Interrupt
+#define I2C_MASTER_INT_RX_DMA_DONE                   0x00000004 // RX DMA Complete Interrupt
+#define I2C_MASTER_INT_TIMEOUT                       0x00000002 // Clock Timeout Interrupt
+#define I2C_MASTER_INT_DATA                          0x00000001 // Data Interrupt
 
 //*****************************************************************************
 //
 // I2C Slave interrupts.
 //
 //*****************************************************************************
-#define I2C_SLAVE_INT_RX_FIFO_FULL  0x00000100 // RX FIFO Full Interrupt
-#define I2C_SLAVE_INT_TX_FIFO_EMPTY 0x00000080 // TX FIFO Empty Interrupt
-#define I2C_SLAVE_INT_RX_FIFO_REQ   0x00000040 // RX FIFO Request Interrupt
-#define I2C_SLAVE_INT_TX_FIFO_REQ   0x00000020 // TX FIFO Request Interrupt
-#define I2C_SLAVE_INT_TX_DMA_DONE   0x00000010 // TX DMA Complete Interrupt
-#define I2C_SLAVE_INT_RX_DMA_DONE   0x00000008 // RX DMA Complete Interrupt
-#define I2C_SLAVE_INT_STOP          0x00000004 // Stop Condition Interrupt
-#define I2C_SLAVE_INT_START         0x00000002 // Start Condition Interrupt
-#define I2C_SLAVE_INT_DATA          0x00000001 // Data Interrupt
+#define I2C_SLAVE_INT_RX_FIFO_FULL                   0x00000100 // RX FIFO Full Interrupt
+#define I2C_SLAVE_INT_TX_FIFO_EMPTY                  0x00000080 // TX FIFO Empty Interrupt
+#define I2C_SLAVE_INT_RX_FIFO_REQ                    0x00000040 // RX FIFO Request Interrupt
+#define I2C_SLAVE_INT_TX_FIFO_REQ                    0x00000020 // TX FIFO Request Interrupt
+#define I2C_SLAVE_INT_TX_DMA_DONE                    0x00000010 // TX DMA Complete Interrupt
+#define I2C_SLAVE_INT_RX_DMA_DONE                    0x00000008 // RX DMA Complete Interrupt
+#define I2C_SLAVE_INT_STOP                           0x00000004 // Stop Condition Interrupt
+#define I2C_SLAVE_INT_START                          0x00000002 // Start Condition Interrupt
+#define I2C_SLAVE_INT_DATA                           0x00000001 // Data Interrupt
 
 //*****************************************************************************
 //
 // I2C Slave FIFO configuration macros.
 //
 //*****************************************************************************
-#define I2C_SLAVE_TX_FIFO_ENABLE 0x00000002
-#define I2C_SLAVE_RX_FIFO_ENABLE 0x00000004
+#define I2C_SLAVE_TX_FIFO_ENABLE                     0x00000002
+#define I2C_SLAVE_RX_FIFO_ENABLE                     0x00000004
 
 //*****************************************************************************
 //
 // I2C FIFO configuration macros.
 //
 //*****************************************************************************
-#define I2C_FIFO_CFG_TX_MASTER     0x00000000
-#define I2C_FIFO_CFG_TX_SLAVE      0x00008000
-#define I2C_FIFO_CFG_RX_MASTER     0x00000000
-#define I2C_FIFO_CFG_RX_SLAVE      0x80000000
-#define I2C_FIFO_CFG_TX_MASTER_DMA 0x00002000
-#define I2C_FIFO_CFG_TX_SLAVE_DMA  0x0000a000
-#define I2C_FIFO_CFG_RX_MASTER_DMA 0x20000000
-#define I2C_FIFO_CFG_RX_SLAVE_DMA  0xa0000000
-#define I2C_FIFO_CFG_TX_NO_TRIG    0x00000000
-#define I2C_FIFO_CFG_TX_TRIG_1     0x00000001
-#define I2C_FIFO_CFG_TX_TRIG_2     0x00000002
-#define I2C_FIFO_CFG_TX_TRIG_3     0x00000003
-#define I2C_FIFO_CFG_TX_TRIG_4     0x00000004
-#define I2C_FIFO_CFG_TX_TRIG_5     0x00000005
-#define I2C_FIFO_CFG_TX_TRIG_6     0x00000006
-#define I2C_FIFO_CFG_TX_TRIG_7     0x00000007
-#define I2C_FIFO_CFG_TX_TRIG_8     0x00000008
-#define I2C_FIFO_CFG_RX_NO_TRIG    0x00000000
-#define I2C_FIFO_CFG_RX_TRIG_1     0x00010000
-#define I2C_FIFO_CFG_RX_TRIG_2     0x00020000
-#define I2C_FIFO_CFG_RX_TRIG_3     0x00030000
-#define I2C_FIFO_CFG_RX_TRIG_4     0x00040000
-#define I2C_FIFO_CFG_RX_TRIG_5     0x00050000
-#define I2C_FIFO_CFG_RX_TRIG_6     0x00060000
-#define I2C_FIFO_CFG_RX_TRIG_7     0x00070000
-#define I2C_FIFO_CFG_RX_TRIG_8     0x00080000
+#define I2C_FIFO_CFG_TX_MASTER                       0x00000000
+#define I2C_FIFO_CFG_TX_SLAVE                        0x00008000
+#define I2C_FIFO_CFG_RX_MASTER                       0x00000000
+#define I2C_FIFO_CFG_RX_SLAVE                        0x80000000
+#define I2C_FIFO_CFG_TX_MASTER_DMA                   0x00002000
+#define I2C_FIFO_CFG_TX_SLAVE_DMA                    0x0000a000
+#define I2C_FIFO_CFG_RX_MASTER_DMA                   0x20000000
+#define I2C_FIFO_CFG_RX_SLAVE_DMA                    0xa0000000
+#define I2C_FIFO_CFG_TX_NO_TRIG                      0x00000000
+#define I2C_FIFO_CFG_TX_TRIG_1                       0x00000001
+#define I2C_FIFO_CFG_TX_TRIG_2                       0x00000002
+#define I2C_FIFO_CFG_TX_TRIG_3                       0x00000003
+#define I2C_FIFO_CFG_TX_TRIG_4                       0x00000004
+#define I2C_FIFO_CFG_TX_TRIG_5                       0x00000005
+#define I2C_FIFO_CFG_TX_TRIG_6                       0x00000006
+#define I2C_FIFO_CFG_TX_TRIG_7                       0x00000007
+#define I2C_FIFO_CFG_TX_TRIG_8                       0x00000008
+#define I2C_FIFO_CFG_RX_NO_TRIG                      0x00000000
+#define I2C_FIFO_CFG_RX_TRIG_1                       0x00010000
+#define I2C_FIFO_CFG_RX_TRIG_2                       0x00020000
+#define I2C_FIFO_CFG_RX_TRIG_3                       0x00030000
+#define I2C_FIFO_CFG_RX_TRIG_4                       0x00040000
+#define I2C_FIFO_CFG_RX_TRIG_5                       0x00050000
+#define I2C_FIFO_CFG_RX_TRIG_6                       0x00060000
+#define I2C_FIFO_CFG_RX_TRIG_7                       0x00070000
+#define I2C_FIFO_CFG_RX_TRIG_8                       0x00080000
 
 //*****************************************************************************
 //
 // I2C FIFO status.
 //
 //*****************************************************************************
-#define I2C_FIFO_RX_BELOW_TRIG_LEVEL 0x00040000
-#define I2C_FIFO_RX_FULL             0x00020000
-#define I2C_FIFO_RX_EMPTY            0x00010000
-#define I2C_FIFO_TX_BELOW_TRIG_LEVEL 0x00000004
-#define I2C_FIFO_TX_FULL             0x00000002
-#define I2C_FIFO_TX_EMPTY            0x00000001
+#define I2C_FIFO_RX_BELOW_TRIG_LEVEL                 0x00040000
+#define I2C_FIFO_RX_FULL                             0x00020000
+#define I2C_FIFO_RX_EMPTY                            0x00010000
+#define I2C_FIFO_TX_BELOW_TRIG_LEVEL                 0x00000004
+#define I2C_FIFO_TX_FULL                             0x00000002
+#define I2C_FIFO_TX_EMPTY                            0x00000001
 
 //*****************************************************************************
 //

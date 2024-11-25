@@ -38,7 +38,7 @@
 /**
  * Initialize TM4C129 internal flash memory.
  */
-bool tm4c129_flash_init(void);
+bool   tm4c129_flash_init(void);
 
 size_t tm4c129_flash_size(void);
 size_t tm4c129_flash_align(void);
@@ -47,22 +47,22 @@ size_t tm4c129_flash_ealign(void);
 /**
  * @param block_addr - must be a multiple of tm4c129_flash_sect_size().
  */
-bool tm4c129_flash_erase(uintptr_t block_addr);
+bool   tm4c129_flash_erase(uintptr_t block_addr);
 
 /**
  * @param addr - must be a multiple of tm4c129_flash_align().
  * @param len  - must be a multiple of tm4c129_flash_align().
  */
-bool tm4c129_flash_write(uintptr_t addr, const void* buf, size_t len);
+bool   tm4c129_flash_write(uintptr_t addr, const void* buf, size_t len);
 
 /**
  * @param addr - must be a multiple of tm4c129_flash_align().
  * @param len  - must be a multiple of tm4c129_flash_align().
  */
-bool tm4c129_flash_compare(uintptr_t addr, const void* buf, size_t len);
+bool   tm4c129_flash_compare(uintptr_t addr, const void* buf, size_t len);
 
 /**
  * JTAG module operations.
  */
-bool tm4c129_flash_jtag_is_on(void);
-void tm4c129_flash_jtag_permanently_off(void);
+bool   tm4c129_flash_jtag_is_on(void);
+void   tm4c129_flash_jtag_permanently_off(void);

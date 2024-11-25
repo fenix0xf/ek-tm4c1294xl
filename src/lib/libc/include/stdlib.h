@@ -28,36 +28,36 @@ double    atof(const char*);
 
 #define ITOA_BUFSIZ (sizeof(int) * 8 + 1) /* non-ANSI */
 
-char* itoa(int, char*, int);              /* non-ANSI */
-char* utoa(unsigned int, char*, int);     /* non-ANSI */
+char*              itoa(int, char*, int);          /* non-ANSI */
+char*              utoa(unsigned int, char*, int); /* non-ANSI */
 
-float       strtof(const char* __restrict, char** __restrict);
-double      strtod(const char* __restrict, char** __restrict);
-long double strtold(const char* __restrict, char** __restrict);
+float              strtof(const char* __restrict, char** __restrict);
+double             strtod(const char* __restrict, char** __restrict);
+long double        strtold(const char* __restrict, char** __restrict);
 
 long               strtol(const char* __restrict, char** __restrict, int);
 unsigned long      strtoul(const char* __restrict, char** __restrict, int);
 long long          strtoll(const char* __restrict, char** __restrict, int);
 unsigned long long strtoull(const char* __restrict, char** __restrict, int);
 
-int  rand(void);
-void srand(unsigned);
+int                rand(void);
+void               srand(unsigned);
 
-void* malloc(size_t);
-void* calloc(size_t, size_t);
-void* realloc(void*, size_t);
-void  free(void*);
-void* aligned_alloc(size_t, size_t);
+void*              malloc(size_t);
+void*              calloc(size_t, size_t);
+void*              realloc(void*, size_t);
+void               free(void*);
+void*              aligned_alloc(size_t, size_t);
 
-_Noreturn void abort(void);
-_Noreturn void _Exit(int);
+_Noreturn void     abort(void);
+_Noreturn void     _Exit(int);
 
-void* bsearch(const void*, const void*, size_t, size_t, int (*)(const void*, const void*));
-void  qsort(void*, size_t, size_t, int (*)(const void*, const void*));
+void*              bsearch(const void*, const void*, size_t, size_t, int (*)(const void*, const void*));
+void               qsort(void*, size_t, size_t, int (*)(const void*, const void*));
 
-int       abs(int);
-long      labs(long);
-long long llabs(long long);
+int                abs(int);
+long               labs(long);
+long long          llabs(long long);
 
 typedef struct
 {

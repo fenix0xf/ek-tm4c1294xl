@@ -33,16 +33,14 @@
 #if TN_USE_EVENTS
 
 static bool do_check_release_cond(TN_EVENT* evf, unsigned int wait_mode, unsigned int wait_pattern);
-static void do_clear_pattern(TN_EVENT*     evf,
-                             unsigned int  wait_mode,
-                             unsigned int  wait_pattern,
+static void do_clear_pattern(TN_EVENT* evf, unsigned int wait_mode, unsigned int wait_pattern,
                              unsigned int* p_flags_pattern); // [OUT]
 static bool scan_event_waitqueue(TN_EVENT* evf);
 
 //----------------------------------------------------------------------------
 //  Structure's field evf->id_event have to be set to 0
 //----------------------------------------------------------------------------
-int tn_event_create(TN_EVENT* evf, unsigned int pattern) //-- Initial value of the event bit pattern
+int         tn_event_create(TN_EVENT* evf, unsigned int pattern) //-- Initial value of the event bit pattern
 {
     int rc = TERR_NO_ERR;
 #if TN_CHECK_PARAM
@@ -89,7 +87,7 @@ TN_EVENT* tn_event_create_dyn(unsigned int pattern, //-- Initial value of the ev
             *err = TERR_WCONTEXT;
         }
     }
-    else                        // Check input parameters inside a static creation func - optimistic approach
+    else // Check input parameters inside a static creation func - optimistic approach
     {
         tmp = sizeof(TN_EVENT); // To make MISRAC 2012 happy
         evf = (TN_EVENT*)tn_alloc(&tn_objects_mem, (long)tmp);
@@ -432,9 +430,7 @@ static bool do_check_release_cond(TN_EVENT* evf, unsigned int wait_mode, unsigne
 }
 
 //----------------------------------------------------------------------------
-static void do_clear_pattern(TN_EVENT*     evf,
-                             unsigned int  wait_mode,
-                             unsigned int  wait_pattern,
+static void do_clear_pattern(TN_EVENT* evf, unsigned int wait_mode, unsigned int wait_pattern,
                              unsigned int* p_flags_pattern) // [OUT]
 {
     if (p_flags_pattern != NULL)

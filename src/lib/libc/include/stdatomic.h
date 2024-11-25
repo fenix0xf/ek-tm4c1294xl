@@ -87,10 +87,7 @@
 #define ATOMIC_VAR_INIT(value)  (value)
 #define atomic_init(obj, value) __c11_atomic_init(obj, value)
 #else
-#define ATOMIC_VAR_INIT(value) \
-    {                          \
-        .__val = (value)       \
-    }
+#define ATOMIC_VAR_INIT(value)  {.__val = (value)}
 #define atomic_init(obj, value) ((void)((obj)->__val = (value)))
 #endif
 
@@ -126,7 +123,8 @@
  * atomic operations.
  */
 
-typedef enum {
+typedef enum
+{
     memory_order_relaxed = __ATOMIC_RELAXED,
     memory_order_consume = __ATOMIC_CONSUME,
     memory_order_acquire = __ATOMIC_ACQUIRE,
@@ -284,15 +282,13 @@ typedef _Atomic(uintmax_t)      atomic_uintmax_t;
 #endif
 #define atomic_fetch_add_explicit(object, operand, order) \
     ((void)(order), __sync_fetch_and_add(&(object)->__val, __atomic_apply_stride(object, operand)))
-#define atomic_fetch_and_explicit(object, operand, order) \
-    ((void)(order), __sync_fetch_and_and(&(object)->__val, operand))
-#define atomic_fetch_or_explicit(object, operand, order) ((void)(order), __sync_fetch_and_or(&(object)->__val, operand))
+#define atomic_fetch_and_explicit(object, operand, order) ((void)(order), __sync_fetch_and_and(&(object)->__val, operand))
+#define atomic_fetch_or_explicit(object, operand, order)  ((void)(order), __sync_fetch_and_or(&(object)->__val, operand))
 #define atomic_fetch_sub_explicit(object, operand, order) \
     ((void)(order), __sync_fetch_and_sub(&(object)->__val, __atomic_apply_stride(object, operand)))
-#define atomic_fetch_xor_explicit(object, operand, order) \
-    ((void)(order), __sync_fetch_and_xor(&(object)->__val, operand))
-#define atomic_load_explicit(object, order)           ((void)(order), __sync_fetch_and_add(&(object)->__val, 0))
-#define atomic_store_explicit(object, desired, order) ((void)atomic_exchange_explicit(object, desired, order))
+#define atomic_fetch_xor_explicit(object, operand, order) ((void)(order), __sync_fetch_and_xor(&(object)->__val, operand))
+#define atomic_load_explicit(object, order)               ((void)(order), __sync_fetch_and_add(&(object)->__val, 0))
+#define atomic_store_explicit(object, desired, order)     ((void)atomic_exchange_explicit(object, desired, order))
 #endif
 
 /*
@@ -329,10 +325,7 @@ typedef struct
     atomic_bool __flag;
 } atomic_flag;
 
-#define ATOMIC_FLAG_INIT   \
-    {                      \
-        ATOMIC_VAR_INIT(0) \
-    }
+#define ATOMIC_FLAG_INIT {ATOMIC_VAR_INIT(0)}
 
 static __inline _Bool atomic_flag_test_and_set_explicit(volatile atomic_flag* __object, memory_order __order)
 {

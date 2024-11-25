@@ -86,10 +86,9 @@ static const uint32_t g_ppui32GPIOIntMapBlizzard[][2] = {
     {GPIO_PORTP_BASE,     INT_GPIOP0_TM4C123},
     {GPIO_PORTQ_BASE,     INT_GPIOQ0_TM4C123},
 };
-static const uint_fast32_t g_ui32GPIOIntMapBlizzardRows =
-    sizeof(g_ppui32GPIOIntMapBlizzard) / sizeof(g_ppui32GPIOIntMapBlizzard[0]);
+static const uint_fast32_t g_ui32GPIOIntMapBlizzardRows = sizeof(g_ppui32GPIOIntMapBlizzard) / sizeof(g_ppui32GPIOIntMapBlizzard[0]);
 
-static const uint32_t g_ppui32GPIOIntMapSnowflake[][2] = {
+static const uint32_t      g_ppui32GPIOIntMapSnowflake[][2] = {
     {GPIO_PORTA_BASE,     INT_GPIOA_TM4C129 },
     {GPIO_PORTA_AHB_BASE, INT_GPIOA_TM4C129 },
     {GPIO_PORTB_BASE,     INT_GPIOB_TM4C129 },
@@ -118,8 +117,7 @@ static const uint32_t g_ppui32GPIOIntMapSnowflake[][2] = {
     {GPIO_PORTS_BASE,     INT_GPIOS_TM4C129 },
     {GPIO_PORTT_BASE,     INT_GPIOT_TM4C129 },
 };
-static const uint_fast32_t g_ui32GPIOIntMapSnowflakeRows =
-    (sizeof(g_ppui32GPIOIntMapSnowflake) / sizeof(g_ppui32GPIOIntMapSnowflake[0]));
+static const uint_fast32_t g_ui32GPIOIntMapSnowflakeRows = (sizeof(g_ppui32GPIOIntMapSnowflake) / sizeof(g_ppui32GPIOIntMapSnowflake[0]));
 
 //*****************************************************************************
 //
@@ -127,7 +125,7 @@ static const uint_fast32_t g_ui32GPIOIntMapSnowflakeRows =
 // are provided.
 //
 //*****************************************************************************
-static const uint32_t g_pui32GPIOBaseAddrs[] = {
+static const uint32_t      g_pui32GPIOBaseAddrs[] = {
     GPIO_PORTA_BASE, GPIO_PORTA_AHB_BASE, GPIO_PORTB_BASE, GPIO_PORTB_AHB_BASE, GPIO_PORTC_BASE, GPIO_PORTC_AHB_BASE,
     GPIO_PORTD_BASE, GPIO_PORTD_AHB_BASE, GPIO_PORTE_BASE, GPIO_PORTE_AHB_BASE, GPIO_PORTF_BASE, GPIO_PORTF_AHB_BASE,
     GPIO_PORTG_BASE, GPIO_PORTG_AHB_BASE, GPIO_PORTH_BASE, GPIO_PORTH_AHB_BASE, GPIO_PORTJ_BASE, GPIO_PORTJ_AHB_BASE,
@@ -364,10 +362,9 @@ void GPIOIntTypeSet(uint32_t ui32Port, uint8_t ui8Pins, uint32_t ui32IntType)
     //
     ASSERT(_GPIOBaseValid(ui32Port));
     ASSERT(((ui32IntType & 0xF) == GPIO_FALLING_EDGE) || ((ui32IntType & 0xF) == GPIO_RISING_EDGE) ||
-           ((ui32IntType & 0xF) == GPIO_BOTH_EDGES) || ((ui32IntType & 0xF) == GPIO_LOW_LEVEL) ||
-           ((ui32IntType & 0xF) == GPIO_HIGH_LEVEL));
-    ASSERT(((ui32IntType & 0x000F0000) == 0) || (((ui32IntType & 0x000F0000) == GPIO_DISCRETE_INT) &&
-                                                 ((ui32Port == GPIO_PORTP_BASE) || (ui32Port == GPIO_PORTQ_BASE))));
+           ((ui32IntType & 0xF) == GPIO_BOTH_EDGES) || ((ui32IntType & 0xF) == GPIO_LOW_LEVEL) || ((ui32IntType & 0xF) == GPIO_HIGH_LEVEL));
+    ASSERT(((ui32IntType & 0x000F0000) == 0) ||
+           (((ui32IntType & 0x000F0000) == GPIO_DISCRETE_INT) && ((ui32Port == GPIO_PORTP_BASE) || (ui32Port == GPIO_PORTQ_BASE))));
 
     //
     // Set the pin interrupt type.
@@ -426,8 +423,7 @@ uint32_t GPIOIntTypeGet(uint32_t ui32Port, uint8_t ui8Pin)
     ui32IEV = HWREG(ui32Port + GPIO_O_IEV);
     ui32SI  = HWREG(ui32Port + GPIO_O_SI);
 
-    return (((ui32IBE & ui8Pin) ? 1 : 0) | ((ui32IS & ui8Pin) ? 2 : 0) | ((ui32IEV & ui8Pin) ? 4 : 0) |
-            ((ui32SI & 0x01) ? 0x10000 : 0));
+    return (((ui32IBE & ui8Pin) ? 1 : 0) | ((ui32IS & ui8Pin) ? 2 : 0) | ((ui32IEV & ui8Pin) ? 4 : 0) | ((ui32SI & 0x01) ? 0x10000 : 0));
 }
 
 //*****************************************************************************
@@ -503,13 +499,11 @@ void GPIOPadConfigSet(uint32_t ui32Port, uint8_t ui8Pins, uint32_t ui32Strength,
     // Check the arguments.
     //
     ASSERT(_GPIOBaseValid(ui32Port));
-    ASSERT((ui32Strength == GPIO_STRENGTH_2MA) || (ui32Strength == GPIO_STRENGTH_4MA) ||
-           (ui32Strength == GPIO_STRENGTH_6MA) || (ui32Strength == GPIO_STRENGTH_8MA) ||
-           (ui32Strength == GPIO_STRENGTH_8MA_SC) || (ui32Strength == GPIO_STRENGTH_10MA) ||
+    ASSERT((ui32Strength == GPIO_STRENGTH_2MA) || (ui32Strength == GPIO_STRENGTH_4MA) || (ui32Strength == GPIO_STRENGTH_6MA) ||
+           (ui32Strength == GPIO_STRENGTH_8MA) || (ui32Strength == GPIO_STRENGTH_8MA_SC) || (ui32Strength == GPIO_STRENGTH_10MA) ||
            (ui32Strength == GPIO_STRENGTH_12MA));
-    ASSERT((ui32PinType == GPIO_PIN_TYPE_STD) || (ui32PinType == GPIO_PIN_TYPE_STD_WPU) ||
-           (ui32PinType == GPIO_PIN_TYPE_STD_WPD) || (ui32PinType == GPIO_PIN_TYPE_OD) ||
-           (ui32PinType == GPIO_PIN_TYPE_WAKE_LOW) || (ui32PinType == GPIO_PIN_TYPE_WAKE_HIGH) ||
+    ASSERT((ui32PinType == GPIO_PIN_TYPE_STD) || (ui32PinType == GPIO_PIN_TYPE_STD_WPU) || (ui32PinType == GPIO_PIN_TYPE_STD_WPD) ||
+           (ui32PinType == GPIO_PIN_TYPE_OD) || (ui32PinType == GPIO_PIN_TYPE_WAKE_LOW) || (ui32PinType == GPIO_PIN_TYPE_WAKE_HIGH) ||
            (ui32PinType == GPIO_PIN_TYPE_ANALOG));
 
     if (!(CLASS_IS_TM4C123))
@@ -548,8 +542,8 @@ void GPIOPadConfigSet(uint32_t ui32Port, uint8_t ui8Pins, uint32_t ui32Strength,
         // TM4C129x and later device classes, but is a harmless write on older
         // devices.
         //
-        HWREG(ui32Port + GPIO_O_DR12R) = ((ui32Strength & 0x10) ? (HWREG(ui32Port + GPIO_O_DR12R) | ui8Pins)
-                                                                : (HWREG(ui32Port + GPIO_O_DR12R) & ~(ui8Pins)));
+        HWREG(ui32Port + GPIO_O_DR12R) =
+            ((ui32Strength & 0x10) ? (HWREG(ui32Port + GPIO_O_DR12R) | ui8Pins) : (HWREG(ui32Port + GPIO_O_DR12R) & ~(ui8Pins)));
     }
 
     //
@@ -571,18 +565,17 @@ void GPIOPadConfigSet(uint32_t ui32Port, uint8_t ui8Pins, uint32_t ui32Strength,
         // registers only appear in TM4C129x and later device classes, but are
         // harmless writes on older devices.
         //
-        HWREG(ui32Port + GPIO_O_WAKELVL) = ((ui32PinType & 0x200) ? (HWREG(ui32Port + GPIO_O_WAKELVL) | ui8Pins)
-                                                                  : (HWREG(ui32Port + GPIO_O_WAKELVL) & ~(ui8Pins)));
-        HWREG(ui32Port + GPIO_O_WAKEPEN) = ((ui32PinType & 0x300) ? (HWREG(ui32Port + GPIO_O_WAKEPEN) | ui8Pins)
-                                                                  : (HWREG(ui32Port + GPIO_O_WAKEPEN) & ~(ui8Pins)));
+        HWREG(ui32Port + GPIO_O_WAKELVL) =
+            ((ui32PinType & 0x200) ? (HWREG(ui32Port + GPIO_O_WAKELVL) | ui8Pins) : (HWREG(ui32Port + GPIO_O_WAKELVL) & ~(ui8Pins)));
+        HWREG(ui32Port + GPIO_O_WAKEPEN) =
+            ((ui32PinType & 0x300) ? (HWREG(ui32Port + GPIO_O_WAKEPEN) | ui8Pins) : (HWREG(ui32Port + GPIO_O_WAKEPEN) & ~(ui8Pins)));
     }
 
     //
     // Set the analog mode select register.
     //
-    HWREG(ui32Port + GPIO_O_AMSEL) =
-        ((ui32PinType == GPIO_PIN_TYPE_ANALOG) ? (HWREG(ui32Port + GPIO_O_AMSEL) | ui8Pins)
-                                               : (HWREG(ui32Port + GPIO_O_AMSEL) & ~(ui8Pins)));
+    HWREG(ui32Port + GPIO_O_AMSEL) = ((ui32PinType == GPIO_PIN_TYPE_ANALOG) ? (HWREG(ui32Port + GPIO_O_AMSEL) | ui8Pins)
+                                                                            : (HWREG(ui32Port + GPIO_O_AMSEL) & ~(ui8Pins)));
 }
 
 //*****************************************************************************
@@ -2371,8 +2364,7 @@ void GPIOPinConfigure(uint32_t ui32PinConfig)
     //
     // Write the requested pin muxing value for this GPIO pin.
     //
-    HWREG(ui32Base + GPIO_O_PCTL) =
-        ((HWREG(ui32Base + GPIO_O_PCTL) & ~(0xf << ui32Shift)) | ((ui32PinConfig & 0xf) << ui32Shift));
+    HWREG(ui32Base + GPIO_O_PCTL) = ((HWREG(ui32Base + GPIO_O_PCTL) & ~(0xf << ui32Shift)) | ((ui32PinConfig & 0xf) << ui32Shift));
 }
 
 //*****************************************************************************

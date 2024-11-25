@@ -44,8 +44,8 @@
 static size_t               g_tls_items_count;
 static struct hal_tls_block g_system_tls_block;
 
-typedef unsigned int word __attribute__((mode(word)));
-typedef unsigned int pointer __attribute__((mode(pointer)));
+typedef unsigned int        word __attribute__((mode(word)));
+typedef unsigned int        pointer __attribute__((mode(pointer)));
 
 #define POINTER_BIT   (sizeof(pointer) * CHAR_BIT)
 
@@ -135,16 +135,13 @@ void* tls_item_copy(struct hal_tls_block* tls_block, struct __emutls_object* obj
  */
 void* __emutls_get_address(struct __emutls_object* obj)
 {
-    bool is_sys_ctx = is_system_ctx();
+    bool                  is_sys_ctx = is_system_ctx();
 
     struct hal_tls_block* tls_block = get_tls_block(is_sys_ctx);
 
     if (HAL_UNLIKELY(tls_block == NULL))
     {
-        hal_errorf(TLS_PREFIX "%s%s TLS block is not set!",
-                   is_sys_ctx ? "System" : "Task ",
-                   is_sys_ctx ? "" : tn_curr_run_task->task_name);
-
+        hal_errorf(TLS_PREFIX "%s%s TLS block is not set!", is_sys_ctx ? "System" : "Task ", is_sys_ctx ? "" : tn_curr_run_task->task_name);
         hal_mcu_halt();
     }
 

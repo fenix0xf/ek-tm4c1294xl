@@ -80,7 +80,9 @@ void DESReset(uint32_t ui32Base)
     //
     // Wait for the reset to finish.
     //
-    while ((HWREG(ui32Base + DES_O_SYSSTATUS) & DES_SYSSTATUS_RESETDONE) == 0) {}
+    while ((HWREG(ui32Base + DES_O_SYSSTATUS) & DES_SYSSTATUS_RESETDONE) == 0)
+    {
+    }
 }
 
 //*****************************************************************************
@@ -313,7 +315,9 @@ void DESDataRead(uint32_t ui32Base, uint32_t* pui32Dest)
     //
     // Wait for data output to be ready.
     //
-    while ((HWREG(ui32Base + DES_O_CTRL) & DES_CTRL_OUTPUT_READY) == 0) {}
+    while ((HWREG(ui32Base + DES_O_CTRL) & DES_CTRL_OUTPUT_READY) == 0)
+    {
+    }
 
     //
     // Read two words of data from the data registers.
@@ -386,7 +390,9 @@ void DESDataWrite(uint32_t ui32Base, uint32_t* pui32Src)
     //
     // Wait for the input ready bit to go high.
     //
-    while (((HWREG(ui32Base + DES_O_CTRL) & DES_CTRL_INPUT_READY)) == 0) {}
+    while (((HWREG(ui32Base + DES_O_CTRL) & DES_CTRL_INPUT_READY)) == 0)
+    {
+    }
 
     //
     // Write the data.
@@ -442,7 +448,9 @@ bool DESDataProcess(uint32_t ui32Base, uint32_t* pui32Src, uint32_t* pui32Dest, 
         //
         // Check if the input ready is fine
         //
-        while ((DES_CTRL_INPUT_READY & (HWREG(ui32Base + DES_O_CTRL))) == 0) {}
+        while ((DES_CTRL_INPUT_READY & (HWREG(ui32Base + DES_O_CTRL))) == 0)
+        {
+        }
 
         //
         // Write the block data.
@@ -452,7 +460,9 @@ bool DESDataProcess(uint32_t ui32Base, uint32_t* pui32Src, uint32_t* pui32Dest, 
         //
         // Wait for the output ready
         //
-        while ((DES_CTRL_OUTPUT_READY & (HWREG(ui32Base + DES_O_CTRL))) == 0) {}
+        while ((DES_CTRL_OUTPUT_READY & (HWREG(ui32Base + DES_O_CTRL))) == 0)
+        {
+        }
 
         //
         // Read the processed data block.
@@ -537,9 +547,8 @@ void DESIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == DES_BASE);
-    ASSERT((ui32IntFlags & DES_INT_CONTEXT_IN) || (ui32IntFlags & DES_INT_DATA_IN) ||
-           (ui32IntFlags & DES_INT_DATA_OUT) || (ui32IntFlags & DES_INT_DMA_CONTEXT_IN) ||
-           (ui32IntFlags & DES_INT_DMA_DATA_IN) || (ui32IntFlags & DES_INT_DMA_DATA_OUT));
+    ASSERT((ui32IntFlags & DES_INT_CONTEXT_IN) || (ui32IntFlags & DES_INT_DATA_IN) || (ui32IntFlags & DES_INT_DATA_OUT) ||
+           (ui32IntFlags & DES_INT_DMA_CONTEXT_IN) || (ui32IntFlags & DES_INT_DMA_DATA_IN) || (ui32IntFlags & DES_INT_DMA_DATA_OUT));
 
     //
     // Enable the interrupts from the flags.
@@ -575,9 +584,8 @@ void DESIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == DES_BASE);
-    ASSERT((ui32IntFlags & DES_INT_CONTEXT_IN) || (ui32IntFlags & DES_INT_DATA_IN) ||
-           (ui32IntFlags & DES_INT_DATA_OUT) || (ui32IntFlags & DES_INT_DMA_CONTEXT_IN) ||
-           (ui32IntFlags & DES_INT_DMA_DATA_IN) || (ui32IntFlags & DES_INT_DMA_DATA_OUT));
+    ASSERT((ui32IntFlags & DES_INT_CONTEXT_IN) || (ui32IntFlags & DES_INT_DATA_IN) || (ui32IntFlags & DES_INT_DATA_OUT) ||
+           (ui32IntFlags & DES_INT_DMA_CONTEXT_IN) || (ui32IntFlags & DES_INT_DMA_DATA_IN) || (ui32IntFlags & DES_INT_DMA_DATA_OUT));
 
     //
     // Clear the interrupts from the flags.
@@ -613,8 +621,7 @@ void DESIntClear(uint32_t ui32Base, uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(ui32Base == DES_BASE);
-    ASSERT((ui32IntFlags & DES_INT_DMA_CONTEXT_IN) || (ui32IntFlags & DES_INT_DMA_DATA_IN) ||
-           (ui32IntFlags & DES_INT_DMA_DATA_OUT));
+    ASSERT((ui32IntFlags & DES_INT_DMA_CONTEXT_IN) || (ui32IntFlags & DES_INT_DMA_DATA_IN) || (ui32IntFlags & DES_INT_DMA_DATA_OUT));
 
     HWREG(ui32Base + DES_O_DMAIC) = (ui32IntFlags & 0x00070000) >> 16;
 }

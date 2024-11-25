@@ -57,14 +57,14 @@ extern "C"
 // several of the APIs.
 //
 //*****************************************************************************
-#define GPIO_PIN_0 0x00000001 // GPIO pin 0
-#define GPIO_PIN_1 0x00000002 // GPIO pin 1
-#define GPIO_PIN_2 0x00000004 // GPIO pin 2
-#define GPIO_PIN_3 0x00000008 // GPIO pin 3
-#define GPIO_PIN_4 0x00000010 // GPIO pin 4
-#define GPIO_PIN_5 0x00000020 // GPIO pin 5
-#define GPIO_PIN_6 0x00000040 // GPIO pin 6
-#define GPIO_PIN_7 0x00000080 // GPIO pin 7
+#define GPIO_PIN_0              0x00000001 // GPIO pin 0
+#define GPIO_PIN_1              0x00000002 // GPIO pin 1
+#define GPIO_PIN_2              0x00000004 // GPIO pin 2
+#define GPIO_PIN_3              0x00000008 // GPIO pin 3
+#define GPIO_PIN_4              0x00000010 // GPIO pin 4
+#define GPIO_PIN_5              0x00000020 // GPIO pin 5
+#define GPIO_PIN_6              0x00000040 // GPIO pin 6
+#define GPIO_PIN_7              0x00000080 // GPIO pin 7
 
 //*****************************************************************************
 //
@@ -72,9 +72,9 @@ extern "C"
 // returned from GPIODirModeGet.
 //
 //*****************************************************************************
-#define GPIO_DIR_MODE_IN  0x00000000 // Pin is a GPIO input
-#define GPIO_DIR_MODE_OUT 0x00000001 // Pin is a GPIO output
-#define GPIO_DIR_MODE_HW  0x00000002 // Pin is a peripheral function
+#define GPIO_DIR_MODE_IN        0x00000000 // Pin is a GPIO input
+#define GPIO_DIR_MODE_OUT       0x00000001 // Pin is a GPIO output
+#define GPIO_DIR_MODE_HW        0x00000002 // Pin is a peripheral function
 
 //*****************************************************************************
 //
@@ -82,12 +82,12 @@ extern "C"
 // and returned from GPIOIntTypeGet.
 //
 //*****************************************************************************
-#define GPIO_FALLING_EDGE 0x00000000 // Interrupt on falling edge
-#define GPIO_RISING_EDGE  0x00000004 // Interrupt on rising edge
-#define GPIO_BOTH_EDGES   0x00000001 // Interrupt on both edges
-#define GPIO_LOW_LEVEL    0x00000002 // Interrupt on low level
-#define GPIO_HIGH_LEVEL   0x00000006 // Interrupt on high level
-#define GPIO_DISCRETE_INT 0x00010000 // Interrupt for individual pins
+#define GPIO_FALLING_EDGE       0x00000000 // Interrupt on falling edge
+#define GPIO_RISING_EDGE        0x00000004 // Interrupt on rising edge
+#define GPIO_BOTH_EDGES         0x00000001 // Interrupt on both edges
+#define GPIO_LOW_LEVEL          0x00000002 // Interrupt on low level
+#define GPIO_HIGH_LEVEL         0x00000006 // Interrupt on high level
+#define GPIO_DISCRETE_INT       0x00010000 // Interrupt for individual pins
 
 //*****************************************************************************
 //
@@ -95,13 +95,13 @@ extern "C"
 // and returned by GPIOPadConfigGet in the *pui32Strength parameter.
 //
 //*****************************************************************************
-#define GPIO_STRENGTH_2MA    0x00000001 // 2mA drive strength
-#define GPIO_STRENGTH_4MA    0x00000002 // 4mA drive strength
-#define GPIO_STRENGTH_6MA    0x00000065 // 6mA drive strength
-#define GPIO_STRENGTH_8MA    0x00000066 // 8mA drive strength
-#define GPIO_STRENGTH_8MA_SC 0x0000006E // 8mA drive with slew rate control
-#define GPIO_STRENGTH_10MA   0x00000075 // 10mA drive strength
-#define GPIO_STRENGTH_12MA   0x00000077 // 12mA drive strength
+#define GPIO_STRENGTH_2MA       0x00000001 // 2mA drive strength
+#define GPIO_STRENGTH_4MA       0x00000002 // 4mA drive strength
+#define GPIO_STRENGTH_6MA       0x00000065 // 6mA drive strength
+#define GPIO_STRENGTH_8MA       0x00000066 // 8mA drive strength
+#define GPIO_STRENGTH_8MA_SC    0x0000006E // 8mA drive with slew rate control
+#define GPIO_STRENGTH_10MA      0x00000075 // 10mA drive strength
+#define GPIO_STRENGTH_12MA      0x00000077 // 12mA drive strength
 
 //*****************************************************************************
 //
@@ -123,15 +123,15 @@ extern "C"
 // in the ui32IntFlags parameter.
 //
 //*****************************************************************************
-#define GPIO_INT_PIN_0 0x00000001
-#define GPIO_INT_PIN_1 0x00000002
-#define GPIO_INT_PIN_2 0x00000004
-#define GPIO_INT_PIN_3 0x00000008
-#define GPIO_INT_PIN_4 0x00000010
-#define GPIO_INT_PIN_5 0x00000020
-#define GPIO_INT_PIN_6 0x00000040
-#define GPIO_INT_PIN_7 0x00000080
-#define GPIO_INT_DMA   0x00000100
+#define GPIO_INT_PIN_0          0x00000001
+#define GPIO_INT_PIN_1          0x00000002
+#define GPIO_INT_PIN_2          0x00000004
+#define GPIO_INT_PIN_3          0x00000008
+#define GPIO_INT_PIN_4          0x00000010
+#define GPIO_INT_PIN_5          0x00000020
+#define GPIO_INT_PIN_6          0x00000040
+#define GPIO_INT_PIN_7          0x00000080
+#define GPIO_INT_DMA            0x00000100
 
 //*****************************************************************************
 //

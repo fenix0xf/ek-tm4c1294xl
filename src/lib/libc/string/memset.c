@@ -56,7 +56,7 @@ __used void* memset(void* dest, int c, size_t n)
     typedef uint32_t __attribute__((__may_alias__)) u32;
     typedef uint64_t __attribute__((__may_alias__)) u64;
 
-    u32 c32 = ((u32)-1) / 255 * (unsigned char)c;
+    u32                                             c32 = ((u32)-1) / 255 * (unsigned char)c;
 
     /* In preparation to copy 32 bytes at a time, aligned on
      * an 8-byte bounary, fill head/tail up to 28 bytes each.
@@ -111,7 +111,10 @@ __used void* memset(void* dest, int c, size_t n)
     }
 #else  /* __GNUC__ */
     /* Pure C fallback with no aliasing violations. */
-    for (; n; n--, s++) { *s = c; }
+    for (; n; n--, s++)
+    {
+        *s = c;
+    }
 #endif /* __GNUC__ */
 
     return dest;

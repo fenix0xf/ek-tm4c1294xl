@@ -61,14 +61,14 @@
 // The delay in microseconds for writing to the Hibernation module registers.
 //
 //*****************************************************************************
-#define DELAY_USECS 95
+#define DELAY_USECS            95
 
 //*****************************************************************************
 //
 // The number of processor cycles to execute one pass of the delay loop.
 //
 //*****************************************************************************
-#define LOOP_CYCLES 3
+#define LOOP_CYCLES            3
 
 //*****************************************************************************
 //
@@ -76,7 +76,7 @@
 // pins.
 //
 //*****************************************************************************
-#define HIBERNATE_WAKE_IO CLASS_IS_TM4C129
+#define HIBERNATE_WAKE_IO      CLASS_IS_TM4C129
 
 //*****************************************************************************
 //
@@ -108,7 +108,9 @@ static void _HibernateWriteComplete(void)
     //
     // Spin until the write complete bit is set.
     //
-    while (!(HWREG(HIB_CTL) & HIB_CTL_WRC)) {}
+    while (!(HWREG(HIB_CTL) & HIB_CTL_WRC))
+    {
+    }
 }
 
 //*****************************************************************************
@@ -234,8 +236,7 @@ void HibernateClockConfig(uint32_t ui32Config)
     //
     // Set the new configuration bits.
     //
-    ui32HIBCtl |=
-        ui32Config & (HIBERNATE_OSC_HIGHDRIVE | HIBERNATE_OSC_LOWDRIVE | HIBERNATE_OSC_LFIOSC | HIBERNATE_OSC_DISABLE);
+    ui32HIBCtl |= ui32Config & (HIBERNATE_OSC_HIGHDRIVE | HIBERNATE_OSC_LOWDRIVE | HIBERNATE_OSC_LFIOSC | HIBERNATE_OSC_DISABLE);
 
     //
     // Must be sure that the 32KHz clock is enabled if the hibernate is about
@@ -408,14 +409,13 @@ void HibernateWakeSet(uint32_t ui32WakeFlags)
     //
     // Check the arguments.
     //
-    ASSERT(!(ui32WakeFlags & ~(HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC | HIBERNATE_WAKE_GPIO | HIBERNATE_WAKE_RESET |
-                               HIBERNATE_WAKE_LOW_BAT)));
+    ASSERT(!(ui32WakeFlags &
+             ~(HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC | HIBERNATE_WAKE_GPIO | HIBERNATE_WAKE_RESET | HIBERNATE_WAKE_LOW_BAT)));
 
     //
     // Set the specified wake flags in the control register.
     //
-    HWREG(HIB_CTL) =
-        (ui32WakeFlags | (HWREG(HIB_CTL) & ~(HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC | HIBERNATE_WAKE_LOW_BAT)));
+    HWREG(HIB_CTL) = (ui32WakeFlags | (HWREG(HIB_CTL) & ~(HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC | HIBERNATE_WAKE_LOW_BAT)));
 
     //
     // Wait for write completion
@@ -454,7 +454,9 @@ void HibernateWakeSet(uint32_t ui32WakeFlags)
         //
         // Spin until the write complete bit is set.
         //
-        while ((HWREG(HIB_IO) & HIB_IO_IOWRC) == 0) {}
+        while ((HWREG(HIB_IO) & HIB_IO_IOWRC) == 0)
+        {
+        }
 
         //
         // Clear the write unlock bit.
@@ -990,9 +992,8 @@ void HibernateIntEnable(uint32_t ui32IntFlags)
     //
     // Check the arguments.
     //
-    ASSERT(!(ui32IntFlags &
-             ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
-               HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
+    ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
+                              HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
 
     //
     // Set the specified interrupt mask bits.
@@ -1025,9 +1026,8 @@ void HibernateIntDisable(uint32_t ui32IntFlags)
     //
     // Check the arguments.
     //
-    ASSERT(!(ui32IntFlags &
-             ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
-               HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
+    ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
+                              HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
 
     //
     // Clear the specified interrupt mask bits.
@@ -1209,9 +1209,8 @@ void HibernateIntClear(uint32_t ui32IntFlags)
     //
     // Check the arguments.
     //
-    ASSERT(!(ui32IntFlags &
-             ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
-               HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
+    ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT | HIBERNATE_INT_VDDFAIL | HIBERNATE_INT_RESET_WAKE |
+                              HIBERNATE_INT_GPIO_WAKE | HIBERNATE_INT_RTC_MATCH_0 | HIBERNATE_INT_WR_COMPLETE)));
 
     //
     // Write the specified interrupt bits into the interrupt clear register.
@@ -1407,8 +1406,7 @@ static void _HibernateCalendarSet(uint32_t ui32Reg, struct tm* psTime)
     //
     // Minutes and seconds are consistent in all modes.
     //
-    ui32Time = (((psTime->tm_min << HIB_CALLD0_MIN_S) & HIB_CALLD0_MIN_M) |
-                ((psTime->tm_sec << HIB_CALLD0_SEC_S) & HIB_CALLD0_SEC_M));
+    ui32Time = (((psTime->tm_min << HIB_CALLD0_MIN_S) & HIB_CALLD0_MIN_M) | ((psTime->tm_sec << HIB_CALLD0_SEC_S) & HIB_CALLD0_SEC_M));
 
     //
     // 24 Hour time is used directly for Calendar set.
@@ -1467,8 +1465,8 @@ static void _HibernateCalendarSet(uint32_t ui32Reg, struct tm* psTime)
         // We must add 1 to the month, since the time structure lists
         // the month from 0 to 11 and the HIB lists it from 1 to 12.
         //
-        ui32Date = ((psTime->tm_mday << HIB_CAL1_DOM_S) | ((psTime->tm_mon + 1) << HIB_CAL1_MON_S) |
-                    (psTime->tm_wday << HIB_CAL1_DOW_S) | ((psTime->tm_year - 100) << HIB_CAL1_YEAR_S));
+        ui32Date = ((psTime->tm_mday << HIB_CAL1_DOM_S) | ((psTime->tm_mon + 1) << HIB_CAL1_MON_S) | (psTime->tm_wday << HIB_CAL1_DOW_S) |
+                    ((psTime->tm_year - 100) << HIB_CAL1_YEAR_S));
     }
     else
     {

@@ -43,7 +43,7 @@ volatile unsigned long tn_sys_tick_count;
 //
 //   sizeof(void*) = sizeof(int)
 //----------------------------------------------------------------------------
-unsigned int* tn_stack_init(void (*task_func)(void* param), void* stack_start, void* param)
+unsigned int*          tn_stack_init(void (*task_func)(void* param), void* stack_start, void* param)
 {
     unsigned int* stk;
     unsigned long tmp;
@@ -55,7 +55,7 @@ unsigned int* tn_stack_init(void (*task_func)(void* param), void* stack_start, v
 
     stk = (unsigned int*)stack_start; //-- Load stack pointer
 
-    *stk = 0x01000000ul;              //-- xPSR
+    *stk = 0x01000000ul; //-- xPSR
     stk--;
 
     tmp   = (unsigned long)task_func;
@@ -120,8 +120,7 @@ void tn_check_stack(TN_TCB* task, size_t opt)
             tn_print("\n");
         }
 
-        tn_printf(TN_STACK_PREFIX
-                  "Task \"%s\" - Fatal! Stack overflow! The stack size has exceeded %u dw (%u bytes)!\n",
+        tn_printf(TN_STACK_PREFIX "Task \"%s\" - Fatal! Stack overflow! The stack size has exceeded %u dw (%u bytes)!\n",
                   task->task_name,
                   task->stk_size,
                   task->stk_size * TN_STACK_ITEM_SIZE);
@@ -154,7 +153,10 @@ void tn_check_stack(TN_TCB* task, size_t opt)
 
     uintptr_t* next_sp = task->stk_start - task->stk_usage;
 
-    while ((next_sp > end_sp) && (*next_sp != TN_FILL_STACK_VAL)) { next_sp--; }
+    while ((next_sp > end_sp) && (*next_sp != TN_FILL_STACK_VAL))
+    {
+        next_sp--;
+    }
 
     size_t stack_usage = (size_t)(task->stk_start - next_sp);
 

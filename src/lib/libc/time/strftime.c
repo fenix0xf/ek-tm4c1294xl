@@ -29,7 +29,7 @@ static int week_num(const struct tm* tm)
     }
     if (!val)
     {
-        val = 52;
+        val       = 52;
         /* If 31 December of prev year a Thursday,
          * or Friday of a leap year, then the
          * prev year has 53 weeks. */
@@ -280,15 +280,13 @@ size_t strftime(char* restrict s, size_t n, const char* restrict f, const struct
             {
                 t++, k--;
             }
-            for (; *t == '0' && t[1] - '0' < 10U; t++, k--)
-                ;
+            for (; *t == '0' && t[1] - '0' < 10U; t++, k--);
             if (width < k)
             {
                 width = k;
             }
             size_t d;
-            for (d = 0; t[d] - '0' < 10U; d++)
-                ;
+            for (d = 0; t[d] - '0' < 10U; d++);
             if (tm->tm_year < -1900)
             {
                 s[l++] = '-';
@@ -299,7 +297,10 @@ size_t strftime(char* restrict s, size_t n, const char* restrict f, const struct
                 s[l++] = '+';
                 width--;
             }
-            for (; width > k && l < n; width--) { s[l++] = '0'; }
+            for (; width > k && l < n; width--)
+            {
+                s[l++] = '0';
+            }
         }
         if (k > n - l)
         {

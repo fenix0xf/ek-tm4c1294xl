@@ -295,12 +295,7 @@ int tn_dqueue_receive(TN_DQUEUE*         dque,
             {
                 tn_idisable_interrupt();
 
-                rc = do_input_sem(&dque->inuse_que,
-                                  TERR_UNDERFLOW,
-                                  &sque,
-                                  &dque->inuse_wait_queue,
-                                  TSK_WAIT_REASON_INUSE_Q,
-                                  timeout);
+                rc = do_input_sem(&dque->inuse_que, TERR_UNDERFLOW, &sque, &dque->inuse_wait_queue, TSK_WAIT_REASON_INUSE_Q, timeout);
 
                 tn_ienable_interrupt();
 
@@ -326,12 +321,7 @@ int tn_dqueue_receive(TN_DQUEUE*         dque,
 
             tn_disable_interrupt();
 
-            rc = do_input_sem(&dque->inuse_que,
-                              TERR_UNDERFLOW,
-                              &sque,
-                              &dque->inuse_wait_queue,
-                              TSK_WAIT_REASON_INUSE_Q,
-                              timeout);
+            rc = do_input_sem(&dque->inuse_que, TERR_UNDERFLOW, &sque, &dque->inuse_wait_queue, TSK_WAIT_REASON_INUSE_Q, timeout);
             tn_enable_interrupt();
 
             if (rc == TERR_YIELD)
@@ -372,10 +362,8 @@ int tn_dqueue_receive(TN_DQUEUE*         dque,
 }
 
 //----------------------------------------------------------------------------
-int tn_dqueue_send_ex(TN_DQUEUE*        dque,
-                      TN_DQUEUE_ELEMENT data,
-                      unsigned long     timeout,
-                      int               send_priority) // TN_SEND_NORMAL or TN_SEND_URGENT
+int tn_dqueue_send_ex(TN_DQUEUE* dque, TN_DQUEUE_ELEMENT data, unsigned long timeout,
+                      int send_priority) // TN_SEND_NORMAL or TN_SEND_URGENT
 {
     SLL_QUEUE*         sque;
     TN_DQUEUE_ELEMENT* pdata;
@@ -407,12 +395,7 @@ int tn_dqueue_send_ex(TN_DQUEUE*        dque,
             {
                 tn_idisable_interrupt();
 
-                rc = do_input_sem(&dque->free_que,
-                                  TERR_OVERFLOW,
-                                  &sque,
-                                  &dque->free_wait_queue,
-                                  TSK_WAIT_REASON_FREE_Q,
-                                  timeout);
+                rc = do_input_sem(&dque->free_que, TERR_OVERFLOW, &sque, &dque->free_wait_queue, TSK_WAIT_REASON_FREE_Q, timeout);
                 if (rc == TERR_NO_ERR)
                 {
                     dque->free_cnt--;
@@ -441,12 +424,7 @@ int tn_dqueue_send_ex(TN_DQUEUE*        dque,
 
             tn_disable_interrupt();
 
-            rc = do_input_sem(&dque->free_que,
-                              TERR_OVERFLOW,
-                              &sque,
-                              &dque->free_wait_queue,
-                              TSK_WAIT_REASON_FREE_Q,
-                              timeout);
+            rc = do_input_sem(&dque->free_que, TERR_OVERFLOW, &sque, &dque->free_wait_queue, TSK_WAIT_REASON_FREE_Q, timeout);
             if (rc == TERR_NO_ERR)
             {
                 dque->free_cnt--;
@@ -556,12 +534,7 @@ bool tn_dqueue_is_empty(TN_DQUEUE* dque)
 //----------------------------------------------------------------------------
 // Shared: TN_MAILBOX, TN_DQUEUE
 //----------------------------------------------------------------------------
-int do_input_sem(SLLBASE*      slist,
-                 int           nodata_rc,
-                 SLL_QUEUE**   entry,
-                 CDLL_QUEUE*   wait_queue,
-                 int           wait_reason,
-                 unsigned long timeout)
+int do_input_sem(SLLBASE* slist, int nodata_rc, SLL_QUEUE** entry, CDLL_QUEUE* wait_queue, int wait_reason, unsigned long timeout)
 {
     SLL_QUEUE* sque;
     int        rc;

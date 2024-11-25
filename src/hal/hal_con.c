@@ -130,7 +130,8 @@ int hal_flush(void)
 #if DEBUG
 void hal_dbg_printbuf(const void* buf, size_t size)
 {
-    enum {
+    enum
+    {
         COLUMNS_PER_LINE = 16,
     };
 

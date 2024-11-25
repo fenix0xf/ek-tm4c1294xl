@@ -51,10 +51,7 @@ static void hal_ll_hardware_init(void)
 /*
  * HAL initialization function. Used as reset ISR handler.
  */
-HAL_USED
-HAL_NORETURN
-HAL_SECTION(".reset")
-void hal_init(void)
+HAL_USED HAL_NORETURN HAL_SECTION(".reset") void hal_init(void)
 {
     /*
      * This function is called before initialization of C standard library. Non-constant static variables are in a non-initialized state!

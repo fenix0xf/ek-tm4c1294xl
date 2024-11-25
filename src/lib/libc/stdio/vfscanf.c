@@ -41,7 +41,10 @@ static void* arg_n(va_list ap, unsigned int n)
     unsigned int i;
     va_list      ap2;
     va_copy(ap2, ap);
-    for (i = n; i > 1; i--) { va_arg(ap2, void*); }
+    for (i = n; i > 1; i--)
+    {
+        va_arg(ap2, void*);
+    }
     p = va_arg(ap2, void*);
     va_end(ap2);
     return p;
@@ -79,9 +82,14 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
     {
         if (isspace(*p))
         {
-            while (isspace(p[1])) { p++; }
+            while (isspace(p[1]))
+            {
+                p++;
+            }
             shlim(f, 0);
-            while (isspace(shgetc(f))) {}
+            while (isspace(shgetc(f)))
+            {
+            }
             shunget(f);
             pos += shcnt(f);
             continue;
@@ -92,7 +100,9 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
             if (*p == '%')
             {
                 p++;
-                while (isspace((c = shgetc(f)))) {}
+                while (isspace((c = shgetc(f))))
+                {
+                }
             }
             else
             {
@@ -127,7 +137,10 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
             dest = va_arg(ap, void*);
         }
 
-        for (width = 0; isdigit(*p); p++) { width = 10 * width + *p - '0'; }
+        for (width = 0; isdigit(*p); p++)
+        {
+            width = 10 * width + *p - '0';
+        }
 
         if (*p == 'm')
         {
@@ -210,8 +223,7 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
                 continue;
             default:
                 shlim(f, 0);
-                while (isspace(shgetc(f)))
-                    ;
+                while (isspace(shgetc(f)));
                 shunget(f);
                 pos += shcnt(f);
         }
@@ -270,7 +282,10 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
                         }
                         if (*p == '-' && p[1] && p[1] != ']')
                         {
-                            for (c = p++ [-1]; c < *p; c++) { scanset[1 + c] = 1 - invert; }
+                            for (c = p++ [-1]; c < *p; c++)
+                            {
+                                scanset[1 + c] = 1 - invert;
+                            }
                         }
                         scanset[1 + *p] = 1 - invert;
                     }
@@ -287,11 +302,16 @@ int vfscanf(FILE* restrict f, const char* restrict fmt, va_list ap)
                 }
                 else if ((s = (char*)dest))
                 {
-                    while (scanset[(c = shgetc(f)) + 1]) { s[i++] = c; }
+                    while (scanset[(c = shgetc(f)) + 1])
+                    {
+                        s[i++] = c;
+                    }
                 }
                 else
                 {
-                    while (scanset[(c = shgetc(f)) + 1]) {}
+                    while (scanset[(c = shgetc(f)) + 1])
+                    {
+                    }
                 }
 
                 shunget(f);

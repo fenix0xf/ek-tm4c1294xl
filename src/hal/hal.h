@@ -108,12 +108,12 @@ HAL_INLINE void hal_mcu_udelay(size_t microseconds)
 
 HAL_NORETURN void hal_mcu_halt(void);
 
-uint32_t hal_mcu_unique_id(void);
+uint32_t          hal_mcu_unique_id(void);
 
 /*
  * Universal sleep function.
  */
-void hal_sleep(size_t mS);
+void              hal_sleep(size_t mS);
 
 /*
  * Assert with MCU halt if assert failed.
@@ -140,4 +140,4 @@ void hal_sleep(size_t mS);
 HAL_NORETURN void hal_system_startup(void);
 HAL_NORETURN void hal_system_reboot(void);
 
-void hal_print_version(void);
+void              hal_print_version(void);

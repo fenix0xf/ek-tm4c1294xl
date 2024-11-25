@@ -29,7 +29,10 @@
 #include <hal/hal_def.h>
 #include <drv/tm4c129.h>
 
-enum { TM4C129_EEPROM_ALIGN = sizeof(uint32_t) };
+enum
+{
+    TM4C129_EEPROM_ALIGN = sizeof(uint32_t)
+};
 
 bool tm4c129_eeprom_init(void)
 {

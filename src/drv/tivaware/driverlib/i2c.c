@@ -71,7 +71,7 @@ static const uint32_t g_ppui32I2CIntMap[][2] = {
 
 static const int_fast8_t g_i8I2CIntMapRows = sizeof(g_ppui32I2CIntMap) / sizeof(g_ppui32I2CIntMap[0]);
 
-static const uint32_t g_ppui32I2CIntMapSnowflake[][2] = {
+static const uint32_t    g_ppui32I2CIntMapSnowflake[][2] = {
     {I2C0_BASE, INT_I2C0_TM4C129},
     {I2C1_BASE, INT_I2C1_TM4C129},
     {I2C2_BASE, INT_I2C2_TM4C129},
@@ -83,8 +83,7 @@ static const uint32_t g_ppui32I2CIntMapSnowflake[][2] = {
     {I2C8_BASE, INT_I2C8_TM4C129},
     {I2C9_BASE, INT_I2C9_TM4C129},
 };
-static const int_fast8_t g_i8I2CIntMapSnowflakeRows =
-    sizeof(g_ppui32I2CIntMapSnowflake) / sizeof(g_ppui32I2CIntMapSnowflake[0]);
+static const int_fast8_t g_i8I2CIntMapSnowflakeRows = sizeof(g_ppui32I2CIntMapSnowflake) / sizeof(g_ppui32I2CIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -1248,19 +1247,17 @@ void I2CMasterControl(uint32_t ui32Base, uint32_t ui32Cmd)
     // Check the arguments.
     //
     ASSERT(_I2CBaseValid(ui32Base));
-    ASSERT(
-        (ui32Cmd == I2C_MASTER_CMD_SINGLE_SEND) || (ui32Cmd == I2C_MASTER_CMD_SINGLE_RECEIVE) ||
-        (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_START) || (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_CONT) ||
-        (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_FINISH) || (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_ERROR_STOP) ||
-        (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_START) || (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_CONT) ||
-        (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_FINISH) || (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_ERROR_STOP) ||
-        (ui32Cmd == I2C_MASTER_CMD_QUICK_COMMAND) || (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_SEND) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_RECEIVE) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_START) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_CONT) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_FINISH) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_ERROR_STOP) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_START) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_CONT) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_FINISH) ||
-        (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_ERROR_STOP) || (ui32Cmd == I2C_MASTER_CMD_HS_MASTER_CODE_SEND));
+    ASSERT((ui32Cmd == I2C_MASTER_CMD_SINGLE_SEND) || (ui32Cmd == I2C_MASTER_CMD_SINGLE_RECEIVE) ||
+           (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_START) || (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_CONT) ||
+           (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_FINISH) || (ui32Cmd == I2C_MASTER_CMD_BURST_SEND_ERROR_STOP) ||
+           (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_START) || (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_CONT) ||
+           (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_FINISH) || (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_ERROR_STOP) ||
+           (ui32Cmd == I2C_MASTER_CMD_QUICK_COMMAND) || (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_SEND) ||
+           (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_RECEIVE) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_START) ||
+           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_CONT) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_FINISH) ||
+           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_ERROR_STOP) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_START) ||
+           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_CONT) || (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_FINISH) ||
+           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_ERROR_STOP) || (ui32Cmd == I2C_MASTER_CMD_HS_MASTER_CODE_SEND));
 
     //
     // Send the command.
@@ -1770,7 +1767,9 @@ void I2CFIFODataPut(uint32_t ui32Base, uint8_t ui8Data)
     //
     // Wait until there is space.
     //
-    while (HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_TXFF) {}
+    while (HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_TXFF)
+    {
+    }
 
     //
     // Place data into the FIFO.
@@ -1841,7 +1840,9 @@ uint32_t I2CFIFODataGet(uint32_t ui32Base)
     //
     // Wait until there is data to read.
     //
-    while (HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_RXFE) {}
+    while (HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_RXFE)
+    {
+    }
 
     //
     // Read a byte.

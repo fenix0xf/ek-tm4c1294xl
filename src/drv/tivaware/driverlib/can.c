@@ -69,28 +69,28 @@
 // The maximum CAN bit timing divisor is 19.
 //
 //*****************************************************************************
-#define CAN_MAX_BIT_DIVISOR 19
+#define CAN_MAX_BIT_DIVISOR  19
 
 //*****************************************************************************
 //
 // The minimum CAN bit timing divisor is 4.
 //
 //*****************************************************************************
-#define CAN_MIN_BIT_DIVISOR 4
+#define CAN_MIN_BIT_DIVISOR  4
 
 //*****************************************************************************
 //
 // The maximum CAN pre-divisor is 1024.
 //
 //*****************************************************************************
-#define CAN_MAX_PRE_DIVISOR 1024
+#define CAN_MAX_PRE_DIVISOR  1024
 
 //*****************************************************************************
 //
 // The minimum CAN pre-divisor is 1.
 //
 //*****************************************************************************
-#define CAN_MIN_PRE_DIVISOR 1
+#define CAN_MIN_PRE_DIVISOR  1
 
 //*****************************************************************************
 //
@@ -331,7 +331,9 @@ void CANInit(uint32_t ui32Base)
     //
     // Wait for busy bit to clear
     //
-    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+    {
+    }
 
     //
     // Clear the message value bit in the arbitration register.  This indicates
@@ -350,7 +352,9 @@ void CANInit(uint32_t ui32Base)
         //
         // Wait for busy bit to clear
         //
-        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+        {
+        }
 
         //
         // Initiate programming the message object
@@ -372,7 +376,9 @@ void CANInit(uint32_t ui32Base)
         //
         // Wait for busy bit to clear.
         //
-        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+        {
+        }
 
         //
         // Initiate programming the message object
@@ -492,8 +498,7 @@ void CANBitTimingGet(uint32_t ui32Base, tCANBitClkParms* psClkParms)
     //
     // Set the pre-divider for the CAN bus bit clock.
     //
-    psClkParms->ui32QuantumPrescaler =
-        ((ui32BitReg & CAN_BIT_BRP_M) | ((HWREG(ui32Base + CAN_O_BRPE) & CAN_BRPE_BRPE_M) << 6)) + 1;
+    psClkParms->ui32QuantumPrescaler = ((ui32BitReg & CAN_BIT_BRP_M) | ((HWREG(ui32Base + CAN_O_BRPE) & CAN_BRPE_BRPE_M) << 6)) + 1;
 }
 
 //*****************************************************************************
@@ -1064,7 +1069,9 @@ void CANIntClear(uint32_t ui32Base, uint32_t ui32IntClr)
         //
         // Wait to be sure that this interface is not busy.
         //
-        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+        {
+        }
 
         //
         // Only change the interrupt pending state by setting only the
@@ -1080,7 +1087,9 @@ void CANIntClear(uint32_t ui32Base, uint32_t ui32IntClr)
         //
         // Wait to be sure that this interface is not busy.
         //
-        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+        while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+        {
+        }
     }
 }
 
@@ -1449,13 +1458,14 @@ void CANMessageSet(uint32_t ui32Base, uint32_t ui32ObjID, tCANMsgObject* psMsgOb
     ASSERT(_CANBaseValid(ui32Base));
     ASSERT((ui32ObjID <= 32) && (ui32ObjID != 0));
     ASSERT((eMsgType == MSG_OBJ_TYPE_TX) || (eMsgType == MSG_OBJ_TYPE_TX_REMOTE) || (eMsgType == MSG_OBJ_TYPE_RX) ||
-           (eMsgType == MSG_OBJ_TYPE_RX_REMOTE) || (eMsgType == MSG_OBJ_TYPE_TX_REMOTE) ||
-           (eMsgType == MSG_OBJ_TYPE_RXTX_REMOTE));
+           (eMsgType == MSG_OBJ_TYPE_RX_REMOTE) || (eMsgType == MSG_OBJ_TYPE_TX_REMOTE) || (eMsgType == MSG_OBJ_TYPE_RXTX_REMOTE));
 
     //
     // Wait for busy bit to clear
     //
-    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+    {
+    }
 
     //
     // See if we need to use an extended identifier or not.
@@ -1823,7 +1833,9 @@ void CANMessageGet(uint32_t ui32Base, uint32_t ui32ObjID, tCANMsgObject* psMsgOb
     //
     // Wait for busy bit to clear
     //
-    while (HWREG(ui32Base + CAN_O_IF2CRQ) & CAN_IF1CRQ_BUSY) {}
+    while (HWREG(ui32Base + CAN_O_IF2CRQ) & CAN_IF1CRQ_BUSY)
+    {
+    }
 
     //
     // Read out the IF Registers.
@@ -1979,7 +1991,9 @@ void CANMessageGet(uint32_t ui32Base, uint32_t ui32ObjID, tCANMsgObject* psMsgOb
         //
         // Wait for busy bit to clear
         //
-        while (HWREG(ui32Base + CAN_O_IF2CRQ) & CAN_IF1CRQ_BUSY) {}
+        while (HWREG(ui32Base + CAN_O_IF2CRQ) & CAN_IF1CRQ_BUSY)
+        {
+        }
 
         //
         // Indicate that there is new data in this message.
@@ -2028,7 +2042,9 @@ void CANMessageClear(uint32_t ui32Base, uint32_t ui32ObjID)
     //
     // Wait for busy bit to clear
     //
-    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY) {}
+    while (HWREG(ui32Base + CAN_O_IF1CRQ) & CAN_IF1CRQ_BUSY)
+    {
+    }
 
     //
     // Clear the message value bit in the arbitration register.  This indicates

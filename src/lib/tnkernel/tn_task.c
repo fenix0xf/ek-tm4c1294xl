@@ -34,16 +34,16 @@ static int do_task_suspend(TN_TCB* task);
 static int do_task_resume(TN_TCB* task);
 
 //-----------------------------------------------------------------------------
-int tn_task_create(TN_TCB* task,                   //-- task TCB
-                   void (*task_func)(void* param), //-- task function
-                   unsigned int  priority,         //-- task priority
-                   unsigned int* task_stack_start, //-- task stack first addr in memory (bottom)
-                   unsigned int  task_stack_size,  //-- task stack size (in TN_STACK_ITEM_SIZE, not bytes)
-                   void*         param,            //-- task function parameter
-                   unsigned int  option,           //-- creation option
-                   void*         tls_block,        //-- thread local storage block
-                   const char*   task_name         //-- task name for debug purposes
-)
+int        tn_task_create(TN_TCB* task,                   //-- task TCB
+                          void (*task_func)(void* param), //-- task function
+                          unsigned int  priority,         //-- task priority
+                          unsigned int* task_stack_start, //-- task stack first addr in memory (bottom)
+                          unsigned int  task_stack_size,  //-- task stack size (in TN_STACK_ITEM_SIZE, not bytes)
+                          void*         param,            //-- task function parameter
+                          unsigned int  option,           //-- creation option
+                          void*         tls_block,        //-- thread local storage block
+                          const char*   task_name         //-- task name for debug purposes
+       )
 {
     unsigned long tn_save_status_reg = 0U;
     int           rc                 = TERR_NO_ERR;
@@ -52,15 +52,13 @@ int tn_task_create(TN_TCB* task,                   //-- task TCB
 
     //-- Lightweight checking of system tasks recreation
 
-    if ((priority == 0U && ((option & TN_TASK_OS_TICK) == 0U)) ||
-        (priority == TN_NUM_PRIORITY - 1U && (option & TN_TASK_IDLE) == 0U))
+    if ((priority == 0U && ((option & TN_TASK_OS_TICK) == 0U)) || (priority == TN_NUM_PRIORITY - 1U && (option & TN_TASK_IDLE) == 0U))
     {
         rc = TERR_WPARAM;
     }
-    else if (priority > TN_NUM_PRIORITY - 1U || task_stack_size < TN_STACK_SIZE_MIN || task_func == NULL ||
-             task == NULL || task_stack_start == NULL || task->id_task != 0UL || //-- recreation
-             ((option & (TN_TASK_OS_TICK | TN_TASK_IDLE | TN_TASK_START_ON_CREATION | TN_TASK_SUSPEND_ON_CREATION)) ==
-              0U))
+    else if (priority > TN_NUM_PRIORITY - 1U || task_stack_size < TN_STACK_SIZE_MIN || task_func == NULL || task == NULL ||
+             task_stack_start == NULL || task->id_task != 0UL || //-- recreation
+             ((option & (TN_TASK_OS_TICK | TN_TASK_IDLE | TN_TASK_START_ON_CREATION | TN_TASK_SUSPEND_ON_CREATION)) == 0U))
     {
         rc = TERR_WPARAM;
     }
@@ -95,7 +93,10 @@ int tn_task_create(TN_TCB* task,                   //-- task TCB
 
         //-- Fill all task stack space by TN_FILL_STACK_VAL - only inside create_task
         ptr_stack = task->stk_start;
-        for (i = 0; i < task->stk_size; i++) { *ptr_stack-- = TN_FILL_STACK_VAL; }
+        for (i = 0; i < task->stk_size; i++)
+        {
+            *ptr_stack-- = TN_FILL_STACK_VAL;
+        }
 
 #if TN_USE_MUTEXES // v 3.0
         queue_reset(&task->mutex_queue);
@@ -197,10 +198,10 @@ TN_TCB* tn_task_create_dyn(void (*task_func)(void* param), //-- task function
                 else
                 {
                     task->id_task = 0UL;
-                    rc            = tn_task_create(task,                          //-- task TCB
-                                        task_func,                     //-- task function
-                                        priority,                      //-- task priority
-                                        &(stack_start                  //-- task stack first addr in memory
+                    rc            = tn_task_create(task,         //-- task TCB
+                                        task_func,    //-- task function
+                                        priority,     //-- task priority
+                                        &(stack_start //-- task stack first addr in memory
                                               [task_stack_size - 1U]),
                                         (unsigned int)task_stack_size, //-- task stack size (in sizeof(int), not bytes)
                                         param,                         //-- task function parameter

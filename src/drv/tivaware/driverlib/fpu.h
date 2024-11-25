@@ -56,16 +56,16 @@ extern "C"
 // Values that can be passed to FPUHalfPrecisionSet as the ui32Mode parameter.
 //
 //*****************************************************************************
-#define FPU_HALF_IEEE      0x00000000
-#define FPU_HALF_ALTERNATE 0x04000000
+#define FPU_HALF_IEEE         0x00000000
+#define FPU_HALF_ALTERNATE    0x04000000
 
 //*****************************************************************************
 //
 // Values that can be passed to FPUNaNModeSet as the ui32Mode parameter.
 //
 //*****************************************************************************
-#define FPU_NAN_PROPAGATE 0x00000000
-#define FPU_NAN_DEFAULT   0x02000000
+#define FPU_NAN_PROPAGATE     0x00000000
+#define FPU_NAN_DEFAULT       0x02000000
 
 //*****************************************************************************
 //
@@ -81,10 +81,10 @@ extern "C"
 // Values that can be passed to FPURoundingModeSet as the ui32Mode parameter.
 //
 //*****************************************************************************
-#define FPU_ROUND_NEAREST 0x00000000
-#define FPU_ROUND_POS_INF 0x00400000
-#define FPU_ROUND_NEG_INF 0x00800000
-#define FPU_ROUND_ZERO    0x00c00000
+#define FPU_ROUND_NEAREST     0x00000000
+#define FPU_ROUND_POS_INF     0x00400000
+#define FPU_ROUND_NEG_INF     0x00800000
+#define FPU_ROUND_ZERO        0x00c00000
 
 //*****************************************************************************
 //

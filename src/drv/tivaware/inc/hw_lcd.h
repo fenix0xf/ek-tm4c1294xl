@@ -51,55 +51,55 @@
 #define LCD_O_LIDDCS0CFG  0x00000010 // LCD LIDD CS0 Configuration
 #define LCD_O_LIDDCS0ADDR 0x00000014 // LIDD CS0 Read/Write Address
 #define LCD_O_LIDDCS0DATA \
-    0x00000018                       // LIDD CS0 Data Read/Write
-                                     // Initiation
-#define LCD_O_LIDDCS1CFG 0x0000001C  // LIDD CS1 Configuration
+    0x00000018                      // LIDD CS0 Data Read/Write
+                                    // Initiation
+#define LCD_O_LIDDCS1CFG 0x0000001C // LIDD CS1 Configuration
 #define LCD_O_LIDDCS1ADDR \
-    0x00000020                       // LIDD CS1 Address Read/Write
-                                     // Initiation
+    0x00000020 // LIDD CS1 Address Read/Write
+               // Initiation
 #define LCD_O_LIDDCS1DATA \
-    0x00000024                       // LIDD CS1 Data Read/Write
-                                     // Initiation
-#define LCD_O_RASTRCTL   0x00000028  // LCD Raster Control
-#define LCD_O_RASTRTIM0  0x0000002C  // LCD Raster Timing 0
-#define LCD_O_RASTRTIM1  0x00000030  // LCD Raster Timing 1
-#define LCD_O_RASTRTIM2  0x00000034  // LCD Raster Timing 2
-#define LCD_O_RASTRSUBP1 0x00000038  // LCD Raster Subpanel Display 1
-#define LCD_O_RASTRSUBP2 0x0000003C  // LCD Raster Subpanel Display 2
-#define LCD_O_DMACTL     0x00000040  // LCD DMA Control
+    0x00000024                      // LIDD CS1 Data Read/Write
+                                    // Initiation
+#define LCD_O_RASTRCTL   0x00000028 // LCD Raster Control
+#define LCD_O_RASTRTIM0  0x0000002C // LCD Raster Timing 0
+#define LCD_O_RASTRTIM1  0x00000030 // LCD Raster Timing 1
+#define LCD_O_RASTRTIM2  0x00000034 // LCD Raster Timing 2
+#define LCD_O_RASTRSUBP1 0x00000038 // LCD Raster Subpanel Display 1
+#define LCD_O_RASTRSUBP2 0x0000003C // LCD Raster Subpanel Display 2
+#define LCD_O_DMACTL     0x00000040 // LCD DMA Control
 #define LCD_O_DMABAFB0 \
-    0x00000044                       // LCD DMA Frame Buffer 0 Base
-                                     // Address
+    0x00000044 // LCD DMA Frame Buffer 0 Base
+               // Address
 #define LCD_O_DMACAFB0 \
-    0x00000048                       // LCD DMA Frame Buffer 0 Ceiling
-                                     // Address
+    0x00000048 // LCD DMA Frame Buffer 0 Ceiling
+               // Address
 #define LCD_O_DMABAFB1 \
-    0x0000004C                       // LCD DMA Frame Buffer 1 Base
-                                     // Address
+    0x0000004C // LCD DMA Frame Buffer 1 Base
+               // Address
 #define LCD_O_DMACAFB1 \
-    0x00000050                       // LCD DMA Frame Buffer 1 Ceiling
-                                     // Address
+    0x00000050 // LCD DMA Frame Buffer 1 Ceiling
+               // Address
 #define LCD_O_SYSCFG \
-    0x00000054                       // LCD System Configuration
-                                     // Register
+    0x00000054 // LCD System Configuration
+               // Register
 #define LCD_O_RISSET \
-    0x00000058                       // LCD Interrupt Raw Status and Set
-                                     // Register
-#define LCD_O_MISCLR   0x0000005C    // LCD Interrupt Status and Clear
-#define LCD_O_IM       0x00000060    // LCD Interrupt Mask
-#define LCD_O_IENC     0x00000064    // LCD Interrupt Enable Clear
-#define LCD_O_CLKEN    0x0000006C    // LCD Clock Enable
-#define LCD_O_CLKRESET 0x00000070    // LCD Clock Resets
+    0x00000058                      // LCD Interrupt Raw Status and Set
+                                    // Register
+#define LCD_O_MISCLR     0x0000005C // LCD Interrupt Status and Clear
+#define LCD_O_IM         0x00000060 // LCD Interrupt Mask
+#define LCD_O_IENC       0x00000064 // LCD Interrupt Enable Clear
+#define LCD_O_CLKEN      0x0000006C // LCD Clock Enable
+#define LCD_O_CLKRESET   0x00000070 // LCD Clock Resets
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the LCD_O_PID register.
 //
 //*****************************************************************************
-#define LCD_PID_MAJOR_M 0x00000700 // Major Release Number
-#define LCD_PID_MINOR_M 0x0000003F // Minor Release Number
-#define LCD_PID_MAJOR_S 8
-#define LCD_PID_MINOR_S 0
+#define LCD_PID_MAJOR_M  0x00000700 // Major Release Number
+#define LCD_PID_MINOR_M  0x0000003F // Minor Release Number
+#define LCD_PID_MAJOR_S  8
+#define LCD_PID_MINOR_S  0
 
 //*****************************************************************************
 //
@@ -117,21 +117,21 @@
 //
 //*****************************************************************************
 #define LCD_LIDDCTL_DMACS \
-    0x00000200                               // CS0/CS1 Select for LIDD DMA
-                                             // Writes
-#define LCD_LIDDCTL_DMAEN 0x00000100         // LIDD DMA Enable
+    0x00000200                       // CS0/CS1 Select for LIDD DMA
+                                     // Writes
+#define LCD_LIDDCTL_DMAEN 0x00000100 // LIDD DMA Enable
 #define LCD_LIDDCTL_CS1E1 \
-    0x00000080                               // Chip Select 1 (CS1)/Enable 1(E1)
-                                             // Polarity Control
+    0x00000080 // Chip Select 1 (CS1)/Enable 1(E1)
+               // Polarity Control
 #define LCD_LIDDCTL_CS0E0 \
-    0x00000040                               // Chip Select 0 (CS0)/Enable 0
-                                             // (E0) Polarity Control
+    0x00000040 // Chip Select 0 (CS0)/Enable 0
+               // (E0) Polarity Control
 #define LCD_LIDDCTL_WRDIRINV \
-    0x00000020                               // Write Strobe (WR) /Direction
-                                             // (DIR) Polarity Control
+    0x00000020 // Write Strobe (WR) /Direction
+               // (DIR) Polarity Control
 #define LCD_LIDDCTL_RDEN \
-    0x00000010                               // Read Strobe (RD) /Direct Enable
-                                             // (EN) Polarity Control
+    0x00000010 // Read Strobe (RD) /Direct Enable
+               // (EN) Polarity Control
 #define LCD_LIDDCTL_ALE \
     0x00000008                               // Address Latch Enable (ALE)
                                              // Polarity Control
@@ -148,7 +148,7 @@
 // register.
 //
 //*****************************************************************************
-#define LCD_LIDDCS0CFG_WRSU_M 0xF8000000   // Write Strobe (WR) Set-Up Cycles
+#define LCD_LIDDCS0CFG_WRSU_M     0xF8000000 // Write Strobe (WR) Set-Up Cycles
 #define LCD_LIDDCS0CFG_WRDUR_M \
     0x07E00000                             // Write Strobe (WR) Duration
                                            // Cycles
@@ -157,20 +157,20 @@
 #define LCD_LIDDCS0CFG_RDDUR_M  0x00000FC0 // Read Strobe (RD) Duration cycles
 #define LCD_LIDDCS0CFG_RDHOLD_M 0x0000003C // Read Strobe (RD) Hold cycles
 #define LCD_LIDDCS0CFG_GAP_M \
-    0x00000003                             // Field value defines the number
-                                           // of LCDMCLK cycles (GAP +1)
-                                           // between the end of one CS0
-                                           // (LCDAC) device access and the
-                                           // start of another CS0 (LCDAC)
-                                           // device access unless the two
-                                           // accesses are both reads
-#define LCD_LIDDCS0CFG_WRSU_S   27
-#define LCD_LIDDCS0CFG_WRDUR_S  21
-#define LCD_LIDDCS0CFG_WRHOLD_S 17
-#define LCD_LIDDCS0CFG_RDSU_S   12
-#define LCD_LIDDCS0CFG_RDDUR_S  6
-#define LCD_LIDDCS0CFG_RDHOLD_S 2
-#define LCD_LIDDCS0CFG_GAP_S    0
+    0x00000003 // Field value defines the number
+               // of LCDMCLK cycles (GAP +1)
+               // between the end of one CS0
+               // (LCDAC) device access and the
+               // start of another CS0 (LCDAC)
+               // device access unless the two
+               // accesses are both reads
+#define LCD_LIDDCS0CFG_WRSU_S     27
+#define LCD_LIDDCS0CFG_WRDUR_S    21
+#define LCD_LIDDCS0CFG_WRHOLD_S   17
+#define LCD_LIDDCS0CFG_RDSU_S     12
+#define LCD_LIDDCS0CFG_RDDUR_S    6
+#define LCD_LIDDCS0CFG_RDHOLD_S   2
+#define LCD_LIDDCS0CFG_GAP_S      0
 
 //*****************************************************************************
 //
@@ -196,7 +196,7 @@
 // register.
 //
 //*****************************************************************************
-#define LCD_LIDDCS1CFG_WRSU_M 0xF8000000   // Write Strobe (WR) Set-Up Cycles
+#define LCD_LIDDCS1CFG_WRSU_M     0xF8000000 // Write Strobe (WR) Set-Up Cycles
 #define LCD_LIDDCS1CFG_WRDUR_M \
     0x07E00000                             // Write Strobe (WR) Duration
                                            // Cycles
@@ -205,20 +205,20 @@
 #define LCD_LIDDCS1CFG_RDDUR_M  0x00000FC0 // Read Strobe (RD) Duration cycles
 #define LCD_LIDDCS1CFG_RDHOLD_M 0x0000003C // Read Strobe (RD) Hold cycles
 #define LCD_LIDDCS1CFG_GAP_M \
-    0x00000003                             // Field value defines the number
-                                           // of LCDMCLK cycles (GAP + 1)
-                                           // between the end of one CS1
-                                           // (LCDAC) device access and the
-                                           // start of another CS0 (LCDAC)
-                                           // device access unless the two
-                                           // accesses are both reads
-#define LCD_LIDDCS1CFG_WRSU_S   27
-#define LCD_LIDDCS1CFG_WRDUR_S  21
-#define LCD_LIDDCS1CFG_WRHOLD_S 17
-#define LCD_LIDDCS1CFG_RDSU_S   12
-#define LCD_LIDDCS1CFG_RDDUR_S  6
-#define LCD_LIDDCS1CFG_RDHOLD_S 2
-#define LCD_LIDDCS1CFG_GAP_S    0
+    0x00000003 // Field value defines the number
+               // of LCDMCLK cycles (GAP + 1)
+               // between the end of one CS1
+               // (LCDAC) device access and the
+               // start of another CS0 (LCDAC)
+               // device access unless the two
+               // accesses are both reads
+#define LCD_LIDDCS1CFG_WRSU_S     27
+#define LCD_LIDDCS1CFG_WRDUR_S    21
+#define LCD_LIDDCS1CFG_WRHOLD_S   17
+#define LCD_LIDDCS1CFG_RDSU_S     12
+#define LCD_LIDDCS1CFG_RDDUR_S    6
+#define LCD_LIDDCS1CFG_RDHOLD_S   2
+#define LCD_LIDDCS1CFG_GAP_S      0
 
 //*****************************************************************************
 //
@@ -243,15 +243,15 @@
 // The following are defines for the bit fields in the LCD_O_RASTRCTL register.
 //
 //*****************************************************************************
-#define LCD_RASTRCTL_TFT24UPCK 0x04000000   // 24-bit TFT Mode Packing
-#define LCD_RASTRCTL_TFT24     0x02000000   // 24-Bit TFT Mode
-#define LCD_RASTRCTL_FRMBUFSZ  0x01000000   // Frame Buffer Select
+#define LCD_RASTRCTL_TFT24UPCK    0x04000000 // 24-bit TFT Mode Packing
+#define LCD_RASTRCTL_TFT24        0x02000000 // 24-Bit TFT Mode
+#define LCD_RASTRCTL_FRMBUFSZ     0x01000000 // Frame Buffer Select
 #define LCD_RASTRCTL_TFTMAP \
-    0x00800000                              // TFT Mode Alternate Signal
-                                            // Mapping for Palettized
-                                            // Framebuffer
-#define LCD_RASTRCTL_NIBMODE   0x00400000   // Nibble Mode
-#define LCD_RASTRCTL_PALMODE_M 0x00300000   // Pallette Loading Mode
+    0x00800000                            // TFT Mode Alternate Signal
+                                          // Mapping for Palettized
+                                          // Framebuffer
+#define LCD_RASTRCTL_NIBMODE   0x00400000 // Nibble Mode
+#define LCD_RASTRCTL_PALMODE_M 0x00300000 // Pallette Loading Mode
 #define LCD_RASTRCTL_PALMODE_PALDAT \
     0x00000000                              // Palette and data loading, reset
                                             // value
@@ -263,8 +263,8 @@
 #define LCD_RASTRCTL_LCDTFT      0x00000080 // LCD TFT
 #define LCD_RASTRCTL_LCDBW       0x00000002 // LCD Monochrome
 #define LCD_RASTRCTL_LCDEN \
-    0x00000001                              // LCD Controller Enable for Raster
-                                            // Operations
+    0x00000001 // LCD Controller Enable for Raster
+               // Operations
 #define LCD_RASTRCTL_REQDLY_S 12
 
 //*****************************************************************************
@@ -273,8 +273,8 @@
 // register.
 //
 //*****************************************************************************
-#define LCD_RASTRTIM0_HBP_M 0xFF000000    // Horizontal Back Porch Lowbits
-#define LCD_RASTRTIM0_HFP_M 0x00FF0000    // Horizontal Front Porch Lowbits
+#define LCD_RASTRTIM0_HBP_M   0xFF000000 // Horizontal Back Porch Lowbits
+#define LCD_RASTRTIM0_HFP_M   0x00FF0000 // Horizontal Front Porch Lowbits
 #define LCD_RASTRTIM0_HSW_M \
     0x0000FC00                            // Horizontal Sync Pulse Width
                                           // Lowbits
@@ -292,14 +292,14 @@
 // register.
 //
 //*****************************************************************************
-#define LCD_RASTRTIM1_VBP_M 0xFF000000 // Vertical Back Porch
-#define LCD_RASTRTIM1_VFP_M 0x00FF0000 // Vertical Front Porch
-#define LCD_RASTRTIM1_VSW_M 0x0000FC00 // Vertical Sync Width Pulse
-#define LCD_RASTRTIM1_LPP_M 0x000003FF // Lines Per Panel
-#define LCD_RASTRTIM1_VBP_S 24
-#define LCD_RASTRTIM1_VFP_S 16
-#define LCD_RASTRTIM1_VSW_S 10
-#define LCD_RASTRTIM1_LPP_S 0
+#define LCD_RASTRTIM1_VBP_M    0xFF000000 // Vertical Back Porch
+#define LCD_RASTRTIM1_VFP_M    0x00FF0000 // Vertical Front Porch
+#define LCD_RASTRTIM1_VSW_M    0x0000FC00 // Vertical Sync Width Pulse
+#define LCD_RASTRTIM1_LPP_M    0x000003FF // Lines Per Panel
+#define LCD_RASTRTIM1_VBP_S    24
+#define LCD_RASTRTIM1_VFP_S    16
+#define LCD_RASTRTIM1_VSW_S    10
+#define LCD_RASTRTIM1_LPP_S    0
 
 //*****************************************************************************
 //
@@ -308,9 +308,9 @@
 //
 //*****************************************************************************
 #define LCD_RASTRTIM2_HSW_M \
-    0x78000000                             // Bits 9:6 of the horizontal sync
-                                           // width field
-#define LCD_RASTRTIM2_MSBLPP 0x04000000    // MSB of Lines Per Panel
+    0x78000000                          // Bits 9:6 of the horizontal sync
+                                        // width field
+#define LCD_RASTRTIM2_MSBLPP 0x04000000 // MSB of Lines Per Panel
 #define LCD_RASTRTIM2_PXLCLKCTL \
     0x02000000                             // Hsync/Vsync Pixel Clock Control
                                            // On/Off
@@ -320,21 +320,21 @@
 #define LCD_RASTRTIM2_IHS       0x00200000 // Invert Hysync
 #define LCD_RASTRTIM2_IVS       0x00100000 // Invert Vsync
 #define LCD_RASTRTIM2_ACBI_M \
-    0x000F0000                             // AC Bias Pins Transitions per
-                                           // Interrupt
-#define LCD_RASTRTIM2_ACBF_M 0x0000FF00    // AC Bias Pin Frequency
+    0x000F0000                          // AC Bias Pins Transitions per
+                                        // Interrupt
+#define LCD_RASTRTIM2_ACBF_M 0x0000FF00 // AC Bias Pin Frequency
 #define LCD_RASTRTIM2_MSBHBP_M \
-    0x00000030                             // Bits 9:8 of the horizontal back
-                                           // porch field
+    0x00000030 // Bits 9:8 of the horizontal back
+               // porch field
 #define LCD_RASTRTIM2_MSBHFP_M \
-    0x00000003                             // Bits 9:8 of the horizontal front
-                                           // porch field
-#define LCD_RASTRTIM2_HSW_S    27
-#define LCD_RASTRTIM2_MSBLPP_S 26
-#define LCD_RASTRTIM2_ACBI_S   16
-#define LCD_RASTRTIM2_ACBF_S   8
-#define LCD_RASTRTIM2_MSBHBP_S 4
-#define LCD_RASTRTIM2_MSBHFP_S 0
+    0x00000003 // Bits 9:8 of the horizontal front
+               // porch field
+#define LCD_RASTRTIM2_HSW_S     27
+#define LCD_RASTRTIM2_MSBLPP_S  26
+#define LCD_RASTRTIM2_ACBI_S    16
+#define LCD_RASTRTIM2_ACBF_S    8
+#define LCD_RASTRTIM2_MSBHBP_S  4
+#define LCD_RASTRTIM2_MSBHFP_S  0
 
 //*****************************************************************************
 //
@@ -364,27 +364,27 @@
 // The following are defines for the bit fields in the LCD_O_DMACTL register.
 //
 //*****************************************************************************
-#define LCD_DMACTL_FIFORDY_M   0x00000700 // DMA FIFO threshold
-#define LCD_DMACTL_FIFORDY_8   0x00000000 // 8 words
-#define LCD_DMACTL_FIFORDY_16  0x00000100 // 16 words
-#define LCD_DMACTL_FIFORDY_32  0x00000200 // 32 words
-#define LCD_DMACTL_FIFORDY_64  0x00000300 // 64 words
-#define LCD_DMACTL_FIFORDY_128 0x00000400 // 128 words
-#define LCD_DMACTL_FIFORDY_256 0x00000500 // 256 words
-#define LCD_DMACTL_FIFORDY_512 0x00000600 // 512 words
+#define LCD_DMACTL_FIFORDY_M    0x00000700 // DMA FIFO threshold
+#define LCD_DMACTL_FIFORDY_8    0x00000000 // 8 words
+#define LCD_DMACTL_FIFORDY_16   0x00000100 // 16 words
+#define LCD_DMACTL_FIFORDY_32   0x00000200 // 32 words
+#define LCD_DMACTL_FIFORDY_64   0x00000300 // 64 words
+#define LCD_DMACTL_FIFORDY_128  0x00000400 // 128 words
+#define LCD_DMACTL_FIFORDY_256  0x00000500 // 256 words
+#define LCD_DMACTL_FIFORDY_512  0x00000600 // 512 words
 #define LCD_DMACTL_BURSTSZ_M \
-    0x00000070                            // Burst Size setting for DMA
-                                          // transfers (all DMA transfers are
-                                          // 32 bits wide):
-#define LCD_DMACTL_BURSTSZ_4  0x00000020  // burst size of 4
-#define LCD_DMACTL_BURSTSZ_8  0x00000030  // burst size of 8
-#define LCD_DMACTL_BURSTSZ_16 0x00000040  // burst size of 16
+    0x00000070                           // Burst Size setting for DMA
+                                         // transfers (all DMA transfers are
+                                         // 32 bits wide):
+#define LCD_DMACTL_BURSTSZ_4  0x00000020 // burst size of 4
+#define LCD_DMACTL_BURSTSZ_8  0x00000030 // burst size of 8
+#define LCD_DMACTL_BURSTSZ_16 0x00000040 // burst size of 16
 #define LCD_DMACTL_BYTESWAP \
-    0x00000008                            // This bit controls the bytelane
-                                          // ordering of the data on the
-                                          // output of the DMA module
-#define LCD_DMACTL_BIGDEND 0x00000002     // Big Endian Enable
-#define LCD_DMACTL_FMODE   0x00000001     // Frame Mode
+    0x00000008                        // This bit controls the bytelane
+                                      // ordering of the data on the
+                                      // output of the DMA module
+#define LCD_DMACTL_BIGDEND 0x00000002 // Big Endian Enable
+#define LCD_DMACTL_FMODE   0x00000001 // Frame Mode
 
 //*****************************************************************************
 //
@@ -431,17 +431,17 @@
 // The following are defines for the bit fields in the LCD_O_SYSCFG register.
 //
 //*****************************************************************************
-#define LCD_SYSCFG_STDBY_M 0x00000030    // Standby Mode
+#define LCD_SYSCFG_STDBY_M   0x00000030 // Standby Mode
 #define LCD_SYSCFG_STDBY_FORCE \
-    0x00000000                           // Force-standby mode: local
-                                         // initiator is unconditionally
-                                         // placed in standby state. Backup
-                                         // mode, for debug only
+    0x00000000 // Force-standby mode: local
+               // initiator is unconditionally
+               // placed in standby state. Backup
+               // mode, for debug only
 #define LCD_SYSCFG_STDBY_NONE \
-    0x00000010                           // No-standby mode: local initiator
-                                         // is unconditionally placed out of
-                                         // standby state. Backup mode, for
-                                         // debug only
+    0x00000010 // No-standby mode: local initiator
+               // is unconditionally placed out of
+               // standby state. Backup mode, for
+               // debug only
 #define LCD_SYSCFG_STDBY_SMART \
     0x00000020                           // Smart-standby mode: local
                                          // initiator standby status depends
@@ -453,26 +453,26 @@
                                          // events
 #define LCD_SYSCFG_IDLEMODE_M 0x0000000C // Idle Mode
 #define LCD_SYSCFG_IDLEMODE_FORCE \
-    0x00000000                           // Force-idle mode: local target's
-                                         // idle state follows
-                                         // (acknowledges) the system's idle
-                                         // requests unconditionally, that
-                                         // is, regardless of the IP
-                                         // module's internal requirements.
-                                         // Backup mode, for debug only
+    0x00000000 // Force-idle mode: local target's
+               // idle state follows
+               // (acknowledges) the system's idle
+               // requests unconditionally, that
+               // is, regardless of the IP
+               // module's internal requirements.
+               // Backup mode, for debug only
 #define LCD_SYSCFG_IDLEMODE_NONE \
-    0x00000004                           // No-idle mode: local target never
-                                         // enters idle state. Backup mode,
-                                         // for debug only
+    0x00000004 // No-idle mode: local target never
+               // enters idle state. Backup mode,
+               // for debug only
 #define LCD_SYSCFG_IDLEMODE_SMART \
-    0x00000008                           // Smart-idle mode: local target's
-                                         // idle state eventually follows
-                                         // (acknowledges) the system's idle
-                                         // requests, depending on the IP
-                                         // module's internal requirements.
-                                         // IP module shall not generate
-                                         // (IRQ- or DMA-requestrelated)
-                                         // wakeup events
+    0x00000008 // Smart-idle mode: local target's
+               // idle state eventually follows
+               // (acknowledges) the system's idle
+               // requests, depending on the IP
+               // module's internal requirements.
+               // IP module shall not generate
+               // (IRQ- or DMA-requestrelated)
+               // wakeup events
 
 //*****************************************************************************
 //
@@ -480,29 +480,29 @@
 //
 //*****************************************************************************
 #define LCD_RISSET_EOF1 \
-    0x00000200                           // DMA End-of-Frame 1 Raw Interrupt
-                                         // Status and Set
+    0x00000200 // DMA End-of-Frame 1 Raw Interrupt
+               // Status and Set
 #define LCD_RISSET_EOF0 \
-    0x00000100                           // DMA End-of-Frame 0 Raw Interrupt
-                                         // Status and Set
+    0x00000100 // DMA End-of-Frame 0 Raw Interrupt
+               // Status and Set
 #define LCD_RISSET_PALLOAD \
-    0x00000040                           // DMA Palette Loaded Raw Interrupt
-                                         // Status and Set
+    0x00000040 // DMA Palette Loaded Raw Interrupt
+               // Status and Set
 #define LCD_RISSET_FIFOU \
-    0x00000020                           // DMA FIFO Underflow Raw Interrupt
-                                         // Status and Set
+    0x00000020 // DMA FIFO Underflow Raw Interrupt
+               // Status and Set
 #define LCD_RISSET_ACBS \
-    0x00000008                           // AC Bias Count Raw Interrupt
-                                         // Status and Set
+    0x00000008 // AC Bias Count Raw Interrupt
+               // Status and Set
 #define LCD_RISSET_SYNCS \
     0x00000004                           // Frame Synchronization Lost Raw
                                          // Interrupt Status and Set
 #define LCD_RISSET_RRASTRDONE 0x00000002 // Raster Mode Frame Done interrupt
 #define LCD_RISSET_DONE \
-    0x00000001                           // Raster or LIDD Frame Done
-                                         // (shared, depends on whether
-                                         // Raster or LIDD mode enabled) Raw
-                                         // Interrupt Status and Set
+    0x00000001 // Raster or LIDD Frame Done
+               // (shared, depends on whether
+               // Raster or LIDD mode enabled) Raw
+               // Interrupt Status and Set
 
 //*****************************************************************************
 //
@@ -510,29 +510,29 @@
 //
 //*****************************************************************************
 #define LCD_MISCLR_EOF1 \
-    0x00000200                           // DMA End-of-Frame 1 Enabled
-                                         // Interrupt and Clear
+    0x00000200 // DMA End-of-Frame 1 Enabled
+               // Interrupt and Clear
 #define LCD_MISCLR_EOF0 \
-    0x00000100                           // DMA End-of-Frame 0 Raw Interrupt
-                                         // and Clear
+    0x00000100 // DMA End-of-Frame 0 Raw Interrupt
+               // and Clear
 #define LCD_MISCLR_PALLOAD \
-    0x00000040                           // DMA Palette Loaded Enabled
-                                         // Interrupt and Clear
+    0x00000040 // DMA Palette Loaded Enabled
+               // Interrupt and Clear
 #define LCD_MISCLR_FIFOU \
-    0x00000020                           // DMA FIFO Underflow Enabled
-                                         // Interrupt and Clear
+    0x00000020 // DMA FIFO Underflow Enabled
+               // Interrupt and Clear
 #define LCD_MISCLR_ACBS \
-    0x00000008                           // AC Bias Count Enabled Interrupt
-                                         // and Clear
+    0x00000008 // AC Bias Count Enabled Interrupt
+               // and Clear
 #define LCD_MISCLR_SYNCS \
     0x00000004                           // Frame Synchronization Lost
                                          // Enabled Interrupt and Clear
 #define LCD_MISCLR_RRASTRDONE 0x00000002 // Raster Mode Frame Done interrupt
 #define LCD_MISCLR_DONE \
-    0x00000001                           // Raster or LIDD Frame Done
-                                         // (shared, depends on whether
-                                         // Raster or LIDD mode enabled)
-                                         // Enabled Interrupt and Clear
+    0x00000001 // Raster or LIDD Frame Done
+               // (shared, depends on whether
+               // Raster or LIDD mode enabled)
+               // Enabled Interrupt and Clear
 
 //*****************************************************************************
 //
@@ -627,4 +627,4 @@
                // Active Matrix and Passive Matrix
                // logic
 
-#endif         // __HW_LCD_H__
+#endif // __HW_LCD_H__

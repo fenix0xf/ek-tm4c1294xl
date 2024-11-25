@@ -8,6 +8,8 @@ int strncasecmp(const char* _l, const char* _r, size_t n)
     {
         return 0;
     }
-    for (; *l && *r && n && (*l == *r || tolower(*l) == tolower(*r)); l++, r++, n--) {}
+    for (; *l && *r && n && (*l == *r || tolower(*l) == tolower(*r)); l++, r++, n--)
+    {
+    }
     return tolower(*l) - tolower(*r);
 }

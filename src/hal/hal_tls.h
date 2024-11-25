@@ -59,6 +59,6 @@ struct hal_tls_block
 #define HAL_DECLARE_TLS_BLOCK(name) static struct hal_tls_block name
 #define HAL_GET_TLS_BLOCK(name)     (&name)
 
-#else  /* HAL_TLS_IS_SUPPORTED */
+#else /* HAL_TLS_IS_SUPPORTED */
 #error Thread Local Storage is not supported for this GCC version!
 #endif /* HAL_TLS_IS_SUPPORTED */

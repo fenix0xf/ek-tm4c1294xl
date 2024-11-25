@@ -18,8 +18,7 @@ char* strptime(const char* restrict s, const char* restrict f, struct tm* restri
         {
             if (isspace(*f))
             {
-                for (; *s && isspace(*s); s++)
-                    ;
+                for (; *s && isspace(*s); s++);
             }
             else if (*s != *f)
             {
@@ -120,8 +119,7 @@ char* strptime(const char* restrict s, const char* restrict f, struct tm* restri
                 goto numeric_range;
             case 'n':
             case 't':
-                for (; *s && isspace(*s); s++)
-                    ;
+                for (; *s && isspace(*s); s++);
                 break;
             case 'p':
                 ex  = nl_langinfo(AM_STR);
@@ -222,7 +220,10 @@ numeric_range:
                     return 0;
                 }
                 *dest = 0;
-                for (i = 1; i <= min + range && isdigit(*s); i *= 10) { *dest = *dest * 10 + *s++ - '0'; }
+                for (i = 1; i <= min + range && isdigit(*s); i *= 10)
+                {
+                    *dest = *dest * 10 + *s++ - '0';
+                }
                 if (*dest - min >= (unsigned)range)
                 {
                     return 0;
@@ -247,7 +248,10 @@ numeric_digits:
                 {
                     return 0;
                 }
-                for (*dest = i = 0; i < w && isdigit(*s); i++) { *dest = *dest * 10 + *s++ - '0'; }
+                for (*dest = i = 0; i < w && isdigit(*s); i++)
+                {
+                    *dest = *dest * 10 + *s++ - '0';
+                }
                 if (neg)
                 {
                     *dest = -*dest;

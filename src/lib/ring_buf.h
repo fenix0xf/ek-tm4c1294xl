@@ -35,8 +35,8 @@
  */
 struct ring_buf
 {
-    uint8_t* buf;
-    size_t   len;
+    uint8_t*        buf;
+    size_t          len;
 
     volatile size_t read_idx;
     volatile size_t write_idx;
@@ -50,47 +50,47 @@ struct ring_buf
 /**
  * Initialize a ring buffer object.
  */
-void ring_buf_init(struct ring_buf* rb, void* buf, size_t len);
+void    ring_buf_init(struct ring_buf* rb, void* buf, size_t len);
 
 /**
  * Determines whether the ring buffer whose pointers and size are provided is full or not.
  */
-bool ring_buf_is_full(struct ring_buf* rb);
+bool    ring_buf_is_full(struct ring_buf* rb);
 
 /**
  * Determines whether the ring buffer whose pointers and size are provided is empty or not.
  */
-bool ring_buf_is_empty(struct ring_buf* rb);
+bool    ring_buf_is_empty(struct ring_buf* rb);
 
 /**
  * Empties the ring buffer.
  */
-void ring_buf_flush(struct ring_buf* rb);
+void    ring_buf_flush(struct ring_buf* rb);
 
 /**
  * Returns number of bytes stored in ring buffer.
  */
-size_t ring_buf_used(struct ring_buf* rb);
+size_t  ring_buf_used(struct ring_buf* rb);
 
 /**
  * Returns number of bytes available in a ring buffer.
  */
-size_t ring_buf_free(struct ring_buf* rb);
+size_t  ring_buf_free(struct ring_buf* rb);
 
 /**
  * Returns number of contiguous bytes of data stored in ring buffer ahead of the current read pointer.
  */
-size_t ring_buf_contig_used(struct ring_buf* rb);
+size_t  ring_buf_contig_used(struct ring_buf* rb);
 
 /**
  * Returns number of contiguous free bytes available in a ring buffer.
  */
-size_t ring_buf_contig_free(struct ring_buf* rb);
+size_t  ring_buf_contig_free(struct ring_buf* rb);
 
 /**
  * Return size in bytes of a ring buffer.
  */
-size_t ring_buf_size(struct ring_buf* rb);
+size_t  ring_buf_size(struct ring_buf* rb);
 
 /**
  * Reads a single byte of data from a ring buffer.
@@ -106,7 +106,7 @@ uint8_t ring_buf_read_byte(struct ring_buf* rb);
  * @note
  * Don't write data from different threads or interrupts!
  */
-void ring_buf_write_byte(struct ring_buf* rb, uint8_t byte);
+void    ring_buf_write_byte(struct ring_buf* rb, uint8_t byte);
 
 /**
  * Reads data from a ring buffer.
@@ -114,7 +114,7 @@ void ring_buf_write_byte(struct ring_buf* rb, uint8_t byte);
  * @note
  * Don't read data from different threads or interrupts!
  */
-void ring_buf_read(struct ring_buf* rb, void* buf, size_t len);
+void    ring_buf_read(struct ring_buf* rb, void* buf, size_t len);
 
 /**
  * Writes data to a ring buffer.
@@ -122,7 +122,7 @@ void ring_buf_read(struct ring_buf* rb, void* buf, size_t len);
  * @note
  * Don't write data from different threads or interrupts!
  */
-void ring_buf_write(struct ring_buf* rb, const void* buf, size_t len);
+void    ring_buf_write(struct ring_buf* rb, const void* buf, size_t len);
 
 /**
  * Remove bytes from the ring buffer by advancing the read index.
@@ -130,4 +130,4 @@ void ring_buf_write(struct ring_buf* rb, const void* buf, size_t len);
  * @note
  * Don't read data from different threads or interrupts!
  */
-void ring_buf_advance_read(struct ring_buf* rb, size_t len);
+void    ring_buf_advance_read(struct ring_buf* rb, size_t len);

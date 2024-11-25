@@ -48,9 +48,9 @@
 #define HWREG(x)        (*((volatile uint32_t*)(x)))
 #define HWREGH(x)       (*((volatile uint16_t*)(x)))
 #define HWREGB(x)       (*((volatile uint8_t*)(x)))
-#define HWREGBITW(x, b) HWREG(((uint32_t)(x)&0xF0000000) | 0x02000000 | (((uint32_t)(x)&0x000FFFFF) << 5) | ((b) << 2))
-#define HWREGBITH(x, b) HWREGH(((uint32_t)(x)&0xF0000000) | 0x02000000 | (((uint32_t)(x)&0x000FFFFF) << 5) | ((b) << 2))
-#define HWREGBITB(x, b) HWREGB(((uint32_t)(x)&0xF0000000) | 0x02000000 | (((uint32_t)(x)&0x000FFFFF) << 5) | ((b) << 2))
+#define HWREGBITW(x, b) HWREG(((uint32_t)(x) & 0xF0000000) | 0x02000000 | (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+#define HWREGBITH(x, b) HWREGH(((uint32_t)(x) & 0xF0000000) | 0x02000000 | (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+#define HWREGBITB(x, b) HWREGB(((uint32_t)(x) & 0xF0000000) | 0x02000000 | (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
 
 //*****************************************************************************
 //
@@ -81,40 +81,33 @@
 //
 //*****************************************************************************
 #ifndef CLASS_IS_TM4C123
-#define CLASS_IS_TM4C123                                                 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
-     (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
+#define CLASS_IS_TM4C123 \
+    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
 #endif
 
 #ifndef CLASS_IS_TM4C129
-#define CLASS_IS_TM4C129                                                 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
-     (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
+#define CLASS_IS_TM4C129 \
+    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
 #endif
 
 #ifndef REVISION_IS_A0
-#define REVISION_IS_A0 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
+#define REVISION_IS_A0 ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
 #endif
 
 #ifndef REVISION_IS_A1
-#define REVISION_IS_A1 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_1))
+#define REVISION_IS_A1 ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_1))
 #endif
 
 #ifndef REVISION_IS_A2
-#define REVISION_IS_A2 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
+#define REVISION_IS_A2 ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
 #endif
 
 #ifndef REVISION_IS_B0
-#define REVISION_IS_B0 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
+#define REVISION_IS_B0 ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
 #endif
 
 #ifndef REVISION_IS_B1
-#define REVISION_IS_B1 \
-    ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
+#define REVISION_IS_B1 ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
 #endif
 
 //*****************************************************************************

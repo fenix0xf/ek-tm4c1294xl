@@ -51,12 +51,7 @@ bool tm4c129_spi0_init(void)
 
     GPIOPinTypeSSI(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_4 | GPIO_PIN_5);
 
-    SSIConfigSetExpClk(SSI0_BASE,
-                       TM4C129_MCU_FREQUENCY,
-                       SSI_FRF_MOTO_MODE_0,
-                       SSI_MODE_MASTER,
-                       TM4C129_SPI0_BITRATE_DEFAULT,
-                       8);
+    SSIConfigSetExpClk(SSI0_BASE, TM4C129_MCU_FREQUENCY, SSI_FRF_MOTO_MODE_0, SSI_MODE_MASTER, TM4C129_SPI0_BITRATE_DEFAULT, 8);
 
     SSIEnable(SSI0_BASE);
     return true;

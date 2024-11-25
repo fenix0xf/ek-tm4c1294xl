@@ -40,9 +40,8 @@ int hal_eprintf(const char* restrict fmt, ...);
 int hal_flush(void);
 
 #define hal_error(s) hal_eprintf("ERROR: \"%s\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
-#define hal_errorf(fmt, ...)                                                                                    \
-    hal_eprintf("ERROR: \"" fmt "\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n" __VA_OPT__(, ) __VA_ARGS__, \
-                __func__)
+#define hal_errorf(fmt, ...) \
+    hal_eprintf("ERROR: \"" fmt "\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n" __VA_OPT__(, ) __VA_ARGS__, __func__)
 
 /*
  * Output for debug builds.
@@ -50,9 +49,12 @@ int hal_flush(void);
 #if DEBUG
 #define hal_dbg_trace() hal_printf("TRACE: %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", __func__)
 #define hal_dbg_puts(s) hal_printf("DEBUG: \"%s\", %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n", (s), __func__)
+#define hal_dbg_puts_fmt(fmt, ...) \
+    hal_printf("DEBUG: \"" fmt "\" in %s(), " __FILE__ ":" HAL_STFN(__LINE__) "\n" __VA_OPT__(, ) __VA_ARGS__, __func__)
 void hal_dbg_printbuf(const void* buf, size_t size);
 #else
 #define hal_dbg_trace()
 #define hal_dbg_puts(s)
+#define hal_dbg_puts_fmt(...)
 #define hal_dbg_printbuf(buf, size)
 #endif /* DEBUG */

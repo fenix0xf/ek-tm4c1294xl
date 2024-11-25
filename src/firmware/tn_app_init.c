@@ -33,14 +33,53 @@
 
 #define OS_PREFIX "OS: "
 
+#include <drv/display_kentec_boostxl_k350qvg_s1_ssd2119_spi.h>
+
+void grlib_test(void)
+{
+    tContext   sContext;
+    tRectangle sRect;
+
+    Kentec320x240x16_SSD2119Init(HAL_MCU_FREQUENCY);
+
+    //
+    // Initialize the graphics context.
+    //
+    GrContextInit(&sContext, &g_sKentec320x240x16_SSD2119);
+
+    //
+    // Fill the top 24 rows of the screen with blue to create the banner.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 0;
+    sRect.i16XMax = GrContextDpyWidthGet(&sContext) - 1;
+    sRect.i16YMax = 23;
+    GrContextForegroundSet(&sContext, ClrDarkBlue);
+    GrRectFill(&sContext, &sRect);
+
+    //
+    // Put a white box around the banner.
+    //
+    GrContextForegroundSet(&sContext, ClrWhite);
+    GrRectDraw(&sContext, &sRect);
+
+    //
+    // Put the application name in the middle of the banner.
+    //
+    GrContextFontSet(&sContext, &g_sFontCm20);
+    GrStringDrawCentered(&sContext, "grlib demo", -1, GrContextDpyWidthGet(&sContext) / 2, 8, 0);
+}
+
 /*
  * Before a call tn_app_init() all interrupts are disabled by the caller.
  * After returning from this function all interrupts will be enabled.
- * Do not use tn_task_sleep() inside, because this function enables interrupts!
+ * Do not use tn_task_sleep() here, because this function enables interrupts!
  */
 int tn_app_init(void)
 {
-    HAL_INIT_ASSERT(OS_PREFIX "Stdio lock init...", hal_crt_stdio_lock_init());
+    HAL_INIT_ASSERT(OS_PREFIX "CRT stdio lock init...", hal_crt_stdio_lock_init());
+
+    grlib_test();
 
     return TERR_NO_ERR;
 }

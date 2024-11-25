@@ -38,7 +38,10 @@ HAL_INLINE void ringbuf_index_update(volatile size_t* value, size_t delta, size_
     *value += delta;
 
     /// This loop need if (delta > buf_len).
-    while (*value >= buf_len) { *value -= buf_len; }
+    while (*value >= buf_len)
+    {
+        *value -= buf_len;
+    }
 
     hal_ll_cr_sect_leave();
 }
@@ -129,14 +132,20 @@ void ring_buf_write_byte(struct ring_buf* rb, uint8_t byte)
 void ring_buf_read(struct ring_buf* rb, void* buf, size_t len)
 {
     uint8_t* pbuf = (uint8_t*)buf;
-    for (size_t i = 0; i < len; i++) { pbuf[i] = ring_buf_read_byte(rb); }
+    for (size_t i = 0; i < len; i++)
+    {
+        pbuf[i] = ring_buf_read_byte(rb);
+    }
 }
 
 void ring_buf_write(struct ring_buf* rb, const void* buf, size_t len)
 {
     const uint8_t* pbuf = (uint8_t*)buf;
 
-    for (size_t i = 0; i < len; i++) { ring_buf_write_byte(rb, pbuf[i]); }
+    for (size_t i = 0; i < len; i++)
+    {
+        ring_buf_write_byte(rb, pbuf[i]);
+    }
 }
 
 void ring_buf_advance_read(struct ring_buf* rb, size_t len)

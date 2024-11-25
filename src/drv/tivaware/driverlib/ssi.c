@@ -44,8 +44,8 @@
 //
 //*****************************************************************************
 
-#include <stdbool.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
@@ -68,14 +68,13 @@ static const uint32_t g_ppui32SSIIntMap[][2] = {
 };
 static const uint_fast8_t g_ui8SSIIntMapRows = sizeof(g_ppui32SSIIntMap) / sizeof(g_ppui32SSIIntMap[0]);
 
-static const uint32_t g_ppui32SSIIntMapSnowflake[][2] = {
+static const uint32_t     g_ppui32SSIIntMapSnowflake[][2] = {
     {SSI0_BASE, INT_SSI0_TM4C129},
     {SSI1_BASE, INT_SSI1_TM4C129},
     {SSI2_BASE, INT_SSI2_TM4C129},
     {SSI3_BASE, INT_SSI3_TM4C129},
 };
-static const uint_fast8_t g_ui8SSIIntMapSnowflakeRows =
-    sizeof(g_ppui32SSIIntMapSnowflake) / sizeof(g_ppui32SSIIntMapSnowflake[0]);
+static const uint_fast8_t g_ui8SSIIntMapSnowflakeRows = sizeof(g_ppui32SSIIntMapSnowflake) / sizeof(g_ppui32SSIIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -230,9 +229,8 @@ void SSIConfigSetExpClk(uint32_t ui32Base,
     // Check the arguments.
     //
     ASSERT(_SSIBaseValid(ui32Base));
-    ASSERT((ui32Protocol == SSI_FRF_MOTO_MODE_0) || (ui32Protocol == SSI_FRF_MOTO_MODE_1) ||
-           (ui32Protocol == SSI_FRF_MOTO_MODE_2) || (ui32Protocol == SSI_FRF_MOTO_MODE_3) ||
-           (ui32Protocol == SSI_FRF_TI) || (ui32Protocol == SSI_FRF_NMW));
+    ASSERT((ui32Protocol == SSI_FRF_MOTO_MODE_0) || (ui32Protocol == SSI_FRF_MOTO_MODE_1) || (ui32Protocol == SSI_FRF_MOTO_MODE_2) ||
+           (ui32Protocol == SSI_FRF_MOTO_MODE_3) || (ui32Protocol == SSI_FRF_TI) || (ui32Protocol == SSI_FRF_NMW));
     ASSERT((ui32Mode == SSI_MODE_MASTER) || (ui32Mode == SSI_MODE_SLAVE));
     ASSERT(((ui32Mode == SSI_MODE_MASTER) && (ui32BitRate <= (ui32SSIClk / 2))) ||
            ((ui32Mode != SSI_MODE_MASTER) && (ui32BitRate <= (ui32SSIClk / 12))));
@@ -554,6 +552,9 @@ void SSIIntClear(uint32_t ui32Base, uint32_t ui32IntFlags)
 //! \return None.
 //
 //*****************************************************************************
+
+#include <hal/hal_con.h>
+
 void SSIDataPut(uint32_t ui32Base, uint32_t ui32Data)
 {
     //
@@ -565,7 +566,9 @@ void SSIDataPut(uint32_t ui32Base, uint32_t ui32Data)
     //
     // Wait until there is space.
     //
-    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_TNF)) {}
+    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_TNF))
+    {
+    }
 
     //
     // Write the data to the SSI.
@@ -646,7 +649,9 @@ void SSIDataGet(uint32_t ui32Base, uint32_t* pui32Data)
     //
     // Wait until there is data to be read.
     //
-    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_RNE)) {}
+    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_RNE))
+    {
+    }
 
     //
     // Read data from SSI.
@@ -930,9 +935,8 @@ void SSIAdvModeSet(uint32_t ui32Base, uint32_t ui32Mode)
     // Check the arguments.
     //
     ASSERT(_SSIBaseValid(ui32Base));
-    ASSERT((ui32Mode == SSI_ADV_MODE_LEGACY) || (ui32Mode == SSI_ADV_MODE_WRITE) ||
-           (ui32Mode == SSI_ADV_MODE_READ_WRITE) || (ui32Mode == SSI_ADV_MODE_BI_READ) ||
-           (ui32Mode == SSI_ADV_MODE_BI_WRITE) || (ui32Mode == SSI_ADV_MODE_QUAD_READ) ||
+    ASSERT((ui32Mode == SSI_ADV_MODE_LEGACY) || (ui32Mode == SSI_ADV_MODE_WRITE) || (ui32Mode == SSI_ADV_MODE_READ_WRITE) ||
+           (ui32Mode == SSI_ADV_MODE_BI_READ) || (ui32Mode == SSI_ADV_MODE_BI_WRITE) || (ui32Mode == SSI_ADV_MODE_QUAD_READ) ||
            (ui32Mode == SSI_ADV_MODE_QUAD_WRITE));
 
     //
@@ -974,7 +978,9 @@ void SSIAdvDataPutFrameEnd(uint32_t ui32Base, uint32_t ui32Data)
     //
     // Wait until there is space.
     //
-    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_TNF)) {}
+    while (!(HWREG(ui32Base + SSI_O_SR) & SSI_SR_TNF))
+    {
+    }
 
     //
     // Write the data to the SSI.

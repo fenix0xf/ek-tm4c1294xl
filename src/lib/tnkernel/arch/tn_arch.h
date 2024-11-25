@@ -87,23 +87,23 @@ extern "C"
 #define TN_INVALID_VAL     0xFFFFFFFFu
 
 #define TN_SYSTICKS_PER_S  HAL_SYSTICK_FREQUENCY
-#define TN_MS_TO_TICKS(ms) (((ms)*TN_SYSTICKS_PER_S) / 1000)
+#define TN_MS_TO_TICKS(ms) (((ms) * TN_SYSTICKS_PER_S) / 1000)
 
 extern volatile unsigned long tn_sys_tick_count;
 
-unsigned int* tn_stack_init(void (*task_func)(void* param), void* stack_start, void* param);
+unsigned int*                 tn_stack_init(void (*task_func)(void* param), void* stack_start, void* param);
 
 //-- Assembler functions prototypes
 
-void tn_switch_context_exit(void);
-void tn_switch_context(void);
+void                          tn_switch_context_exit(void);
+void                          tn_switch_context(void);
 
-void tn_start_exe(void);
-void tn_pendsv_handler(void);
-int  ffs_asm(unsigned int val);
+void                          tn_start_exe(void);
+void                          tn_pendsv_handler(void);
+int                           ffs_asm(unsigned int val);
 
-void tn_int_exit(void);
-void tn_task_exit_asm(void* tcb);
+void                          tn_int_exit(void);
+void                          tn_task_exit_asm(void* tcb);
 
 /**
  * TN_TCB forward declaration.
@@ -115,7 +115,7 @@ typedef struct _TN_TCB TN_TCB;
 #define TN_CHECK_STACK_HALT  0x1u
 #define TN_CHECK_STACK_FORCE 0x2u
 
-void tn_check_stack(TN_TCB* task, size_t opt);
+void             tn_check_stack(TN_TCB* task, size_t opt);
 
 /**
  * @brief Determining whether we are inside an interrupt.
@@ -137,21 +137,21 @@ TN_INLINE unsigned long tn_get_sys_ticks(void)
     return tn_sys_tick_count;
 }
 
-#define tn_puts(s)          hal_puts(s)
-#define tn_print(s)         hal_print(s)
-#define tn_printf(fmt, ...) hal_printf(fmt __VA_OPT__(, ) __VA_ARGS__)
+#define tn_puts(s)                 hal_puts(s)
+#define tn_print(s)                hal_print(s)
+#define tn_printf(fmt, ...)        hal_printf(fmt __VA_OPT__(, ) __VA_ARGS__)
 
 //-- Interrupt processing - the CPU specific
 
 // All Cortex-M CPU supports nested interrupts
 
-#define TN_INTSAVE_DATA_INT     size_t tn_save_status_reg;
-#define TN_INTSAVE_DATA         size_t tn_save_status_reg;
-#define tn_disable_interrupt()  tn_save_status_reg = hal_mcu_int_off_dstate()
-#define tn_enable_interrupt()   hal_mcu_int_restore(tn_save_status_reg)
+#define TN_INTSAVE_DATA_INT        size_t tn_save_status_reg;
+#define TN_INTSAVE_DATA            size_t tn_save_status_reg;
+#define tn_disable_interrupt()     tn_save_status_reg = hal_mcu_int_off_dstate()
+#define tn_enable_interrupt()      hal_mcu_int_restore(tn_save_status_reg)
 
-#define tn_idisable_interrupt() tn_save_status_reg = hal_mcu_int_off_dstate()
-#define tn_ienable_interrupt()  hal_mcu_int_restore(tn_save_status_reg)
+#define tn_idisable_interrupt()    tn_save_status_reg = hal_mcu_int_off_dstate()
+#define tn_ienable_interrupt()     hal_mcu_int_restore(tn_save_status_reg)
 
 // disable interrupts without saving status reg
 #define tn_disable_interrupt_nsc() hal_mcu_int_off()

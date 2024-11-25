@@ -29,7 +29,7 @@
 
 extern void* __libc_malloc_lock; /* Placed in malloc.c */
 
-void libc_set_file_lock(FILE* f, void* lock)
+void         libc_set_file_lock(FILE* f, void* lock)
 {
     f->lock = lock;
 }

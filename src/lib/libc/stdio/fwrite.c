@@ -18,7 +18,9 @@ size_t __fwritex(const unsigned char* restrict s, size_t l, FILE* restrict f)
     if (f->lbf >= 0)
     {
         /* Match /^(.*\n|)/ */
-        for (i = l; i && s[i - 1] != '\n'; i--) {}
+        for (i = l; i && s[i - 1] != '\n'; i--)
+        {
+        }
 
         if (i)
         {

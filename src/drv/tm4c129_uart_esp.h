@@ -34,7 +34,7 @@
  * @details Default speed 115200, 8 bit data, one stop bit, parity none.
  *
  */
-bool tm4c129_uart_esp_init(void);
+bool     tm4c129_uart_esp_init(void);
 
 intptr_t tm4c129_uart_esp_puts(const char* s);
 intptr_t tm4c129_uart_esp_print(const char* s);

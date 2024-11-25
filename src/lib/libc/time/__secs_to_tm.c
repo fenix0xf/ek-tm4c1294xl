@@ -76,7 +76,10 @@ int __secs_to_tm(long long t, struct tm* tm)
 
     years = remyears + 4 * q_cycles + 100 * c_cycles + 400LL * qc_cycles;
 
-    for (months = 0; days_in_month[months] <= remdays; months++) { remdays -= days_in_month[months]; }
+    for (months = 0; days_in_month[months] <= remdays; months++)
+    {
+        remdays -= days_in_month[months];
+    }
 
     if (months >= 10)
     {

@@ -71,22 +71,22 @@ extern "C"
 // parameter.
 //
 //*****************************************************************************
-#define QEI_FILTCNT_2  0x00000000 // Filter Count of 2 System Clocks
-#define QEI_FILTCNT_3  0x00010000 // Filter Count of 3 System Clocks
-#define QEI_FILTCNT_4  0x00020000 // Filter Count of 4 System Clocks
-#define QEI_FILTCNT_5  0x00030000 // Filter Count of 5 System Clocks
-#define QEI_FILTCNT_6  0x00040000 // Filter Count of 6 System Clocks
-#define QEI_FILTCNT_7  0x00050000 // Filter Count of 7 System Clocks
-#define QEI_FILTCNT_8  0x00060000 // Filter Count of 8 System Clocks
-#define QEI_FILTCNT_9  0x00070000 // Filter Count of 9 System Clocks
-#define QEI_FILTCNT_10 0x00080000 // Filter Count of 10 System Clocks
-#define QEI_FILTCNT_11 0x00090000 // Filter Count of 11 System Clocks
-#define QEI_FILTCNT_12 0x000A0000 // Filter Count of 12 System Clocks
-#define QEI_FILTCNT_13 0x000B0000 // Filter Count of 13 System Clocks
-#define QEI_FILTCNT_14 0x000C0000 // Filter Count of 14 System Clocks
-#define QEI_FILTCNT_15 0x000D0000 // Filter Count of 15 System Clocks
-#define QEI_FILTCNT_16 0x000E0000 // Filter Count of 16 System Clocks
-#define QEI_FILTCNT_17 0x000F0000 // Filter Count of 17 System Clocks
+#define QEI_FILTCNT_2          0x00000000 // Filter Count of 2 System Clocks
+#define QEI_FILTCNT_3          0x00010000 // Filter Count of 3 System Clocks
+#define QEI_FILTCNT_4          0x00020000 // Filter Count of 4 System Clocks
+#define QEI_FILTCNT_5          0x00030000 // Filter Count of 5 System Clocks
+#define QEI_FILTCNT_6          0x00040000 // Filter Count of 6 System Clocks
+#define QEI_FILTCNT_7          0x00050000 // Filter Count of 7 System Clocks
+#define QEI_FILTCNT_8          0x00060000 // Filter Count of 8 System Clocks
+#define QEI_FILTCNT_9          0x00070000 // Filter Count of 9 System Clocks
+#define QEI_FILTCNT_10         0x00080000 // Filter Count of 10 System Clocks
+#define QEI_FILTCNT_11         0x00090000 // Filter Count of 11 System Clocks
+#define QEI_FILTCNT_12         0x000A0000 // Filter Count of 12 System Clocks
+#define QEI_FILTCNT_13         0x000B0000 // Filter Count of 13 System Clocks
+#define QEI_FILTCNT_14         0x000C0000 // Filter Count of 14 System Clocks
+#define QEI_FILTCNT_15         0x000D0000 // Filter Count of 15 System Clocks
+#define QEI_FILTCNT_16         0x000E0000 // Filter Count of 16 System Clocks
+#define QEI_FILTCNT_17         0x000F0000 // Filter Count of 17 System Clocks
 
 //*****************************************************************************
 //
@@ -94,14 +94,14 @@ extern "C"
 // parameter.
 //
 //*****************************************************************************
-#define QEI_VELDIV_1   0x00000000 // Predivide by 1
-#define QEI_VELDIV_2   0x00000040 // Predivide by 2
-#define QEI_VELDIV_4   0x00000080 // Predivide by 4
-#define QEI_VELDIV_8   0x000000C0 // Predivide by 8
-#define QEI_VELDIV_16  0x00000100 // Predivide by 16
-#define QEI_VELDIV_32  0x00000140 // Predivide by 32
-#define QEI_VELDIV_64  0x00000180 // Predivide by 64
-#define QEI_VELDIV_128 0x000001C0 // Predivide by 128
+#define QEI_VELDIV_1           0x00000000 // Predivide by 1
+#define QEI_VELDIV_2           0x00000040 // Predivide by 2
+#define QEI_VELDIV_4           0x00000080 // Predivide by 4
+#define QEI_VELDIV_8           0x000000C0 // Predivide by 8
+#define QEI_VELDIV_16          0x00000100 // Predivide by 16
+#define QEI_VELDIV_32          0x00000140 // Predivide by 32
+#define QEI_VELDIV_64          0x00000180 // Predivide by 64
+#define QEI_VELDIV_128         0x000001C0 // Predivide by 128
 
 //*****************************************************************************
 //
@@ -109,10 +109,10 @@ extern "C"
 // as the ui32IntFlags parameter, and returned by QEIGetIntStatus.
 //
 //*****************************************************************************
-#define QEI_INTERROR 0x00000008 // Phase error detected
-#define QEI_INTDIR   0x00000004 // Direction change
-#define QEI_INTTIMER 0x00000002 // Velocity timer expired
-#define QEI_INTINDEX 0x00000001 // Index pulse detected
+#define QEI_INTERROR           0x00000008 // Phase error detected
+#define QEI_INTDIR             0x00000004 // Direction change
+#define QEI_INTTIMER           0x00000002 // Velocity timer expired
+#define QEI_INTINDEX           0x00000001 // Index pulse detected
 
 //*****************************************************************************
 //

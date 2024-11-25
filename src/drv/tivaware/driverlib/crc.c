@@ -99,13 +99,11 @@ void CRCConfigSet(uint32_t ui32Base, uint32_t ui32CRCConfig)
     // Check the arguments.
     //
     ASSERT(ui32Base == CCM0_BASE);
-    ASSERT((ui32CRCConfig & CRC_CFG_INIT_SEED) || (ui32CRCConfig & CRC_CFG_INIT_0) ||
-           (ui32CRCConfig & CRC_CFG_INIT_1) || (ui32CRCConfig & CRC_CFG_SIZE_8BIT) ||
-           (ui32CRCConfig & CRC_CFG_SIZE_32BIT) || (ui32CRCConfig & CRC_CFG_RESINV) || (ui32CRCConfig & CRC_CFG_OBR) ||
-           (ui32CRCConfig & CRC_CFG_IBR) || (ui32CRCConfig & CRC_CFG_ENDIAN_SBHW) ||
-           (ui32CRCConfig & CRC_CFG_ENDIAN_SHW) || (ui32CRCConfig & CRC_CFG_TYPE_P8005) ||
-           (ui32CRCConfig & CRC_CFG_TYPE_P1021) || (ui32CRCConfig & CRC_CFG_TYPE_P4C11DB7) ||
-           (ui32CRCConfig & CRC_CFG_TYPE_P1EDC6F41) || (ui32CRCConfig & CRC_CFG_TYPE_TCPCHKSUM));
+    ASSERT((ui32CRCConfig & CRC_CFG_INIT_SEED) || (ui32CRCConfig & CRC_CFG_INIT_0) || (ui32CRCConfig & CRC_CFG_INIT_1) ||
+           (ui32CRCConfig & CRC_CFG_SIZE_8BIT) || (ui32CRCConfig & CRC_CFG_SIZE_32BIT) || (ui32CRCConfig & CRC_CFG_RESINV) ||
+           (ui32CRCConfig & CRC_CFG_OBR) || (ui32CRCConfig & CRC_CFG_IBR) || (ui32CRCConfig & CRC_CFG_ENDIAN_SBHW) ||
+           (ui32CRCConfig & CRC_CFG_ENDIAN_SHW) || (ui32CRCConfig & CRC_CFG_TYPE_P8005) || (ui32CRCConfig & CRC_CFG_TYPE_P1021) ||
+           (ui32CRCConfig & CRC_CFG_TYPE_P4C11DB7) || (ui32CRCConfig & CRC_CFG_TYPE_P1EDC6F41) || (ui32CRCConfig & CRC_CFG_TYPE_TCPCHKSUM));
 
     //
     // Write the control register with the configuration.

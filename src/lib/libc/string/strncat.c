@@ -6,7 +6,10 @@ char* strncat(char* restrict d, const char* restrict s, size_t n)
 
     d += strlen(d);
 
-    while (n && *s) { n--, *d++ = *s++; }
+    while (n && *s)
+    {
+        n--, *d++ = *s++;
+    }
 
     *d++ = 0;
 

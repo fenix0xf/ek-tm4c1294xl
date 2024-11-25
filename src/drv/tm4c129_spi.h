@@ -39,8 +39,8 @@
  * Initialize SPI0.
  * SPI0 used for external EEPROM and FLASH.
  */
-bool tm4c129_spi0_init(void);
-void tm4c129_spi0_bitrate_set(size_t bitrate);
+bool    tm4c129_spi0_init(void);
+void    tm4c129_spi0_bitrate_set(size_t bitrate);
 
 /**
  * SPI0 exchange, send one byte and receive one byte.

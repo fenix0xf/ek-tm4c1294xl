@@ -74,34 +74,34 @@ extern "C"
 //
 //! This indicates that transmit interrupts are enabled.
 //
-#define MSG_OBJ_TX_INT_ENABLE 0x00000001
+#define MSG_OBJ_TX_INT_ENABLE  0x00000001
 
 //
 //! This indicates that receive interrupts are enabled.
 //
-#define MSG_OBJ_RX_INT_ENABLE 0x00000002
+#define MSG_OBJ_RX_INT_ENABLE  0x00000002
 
 //
 //! This indicates that a message object is using an extended identifier.
 //
-#define MSG_OBJ_EXTENDED_ID 0x00000004
+#define MSG_OBJ_EXTENDED_ID    0x00000004
 
 //
 //! This indicates that a message object is using filtering based on the
 //! object's message identifier.
 //
-#define MSG_OBJ_USE_ID_FILTER 0x00000008
+#define MSG_OBJ_USE_ID_FILTER  0x00000008
 
 //
 //! This indicates that new data was available in the message object.
 //
-#define MSG_OBJ_NEW_DATA 0x00000080
+#define MSG_OBJ_NEW_DATA       0x00000080
 
 //
 //! This indicates that data was lost since this message object was last
 //! read.
 //
-#define MSG_OBJ_DATA_LOST 0x00000100
+#define MSG_OBJ_DATA_LOST      0x00000100
 
 //
 //! This indicates that a message object uses or is using filtering
@@ -120,18 +120,18 @@ extern "C"
 //
 //! This indicates that a message object is a remote frame.
 //
-#define MSG_OBJ_REMOTE_FRAME 0x00000040
+#define MSG_OBJ_REMOTE_FRAME   0x00000040
 
 //
 //! This indicates that this message object is part of a FIFO structure and
 //! not the final message object in a FIFO.
 //
-#define MSG_OBJ_FIFO 0x00000200
+#define MSG_OBJ_FIFO           0x00000200
 
 //
 //! This indicates that a message object has no flags set.
 //
-#define MSG_OBJ_NO_FLAGS 0x00000000
+#define MSG_OBJ_NO_FLAGS       0x00000000
 
 //*****************************************************************************
 //
@@ -139,7 +139,7 @@ extern "C"
 //! flags and not configuration flags.
 //
 //*****************************************************************************
-#define MSG_OBJ_STATUS_MASK (MSG_OBJ_NEW_DATA | MSG_OBJ_DATA_LOST)
+#define MSG_OBJ_STATUS_MASK    (MSG_OBJ_NEW_DATA | MSG_OBJ_DATA_LOST)
 
 //*****************************************************************************
 //
@@ -270,7 +270,7 @@ typedef enum
 //! This flag is used to allow a CAN controller to generate error
 //! interrupts.
 //
-#define CAN_INT_ERROR 0x00000008
+#define CAN_INT_ERROR  0x00000008
 
 //
 //! This flag is used to allow a CAN controller to generate status
@@ -328,38 +328,38 @@ typedef enum
 //
 //! CAN controller has entered a Bus Off state.
 //
-#define CAN_STATUS_BUS_OFF 0x00000080
+#define CAN_STATUS_BUS_OFF   0x00000080
 
 //
 //! CAN controller error level has reached warning level.
 //
-#define CAN_STATUS_EWARN 0x00000040
+#define CAN_STATUS_EWARN     0x00000040
 
 //
 //! CAN controller error level has reached error passive level.
 //
-#define CAN_STATUS_EPASS 0x00000020
+#define CAN_STATUS_EPASS     0x00000020
 
 //
 //! A message was received successfully since the last read of this status.
 //
-#define CAN_STATUS_RXOK 0x00000010
+#define CAN_STATUS_RXOK      0x00000010
 
 //
 //! A message was transmitted successfully since the last read of this
 //! status.
 //
-#define CAN_STATUS_TXOK 0x00000008
+#define CAN_STATUS_TXOK      0x00000008
 
 //
 //! This is the mask for the last error code field.
 //
-#define CAN_STATUS_LEC_MSK 0x00000007
+#define CAN_STATUS_LEC_MSK   0x00000007
 
 //
 //! There was no error.
 //
-#define CAN_STATUS_LEC_NONE 0x00000000
+#define CAN_STATUS_LEC_NONE  0x00000000
 
 //
 //! A bit stuffing error has occurred.
@@ -369,32 +369,32 @@ typedef enum
 //
 //! A formatting error has occurred.
 //
-#define CAN_STATUS_LEC_FORM 0x00000002
+#define CAN_STATUS_LEC_FORM  0x00000002
 
 //
 //! An acknowledge error has occurred.
 //
-#define CAN_STATUS_LEC_ACK 0x00000003
+#define CAN_STATUS_LEC_ACK   0x00000003
 
 //
 //! The bus remained a bit level of 1 for longer than is allowed.
 //
-#define CAN_STATUS_LEC_BIT1 0x00000004
+#define CAN_STATUS_LEC_BIT1  0x00000004
 
 //
 //! The bus remained a bit level of 0 for longer than is allowed.
 //
-#define CAN_STATUS_LEC_BIT0 0x00000005
+#define CAN_STATUS_LEC_BIT0  0x00000005
 
 //
 //! A CRC error has occurred.
 //
-#define CAN_STATUS_LEC_CRC 0x00000006
+#define CAN_STATUS_LEC_CRC   0x00000006
 
 //
 //! This is the mask for the CAN Last Error Code (LEC).
 //
-#define CAN_STATUS_LEC_MASK 0x00000007
+#define CAN_STATUS_LEC_MASK  0x00000007
 
 //*****************************************************************************
 //

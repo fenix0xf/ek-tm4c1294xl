@@ -57,8 +57,8 @@ extern "C"
 // ui32Config argument in the DESConfig() function.  Only one is permitted.
 //
 //*****************************************************************************
-#define DES_CFG_DIR_DECRYPT 0x00000000
-#define DES_CFG_DIR_ENCRYPT 0x00000004
+#define DES_CFG_DIR_DECRYPT    0x00000000
+#define DES_CFG_DIR_ENCRYPT    0x00000004
 
 //*****************************************************************************
 //
@@ -66,9 +66,9 @@ extern "C"
 // ui32Config argument in the DESConfig() function.  Only one is permitted.
 //
 //*****************************************************************************
-#define DES_CFG_MODE_ECB 0x00000000
-#define DES_CFG_MODE_CBC 0x00000010
-#define DES_CFG_MODE_CFB 0x00000020
+#define DES_CFG_MODE_ECB       0x00000000
+#define DES_CFG_MODE_CBC       0x00000010
+#define DES_CFG_MODE_CFB       0x00000020
 
 //*****************************************************************************
 //
@@ -77,8 +77,8 @@ extern "C"
 // permitted.
 //
 //*****************************************************************************
-#define DES_CFG_SINGLE 0x00000000
-#define DES_CFG_TRIPLE 0x00000008
+#define DES_CFG_SINGLE         0x00000000
+#define DES_CFG_TRIPLE         0x00000008
 
 //*****************************************************************************
 //
@@ -99,9 +99,9 @@ extern "C"
 // functions.
 //
 //*****************************************************************************
-#define DES_DMA_CONTEXT_IN 0x00000080
-#define DES_DMA_DATA_OUT   0x00000040
-#define DES_DMA_DATA_IN    0x00000020
+#define DES_DMA_CONTEXT_IN     0x00000080
+#define DES_DMA_DATA_OUT       0x00000040
+#define DES_DMA_DATA_IN        0x00000020
 
 //*****************************************************************************
 //

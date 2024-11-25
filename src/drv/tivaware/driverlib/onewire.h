@@ -68,65 +68,65 @@ extern "C"
 // This define is used in initialization to request standard speed bus
 // timings.  This is the default.
 //
-#define ONEWIRE_INIT_SPD_STD 0x00000000
+#define ONEWIRE_INIT_SPD_STD        0x00000000
 
 //
 // This define is used in initialization to request overdrive speed bus
 // timings.
 //
-#define ONEWIRE_INIT_SPD_OD 0x00000020
+#define ONEWIRE_INIT_SPD_OD         0x00000020
 
 //
 // This define is used in initialization to request standard read sampling
 // timing (2us for ONEWIRE_INIT_SPD_OD and 16us for ONEWIRE_INIT_SPD_STD).
 // This is the default.
 //
-#define ONEWIRE_INIT_READ_STD 0x00000000
+#define ONEWIRE_INIT_READ_STD       0x00000000
 
 //
 // This define is used in initialization to request late read sampling
 // timing (7us for ONEWIRE_INIT_SPD_OD and 50us for ONEWIRE_INIT_SPD_STD).
 //
-#define ONEWIRE_INIT_READ_LATE 0x00000040
+#define ONEWIRE_INIT_READ_LATE      0x00000040
 
 //
 // This define is used in initialization to request a standard
 // Answer-to-Reset (presence detect) monitor.  This is the default.
 //
-#define ONEWIRE_INIT_ATR 0x00000000
+#define ONEWIRE_INIT_ATR            0x00000000
 
 //
 // This define is used in initialization to request no Answer-to-Reset
 // (presence detect) monitor.  The module will delay operations after a bus
 // reset for the expected presence detect period in this case.
 //
-#define ONEWIRE_INIT_NO_ATR 0x00000080
+#define ONEWIRE_INIT_NO_ATR         0x00000080
 
 //
 // This define is used in initialization to request standard signal polarity
 // on the 1-Wire bus (pin is driven low to drive bus low).  This is the
 // default.
 //
-#define ONEWIRE_INIT_STD_POL 0x00000000
+#define ONEWIRE_INIT_STD_POL        0x00000000
 
 //
 // This define is used in initialization to request alternate signal polarity
 // on the 1-Wire bus (pin is driven high to drive bus low).
 //
-#define ONEWIRE_INIT_ALT_POL 0x40000000
+#define ONEWIRE_INIT_ALT_POL        0x40000000
 
 //
 // This define is used in initialization to request normal 1-Wire operational
 // mode.  This is the default.
 //
-#define ONEWIRE_INIT_1_WIRE_CFG 0x00000000
+#define ONEWIRE_INIT_1_WIRE_CFG     0x00000000
 
 //
 // This define is used in initialization to request a 2 pin operational
 // mode where one pin is used exclusively for TX operations and the other
 // for RX.
 //
-#define ONEWIRE_INIT_2_WIRE_CFG 0x80000000
+#define ONEWIRE_INIT_2_WIRE_CFG     0x80000000
 
 //*****************************************************************************
 //
@@ -139,7 +139,7 @@ extern "C"
 // This will be set if the bus is busy handling a Read, Write or
 // Reset activity.
 //
-#define ONEWIRE_BUS_STATUS_BUSY 0x00000100
+#define ONEWIRE_BUS_STATUS_BUSY     0x00000100
 
 //
 // This will be set if the module did not detect any slave presence pulses
@@ -151,7 +151,7 @@ extern "C"
 // This will be set if the bus is being held low outside of a normal Read,
 // Write or Reset activity.
 //
-#define ONEWIRE_BUS_STATUS_STUCK 0x00000400
+#define ONEWIRE_BUS_STATUS_STUCK    0x00000400
 
 //*****************************************************************************
 //
@@ -163,17 +163,17 @@ extern "C"
 // This mode flag indicates a single reset should be issued prior to a write
 // and/or read operation.
 //
-#define ONEWIRE_OP_RESET 0x00000001
+#define ONEWIRE_OP_RESET            0x00000001
 
 //
 // This mode flag indicates a read operation.
 //
-#define ONEWIRE_OP_READ 0x00000002
+#define ONEWIRE_OP_READ             0x00000002
 
 //
 // This mode flag indicates a write operation.
 //
-#define ONEWIRE_OP_WRITE 0x00000004
+#define ONEWIRE_OP_WRITE            0x00000004
 
 //*****************************************************************************
 //
@@ -184,49 +184,49 @@ extern "C"
 //
 // This indicates the DMA should issue a 1-Wire bus reset before starting.
 //
-#define ONEWIRE_DMA_BUS_RESET 0x00000001
+#define ONEWIRE_DMA_BUS_RESET       0x00000001
 
 //
 // The DMA operation will be a single Read after each module transaction.
 //
-#define ONEWIRE_DMA_OP_READ 0x00000002
+#define ONEWIRE_DMA_OP_READ         0x00000002
 
 //
 // The DMA will write values to the 1-Wire interface as each previous DMA
 // write operation completes.
 //
-#define ONEWIRE_DMA_OP_MULTI_WRITE 0x00000004
+#define ONEWIRE_DMA_OP_MULTI_WRITE  0x00000004
 
 //
 // The DMA will read values from the 1-Wire interface as each previous DMA
 // read operation completes.
 //
-#define ONEWIRE_DMA_OP_MULTI_READ 0x00000006
+#define ONEWIRE_DMA_OP_MULTI_READ   0x00000006
 
 //
 // This Scatter Gather DMA mode is paired with ONEWIRE_DMA_OP_READ to instruct
 // the 1-Wire DMA to initiate an operation at the start of and then on each
 // transition completion thereafter.
 //
-#define ONEWIRE_DMA_MODE_SG 0x00000008
+#define ONEWIRE_DMA_MODE_SG         0x00000008
 
 //
 // DMA expects a Read/Write bus operation size of 8 bits.  This should match
 // the uDMA channel setup.
 //
-#define ONEWIRE_DMA_OP_SZ_8 0x00000000
+#define ONEWIRE_DMA_OP_SZ_8         0x00000000
 
 //
 // DMA expects a Read/Write bus operation size of 16 bits.  This should match
 // the uDMA channel setup.
 //
-#define ONEWIRE_DMA_OP_SZ_16 0x00000800
+#define ONEWIRE_DMA_OP_SZ_16        0x00000800
 
 //
 // DMA expects a Read/Write bus operation size of 32 bits.  This should match
 // the uDMA channel setup.
 //
-#define ONEWIRE_DMA_OP_SZ_32 0x00001800
+#define ONEWIRE_DMA_OP_SZ_32        0x00001800
 
 //*****************************************************************************
 //
@@ -238,30 +238,30 @@ extern "C"
 //
 // This interrupt indicates a bus reset has just completed.
 //
-#define ONEWIRE_INT_RESET_DONE 0x00000001
+#define ONEWIRE_INT_RESET_DONE      0x00000001
 
 //
 // The interrupt indicates a Read or Write master initiated operation
 // has just completed.
 //
-#define ONEWIRE_INT_OP_DONE 0x00000002
+#define ONEWIRE_INT_OP_DONE         0x00000002
 
 //
 // This interrupt indicates that no presence detect was signaled by a slave
 // on the bus after a reset.
 //
-#define ONEWIRE_INT_NO_SLAVE 0x00000004
+#define ONEWIRE_INT_NO_SLAVE        0x00000004
 
 //
 // This interrupt indicates the bus is being held low outside of normal
 // operations.
 //
-#define ONEWIRE_INT_STUCK 0x00000008
+#define ONEWIRE_INT_STUCK           0x00000008
 
 //
 // This interrupt indicates a OneWire DMA operation has completed.
 //
-#define ONEWIRE_INT_DMA_DONE 0x00000010
+#define ONEWIRE_INT_DMA_DONE        0x00000010
 
 //*****************************************************************************
 //

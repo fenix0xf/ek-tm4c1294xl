@@ -55,10 +55,15 @@ static long long scanexp(FILE* f, int pok)
         shunget(f);
         return LLONG_MIN;
     }
-    for (x = 0; c - '0' < 10U && x < INT_MAX / 10; c = shgetc(f)) { x = 10 * x + c - '0'; }
-    for (y = x; c - '0' < 10U && y < LLONG_MAX / 100; c = shgetc(f)) { y = 10 * y + c - '0'; }
-    for (; c - '0' < 10U; c = shgetc(f))
-        ;
+    for (x = 0; c - '0' < 10U && x < INT_MAX / 10; c = shgetc(f))
+    {
+        x = 10 * x + c - '0';
+    }
+    for (y = x; c - '0' < 10U && y < LLONG_MAX / 100; c = shgetc(f))
+    {
+        y = 10 * y + c - '0';
+    }
+    for (; c - '0' < 10U; c = shgetc(f));
     shunget(f);
     return neg ? -y : y;
 }
@@ -85,11 +90,17 @@ static long double decfloat(FILE* f, int c, int bits, int emin, int sign, int po
     k = 0;
 
     /* Don't let leading zeros consume buffer space */
-    for (; c == '0'; c = shgetc(f)) { gotdig = 1; }
+    for (; c == '0'; c = shgetc(f))
+    {
+        gotdig = 1;
+    }
     if (c == '.')
     {
         gotrad = 1;
-        for (c = shgetc(f); c == '0'; c = shgetc(f)) { gotdig = 1, lrp--; }
+        for (c = shgetc(f); c == '0'; c = shgetc(f))
+        {
+            gotdig = 1, lrp--;
+        }
     }
 
     x[0] = 0;
@@ -195,7 +206,10 @@ static long double decfloat(FILE* f, int c, int bits, int emin, int sign, int po
     /* Align incomplete final B1B digit */
     if (j)
     {
-        for (; j < 9; j++) { x[k] *= 10; }
+        for (; j < 9; j++)
+        {
+            x[k] *= 10;
+        }
         k++;
         j = 0;
     }
@@ -224,8 +238,7 @@ static long double decfloat(FILE* f, int c, int bits, int emin, int sign, int po
     }
 
     /* Drop trailing zeros */
-    for (; !x[z - 1]; z--)
-        ;
+    for (; !x[z - 1]; z--);
 
     /* Align radix point to B1B digit boundary */
     if (rp % 9)
@@ -445,14 +458,20 @@ static long double hexfloat(FILE* f, int bits, int emin, int sign, int pok)
     c = shgetc(f);
 
     /* Skip leading zeros */
-    for (; c == '0'; c = shgetc(f)) { gotdig = 1; }
+    for (; c == '0'; c = shgetc(f))
+    {
+        gotdig = 1;
+    }
 
     if (c == '.')
     {
         gotrad = 1;
         c      = shgetc(f);
         /* Count zeros after the radix point before significand */
-        for (rp = 0; c == '0'; c = shgetc(f), rp--) { gotdig = 1; }
+        for (rp = 0; c == '0'; c = shgetc(f), rp--)
+        {
+            gotdig = 1;
+        }
     }
 
     for (; c - '0' < 10U || (c | 32) - 'a' < 6U || c == '.'; c = shgetc(f))
@@ -514,7 +533,10 @@ static long double hexfloat(FILE* f, int bits, int emin, int sign, int pok)
     {
         rp = dc;
     }
-    while (dc < 8) { x *= 16, dc++; }
+    while (dc < 8)
+    {
+        x *= 16, dc++;
+    }
     if ((c | 32) == 'p')
     {
         e2 = scanexp(f, pok);
@@ -623,8 +645,7 @@ long double __floatscan(FILE* f, int prec, int pok)
         default: return 0;
     }
 
-    while (isspace((c = shgetc(f))))
-        ;
+    while (isspace((c = shgetc(f))));
 
     if (c == '+' || c == '-')
     {
@@ -646,7 +667,10 @@ long double __floatscan(FILE* f, int prec, int pok)
             shunget(f);
             if (pok)
             {
-                for (; i > 3; i--) { shunget(f); }
+                for (; i > 3; i--)
+                {
+                    shunget(f);
+                }
             }
         }
         return sign * INFINITY;
@@ -686,7 +710,10 @@ long double __floatscan(FILE* f, int prec, int pok)
                 shlim(f, 0);
                 return 0;
             }
-            while (i--) { shunget(f); }
+            while (i--)
+            {
+                shunget(f);
+            }
             return NAN;
         }
         return NAN;

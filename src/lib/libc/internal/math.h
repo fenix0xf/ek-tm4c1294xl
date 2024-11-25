@@ -49,9 +49,9 @@ extern "C"
 #define FP_FAST_FMAL 1
 #endif
 
-int __fpclassify(double);
-int __fpclassifyf(float);
-int __fpclassifyl(long double);
+int                      __fpclassify(double);
+int                      __fpclassifyf(float);
+int                      __fpclassifyl(long double);
 
 static __inline unsigned __FLOAT_BITS(float __f)
 {
@@ -77,8 +77,7 @@ static __inline unsigned long long __DOUBLE_BITS(double __f)
     return __u.__i;
 }
 
-#define fpclassify(x) \
-    (sizeof(x) == sizeof(float) ? __fpclassifyf(x) : sizeof(x) == sizeof(double) ? __fpclassify(x) : __fpclassifyl(x))
+#define fpclassify(x) (sizeof(x) == sizeof(float) ? __fpclassifyf(x) : sizeof(x) == sizeof(double) ? __fpclassify(x) : __fpclassifyl(x))
 
 #define isinf(x)                                                                       \
     (sizeof(x) == sizeof(float)    ? (__FLOAT_BITS(x) & 0x7fffffff) == 0x7f800000      \
@@ -133,8 +132,7 @@ __ISREL_DEF(greaterequalf, >=, float_t)
 __ISREL_DEF(greaterequal, >=, double_t)
 __ISREL_DEF(greaterequall, >=, long double)
 
-#define __tg_pred_2(x, y, p) \
-    (sizeof((x) + (y)) == sizeof(float) ? p##f(x, y) : sizeof((x) + (y)) == sizeof(double) ? p(x, y) : p##l(x, y))
+#define __tg_pred_2(x, y, p) (sizeof((x) + (y)) == sizeof(float) ? p##f(x, y) : sizeof((x) + (y)) == sizeof(double) ? p(x, y) : p##l(x, y))
 
 #define isless(x, y)         __tg_pred_2(x, y, __isless)
 #define islessequal(x, y)    __tg_pred_2(x, y, __islessequal)
@@ -246,9 +244,9 @@ double      hypot(double, double);
 float       hypotf(float, float);
 long double hypotl(long double, long double);
 
-int ilogb(double);
-int ilogbf(float);
-int ilogbl(long double);
+int         ilogb(double);
+int         ilogbf(float);
+int         ilogbl(long double);
 
 double      ldexp(double, int);
 float       ldexpf(float, int);
@@ -258,13 +256,13 @@ double      lgamma(double);
 float       lgammaf(float);
 long double lgammal(long double);
 
-long long llrint(double);
-long long llrintf(float);
-long long llrintl(long double);
+long long   llrint(double);
+long long   llrintf(float);
+long long   llrintl(long double);
 
-long long llround(double);
-long long llroundf(float);
-long long llroundl(long double);
+long long   llround(double);
+long long   llroundf(float);
+long long   llroundl(long double);
 
 double      log(double);
 float       logf(float);
@@ -286,13 +284,13 @@ double      logb(double);
 float       logbf(float);
 long double logbl(long double);
 
-long lrint(double);
-long lrintf(float);
-long lrintl(long double);
+long        lrint(double);
+long        lrintf(float);
+long        lrintl(long double);
 
-long lround(double);
-long lroundf(float);
-long lroundl(long double);
+long        lround(double);
+long        lroundf(float);
+long        lroundl(long double);
 
 double      modf(double, double*);
 float       modff(float, float*);
@@ -392,13 +390,13 @@ long double truncl(long double);
 
 extern int signgam;
 
-double j0(double);
-double j1(double);
-double jn(int, double);
+double     j0(double);
+double     j1(double);
+double     jn(int, double);
 
-double y0(double);
-double y1(double);
-double yn(int, double);
+double     y0(double);
+double     y1(double);
+double     yn(int, double);
 #endif
 
 #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
@@ -407,8 +405,8 @@ double yn(int, double);
 double drem(double, double);
 float  dremf(float, float);
 
-int finite(double);
-int finitef(float);
+int    finite(double);
+int    finitef(float);
 
 double scalb(double, double);
 float  scalbf(float, float);
@@ -419,21 +417,21 @@ float  significandf(float);
 double lgamma_r(double, int*);
 float  lgammaf_r(float, int*);
 
-float j0f(float);
-float j1f(float);
-float jnf(int, float);
+float  j0f(float);
+float  j1f(float);
+float  jnf(int, float);
 
-float y0f(float);
-float y1f(float);
-float ynf(int, float);
+float  y0f(float);
+float  y1f(float);
+float  ynf(int, float);
 #endif
 
 #ifdef _GNU_SOURCE
 long double lgammal_r(long double, int*);
 
-void sincos(double, double*, double*);
-void sincosf(float, float*, float*);
-void sincosl(long double, long double*, long double*);
+void        sincos(double, double*, double*);
+void        sincosf(float, float*, float*);
+void        sincosl(long double, long double*, long double*);
 
 double      exp10(double);
 float       exp10f(float);

@@ -3,7 +3,7 @@
 
 static uint64_t seed;
 
-void srand(unsigned s)
+void            srand(unsigned s)
 {
     seed = s - 1;
 }

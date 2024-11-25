@@ -39,22 +39,22 @@
 
 //---- System's  global variables ----
 
-CDLL_QUEUE   tn_ready_list[TN_NUM_PRIORITY];     //-- all ready to run(RUNNABLE) tasks
-CDLL_QUEUE   tn_create_queue;                    //-- all created tasks
-volatile int tn_created_tasks_qty;               //-- num of created tasks
+CDLL_QUEUE             tn_ready_list[TN_NUM_PRIORITY]; //-- all ready to run(RUNNABLE) tasks
+CDLL_QUEUE             tn_create_queue;                //-- all created tasks
+volatile int           tn_created_tasks_qty;           //-- num of created tasks
 
-unsigned short tn_tslice_ticks[TN_NUM_PRIORITY]; //-- for round-robin scheduler only
+unsigned short         tn_tslice_ticks[TN_NUM_PRIORITY]; //-- for round-robin scheduler only
 
-volatile int tn_system_state;                    //-- The System state -(running/not running/etc.)
+volatile int           tn_system_state; //-- The System state -(running/not running/etc.)
 
-TN_TCB* tn_next_task_to_run;                     //-- Task to be run after switch context
-TN_TCB* tn_curr_run_task;                        //-- Task that is running now
+TN_TCB*                tn_next_task_to_run; //-- Task to be run after switch context
+TN_TCB*                tn_curr_run_task;    //-- Task that is running now
 
 volatile unsigned int  tn_ready_to_run_bmp;
 volatile unsigned long tn_idle_count;
 
 //-- The hook function for the Idle task
-tn_task_func_idle_t tn_task_func_idle = NULL;
+tn_task_func_idle_t    tn_task_func_idle = NULL;
 
 //-- The stack that is used in the tn_task_exit() function
 
@@ -81,7 +81,7 @@ void                tn_os_tick_task_func(void* p);
 TN_DECLARE_TLS_BLOCK(tn_os_idle_task_tls);
 TN_DECLARE_TLS_BLOCK(tn_os_tick_task_tls);
 
-TN_SEM tn_sys_tick_sem;
+TN_SEM     tn_sys_tick_sem;
 
 //------ System timers wheel
 
@@ -125,11 +125,17 @@ int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size)
 
     //-- System timers wheel
     queue_reset(&tn_os_timer_list_gen);
-    for (i = 0; i < (int)TN_OS_TICK_LISTS_CNT; i++) { queue_reset(&(tn_os_timer_list_tick[i])); }
+    for (i = 0; i < (int)TN_OS_TICK_LISTS_CNT; i++)
+    {
+        queue_reset(&(tn_os_timer_list_tick[i]));
+    }
 
 #if TN_USE_USER_TIMERS
     queue_reset(&tn_user_timer_list_gen);
-    for (i = 0; i < (int)TN_USER_TICK_LISTS_CNT; i++) { queue_reset(&(tn_user_timer_list_tick[i])); }
+    for (i = 0; i < (int)TN_USER_TICK_LISTS_CNT; i++)
+    {
+        queue_reset(&(tn_user_timer_list_tick[i]));
+    }
 #endif
 
     for (i = 0; i < (int)TN_NUM_PRIORITY; i++)

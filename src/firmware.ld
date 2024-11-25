@@ -34,28 +34,24 @@ MEMORY
     SRAM (rwx)  : o = 0x20000000, l = 256K
 }
 
-/* Don not use __align from C code, it refers to value at address 0x00000008 inside .vtable. */
-__align = 0x00000008;
-
 SECTIONS
 {
     .text :
     {
-        . = ALIGN(__align);
         KEEP(*(.vtable))
-        . = ALIGN(__align);
+        . = ALIGN(16);
         KEEP(*(.version))
-        . = ALIGN(__align);
+        . = ALIGN(8);
         KEEP(*(.reset))
-        . = ALIGN(__align);
+        . = ALIGN(8);
         *(.text*)
-        . = ALIGN(__align);
+        . = ALIGN(8);
         *(.rodata*)
     } > FLASH
 
     .ARM.exidx :
     {
-        . = ALIGN(__align);
+        . = ALIGN(16);
         *(.ARM.exidx*)
     } > FLASH
 
@@ -63,7 +59,7 @@ SECTIONS
 
     .data :
     {
-        . = ALIGN(__align);
+        . = ALIGN(16);
         g_ld_data = .;
         *(.data*)
         g_ld_edata = .;
@@ -71,19 +67,33 @@ SECTIONS
 
     .bss (NOLOAD) :
     {
-        . = ALIGN(__align);
+        . = ALIGN(16);
         g_ld_bss = .;
         *(.bss*)
-        . = ALIGN(__align);
+        . = ALIGN(8);
         *(COMMON)
         g_ld_ebss = .;
     } > SRAM
 
     .noinit (NOLOAD) :
     {
-        . = ALIGN(__align);
+        . = ALIGN(16);
         *(.noinit.common*)
         *(.noinit.stack*)
         *(.noinit.heap*)
     } > SRAM
+
+    .fill :
+    {
+        . = ALIGN(16);
+        LONG(0); /* Fill - 4 bytes. */
+        LONG(0); /* Fill - 4 bytes. */
+        LONG(0); /* Fill - 4 bytes. */
+    } > FLASH
+
+    .checksum :
+    {
+        . = ALIGN(4);
+        LONG(0xFFFFFFFF); /* Place for CRC32 - 4 bytes. */
+    } > FLASH
 }

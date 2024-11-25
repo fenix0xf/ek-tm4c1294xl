@@ -253,10 +253,9 @@ void LCDIDDConfigSet(uint32_t ui32Base, uint32_t ui32Config)
     // Sanity check parameters.
     //
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32Config &
-             ~(LIDD_CONFIG_SYNC_MPU68 | LIDD_CONFIG_ASYNC_MPU68 | LIDD_CONFIG_SYNC_MPU80 | LIDD_CONFIG_ASYNC_MPU80 |
-               LIDD_CONFIG_ASYNC_HITACHI | LIDD_CONFIG_INVERT_ALE | LIDD_CONFIG_INVERT_RS_EN |
-               LIDD_CONFIG_INVERT_WS_DIR | LIDD_CONFIG_INVERT_CS0 | LIDD_CONFIG_INVERT_CS1)));
+    ASSERT(!(ui32Config & ~(LIDD_CONFIG_SYNC_MPU68 | LIDD_CONFIG_ASYNC_MPU68 | LIDD_CONFIG_SYNC_MPU80 | LIDD_CONFIG_ASYNC_MPU80 |
+                            LIDD_CONFIG_ASYNC_HITACHI | LIDD_CONFIG_INVERT_ALE | LIDD_CONFIG_INVERT_RS_EN | LIDD_CONFIG_INVERT_WS_DIR |
+                            LIDD_CONFIG_INVERT_CS0 | LIDD_CONFIG_INVERT_CS1)));
 
     //
     // Write the LIDD Control Register.
@@ -307,13 +306,11 @@ void LCDIDDTimingSet(uint32_t ui32Base, uint32_t ui32CS, const tLCDIDDTiming* pT
     //
     // Convert the timings provided into a value ready for the register.
     //
-    ui32Val = (((uint32_t)(pTiming->ui8WSSetup) << LCD_LIDDCS0CFG_WRSU_S) |
-               ((uint32_t)(pTiming->ui8WSDuration) << LCD_LIDDCS0CFG_WRDUR_S) |
-               ((uint32_t)(pTiming->ui8WSHold) << LCD_LIDDCS0CFG_WRHOLD_S) |
-               ((uint32_t)(pTiming->ui8RSSetup) << LCD_LIDDCS0CFG_RDSU_S) |
-               ((uint32_t)(pTiming->ui8RSDuration) << LCD_LIDDCS0CFG_RDDUR_S) |
-               ((uint32_t)(pTiming->ui8RSHold) << LCD_LIDDCS0CFG_RDHOLD_S) |
-               ((uint32_t)(pTiming->ui8DelayCycles - 1) << LCD_LIDDCS0CFG_GAP_S));
+    ui32Val =
+        (((uint32_t)(pTiming->ui8WSSetup) << LCD_LIDDCS0CFG_WRSU_S) | ((uint32_t)(pTiming->ui8WSDuration) << LCD_LIDDCS0CFG_WRDUR_S) |
+         ((uint32_t)(pTiming->ui8WSHold) << LCD_LIDDCS0CFG_WRHOLD_S) | ((uint32_t)(pTiming->ui8RSSetup) << LCD_LIDDCS0CFG_RDSU_S) |
+         ((uint32_t)(pTiming->ui8RSDuration) << LCD_LIDDCS0CFG_RDDUR_S) | ((uint32_t)(pTiming->ui8RSHold) << LCD_LIDDCS0CFG_RDHOLD_S) |
+         ((uint32_t)(pTiming->ui8DelayCycles - 1) << LCD_LIDDCS0CFG_GAP_S));
 
     //
     // Write the appropriate LCD LIDD CS configuration register.
@@ -823,12 +820,11 @@ void LCDRasterConfigSet(uint32_t ui32Base, uint32_t ui32Config, uint8_t ui8PalLo
     // Sanity check parameters.
     //
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32Config &
-             ~(RASTER_FMT_ACTIVE_24BPP_PACKED | RASTER_FMT_ACTIVE_24BPP_UNPACKED | RASTER_FMT_ACTIVE_PALETTIZED_12BIT |
-               RASTER_FMT_ACTIVE_PALETTIZED_16BIT | RASTER_FMT_PASSIVE_MONO_4PIX | RASTER_FMT_PASSIVE_MONO_8PIX |
-               RASTER_FMT_PASSIVE_PALETTIZED | RASTER_FMT_PASSIVE_COLOR_12BIT | RASTER_FMT_PASSIVE_COLOR_16BIT |
-               RASTER_ACTVID_DURING_BLANK | RASTER_NIBBLE_MODE_ENABLED | RASTER_LOAD_DATA_ONLY |
-               RASTER_LOAD_PALETTE_ONLY | RASTER_READ_ORDER_REVERSED)));
+    ASSERT(!(ui32Config & ~(RASTER_FMT_ACTIVE_24BPP_PACKED | RASTER_FMT_ACTIVE_24BPP_UNPACKED | RASTER_FMT_ACTIVE_PALETTIZED_12BIT |
+                            RASTER_FMT_ACTIVE_PALETTIZED_16BIT | RASTER_FMT_PASSIVE_MONO_4PIX | RASTER_FMT_PASSIVE_MONO_8PIX |
+                            RASTER_FMT_PASSIVE_PALETTIZED | RASTER_FMT_PASSIVE_COLOR_12BIT | RASTER_FMT_PASSIVE_COLOR_16BIT |
+                            RASTER_ACTVID_DURING_BLANK | RASTER_NIBBLE_MODE_ENABLED | RASTER_LOAD_DATA_ONLY | RASTER_LOAD_PALETTE_ONLY |
+                            RASTER_READ_ORDER_REVERSED)));
 
     //
     // Write the raster control register.
@@ -862,10 +858,9 @@ void LCDRasterTimingSet(uint32_t ui32Base, const tLCDRasterTiming* pTiming)
     //
     ASSERT(ui32Base == LCD0_BASE);
     ASSERT(pTiming);
-    ASSERT(!(pTiming->ui32Flags &
-             ~(RASTER_TIMING_SYNCS_OPPOSITE_PIXCLK | RASTER_TIMING_SYNCS_ON_FALLING_PIXCLK |
-               RASTER_TIMING_SYNCS_ON_RISING_PIXCLK | RASTER_TIMING_ACTIVE_LOW_OE | RASTER_TIMING_ACTIVE_LOW_PIXCLK |
-               RASTER_TIMING_ACTIVE_LOW_HSYNC | RASTER_TIMING_ACTIVE_LOW_VSYNC)));
+    ASSERT(!(pTiming->ui32Flags & ~(RASTER_TIMING_SYNCS_OPPOSITE_PIXCLK | RASTER_TIMING_SYNCS_ON_FALLING_PIXCLK |
+                                    RASTER_TIMING_SYNCS_ON_RISING_PIXCLK | RASTER_TIMING_ACTIVE_LOW_OE | RASTER_TIMING_ACTIVE_LOW_PIXCLK |
+                                    RASTER_TIMING_ACTIVE_LOW_HSYNC | RASTER_TIMING_ACTIVE_LOW_VSYNC)));
     ASSERT(pTiming->ui16PanelWidth && (pTiming->ui16PanelWidth <= 2048) && ((pTiming->ui16PanelWidth % 16) == 0));
     ASSERT(pTiming->ui16PanelHeight && (pTiming->ui16PanelHeight <= 2048));
     ASSERT(pTiming->ui16HFrontPorch && (pTiming->ui16HFrontPorch <= 1024));
@@ -881,8 +876,7 @@ void LCDRasterTimingSet(uint32_t ui32Base, const tLCDRasterTiming* pTiming)
              ((uint32_t)((pTiming->ui16HSyncWidth - 1) & 0x3F) << LCD_RASTRTIM0_HSW_S) |
              (((uint32_t)((pTiming->ui16PanelWidth - 1) & 0x3F0) >> 4) << LCD_RASTRTIM0_PPL_S) |
              (((uint32_t)((pTiming->ui16PanelWidth - 1) & 0x400) >> 10) << LCD_RASTRTIM0_MSBPPL_S);
-    ui32T1 = ((uint32_t)pTiming->ui8VBackPorch << LCD_RASTRTIM1_VBP_S) |
-             ((uint32_t)pTiming->ui8VFrontPorch << LCD_RASTRTIM1_VFP_S) |
+    ui32T1 = ((uint32_t)pTiming->ui8VBackPorch << LCD_RASTRTIM1_VBP_S) | ((uint32_t)pTiming->ui8VFrontPorch << LCD_RASTRTIM1_VFP_S) |
              ((uint32_t)((pTiming->ui8VSyncWidth - 1) & 0x3F) << LCD_RASTRTIM1_VSW_S) |
              ((uint32_t)(pTiming->ui16PanelHeight - 1) & 0x3FF) << LCD_RASTRTIM1_LPP_S;
     ui32T2 = pTiming->ui32Flags | ((((pTiming->ui16HSyncWidth - 1) & 0x3C0) >> 6) << LCD_RASTRTIM2_HSW_S) |
@@ -1070,10 +1064,7 @@ void LCDRasterDisable(uint32_t ui32Base)
 //! \return None.
 //
 //*****************************************************************************
-void LCDRasterSubPanelConfigSet(uint32_t ui32Base,
-                                uint32_t ui32Flags,
-                                uint32_t ui32BottomLines,
-                                uint32_t ui32DefaultPixel)
+void LCDRasterSubPanelConfigSet(uint32_t ui32Base, uint32_t ui32Flags, uint32_t ui32BottomLines, uint32_t ui32DefaultPixel)
 {
     //
     // Sanity check parameters.
@@ -1228,8 +1219,7 @@ void LCDDMAConfigSet(uint32_t ui32Base, uint32_t ui32Config)
     // Sanity check parameters.
     //
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32Config & ~(LCD_DMACTL_FIFORDY_M | LCD_DMACTL_BURSTSZ_M | LCD_DMACTL_BYTESWAP | LCD_DMACTL_BIGDEND |
-                            LCD_DMACTL_FMODE)));
+    ASSERT(!(ui32Config & ~(LCD_DMACTL_FIFORDY_M | LCD_DMACTL_BURSTSZ_M | LCD_DMACTL_BYTESWAP | LCD_DMACTL_BIGDEND | LCD_DMACTL_FMODE)));
 
     //
     // Write the DMA control register.
@@ -1313,8 +1303,8 @@ void LCDRasterPaletteSet(uint32_t        ui32Base,
     ASSERT((ui32Start + ui32Count) <= 256);
     ASSERT(pui32Addr);
     ASSERT((pui32SrcColors) || (ui32Count == 0));
-    ASSERT(!(ui32Type & ~(LCD_PALETTE_SRC_24BIT | LCD_PALETTE_TYPE_DIRECT | LCD_PALETTE_TYPE_8BPP |
-                          LCD_PALETTE_TYPE_4BPP | LCD_PALETTE_TYPE_2BPP | LCD_PALETTE_TYPE_1BPP)));
+    ASSERT(!(ui32Type & ~(LCD_PALETTE_SRC_24BIT | LCD_PALETTE_TYPE_DIRECT | LCD_PALETTE_TYPE_8BPP | LCD_PALETTE_TYPE_4BPP |
+                          LCD_PALETTE_TYPE_2BPP | LCD_PALETTE_TYPE_1BPP)));
 
     //
     // Get a pointer to the start of the palette.
@@ -1470,8 +1460,8 @@ void LCDRasterFrameBufferSet(uint32_t ui32Base, uint8_t ui8Buffer, uint32_t* pui
 void LCDIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags)
 {
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW |
-                              LCD_INT_PAL_LOAD | LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
+    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW | LCD_INT_PAL_LOAD |
+                              LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
 
     //
     // Enable the interrupt sources by setting the appropriate bits in the
@@ -1517,8 +1507,8 @@ void LCDIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags)
 void LCDIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags)
 {
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW |
-                              LCD_INT_PAL_LOAD | LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
+    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW | LCD_INT_PAL_LOAD |
+                              LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
 
     //
     // Disable the interrupt sources by clearing the appropriate bits in the
@@ -1628,8 +1618,8 @@ uint32_t LCDIntStatus(uint32_t ui32Base, bool bMasked)
 void LCDIntClear(uint32_t ui32Base, uint32_t ui32IntFlags)
 {
     ASSERT(ui32Base == LCD0_BASE);
-    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW |
-                              LCD_INT_PAL_LOAD | LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
+    ASSERT(!(ui32IntFlags & ~(LCD_INT_DMA_DONE | LCD_INT_SYNC_LOST | LCD_INT_AC_BIAS_CNT | LCD_INT_UNDERFLOW | LCD_INT_PAL_LOAD |
+                              LCD_INT_EOF0 | LCD_INT_EOF1 | LCD_INT_RASTER_FRAME_DONE)));
 
     //
     // Clear the requested interrupts.

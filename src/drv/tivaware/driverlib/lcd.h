@@ -65,8 +65,7 @@ extern "C"
 //! entry.
 //
 //*****************************************************************************
-#define PAL_FROM_RGB(ui32RGBColor) \
-    (((ui32RGBColor & 0xF0) >> 4) | ((ui32RGBColor & 0xF000) >> 8) | ((ui32RGBColor & 0xF00000) >> 12))
+#define PAL_FROM_RGB(ui32RGBColor) (((ui32RGBColor & 0xF0) >> 4) | ((ui32RGBColor & 0xF000) >> 8) | ((ui32RGBColor & 0xF00000) >> 12))
 
 //*****************************************************************************
 //
@@ -81,7 +80,7 @@ extern "C"
 //
 //*****************************************************************************
 #define CYCLES_FROM_TIME_US(ui32ClockFreq, ui32Time_uS) \
-    (((ui32Time_uS) == 0) ? 0 : (((ui32ClockFreq) / 1000000) * ((((ui32Time_uS)*1000) - 1) / 1000)) + 1)
+    (((ui32Time_uS) == 0) ? 0 : (((ui32ClockFreq) / 1000000) * ((((ui32Time_uS) * 1000) - 1) / 1000)) + 1)
 
 //*****************************************************************************
 //
@@ -96,7 +95,7 @@ extern "C"
 //
 //*****************************************************************************
 #define CYCLES_FROM_TIME_NS(ui32ClockFreq, ui32Time_nS) \
-    (((ui32Time_nS) == 0) ? 0 : ((((((ui32ClockFreq) / 1000000) * ((ui32Time_nS)-1)) / 1000)) + 1))
+    (((ui32Time_nS) == 0) ? 0 : ((((((ui32ClockFreq) / 1000000) * ((ui32Time_nS) - 1)) / 1000)) + 1))
 
 //*****************************************************************************
 //
@@ -224,14 +223,14 @@ typedef struct
     //! A value from 0 to 255 that specifies the number of line clock periods
     //! to add to the end of each frame after the last active line.
     //
-    uint8_t ui8VFrontPorch;
+    uint8_t  ui8VFrontPorch;
 
     //
     //! A value from 0 to 255 that specifies the number of line clock periods
     //! to add to the beginning of a frame before the first active line is
     //! output to the display.
     //
-    uint8_t ui8VBackPorch;
+    uint8_t  ui8VBackPorch;
 
     //
     //! In active mode, a value from 1 to 64 that specifies the number of
@@ -244,7 +243,7 @@ typedef struct
     //! period has elapsed.  Note that the width of lcd_fp is not affected by
     //! this value in passive mode.
     //
-    uint8_t ui8VSyncWidth;
+    uint8_t  ui8VSyncWidth;
 
     //
     //! A value from 0 to 255 that specifies the number of line clocks to
@@ -252,7 +251,7 @@ typedef struct
     //! periodically invert the polarity of the power supply to prevent DC
     //! charge build-up within the display.
     //
-    uint8_t ui8ACBiasLineCount;
+    uint8_t  ui8ACBiasLineCount;
 } tLCDRasterTiming;
 
 //*****************************************************************************
@@ -261,25 +260,25 @@ typedef struct
 // LCD_MODE_AUTO_UFLOW_RESTART may be ORed with either of the other two.
 //
 //*****************************************************************************
-#define LCD_MODE_LIDD               ((uint8_t)0x00)
-#define LCD_MODE_RASTER             ((uint8_t)0x01)
-#define LCD_MODE_AUTO_UFLOW_RESTART ((uint8_t)0x02)
+#define LCD_MODE_LIDD                      ((uint8_t)0x00)
+#define LCD_MODE_RASTER                    ((uint8_t)0x01)
+#define LCD_MODE_AUTO_UFLOW_RESTART        ((uint8_t)0x02)
 
 //*****************************************************************************
 //
 // Values used to construct the ui32Config parameter to LCDIDDConfigSet().
 //
 //*****************************************************************************
-#define LIDD_CONFIG_SYNC_MPU68    0x00000000
-#define LIDD_CONFIG_ASYNC_MPU68   0x00000001
-#define LIDD_CONFIG_SYNC_MPU80    0x00000002
-#define LIDD_CONFIG_ASYNC_MPU80   0x00000003
-#define LIDD_CONFIG_ASYNC_HITACHI 0x00000004
-#define LIDD_CONFIG_INVERT_ALE    0x00000008
-#define LIDD_CONFIG_INVERT_RS_EN  0x00000010
-#define LIDD_CONFIG_INVERT_WS_DIR 0x00000020
-#define LIDD_CONFIG_INVERT_CS0    0x00000040
-#define LIDD_CONFIG_INVERT_CS1    0x00000080
+#define LIDD_CONFIG_SYNC_MPU68             0x00000000
+#define LIDD_CONFIG_ASYNC_MPU68            0x00000001
+#define LIDD_CONFIG_SYNC_MPU80             0x00000002
+#define LIDD_CONFIG_ASYNC_MPU80            0x00000003
+#define LIDD_CONFIG_ASYNC_HITACHI          0x00000004
+#define LIDD_CONFIG_INVERT_ALE             0x00000008
+#define LIDD_CONFIG_INVERT_RS_EN           0x00000010
+#define LIDD_CONFIG_INVERT_WS_DIR          0x00000020
+#define LIDD_CONFIG_INVERT_CS0             0x00000040
+#define LIDD_CONFIG_INVERT_CS1             0x00000080
 
 //*****************************************************************************
 //
@@ -313,67 +312,67 @@ typedef struct
 // returned by LCDIntStatus().
 //
 //*****************************************************************************
-#define LCD_INT_DMA_DONE          0x00000001
-#define LCD_INT_RASTER_FRAME_DONE 0x00000002
-#define LCD_INT_SYNC_LOST         0x00000004
-#define LCD_INT_AC_BIAS_CNT       0x00000008
-#define LCD_INT_UNDERFLOW         0x00000020
-#define LCD_INT_PAL_LOAD          0x00000040
-#define LCD_INT_EOF0              0x00000100
-#define LCD_INT_EOF1              0x00000200
+#define LCD_INT_DMA_DONE                   0x00000001
+#define LCD_INT_RASTER_FRAME_DONE          0x00000002
+#define LCD_INT_SYNC_LOST                  0x00000004
+#define LCD_INT_AC_BIAS_CNT                0x00000008
+#define LCD_INT_UNDERFLOW                  0x00000020
+#define LCD_INT_PAL_LOAD                   0x00000040
+#define LCD_INT_EOF0                       0x00000100
+#define LCD_INT_EOF1                       0x00000200
 
 //*****************************************************************************
 //
 // Configuration values used with LCDDMAConfigSet().
 //
 //*****************************************************************************
-#define LCD_DMA_FIFORDY_8_WORDS   0x00000000
-#define LCD_DMA_FIFORDY_16_WORDS  0x00000100
-#define LCD_DMA_FIFORDY_32_WORDS  0x00000200
-#define LCD_DMA_FIFORDY_64_WORDS  0x00000300
-#define LCD_DMA_FIFORDY_128_WORDS 0x00000400
-#define LCD_DMA_FIFORDY_256_WORDS 0x00000500
-#define LCD_DMA_FIFORDY_512_WORDS 0x00000600
-#define LCD_DMA_BURST_1           0x00000010
-#define LCD_DMA_BURST_2           0x00000010
-#define LCD_DMA_BURST_4           0x00000020
-#define LCD_DMA_BURST_8           0x00000030
-#define LCD_DMA_BURST_16          0x00000040
-#define LCD_DMA_BYTE_ORDER_0123   0x00000000
-#define LCD_DMA_BYTE_ORDER_1023   0x00000008
-#define LCD_DMA_BYTE_ORDER_3210   0x00000002
-#define LCD_DMA_BYTE_ORDER_2301   0x0000000A
-#define LCD_DMA_PING_PONG         0x00000001
+#define LCD_DMA_FIFORDY_8_WORDS            0x00000000
+#define LCD_DMA_FIFORDY_16_WORDS           0x00000100
+#define LCD_DMA_FIFORDY_32_WORDS           0x00000200
+#define LCD_DMA_FIFORDY_64_WORDS           0x00000300
+#define LCD_DMA_FIFORDY_128_WORDS          0x00000400
+#define LCD_DMA_FIFORDY_256_WORDS          0x00000500
+#define LCD_DMA_FIFORDY_512_WORDS          0x00000600
+#define LCD_DMA_BURST_1                    0x00000010
+#define LCD_DMA_BURST_2                    0x00000010
+#define LCD_DMA_BURST_4                    0x00000020
+#define LCD_DMA_BURST_8                    0x00000030
+#define LCD_DMA_BURST_16                   0x00000040
+#define LCD_DMA_BYTE_ORDER_0123            0x00000000
+#define LCD_DMA_BYTE_ORDER_1023            0x00000008
+#define LCD_DMA_BYTE_ORDER_3210            0x00000002
+#define LCD_DMA_BYTE_ORDER_2301            0x0000000A
+#define LCD_DMA_PING_PONG                  0x00000001
 
 //*****************************************************************************
 //
 // Type values used with LCDRasterPaletteSet().
 //
 //*****************************************************************************
-#define LCD_PALETTE_TYPE_1BPP   0x00000000
-#define LCD_PALETTE_TYPE_2BPP   0x00001000
-#define LCD_PALETTE_TYPE_4BPP   0x00002000
-#define LCD_PALETTE_TYPE_8BPP   0x00003000
-#define LCD_PALETTE_TYPE_DIRECT 0x00004000
-#define LCD_PALETTE_SRC_24BIT   0x80000000
+#define LCD_PALETTE_TYPE_1BPP              0x00000000
+#define LCD_PALETTE_TYPE_2BPP              0x00001000
+#define LCD_PALETTE_TYPE_4BPP              0x00002000
+#define LCD_PALETTE_TYPE_8BPP              0x00003000
+#define LCD_PALETTE_TYPE_DIRECT            0x00004000
+#define LCD_PALETTE_SRC_24BIT              0x80000000
 
 //*****************************************************************************
 //
 // Flags used in the ui32Clocks parameter to LCDClockReset().
 //
 //*****************************************************************************
-#define LCD_CLOCK_MAIN 0x00000008
-#define LCD_CLOCK_DMA  0x00000004
-#define LCD_CLOCK_LIDD 0x00000002
-#define LCD_CLOCK_CORE 0x00000001
+#define LCD_CLOCK_MAIN                     0x00000008
+#define LCD_CLOCK_DMA                      0x00000004
+#define LCD_CLOCK_LIDD                     0x00000002
+#define LCD_CLOCK_CORE                     0x00000001
 
 //*****************************************************************************
 //
 // Flags used in with LCDSubPanelConfigSet().
 //
 //*****************************************************************************
-#define LCD_SUBPANEL_AT_TOP    0x20000000
-#define LCD_SUBPANEL_AT_BOTTOM 0x00000000
+#define LCD_SUBPANEL_AT_TOP                0x20000000
+#define LCD_SUBPANEL_AT_BOTTOM             0x00000000
 
 //*****************************************************************************
 //
@@ -405,10 +404,7 @@ extern void     LCDRasterACBiasIntCountSet(uint32_t ui32Base, uint8_t ui8Count);
 extern void     LCDRasterEnable(uint32_t ui32Base);
 extern bool     LCDRasterEnabled(uint32_t ui32Base);
 extern void     LCDRasterDisable(uint32_t ui32Base);
-extern void     LCDRasterSubPanelConfigSet(uint32_t ui32Base,
-                                           uint32_t ui32Flags,
-                                           uint32_t ui32BottomLines,
-                                           uint32_t ui32DefaultPixel);
+extern void     LCDRasterSubPanelConfigSet(uint32_t ui32Base, uint32_t ui32Flags, uint32_t ui32BottomLines, uint32_t ui32DefaultPixel);
 extern void     LCDRasterSubPanelEnable(uint32_t ui32Base);
 extern void     LCDRasterSubPanelDisable(uint32_t ui32Base);
 extern void     LCDDMAConfigSet(uint32_t ui32Base, uint32_t ui32Config);
@@ -418,9 +414,9 @@ extern void     LCDRasterPaletteSet(uint32_t        ui32Base,
                                     const uint32_t* pui32SrcColors,
                                     uint32_t        ui32Start,
                                     uint32_t        ui32Count);
-extern void LCDRasterFrameBufferSet(uint32_t ui32Base, uint8_t ui8Buffer, uint32_t* pui32Addr, uint32_t ui32NumBytes);
-extern void LCDIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags);
-extern void LCDIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags);
+extern void     LCDRasterFrameBufferSet(uint32_t ui32Base, uint8_t ui8Buffer, uint32_t* pui32Addr, uint32_t ui32NumBytes);
+extern void     LCDIntEnable(uint32_t ui32Base, uint32_t ui32IntFlags);
+extern void     LCDIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern uint32_t LCDIntStatus(uint32_t ui32Base, bool bMasked);
 extern void     LCDIntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern void     LCDIntRegister(uint32_t ui32Base, void (*pfnHandler)(void));

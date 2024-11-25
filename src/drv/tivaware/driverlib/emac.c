@@ -68,12 +68,11 @@
 // Combined valid configuration flags.
 //
 //*****************************************************************************
-#define VALID_CONFIG_FLAGS                                                                                     \
-    (EMAC_CONFIG_USE_MACADDR1 | EMAC_CONFIG_SA_INSERT | EMAC_CONFIG_SA_REPLACE | EMAC_CONFIG_2K_PACKETS |      \
-     EMAC_CONFIG_STRIP_CRC | EMAC_CONFIG_JABBER_DISABLE | EMAC_CONFIG_JUMBO_ENABLE | EMAC_CONFIG_IF_GAP_MASK | \
-     EMAC_CONFIG_CS_DISABLE | EMAC_CONFIG_100MBPS | EMAC_CONFIG_RX_OWN_DISABLE | EMAC_CONFIG_LOOPBACK |        \
-     EMAC_CONFIG_FULL_DUPLEX | EMAC_CONFIG_CHECKSUM_OFFLOAD | EMAC_CONFIG_RETRY_DISABLE |                      \
-     EMAC_CONFIG_AUTO_CRC_STRIPPING | EMAC_CONFIG_BO_MASK | EMAC_CONFIG_DEFERRAL_CHK_ENABLE |                  \
+#define VALID_CONFIG_FLAGS                                                                                                            \
+    (EMAC_CONFIG_USE_MACADDR1 | EMAC_CONFIG_SA_INSERT | EMAC_CONFIG_SA_REPLACE | EMAC_CONFIG_2K_PACKETS | EMAC_CONFIG_STRIP_CRC |     \
+     EMAC_CONFIG_JABBER_DISABLE | EMAC_CONFIG_JUMBO_ENABLE | EMAC_CONFIG_IF_GAP_MASK | EMAC_CONFIG_CS_DISABLE | EMAC_CONFIG_100MBPS | \
+     EMAC_CONFIG_RX_OWN_DISABLE | EMAC_CONFIG_LOOPBACK | EMAC_CONFIG_FULL_DUPLEX | EMAC_CONFIG_CHECKSUM_OFFLOAD |                     \
+     EMAC_CONFIG_RETRY_DISABLE | EMAC_CONFIG_AUTO_CRC_STRIPPING | EMAC_CONFIG_BO_MASK | EMAC_CONFIG_DEFERRAL_CHK_ENABLE |             \
      EMAC_CONFIG_PREAMBLE_MASK)
 
 //*****************************************************************************
@@ -81,11 +80,10 @@
 // Combined valid frame filter flags.
 //
 //*****************************************************************************
-#define VALID_FRMFILTER_FLAGS                                                                               \
-    (EMAC_FRMFILTER_RX_ALL | EMAC_FRMFILTER_VLAN | EMAC_FRMFILTER_HASH_AND_PERFECT | EMAC_FRMFILTER_SADDR | \
-     EMAC_FRMFILTER_INV_SADDR | EMAC_FRMFILTER_PASS_NO_PAUSE | EMAC_FRMFILTER_PASS_ALL_CTRL |               \
-     EMAC_FRMFILTER_PASS_ADDR_CTRL | EMAC_FRMFILTER_BROADCAST | EMAC_FRMFILTER_PASS_MULTICAST |             \
-     EMAC_FRMFILTER_INV_DADDR | EMAC_FRMFILTER_HASH_MULTICAST | EMAC_FRMFILTER_HASH_UNICAST |               \
+#define VALID_FRMFILTER_FLAGS                                                                                                          \
+    (EMAC_FRMFILTER_RX_ALL | EMAC_FRMFILTER_VLAN | EMAC_FRMFILTER_HASH_AND_PERFECT | EMAC_FRMFILTER_SADDR | EMAC_FRMFILTER_INV_SADDR | \
+     EMAC_FRMFILTER_PASS_NO_PAUSE | EMAC_FRMFILTER_PASS_ALL_CTRL | EMAC_FRMFILTER_PASS_ADDR_CTRL | EMAC_FRMFILTER_BROADCAST |          \
+     EMAC_FRMFILTER_PASS_MULTICAST | EMAC_FRMFILTER_INV_DADDR | EMAC_FRMFILTER_HASH_MULTICAST | EMAC_FRMFILTER_HASH_UNICAST |          \
      EMAC_FRMFILTER_PROMISCUOUS)
 
 //*****************************************************************************
@@ -93,11 +91,10 @@
 // Combined valid maskable interrupts.
 //
 //*****************************************************************************
-#define EMAC_MASKABLE_INTS                                                                                           \
-    (EMAC_INT_EARLY_RECEIVE | EMAC_INT_BUS_ERROR | EMAC_INT_EARLY_TRANSMIT | EMAC_INT_RX_WATCHDOG |                  \
-     EMAC_INT_RX_STOPPED | EMAC_INT_RX_NO_BUFFER | EMAC_INT_RECEIVE | EMAC_INT_TX_UNDERFLOW | EMAC_INT_RX_OVERFLOW | \
-     EMAC_INT_TX_JABBER | EMAC_INT_TX_NO_BUFFER | EMAC_INT_TX_STOPPED | EMAC_INT_TRANSMIT | EMAC_INT_NORMAL_INT |    \
-     EMAC_INT_ABNORMAL_INT | EMAC_INT_PHY)
+#define EMAC_MASKABLE_INTS                                                                                                \
+    (EMAC_INT_EARLY_RECEIVE | EMAC_INT_BUS_ERROR | EMAC_INT_EARLY_TRANSMIT | EMAC_INT_RX_WATCHDOG | EMAC_INT_RX_STOPPED | \
+     EMAC_INT_RX_NO_BUFFER | EMAC_INT_RECEIVE | EMAC_INT_TX_UNDERFLOW | EMAC_INT_RX_OVERFLOW | EMAC_INT_TX_JABBER |       \
+     EMAC_INT_TX_NO_BUFFER | EMAC_INT_TX_STOPPED | EMAC_INT_TRANSMIT | EMAC_INT_NORMAL_INT | EMAC_INT_ABNORMAL_INT | EMAC_INT_PHY)
 
 //*****************************************************************************
 //
@@ -128,16 +125,16 @@
 // The number of MAC addresses the module can store for filtering purposes.
 //
 //*****************************************************************************
-#define NUM_MAC_ADDR 4
+#define NUM_MAC_ADDR         4
 
 //*****************************************************************************
 //
 // Macros aiding access to the MAC address registers.
 //
 //*****************************************************************************
-#define MAC_ADDR_OFFSET (EMAC_O_ADDR1L - EMAC_O_ADDR0L)
-#define EMAC_O_ADDRL(n) (EMAC_O_ADDR0L + (MAC_ADDR_OFFSET * (n)))
-#define EMAC_O_ADDRH(n) (EMAC_O_ADDR0H + (MAC_ADDR_OFFSET * (n)))
+#define MAC_ADDR_OFFSET      (EMAC_O_ADDR1L - EMAC_O_ADDR0L)
+#define EMAC_O_ADDRL(n)      (EMAC_O_ADDR0L + (MAC_ADDR_OFFSET * (n)))
+#define EMAC_O_ADDRH(n)      (EMAC_O_ADDR0H + (MAC_ADDR_OFFSET * (n)))
 
 //*****************************************************************************
 //
@@ -167,8 +164,8 @@ static const struct
 // The define for accessing PHY registers in the MMD address space.
 //
 //*****************************************************************************
-#define DEV_ADDR(x) ((x & 0xF000) >> 12)
-#define REG_ADDR(x) ((x & 0x0FFF))
+#define DEV_ADDR(x)        ((x & 0xF000) >> 12)
+#define REG_ADDR(x)        ((x & 0x0FFF))
 
 //*****************************************************************************
 //
@@ -283,7 +280,9 @@ void EMACInit(uint32_t ui32Base,
     //
     // Make sure that the DMA software reset is clear before continuing.
     //
-    while (HWREG(EMAC0_BASE + EMAC_O_DMABUSMOD) & EMAC_DMABUSMOD_SWR) {}
+    while (HWREG(EMAC0_BASE + EMAC_O_DMABUSMOD) & EMAC_DMABUSMOD_SWR)
+    {
+    }
 
     //
     // Set common flags.  Note that this driver assumes we are always using
@@ -327,8 +326,7 @@ void EMACInit(uint32_t ui32Base,
         //
         // No - we need to use separate burst lengths for each.
         //
-        ui32Val |=
-            (EMAC_DMABUSMOD_USP | (ui32TxBurst << EMAC_DMABUSMOD_PBL_S) | (ui32RxBurst << EMAC_DMABUSMOD_RPBL_S));
+        ui32Val |= (EMAC_DMABUSMOD_USP | (ui32TxBurst << EMAC_DMABUSMOD_PBL_S) | (ui32RxBurst << EMAC_DMABUSMOD_RPBL_S));
     }
 
     //
@@ -392,7 +390,9 @@ void EMACReset(uint32_t ui32Base)
     //
     // Wait for the reset to complete.
     //
-    while (HWREG(ui32Base + EMAC_O_DMABUSMOD) & EMAC_DMABUSMOD_SWR) {}
+    while (HWREG(ui32Base + EMAC_O_DMABUSMOD) & EMAC_DMABUSMOD_SWR)
+    {
+    }
 }
 
 //*****************************************************************************
@@ -1020,8 +1020,7 @@ void EMACConfigGet(uint32_t ui32Base, uint32_t* pui32Config, uint32_t* pui32Mode
     //
     // Return the current configuration flags from the EMAC_O_CFG register.
     //
-    *pui32Config =
-        (HWREG(ui32Base + EMAC_O_CFG) & (VALID_CONFIG_FLAGS | EMAC_CONFIG_TX_ENABLED | EMAC_CONFIG_RX_ENABLED));
+    *pui32Config = (HWREG(ui32Base + EMAC_O_CFG) & (VALID_CONFIG_FLAGS | EMAC_CONFIG_TX_ENABLED | EMAC_CONFIG_RX_ENABLED));
 
     //
     // Get the receive packet size watchdog value.
@@ -1134,8 +1133,7 @@ void EMACAddrSet(uint32_t ui32Base, uint32_t ui32Index, const uint8_t* pui8MACAd
     //
     // Set the first 4 bytes of the MAC address
     //
-    HWREG(ui32Base + EMAC_O_ADDRL(ui32Index)) =
-        (pui8MACAddr[0] | (pui8MACAddr[1] << 8) | (pui8MACAddr[2] << 16) | (pui8MACAddr[3] << 24));
+    HWREG(ui32Base + EMAC_O_ADDRL(ui32Index)) = (pui8MACAddr[0] | (pui8MACAddr[1] << 8) | (pui8MACAddr[2] << 16) | (pui8MACAddr[3] << 24));
 }
 
 //*****************************************************************************
@@ -1340,8 +1338,7 @@ uint32_t EMACAddrFilterGet(uint32_t ui32Base, uint32_t ui32Index)
     //
     // Read and return the filter settings for the requested MAC address slot.
     //
-    return (HWREG(ui32Base + EMAC_O_ADDRH(ui32Index)) &
-            (EMAC_FILTER_BYTE_MASK_M | EMAC_FILTER_ADDR_ENABLE | EMAC_FILTER_SOURCE_ADDR));
+    return (HWREG(ui32Base + EMAC_O_ADDRH(ui32Index)) & (EMAC_FILTER_BYTE_MASK_M | EMAC_FILTER_ADDR_ENABLE | EMAC_FILTER_SOURCE_ADDR));
 }
 
 //*****************************************************************************
@@ -1424,8 +1421,7 @@ void EMACFrameFilterSet(uint32_t ui32Base, uint32_t ui32FilterOpts)
     //
     // Set the Ethernet MAC frame filter according to the flags passed.
     //
-    HWREG(ui32Base + EMAC_O_FRAMEFLTR) =
-        ((HWREG(ui32Base + EMAC_O_FRAMEFLTR) & ~VALID_FRMFILTER_FLAGS) | ui32FilterOpts);
+    HWREG(ui32Base + EMAC_O_FRAMEFLTR) = ((HWREG(ui32Base + EMAC_O_FRAMEFLTR) & ~VALID_FRMFILTER_FLAGS) | ui32FilterOpts);
 }
 
 //*****************************************************************************
@@ -2092,8 +2088,7 @@ uint32_t EMACDMAStateGet(uint32_t ui32Base)
     //
     // Return the status of the DMA channels.
     //
-    return (HWREG(ui32Base + EMAC_O_DMARIS) &
-            (EMAC_DMARIS_FBI | EMAC_DMARIS_AE_M | EMAC_DMARIS_RS_M | EMAC_DMARIS_TS_M));
+    return (HWREG(ui32Base + EMAC_O_DMARIS) & (EMAC_DMARIS_FBI | EMAC_DMARIS_AE_M | EMAC_DMARIS_RS_M | EMAC_DMARIS_TS_M));
 }
 
 //*****************************************************************************
@@ -2125,7 +2120,9 @@ void EMACTxFlush(uint32_t ui32Base)
         //
         // Wait for the flush to complete.
         //
-        while (HWREG(ui32Base + EMAC_O_DMAOPMODE) & EMAC_DMAOPMODE_FTF) {}
+        while (HWREG(ui32Base + EMAC_O_DMAOPMODE) & EMAC_DMAOPMODE_FTF)
+        {
+        }
     }
 }
 
@@ -2757,7 +2754,9 @@ void EMACPHYWrite(uint32_t ui32Base, uint8_t ui8PhyAddr, uint8_t ui8RegAddr, uin
     //
     // Make sure the MII is idle.
     //
-    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB) {}
+    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB)
+    {
+    }
 
     //
     // Write the value provided.
@@ -2767,14 +2766,15 @@ void EMACPHYWrite(uint32_t ui32Base, uint8_t ui8PhyAddr, uint8_t ui8RegAddr, uin
     //
     // Tell the MAC to write the given PHY register.
     //
-    HWREG(ui32Base + EMAC_O_MIIADDR) =
-        ((HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_CR_M) | (ui8RegAddr << EMAC_MIIADDR_MII_S) |
-         (ui8PhyAddr << EMAC_MIIADDR_PLA_S) | EMAC_MIIADDR_MIIW | EMAC_MIIADDR_MIIB);
+    HWREG(ui32Base + EMAC_O_MIIADDR) = ((HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_CR_M) | (ui8RegAddr << EMAC_MIIADDR_MII_S) |
+                                        (ui8PhyAddr << EMAC_MIIADDR_PLA_S) | EMAC_MIIADDR_MIIW | EMAC_MIIADDR_MIIB);
 
     //
     // Wait for the write to complete.
     //
-    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB) {}
+    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB)
+    {
+    }
 }
 
 //*****************************************************************************
@@ -2802,19 +2802,22 @@ uint16_t EMACPHYRead(uint32_t ui32Base, uint8_t ui8PhyAddr, uint8_t ui8RegAddr)
     //
     // Make sure the MII is idle.
     //
-    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB) {}
+    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB)
+    {
+    }
 
     //
     // Tell the MAC to read the given PHY register.
     //
-    HWREG(ui32Base + EMAC_O_MIIADDR) =
-        ((HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_CR_M) | (ui8RegAddr << EMAC_MIIADDR_MII_S) |
-         (ui8PhyAddr << EMAC_MIIADDR_PLA_S) | EMAC_MIIADDR_MIIB);
+    HWREG(ui32Base + EMAC_O_MIIADDR) = ((HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_CR_M) | (ui8RegAddr << EMAC_MIIADDR_MII_S) |
+                                        (ui8PhyAddr << EMAC_MIIADDR_PLA_S) | EMAC_MIIADDR_MIIB);
 
     //
     // Wait for the read to complete.
     //
-    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB) {}
+    while (HWREG(ui32Base + EMAC_O_MIIADDR) & EMAC_MIIADDR_MIIB)
+    {
+    }
 
     //
     // Return the result.
@@ -2917,10 +2920,7 @@ void EMACPHYPowerOff(uint32_t ui32Base, uint8_t ui8PhyAddr)
     // Set the PWRDN bit and clear the ANEN bit in the PHY, putting it into
     // its low power mode.
     //
-    EMACPHYWrite(ui32Base,
-                 ui8PhyAddr,
-                 EPHY_BMCR,
-                 (EMACPHYRead(ui32Base, ui8PhyAddr, EPHY_BMCR) & ~EPHY_BMCR_ANEN) | EPHY_BMCR_PWRDWN);
+    EMACPHYWrite(ui32Base, ui8PhyAddr, EPHY_BMCR, (EMACPHYRead(ui32Base, ui8PhyAddr, EPHY_BMCR) & ~EPHY_BMCR_ANEN) | EPHY_BMCR_PWRDWN);
 }
 
 //*****************************************************************************
@@ -2943,10 +2943,7 @@ void EMACPHYPowerOn(uint32_t ui32Base, uint8_t ui8PhyAddr)
     // Clear the PWRDN bit and set the ANEGEN bit in the PHY, putting it into
     // normal operating mode.
     //
-    EMACPHYWrite(ui32Base,
-                 ui8PhyAddr,
-                 EPHY_BMCR,
-                 (EMACPHYRead(ui32Base, ui8PhyAddr, EPHY_BMCR) & ~EPHY_BMCR_PWRDWN) | EPHY_BMCR_ANEN);
+    EMACPHYWrite(ui32Base, ui8PhyAddr, EPHY_BMCR, (EMACPHYRead(ui32Base, ui8PhyAddr, EPHY_BMCR) & ~EPHY_BMCR_PWRDWN) | EPHY_BMCR_ANEN);
 }
 
 //*****************************************************************************
@@ -3479,7 +3476,9 @@ void EMACTimestampTargetSet(uint32_t ui32Base, uint32_t ui32Seconds, uint32_t ui
     //
     // Wait for any previous write to complete.
     //
-    while (HWREG(ui32Base + EMAC_O_TARGNANO) & EMAC_TARGNANO_TRGTBUSY) {}
+    while (HWREG(ui32Base + EMAC_O_TARGNANO) & EMAC_TARGNANO_TRGTBUSY)
+    {
+    }
 
     //
     // Write the new target time.
@@ -4419,18 +4418,17 @@ void EMACPowerManagementControlSet(uint32_t ui32Base, uint32_t ui32Flags)
     // Parameter sanity check.
     //
     ASSERT(ui32Base == EMAC0_BASE);
-    ASSERT(~(ui32Flags & ~(EMAC_PMT_GLOBAL_UNICAST_ENABLE | EMAC_PMT_WAKEUP_PACKET_ENABLE |
-                           EMAC_PMT_MAGIC_PACKET_ENABLE | EMAC_PMT_POWER_DOWN)));
+    ASSERT(~(ui32Flags &
+             ~(EMAC_PMT_GLOBAL_UNICAST_ENABLE | EMAC_PMT_WAKEUP_PACKET_ENABLE | EMAC_PMT_MAGIC_PACKET_ENABLE | EMAC_PMT_POWER_DOWN)));
 
     //
     // Read the control/status register, clear all the bits we can set, mask
     // in the new values then rewrite the new register value.
     //
-    ui32Value = HWREG(ui32Base + EMAC_O_PMTCTLSTAT);
-    ui32Value &=
-        ~(EMAC_PMTCTLSTAT_GLBLUCAST | EMAC_PMTCTLSTAT_WUPFREN | EMAC_PMTCTLSTAT_MGKPKTEN | EMAC_PMTCTLSTAT_PWRDWN);
-    ui32Value                           |= ui32Flags;
-    HWREG(ui32Base + EMAC_O_PMTCTLSTAT)  = ui32Value;
+    ui32Value  = HWREG(ui32Base + EMAC_O_PMTCTLSTAT);
+    ui32Value &= ~(EMAC_PMTCTLSTAT_GLBLUCAST | EMAC_PMTCTLSTAT_WUPFREN | EMAC_PMTCTLSTAT_MGKPKTEN | EMAC_PMTCTLSTAT_PWRDWN);
+    ui32Value |= ui32Flags;
+    HWREG(ui32Base + EMAC_O_PMTCTLSTAT) = ui32Value;
 }
 
 //*****************************************************************************
@@ -4509,8 +4507,7 @@ uint32_t EMACPowerManagementStatusGet(uint32_t ui32Base)
     // Read the control/status register and mask off the status bits to return
     // them to the caller.
     //
-    return (HWREG(ui32Base + EMAC_O_PMTCTLSTAT) &
-            (EMAC_PMTCTLSTAT_WUPRX | EMAC_PMTCTLSTAT_MGKPRX | EMAC_PMTCTLSTAT_PWRDWN));
+    return (HWREG(ui32Base + EMAC_O_PMTCTLSTAT) & (EMAC_PMTCTLSTAT_WUPRX | EMAC_PMTCTLSTAT_MGKPRX | EMAC_PMTCTLSTAT_PWRDWN));
 }
 
 //*****************************************************************************
@@ -4538,7 +4535,9 @@ void EMACWoLEnter(uint32_t ui32Base)
     //
     // Check if the Transmit interrupt bit is clear.
     //
-    while (HWREG(ui32Base + EMAC_O_DMARIS) == EMAC_DMARIS_TI) {}
+    while (HWREG(ui32Base + EMAC_O_DMARIS) == EMAC_DMARIS_TI)
+    {
+    }
 
     //
     // Disable transmission in the MAC configuration register.
@@ -4553,7 +4552,9 @@ void EMACWoLEnter(uint32_t ui32Base)
     //
     // Check if the Receive FIFO is empty.
     //
-    while ((HWREG(ui32Base + EMAC_O_STATUS) & EMAC_STATUS_RX_FIFO_LEVEL_MASK) == EMAC_STATUS_RX_FIFO_EMPTY) {}
+    while ((HWREG(ui32Base + EMAC_O_STATUS) & EMAC_STATUS_RX_FIFO_LEVEL_MASK) == EMAC_STATUS_RX_FIFO_EMPTY)
+    {
+    }
 
     //
     // Disable the MAC receive path.

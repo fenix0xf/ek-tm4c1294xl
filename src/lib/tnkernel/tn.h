@@ -98,27 +98,27 @@ extern "C"
 
 //--- Constants
 
-#define TN_ST_STATE_NOT_RUN       0
-#define TN_ST_STATE_RUNNING       1
+#define TN_ST_STATE_NOT_RUN         0
+#define TN_ST_STATE_RUNNING         1
 
-#define TN_TASK_START_ON_CREATION 1u
-#define TN_TASK_OS_TICK           0x80u
-#define TN_TASK_IDLE              0x40u
+#define TN_TASK_START_ON_CREATION   1u
+#define TN_TASK_OS_TICK             0x80u
+#define TN_TASK_IDLE                0x40u
 
-#define TN_ID_MASK                0x0FFFFFFFul
-#define TN_DYN_MASK               0x70000000ul
-#define TN_DYN_CREATED            0x50000000ul
+#define TN_ID_MASK                  0x0FFFFFFFul
+#define TN_DYN_MASK                 0x70000000ul
+#define TN_DYN_CREATED              0x50000000ul
 
-#define TN_ID_TASK                0x07ABCF69ul
-#define TN_ID_SEMAPHORE           0x0FA173EBul
-#define TN_ID_EVENT               0x0E224F25ul
-#define TN_ID_DATAQUEUE           0x0C8A6C89ul
-#define TN_ID_FSMEMORYPOOL        0x06B7CE8Bul
-#define TN_ID_MUTEX               0x07129E45ul
-#define TN_ID_MAILBOX             0x04289EBDul
-#define TN_ID_TIMER               0x0B04D447ul
+#define TN_ID_TASK                  0x07ABCF69ul
+#define TN_ID_SEMAPHORE             0x0FA173EBul
+#define TN_ID_EVENT                 0x0E224F25ul
+#define TN_ID_DATAQUEUE             0x0C8A6C89ul
+#define TN_ID_FSMEMORYPOOL          0x06B7CE8Bul
+#define TN_ID_MUTEX                 0x07129E45ul
+#define TN_ID_MAILBOX               0x04289EBDul
+#define TN_ID_TIMER                 0x0B04D447ul
 
-#define TN_EXIT_AND_DELETE_TASK   1
+#define TN_EXIT_AND_DELETE_TASK     1
 
 //-- Task states
 
@@ -131,48 +131,48 @@ extern "C"
 #define TN_TASK_SUSPEND_ON_CREATION TSK_STATE_SUSPEND
 //--- Waiting
 
-#define TSK_WAIT_REASON_SLEEP   0x0001
-#define TSK_WAIT_REASON_SEM     0x0002
-#define TSK_WAIT_REASON_EVENT   0x0004
-#define TSK_WAIT_REASON_INUSE_Q 0x0008 // Both dqueue and mailbox ver 3
-#define TSK_WAIT_REASON_FREE_Q  0x0010 // Both dqueue and mailbox ver 3
-#define TSK_WAIT_REASON_MUTEX   0x0020 //-- ver 3
-#define TSK_WAIT_REASON_MUTEX_I 0x0040 //-- ver 3
-#define TSK_WAIT_REASON_WFIXMEM 0x2000
+#define TSK_WAIT_REASON_SLEEP       0x0001
+#define TSK_WAIT_REASON_SEM         0x0002
+#define TSK_WAIT_REASON_EVENT       0x0004
+#define TSK_WAIT_REASON_INUSE_Q     0x0008 // Both dqueue and mailbox ver 3
+#define TSK_WAIT_REASON_FREE_Q      0x0010 // Both dqueue and mailbox ver 3
+#define TSK_WAIT_REASON_MUTEX       0x0020 //-- ver 3
+#define TSK_WAIT_REASON_MUTEX_I     0x0040 //-- ver 3
+#define TSK_WAIT_REASON_WFIXMEM     0x2000
 
-#define TN_EVENT_ATTR_SINGLE    1u  // If no the attr, it will be treated as TN_EVENT_ATTR_MULTI
-#define TN_EVENT_ATTR_MULTI     2u  // May be assigned at wait
+#define TN_EVENT_ATTR_SINGLE        1u // If no the attr, it will be treated as TN_EVENT_ATTR_MULTI
+#define TN_EVENT_ATTR_MULTI         2u // May be assigned at wait
 
-#define TN_EVENT_ATTR_CLR       4u  // Clear all bits
-#define TN_EVENT_ATTR_BITCLR    8u  // Clear the condition bit only
+#define TN_EVENT_ATTR_CLR           4u // Clear all bits
+#define TN_EVENT_ATTR_BITCLR        8u // Clear the condition bit only
 
-#define TN_EVENT_WCOND_OR       16u // A single any bit set is enough
-#define TN_EVENT_WCOND_AND      32u // An all bit have to be set for the event rising
+#define TN_EVENT_WCOND_OR           16u // A single any bit set is enough
+#define TN_EVENT_WCOND_AND          32u // An all bit have to be set for the event rising
 
-#define TN_MUTEX_NO_ATTR        1u  // Just lock without priority changing
-#define TN_MUTEX_ATTR_INHERIT   4u
+#define TN_MUTEX_NO_ATTR            1u // Just lock without priority changing
+#define TN_MUTEX_ATTR_INHERIT       4u
 
 //-- Errors
 
-#define TERR_NO_ERR        (0)
-#define TERR_OVERFLOW      (-1) //-- OOV
-#define TERR_WCONTEXT      (-2) //-- Wrong context context error
-#define TERR_WSTATE        (-3) //-- Wrong state   state error
-#define TERR_TIMEOUT       (-4) //-- Polling failure or timeout
-#define TERR_WPARAM        (-5)
-#define TERR_UNDERFLOW     (-6)
-#define TERR_OUT_OF_MEM    (-7)
-#define TERR_ILUSE         (-8)  //-- Illegal using
-#define TERR_NOEXS         (-9)  //-- Non-valid or Non-existent object
-#define TERR_DLT           (-10) //-- Waiting object deleted
-#define TERR_YIELD         (-11)
-#define TERR_WAIT_COMPLETE (-12)
+#define TERR_NO_ERR                 (0)
+#define TERR_OVERFLOW               (-1) //-- OOV
+#define TERR_WCONTEXT               (-2) //-- Wrong context context error
+#define TERR_WSTATE                 (-3) //-- Wrong state   state error
+#define TERR_TIMEOUT                (-4) //-- Polling failure or timeout
+#define TERR_WPARAM                 (-5)
+#define TERR_UNDERFLOW              (-6)
+#define TERR_OUT_OF_MEM             (-7)
+#define TERR_ILUSE                  (-8)  //-- Illegal using
+#define TERR_NOEXS                  (-9)  //-- Non-valid or Non-existent object
+#define TERR_DLT                    (-10) //-- Waiting object deleted
+#define TERR_YIELD                  (-11)
+#define TERR_WAIT_COMPLETE          (-12)
 
-#define NO_TIME_SLICE      0u
-#define MAX_TIME_SLICE     0xFFFEu
+#define NO_TIME_SLICE               0u
+#define MAX_TIME_SLICE              0xFFFEu
 
-#define TN_SEND_NORMAL     0
-#define TN_SEND_URGENT     1
+#define TN_SEND_NORMAL              0
+#define TN_SEND_URGENT              1
 
 //-- Circular double-linked list queue - for internal usage
 
@@ -202,12 +202,12 @@ typedef tn_task_func_t tn_task_func_idle_t;
 
 typedef struct _TN_TCB
 {
-    unsigned int* task_stk;    //-- Pointer to task's top of stack
-    CDLL_QUEUE    task_queue;  //-- Queue is used to include task in ready/wait lists
-    CDLL_QUEUE    timer_queue; //-- Queue is used to include task in timer (timeout,etc.) list
-    CDLL_QUEUE*   pwait_queue; //-- Ptr to object's (semaphore,event,etc.) wait list,
-                               //   that task has been included for waiting (ver 2.x)
-    CDLL_QUEUE create_queue;   //-- Queue is used to include task in create list only
+    unsigned int* task_stk;     //-- Pointer to task's top of stack
+    CDLL_QUEUE    task_queue;   //-- Queue is used to include task in ready/wait lists
+    CDLL_QUEUE    timer_queue;  //-- Queue is used to include task in timer (timeout,etc.) list
+    CDLL_QUEUE*   pwait_queue;  //-- Ptr to object's (semaphore,event,etc.) wait list,
+                                //   that task has been included for waiting (ver 2.x)
+    CDLL_QUEUE    create_queue; //-- Queue is used to include task in create list only
 
 #if TN_USE_MUTEXES
     CDLL_QUEUE mutex_queue;         //-- List of all mutexes that tack locked  (ver 2.x)
@@ -220,17 +220,17 @@ typedef struct _TN_TCB
     tn_task_func_t task_func_addr;  //-- filled on creation  (ver 2.x)
     void*          task_func_param; //-- filled on creation  (ver 2.x)
 
-    unsigned int  base_priority;    //-- Task base priority  (ver 2.x)
-    unsigned int  priority;         //-- Task current priority
-    unsigned int  restore_priority; //   v 3.0
-    unsigned long id_task;          //-- ID for verification(is it a task or another object?)
-                                    //   All tasks have the same id_task magic number (ver 2.x)
+    unsigned int   base_priority;    //-- Task base priority  (ver 2.x)
+    unsigned int   priority;         //-- Task current priority
+    unsigned int   restore_priority; //   v 3.0
+    unsigned long  id_task;          //-- ID for verification(is it a task or another object?)
+                                     //   All tasks have the same id_task magic number (ver 2.x)
 
-    unsigned int  task_state;       //-- Task state
-    int           task_wait_reason; //-- Reason for waiting
-    int           task_wait_rc;     //-- Waiting return code(reason why waiting  finished)
-    unsigned long tick_count;       //-- Remaining time until timeout
-    int           tslice_count;     //-- Time slice counter
+    unsigned int   task_state;       //-- Task state
+    int            task_wait_reason; //-- Reason for waiting
+    int            task_wait_rc;     //-- Waiting return code(reason why waiting  finished)
+    unsigned long  tick_count;       //-- Remaining time until timeout
+    int            tslice_count;     //-- Time slice counter
 
 #if TN_USE_EVENTS
     unsigned int ewait_pattern; //-- Event wait pattern
@@ -267,7 +267,7 @@ typedef struct _TN_SEM
 
 typedef struct _TN_EVENT
 {
-    CDLL_QUEUE wait_queue;
+    CDLL_QUEUE    wait_queue;
     //  unsigned int attr;  //-- Eventflag attribute
     unsigned int  pattern;  //-- Initial value of the event bit pattern
     unsigned long id_event; //-- ID for verification(is it a event or another object?)
@@ -278,12 +278,12 @@ typedef struct _TN_EVENT
 
 typedef struct _TN_DQUEUE
 {
-    SLLBASE inuse_que;
-    SLLBASE free_que;
+    SLLBASE        inuse_que;
+    SLLBASE        free_que;
 
-    CDLL_QUEUE    inuse_wait_queue;
-    CDLL_QUEUE    free_wait_queue;
-    unsigned long free_cnt;
+    CDLL_QUEUE     inuse_wait_queue;
+    CDLL_QUEUE     free_wait_queue;
+    unsigned long  free_cnt;
 
     unsigned int   num_elem;
     unsigned char* data_buf;
@@ -296,23 +296,22 @@ typedef struct _TN_DQUEUE
 
 typedef struct _TN_MAILBOX
 {
-    SLLBASE inuse_que;
-    SLLBASE free_que;
+    SLLBASE        inuse_que;
+    SLLBASE        free_que;
 
-    CDLL_QUEUE    inuse_wait_queue;
-    CDLL_QUEUE    free_wait_queue;
-    unsigned long free_cnt;
+    CDLL_QUEUE     inuse_wait_queue;
+    CDLL_QUEUE     free_wait_queue;
+    unsigned long  free_cnt;
 
     unsigned long  num_elem;
     unsigned long  elem_size;
     unsigned char* data_buf;
 
-    unsigned long id_mailbox;
+    unsigned long  id_mailbox;
 
 } TN_MAILBOX;
 
-#define MAILBOX_ENTRY_SIZE(entry_payload_size) \
-    ((unsigned long)(entry_payload_size) + sizeof(SLL_QUEUE) + sizeof(unsigned long))
+#define MAILBOX_ENTRY_SIZE(entry_payload_size) ((unsigned long)(entry_payload_size) + sizeof(SLL_QUEUE) + sizeof(unsigned long))
 
 // IAR C-STAT MISRA 2012 gives false message here
 #define ADD_WITH_SEND_PRI(obj)                 \
@@ -329,7 +328,7 @@ typedef struct _TN_MAILBOX
 
 typedef struct _TN_FMP
 {
-    CDLL_QUEUE wait_queue;
+    CDLL_QUEUE     wait_queue;
 
     unsigned long  block_size; //-- Actual block size (in bytes)
     unsigned long  num_blocks; //-- Capacity (Fixed-sized blocks actual max qty)
@@ -345,15 +344,15 @@ typedef struct _TN_FMP
 
 typedef struct _TN_MUTEX
 {
-    CDLL_QUEUE wait_queue;   //-- List of tasks that wait a lock
-    CDLL_QUEUE mutex_queue;  //-- To include in task's locked mutexes list (if any) CDLL_QUEUE lock_mutex_queue;
-                             //-- To include in system's locked mutexes list
-    unsigned int  attr;      //-- Mutex creation attr - CEILING or INHERIT
-    int           pi_active; //-- Priority inheritance process is active
-    TN_TCB*       holder;    //-- Current lock owner (task that locked lock)
-    int           cnt;       //-- Recursive locking counter
-    unsigned long id_mutex;  //-- ID for verification(is it a lock or another object?)
-                             //-- All mutexes have the same id_mutex magic number (ver 2.x)
+    CDLL_QUEUE    wait_queue;  //-- List of tasks that wait a lock
+    CDLL_QUEUE    mutex_queue; //-- To include in task's locked mutexes list (if any) CDLL_QUEUE lock_mutex_queue;
+                               //-- To include in system's locked mutexes list
+    unsigned int  attr;        //-- Mutex creation attr - CEILING or INHERIT
+    int           pi_active;   //-- Priority inheritance process is active
+    TN_TCB*       holder;      //-- Current lock owner (task that locked lock)
+    int           cnt;         //-- Recursive locking counter
+    unsigned long id_mutex;    //-- ID for verification(is it a lock or another object?)
+                               //-- All mutexes have the same id_mutex magic number (ver 2.x)
 } TN_MUTEX;
 
 //----- Timer ------------
@@ -390,32 +389,32 @@ typedef struct _MEMINFO
 
 //-- Global vars
 
-extern CDLL_QUEUE   tn_ready_list[TN_NUM_PRIORITY]; //-- All ready to run (RUNNABLE) tasks
-extern CDLL_QUEUE   tn_create_queue;                //-- All created tasks
-extern volatile int tn_created_tasks_qty;           //-- Num of created tasks
+extern CDLL_QUEUE             tn_ready_list[TN_NUM_PRIORITY]; //-- All ready to run (RUNNABLE) tasks
+extern CDLL_QUEUE             tn_create_queue;                //-- All created tasks
+extern volatile int           tn_created_tasks_qty;           //-- Num of created tasks
 
-extern volatile int tn_system_state;                //-- System state (running/not running,etc.)
+extern volatile int           tn_system_state; //-- System state (running/not running,etc.)
 
-extern TN_TCB* tn_curr_run_task;                    //-- Task that run now
-extern TN_TCB* tn_next_task_to_run;                 //-- Task to be run after switch context
+extern TN_TCB*                tn_curr_run_task;    //-- Task that run now
+extern TN_TCB*                tn_next_task_to_run; //-- Task to be run after switch context
 
 extern volatile unsigned int  tn_ready_to_run_bmp;
 extern volatile unsigned long tn_idle_count;
 
-extern tn_task_func_idle_t tn_task_func_idle;
-extern TN_SEM              tn_sys_tick_sem;
-extern unsigned int        tn_func_exit_stack[];
-extern unsigned int*       tn_func_exit_stack_start;
+extern tn_task_func_idle_t    tn_task_func_idle;
+extern TN_SEM                 tn_sys_tick_sem;
+extern unsigned int           tn_func_exit_stack[];
+extern unsigned int*          tn_func_exit_stack_start;
 
-extern CDLL_QUEUE tn_os_timer_list_gen;
-extern CDLL_QUEUE tn_os_timer_list_tick[];
-extern CDLL_QUEUE tn_user_timer_list_gen;
-extern CDLL_QUEUE tn_user_timer_list_tick[];
+extern CDLL_QUEUE             tn_os_timer_list_gen;
+extern CDLL_QUEUE             tn_os_timer_list_tick[];
+extern CDLL_QUEUE             tn_user_timer_list_gen;
+extern CDLL_QUEUE             tn_user_timer_list_tick[];
 
-extern TN_TCB tn_os_idle_task;
-extern TN_TCB tn_os_tick_task;
+extern TN_TCB                 tn_os_idle_task;
+extern TN_TCB                 tn_os_tick_task;
 
-TN_INLINE bool tn_system_is_running(void)
+TN_INLINE bool                tn_system_is_running(void)
 {
     return tn_system_state == TN_ST_STATE_RUNNING;
 }
@@ -515,12 +514,12 @@ TN_INLINE void tn_stack_usage_update(TN_TCB* task, unsigned int stack_usage)
 
 //--- User function
 
-int tn_app_init(void);
+int  tn_app_init(void);
 
 //----- tn.c ----------------------------------
 
-int tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size);
-int tn_sys_tslice_ticks(unsigned int priority, unsigned int value);
+int  tn_start_system(unsigned char* sys_obj_mem, unsigned long sys_obj_mem_size);
+int  tn_sys_tslice_ticks(unsigned int priority, unsigned int value);
 // TN_INLINE unsigned long tn_get_sys_ticks(void); placed in tn_port.h
 
 //----- tn_sys.c
@@ -534,15 +533,15 @@ int  tn_release_wait_que(CDLL_QUEUE* wait_que);
 
 //----- tn_task.c ----------------------------------
 
-int tn_task_create(TN_TCB* task,
-                   void (*task_func)(void* param),
-                   unsigned int  priority,
-                   unsigned int* task_stack_start,
-                   unsigned int  task_stack_size,
-                   void*         param,
-                   unsigned int  option,
-                   void*         tls_block,
-                   const char*   task_name);
+int  tn_task_create(TN_TCB* task,
+                    void (*task_func)(void* param),
+                    unsigned int  priority,
+                    unsigned int* task_stack_start,
+                    unsigned int  task_stack_size,
+                    void*         param,
+                    unsigned int  option,
+                    void*         tls_block,
+                    const char*   task_name);
 
 #if TN_USE_DYN_OBJ
 TN_TCB* tn_task_create_dyn(void (*task_func)(void* param),
@@ -579,7 +578,7 @@ void delete_task_resources(TN_TCB* task);
 
 //----- tn_sem.c ----------------------------------
 
-int tn_sem_create(TN_SEM* sem, unsigned int start_value, unsigned int max_val);
+int  tn_sem_create(TN_SEM* sem, unsigned int start_value, unsigned int max_val);
 
 #if TN_USE_DYN_OBJ
 TN_SEM* tn_sem_create_dyn(unsigned int start_value, unsigned int max_val, int* err);
@@ -605,12 +604,7 @@ int           tn_dqueue_send_ex(TN_DQUEUE* dque, TN_DQUEUE_ELEMENT data, unsigne
 unsigned long tn_dqueue_num_free_entries(TN_DQUEUE* dque);
 bool          tn_dqueue_is_empty(TN_DQUEUE* dque);
 
-int do_input_sem(SLLBASE*      slist,
-                 int           nodata_rc,
-                 SLL_QUEUE**   entry,
-                 CDLL_QUEUE*   wait_queue,
-                 int           wait_reason,
-                 unsigned long timeout);
+int do_input_sem(SLLBASE* slist, int nodata_rc, SLL_QUEUE** entry, CDLL_QUEUE* wait_queue, int wait_reason, unsigned long timeout);
 int do_output_sem(CDLL_QUEUE* wait_que, SLLBASE* slist);
 
 TN_INLINE int tn_dqueue_send(TN_DQUEUE* dque, TN_DQUEUE_ELEMENT data, unsigned long timeout)
@@ -626,11 +620,7 @@ int tn_event_create(TN_EVENT* evf, unsigned int pattern);
 TN_EVENT* tn_event_create_dyn(unsigned int pattern, int* err);
 #endif
 int tn_event_delete(TN_EVENT* evf);
-int tn_event_wait(TN_EVENT*     evf,
-                  unsigned int  wait_pattern,
-                  unsigned int  wait_mode,
-                  unsigned int* p_flags_pattern,
-                  unsigned long timeout);
+int tn_event_wait(TN_EVENT* evf, unsigned int wait_pattern, unsigned int wait_mode, unsigned int* p_flags_pattern, unsigned long timeout);
 int tn_event_set(TN_EVENT* evf, unsigned int pattern);
 int tn_event_clear(TN_EVENT* evf, unsigned int pattern);
 #endif
@@ -652,9 +642,9 @@ int tn_mutex_create(TN_MUTEX* mutex, unsigned int attribute);
 #if TN_USE_DYN_OBJ
 TN_MUTEX* tn_mutex_create_dyn(unsigned int attribute, int* err);
 #endif
-int tn_mutex_delete(TN_MUTEX* mutex);
-int tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout);
-int tn_mutex_unlock(TN_MUTEX* mutex);
+int  tn_mutex_delete(TN_MUTEX* mutex);
+int  tn_mutex_lock(TN_MUTEX* mutex, unsigned long timeout);
+int  tn_mutex_unlock(TN_MUTEX* mutex);
 
 int  do_mutex_unlock(TN_TCB* task, TN_MUTEX* mutex);
 void do_set_mutex_holder_max_priority(TN_TCB* task);
@@ -673,13 +663,9 @@ int tn_mailbox_create(TN_MAILBOX*    mb,
 TN_MAILBOX* tn_mailbox_create_dyn(unsigned long num_elem, unsigned long elem_size, int* err);
 #endif
 
-int tn_mailbox_delete(TN_MAILBOX* mb);
+int           tn_mailbox_delete(TN_MAILBOX* mb);
 
-int tn_mailbox_send_ex(TN_MAILBOX*   mb,
-                       void*         data_ptr,
-                       unsigned long data_size,
-                       unsigned long timeout,
-                       int           send_priority);
+int           tn_mailbox_send_ex(TN_MAILBOX* mb, void* data_ptr, unsigned long data_size, unsigned long timeout, int send_priority);
 
 long          tn_mailbox_receive(TN_MAILBOX* mb, void* data_ptr, unsigned long max_len, unsigned long timeout);
 unsigned long tn_mailbox_num_free_entries(TN_MAILBOX* mb);

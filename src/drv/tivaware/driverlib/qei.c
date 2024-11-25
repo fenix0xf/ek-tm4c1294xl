@@ -148,8 +148,7 @@ void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPositi
     // Write the new configuration to the hardware.
     //
     HWREG(ui32Base + QEI_O_CTL) =
-        ((HWREG(ui32Base + QEI_O_CTL) & ~(QEI_CTL_CAPMODE | QEI_CTL_RESMODE | QEI_CTL_SIGMODE | QEI_CTL_SWAP)) |
-         ui32Config);
+        ((HWREG(ui32Base + QEI_O_CTL) & ~(QEI_CTL_CAPMODE | QEI_CTL_RESMODE | QEI_CTL_SIGMODE | QEI_CTL_SWAP)) | ui32Config);
 
     //
     // Set the maximum position.

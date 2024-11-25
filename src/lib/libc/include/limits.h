@@ -34,8 +34,7 @@
 
 #define MB_LEN_MAX 4
 
-#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || \
-    defined(_BSD_SOURCE)
+#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 
 #include <bits/limits.h>
 
@@ -74,20 +73,20 @@
 
 /* Arbitrary numbers... */
 
-#define BC_BASE_MAX        99
-#define BC_DIM_MAX         2048
-#define BC_SCALE_MAX       99
-#define BC_STRING_MAX      1000
-#define CHARCLASS_NAME_MAX 14
-#define COLL_WEIGHTS_MAX   2
-#define EXPR_NEST_MAX      32
-#define LINE_MAX           4096
-#define RE_DUP_MAX         255
+#define BC_BASE_MAX                   99
+#define BC_DIM_MAX                    2048
+#define BC_SCALE_MAX                  99
+#define BC_STRING_MAX                 1000
+#define CHARCLASS_NAME_MAX            14
+#define COLL_WEIGHTS_MAX              2
+#define EXPR_NEST_MAX                 32
+#define LINE_MAX                      4096
+#define RE_DUP_MAX                    255
 
-#define NL_ARGMAX          9
-#define NL_MSGMAX          32767
-#define NL_SETMAX          255
-#define NL_TEXTMAX         2048
+#define NL_ARGMAX                     9
+#define NL_MSGMAX                     32767
+#define NL_SETMAX                     255
+#define NL_TEXTMAX                    2048
 
 #endif
 

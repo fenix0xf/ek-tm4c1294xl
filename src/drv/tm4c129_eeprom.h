@@ -38,7 +38,7 @@
 /**
  * Initialize TM4C129 internal EEPROM.
  */
-bool tm4c129_eeprom_init(void);
+bool   tm4c129_eeprom_init(void);
 
 /**
  *  TM4C129 internal EEPROM size in bytes.
@@ -55,16 +55,16 @@ size_t tm4c129_eeprom_align(void);
 /**
  * TM4C129 internal EEPROM mass erase.
  */
-bool tm4c129_eeprom_mass_erase(void);
+bool   tm4c129_eeprom_mass_erase(void);
 
 /**
  * @param addr - must be a multiple of tm4c129_eeprom_align().
  * @param len  - must be a multiple of tm4c129_eeprom_align().
  */
-bool tm4c129_eeprom_read(uintptr_t addr, void* buf, size_t len);
+bool   tm4c129_eeprom_read(uintptr_t addr, void* buf, size_t len);
 
 /**
  * @param addr - must be a multiple of tm4c129_eeprom_align().
  * @param len  - must be a multiple of tm4c129_eeprom_align().
  */
-bool tm4c129_eeprom_write(uintptr_t addr, const void* buf, size_t len);
+bool   tm4c129_eeprom_write(uintptr_t addr, const void* buf, size_t len);

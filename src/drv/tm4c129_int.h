@@ -42,7 +42,8 @@
  * INT_PRI7 - lowest priority.
  *
  */
-enum tm4c129_int_pri {
+enum tm4c129_int_pri
+{
     TM4C129_ISR_PRI0 = (0 << 5), /// 0x00, highest priority.
     TM4C129_ISR_PRI1 = (1 << 5), /// 0x20
     TM4C129_ISR_PRI2 = (2 << 5), /// 0x40
