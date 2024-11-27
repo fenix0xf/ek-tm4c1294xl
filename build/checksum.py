@@ -33,6 +33,8 @@ import crcmod.predefined
 import elftools.elf.elffile
 import elftools.elf.sections
 
+checksum_section_name = ".checksum" # Should be last section in the FLASH region in LD file
+
 if len(sys.argv) != 2:
     print("Usage: checksum.py firmware.elf", file=sys.stderr)
     exit(1)
@@ -45,7 +47,7 @@ if not os.path.isfile(elf_file):
 
 with open(elf_file, mode="r+b") as ef:
     elf = elftools.elf.elffile.ELFFile(ef)
-    checksum_section = elf.get_section_by_name(".checksum")
+    checksum_section = elf.get_section_by_name(checksum_section_name)
 
     if checksum_section is None:
         print(f"checksum.py: .checksum section is not found!", file=sys.stderr)
@@ -60,17 +62,17 @@ with open(elf_file, mode="r+b") as ef:
 
     checksum = crcmod.predefined.Crc("crc-32-mpeg")
 
-    print(f"\nchecksum.py: Section Name    Type           VMA         Offset      Size")
+    print(f"checksum.py: Section         Type           VMA         Offset        Size")
 
     for section in elf.iter_sections():
         if section["sh_type"] == "SHT_NOBITS" or section["sh_type"] == "SHT_NULL":
             continue
 
-        if section.name == ".checksum":
-            break
-
         print(
-            f"checksum.py: {section.name:15s} {section["sh_type"]:14s} 0x{section["sh_addr"]:08X}  0x{section["sh_offset"]:08X}  {section["sh_size"]}")
+            f"checksum.py: {section.name:15s} {section["sh_type"]:14s} 0x{section["sh_addr"]:08X}  0x{section["sh_offset"]:08X}  {section["sh_size"]:6}")
+
+        if section.name == checksum_section_name:
+            break
 
         checksum.update(section.data())
 
@@ -78,4 +80,4 @@ with open(elf_file, mode="r+b") as ef:
     ef.write(checksum.crcValue.to_bytes(checksum_size, byteorder="little", signed=False))
 
     print(f"checksum.py:")
-    print(f"checksum.py: Write checksum 0x{checksum.crcValue:08X} to {elf_file} at offset 0x{checksum_offset:08X}")
+    print(f"checksum.py: Write checksum 0x{checksum.crcValue:08X} to {elf_file} - section \"{checksum_section_name}\" at offset 0x{checksum_offset:08X}")

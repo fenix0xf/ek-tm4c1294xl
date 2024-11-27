@@ -24,13 +24,17 @@
 
  */
 
-#include <hal/hal.h>
+#include <time.h>
 
+#include <hal/hal.h>
+#include <hal/hal_mm.h>
 #include <hal/hal_crt.h>
 #include <hal/hal_con.h>
 #include <hal/hal_init.h>
 #include <hal/hal_version.h>
+
 #include <drv/tm4c129_int.h>
+#include <drv/tm4c129_ccm.h>
 #include <drv/tm4c129_uart_dbg.h>
 
 #include <tn.h>
@@ -145,15 +149,24 @@ void hal_print_version(void)
 
     hal_printf("\n\n\n"
                "Test Firmware v%u.%u rev %u build %u (%s) © 2024 Alexander Kotikov\n"
-               "Git hash  : %s\n"
-               "Build time: %s\n"
-               "Board     : EK-TM4C1294XL Rev D\n"
+               "Build time: UTC %s" /* asctime() adds \n char */
+               "Git hash  : %08x\n"
+               "FW size   : %u B\n"
+               "Board     : %s\n"
                "MCU       : %s [%u MHz]\n"
                "SRAM      : %u KiB\n"
                "FLASH     : %u/%u KiB\n"
                "MCUID     : 0x%08X, 0x%08X, 0x%08X, 0x%08X\n\n",
 
-               g_hal_version.major, g_hal_version.minor, g_hal_version.revision, g_hal_version.build, DEBUG ? "Debug" : "Release",
+               g_hal_version.major,
+               g_hal_version.minor,
+               g_hal_version.revision,
+               g_hal_version.build,
+               DEBUG ? "Debug" : "Release",
+               asctime(gmtime((time_t*)&g_hal_version.timestamp)),
+               g_hal_version.git_hash,
+               hal_firmware_size(),
+               "EK-TM4C1294XL Rev D",
                hal_mcu_name(),
                (unsigned)HAL_MCU_FREQUENCY_MHz,
                (unsigned)(hal_mcu_sram_size() / 1024),
@@ -163,4 +176,28 @@ void hal_print_version(void)
                (unsigned)id1,
                (unsigned)id2,
                (unsigned)id3);
+}
+
+size_t hal_firmware_size(void)
+{
+    extern uintptr_t g_fw_size; /* FW size from LD file. */
+    return (size_t)&g_fw_size;
+}
+
+void hal_firmware_self_check(void)
+{
+    extern uint32_t g_checksum_data; /* FW checksum from LD file. */
+
+    hal_printf(HAL_PREFIX "Check firmware checksum...");
+
+    size_t   fw_size_dw = hal_firmware_size() / sizeof(uint32_t);
+    uint32_t checksum   = tm4c129_ccm_crc32_mpeg_32bit((void*)MM_FLASH_ADDR, fw_size_dw - 1, TM4C129_CCM_SEED);
+
+    if (checksum != g_checksum_data)
+    {
+        hal_errorf("Invalid FW checksum: 0x%08X != 0x%08X", checksum, g_checksum_data);
+        hal_mcu_halt();
+    }
+
+    hal_puts("[done]");
 }

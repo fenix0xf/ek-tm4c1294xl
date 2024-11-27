@@ -32,9 +32,15 @@
  * Memory Map.
  */
 
-#define MM_VTABLE_SP_NUM 1 ///< First item in ISR table is initial stack pointer.
+#define MM_FLASH_ADDR       (0x00000000)
+#define MM_FLASH_SIZE       (1 * 1024 * 1024)
 
-#define MM_VTABLE_ALIGN  1024                                ///< ISR table align: 1024 for TM4C1294NCPDT.
-#define MM_VTABLE_ITEMS  (MM_VTABLE_SP_NUM + NUM_INTERRUPTS) ///< ISR table items number: 130 for TM4C1294NCPDT.
-#define MM_VTABLE_ISIZE  sizeof(void*)                       ///< ISR table item size: 4 bytes.
-#define MM_VTABLE_SIZE   (MM_VTABLE_ITEMS * MM_VTABLE_ISIZE) ///< ISR table size: 130 * 4 = 520 bytes (0x208).
+#define MM_SRAM_ADDR        (0x20000000)
+#define MM_SRAM_SIZE        (256 * 1024)
+
+#define MM_VTABLE_SP_NUM    1 ///< First item in ISR table is initial stack pointer.
+
+#define MM_VTABLE_ALIGN     1024                                    ///< ISR table align: 1024 for TM4C1294NCPDT.
+#define MM_VTABLE_ITEMS     (MM_VTABLE_SP_NUM + NUM_INTERRUPTS)     ///< ISR table items number: 130 for TM4C1294NCPDT.
+#define MM_VTABLE_ITEM_SIZE sizeof(void*)                           ///< ISR table item size: 4 bytes.
+#define MM_VTABLE_SIZE      (MM_VTABLE_ITEMS * MM_VTABLE_ITEM_SIZE) ///< ISR table size: 130 * 4 = 520 bytes (0x208).

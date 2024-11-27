@@ -64,7 +64,8 @@ HAL_HEAP_SECTION(g_heap)
 static char                  g_heap[64 * 1024];
 
 static intptr_t              g_heap_brk;
-static hal_crt_stdout_func_t g_stdout_func, g_stderr_func;
+static hal_crt_stdout_func_t g_stdout_func;
+static hal_crt_stdout_func_t g_stderr_func;
 
 void                         hal_crt_init(hal_crt_stdout_func_t stdout_func, hal_crt_stdout_func_t stderr_func)
 {

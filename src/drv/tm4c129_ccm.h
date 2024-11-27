@@ -50,4 +50,4 @@ void tm4c129_ccm_free(void);
 #define TM4C129_CCM_SEED 0xFFFFFFFF
 
 uint32_t tm4c129_ccm_crc32_mpeg_8bit(const void* buf, size_t len, uint32_t seed);
-uint32_t tm4c129_ccm_crc32_mpeg_align32(const void* align32_buf, size_t align32_len, uint32_t seed);
+uint32_t tm4c129_ccm_crc32_mpeg_32bit(const void* buf, size_t len_dw, uint32_t seed);

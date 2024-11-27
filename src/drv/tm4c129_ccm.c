@@ -49,10 +49,10 @@ uint32_t tm4c129_ccm_crc32_mpeg_8bit(const void* buf, size_t len, uint32_t seed)
     return CRCDataProcess(CCM0_BASE, (uint32_t*)buf, (uint32_t)len, false);
 }
 
-uint32_t tm4c129_ccm_crc32_mpeg_32bit(const void* buf, size_t len, uint32_t seed)
+uint32_t tm4c129_ccm_crc32_mpeg_32bit(const void* buf, size_t len_dw, uint32_t seed)
 {
     CRCConfigSet(CCM0_BASE, CRC_CFG_INIT_SEED | CRC_CFG_TYPE_P4C11DB7 | CRC_CFG_SIZE_32BIT);
     CRCSeedSet(CCM0_BASE, seed);
 
-    return CRCDataProcess(CCM0_BASE, (uint32_t*)buf, (uint32_t)len, false);
+    return CRCDataProcess(CCM0_BASE, (uint32_t*)buf, (uint32_t)len_dw, false);
 }

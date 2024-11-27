@@ -55,7 +55,7 @@ HAL_USED HAL_NORETURN HAL_SECTION(".reset") void hal_init(void)
 {
     /*
      * This function is called before initialization of C standard library. Non-constant static variables are in a non-initialized state!
-     * Don't use non-constant static variables here!
+     * Don't use non-constant static variables until hal_crt_init() is called!
      */
 
     /* Disable all interrupts. */
@@ -78,7 +78,7 @@ HAL_USED HAL_NORETURN HAL_SECTION(".reset") void hal_init(void)
     /*
      * Initialize the C runtime library.
      * This function initialize C standard library (global variables, internal CRT structures, etc.).
-     * After this call stdout is ready to work.
+     * After this call non-constant static variables, stdout and stderr are ready to work.
      */
     hal_crt_init(tm4c129_uart_dbg_send_buf, tm4c129_uart_dbg_send_buf);
 
@@ -87,6 +87,9 @@ HAL_USED HAL_NORETURN HAL_SECTION(".reset") void hal_init(void)
 
     /* Initialize hardware modules. */
     hal_ll_hardware_init();
+
+    /* Check firmware checksum. It uses CCM module, call hal_ll_hardware_init() first. */
+    hal_firmware_self_check();
 
     /* TN Kernel initialization and start. */
     hal_system_startup();

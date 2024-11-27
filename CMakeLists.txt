@@ -165,14 +165,14 @@ file(GLOB LIB_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/lib/*.[h,c])
 file(GLOB_RECURSE FIRMWARE_FILES RELATIVE ${CMAKE_SOURCE_DIR} src/firmware/*.[h,c])
 
 
-###
 ### Firmware build target.
-###
 set(FIRMWARE_TARGET_NAME firmware)
+set(FIRMWARE_TARGET ${FIRMWARE_TARGET_NAME}.elf)
 set(FIRMWARE_LD_SCRIPT ${PROJECT_SOURCE_DIR}/src/${FIRMWARE_TARGET_NAME}.ld)
+set(FIRMWARE_LD_SCRIPT_PP ${PROJECT_BINARY_DIR}/${FIRMWARE_TARGET_NAME}.ld)
 set(FIRMWARE_MAP_FILE ${CMAKE_BINARY_DIR}/${FIRMWARE_TARGET_NAME}.map)
 
-add_executable(${FIRMWARE_TARGET_NAME}.elf
+add_executable(${FIRMWARE_TARGET}
                ${LIBC_FILES}
                ${TIVAWARE_FILES}
                ${DRV_FILES}
@@ -184,7 +184,7 @@ add_executable(${FIRMWARE_TARGET_NAME}.elf
 )
 
 ### TN Kernel config.
-target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC
+target_compile_definitions(${FIRMWARE_TARGET} PUBLIC
                            TN_SUPPORT_FPU=1
                            TN_USE_USER_TIMERS=1
                            TN_USE_MUTEXES=1
@@ -194,23 +194,46 @@ target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC
                            TN_STACK_CHECK=2
 )
 
-target_compile_definitions(${FIRMWARE_TARGET_NAME}.elf PUBLIC $<IF:$<CONFIG:Debug>,DEBUG=1,DEBUG=0>)
-target_compile_options(${FIRMWARE_TARGET_NAME}.elf PUBLIC ${C_WARN})
-set_target_properties(${FIRMWARE_TARGET_NAME}.elf PROPERTIES LINK_FLAGS "-Wl,-T,${FIRMWARE_LD_SCRIPT},-Map,${FIRMWARE_MAP_FILE}")
-target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lgcc) # Link with GCC library libgcc.a
-#target_link_libraries(${FIRMWARE_TARGET_NAME}.elf PUBLIC -lm) # Link with C math library libm.a
+target_compile_definitions(${FIRMWARE_TARGET} PUBLIC $<IF:$<CONFIG:Debug>,DEBUG=1,DEBUG=0>)
+target_compile_options(${FIRMWARE_TARGET} PUBLIC ${C_WARN})
+set_target_properties(${FIRMWARE_TARGET} PROPERTIES LINK_FLAGS "-Wl,-T,${FIRMWARE_LD_SCRIPT_PP},-Map,${FIRMWARE_MAP_FILE}")
+target_link_libraries(${FIRMWARE_TARGET} PUBLIC -lgcc) # Link with GCC library libgcc.a
+#target_link_libraries(${FIRMWARE_TARGET} PUBLIC -lm) # Link with C math library libm.a
 
-#add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} ARGS -Oihex ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.hex COMMENT "Generate HEX file...")
+# Pre link steps
+add_custom_command(TARGET ${FIRMWARE_TARGET} PRE_LINK COMMAND ${CMAKE_COMMAND} -E echo)
+add_custom_command(TARGET ${FIRMWARE_TARGET} PRE_LINK
+                   COMMAND ${CMAKE_COMMAND} -E echo "PRE_LINK: ${FIRMWARE_LD_SCRIPT} preprocessing..."
+                   COMMAND ${CMAKE_C_COMPILER}
+                   "-D$<JOIN:$<TARGET_PROPERTY:${FIRMWARE_TARGET},COMPILE_DEFINITIONS>,;-D>"
+                   "-I$<JOIN:$<TARGET_PROPERTY:${FIRMWARE_TARGET},INCLUDE_DIRECTORIES>,;-I>"
+                   # $<TARGET_PROPERTY:${FIRMWARE_TARGET},COMPILE_OPTIONS>
+                   -P -E -xc ${FIRMWARE_LD_SCRIPT} -o ${FIRMWARE_LD_SCRIPT_PP}
+                   COMMAND_EXPAND_LISTS
+                   VERBATIM)
 
-add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND python ${PROJECT_SOURCE_DIR}/build/checksum.py ${FIRMWARE_TARGET_NAME}.elf COMMENT "Update checksum in ELF file...")
-add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_OBJCOPY} -Obinary ${FIRMWARE_TARGET_NAME}.elf ${FIRMWARE_TARGET_NAME}.bin COMMENT "Generate BIN file...")
+### Post build steps
+add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo)
+add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Update checksum in ELF file, executing ${PROJECT_SOURCE_DIR}/build/checksum.py..."
+                   COMMAND python ${PROJECT_SOURCE_DIR}/build/checksum.py ${FIRMWARE_TARGET})
 
-#add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${PROJECT_SOURCE_DIR}/aes-256-ctr.py 0x208 ${FIRMWARE_TARGET_NAME}.bin ${FIRMWARE_TARGET_NAME}.eff COMMENT "Generate encrypted firmware file (EFF)...")
+add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate BIN file..."
+                   COMMAND ${CMAKE_OBJCOPY} -Obinary ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.bin)
+
+add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate HEX file..."
+                   COMMAND ${CMAKE_OBJCOPY} -Oihex ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.hex)
+
+#add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
+#                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate encrypted firmware file (EFF)..."
+#                   COMMAND ${PROJECT_SOURCE_DIR}/aes-256-ctr.py 0x208 ${FIRMWARE_TARGET_NAME}.bin ${FIRMWARE_TARGET_NAME}.eff)
 
 ### Add the linker script file as depends of src/hal/hal_version.c for auto rebuild target on any ld script changes.
 set_source_files_properties(src/hal/hal_version.c PROPERTIES OBJECT_DEPENDS ${FIRMWARE_LD_SCRIPT})
 
 ### Generate src/version.h file.
-add_custom_command(TARGET ${FIRMWARE_TARGET_NAME}.elf POST_BUILD COMMAND ${CMAKE_COMMAND} -E touch_nocreate ${PROJECT_SOURCE_DIR}/src/version.h)
+add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E touch_nocreate ${PROJECT_SOURCE_DIR}/src/version.h)
 add_custom_target(cmake_pre_build_target COMMAND python ${PROJECT_SOURCE_DIR}/build/version.py ${PROJECT_SOURCE_DIR}/src/version.h)
-add_dependencies(${FIRMWARE_TARGET_NAME}.elf cmake_pre_build_target)
+add_dependencies(${FIRMWARE_TARGET} cmake_pre_build_target)

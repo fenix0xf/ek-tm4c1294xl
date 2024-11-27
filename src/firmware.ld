@@ -2,7 +2,7 @@
 
  MIT License
 
- Copyright © 2023 Alexander Kotikov, alexandr.kotikov@gmail.com
+ Copyright © 2024 Alexander Kotikov, alexandr.kotikov@gmail.com
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,16 @@
 
  */
 
+#include <hal/hal_mm.h>
+
 OUTPUT_FORMAT(elf32-littlearm)
 
 ENTRY(hal_init)
 
 MEMORY
 {
-    FLASH (rx)  : o = 0x00000000, l = 1M
-    SRAM (rwx)  : o = 0x20000000, l = 256K
+    FLASH (rx)  : o = MM_FLASH_ADDR, l = MM_FLASH_SIZE
+    SRAM (rwx)  : o = MM_SRAM_ADDR, l = MM_SRAM_SIZE
 }
 
 SECTIONS
@@ -94,6 +96,8 @@ SECTIONS
     .checksum :
     {
         . = ALIGN(4);
-        LONG(0xFFFFFFFF); /* Place for CRC32 - 4 bytes. */
+        g_checksum_data = .;
+        LONG(0xFFFFFFFF); /* CRC32 MPEG placeholder - 4 bytes. */
+        g_fw_size = .;
     } > FLASH
 }

@@ -141,3 +141,5 @@ HAL_NORETURN void hal_system_startup(void);
 HAL_NORETURN void hal_system_reboot(void);
 
 void              hal_print_version(void);
+size_t            hal_firmware_size(void);
+void              hal_firmware_self_check(void);

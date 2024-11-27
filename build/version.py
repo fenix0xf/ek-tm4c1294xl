@@ -29,8 +29,6 @@ import pathlib
 import subprocess
 
 from datetime import datetime, timezone
-from idlelib.run import flush_stdout
-
 
 def git_hash_get():
     def _minimal_ext_cmd(cmd):

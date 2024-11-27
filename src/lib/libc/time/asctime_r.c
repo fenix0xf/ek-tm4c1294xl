@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <langinfo.h>
 
-char* asctime_r(const struct tm* restrict tm, char* restrict buf)
+char* __asctime_r(const struct tm* restrict tm, char* restrict buf)
 {
     if (snprintf(buf,
                  26,
@@ -25,5 +25,6 @@ char* asctime_r(const struct tm* restrict tm, char* restrict buf)
          */
         abort();
     }
+
     return buf;
 }
