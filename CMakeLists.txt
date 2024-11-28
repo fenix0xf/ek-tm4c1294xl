@@ -35,6 +35,11 @@ set(CMAKE_C_EXTENSIONS ON) # POSIX.1-2001 function strcasecmp() and __VA_OPT__.
 ### Project options.
 set(LIBC_USE_CUSTOM ON) # Set to ON to disable default GCC libc.
 
+set(P_COLOR --cyan --bold) # normal, black, red, green, yellow, blue, magenta, cyan, white
+set(P_ECHO ${CMAKE_COMMAND} -E echo)
+set(P_PRINTLN ${CMAKE_COMMAND} -E cmake_echo_color ${P_COLOR})
+set(P_PRINT ${CMAKE_COMMAND} -E cmake_echo_color ${P_COLOR} --no-newline)
+
 ### Set default build type to Release.
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
@@ -201,34 +206,35 @@ target_link_libraries(${FIRMWARE_TARGET} PUBLIC -lgcc) # Link with GCC library l
 #target_link_libraries(${FIRMWARE_TARGET} PUBLIC -lm) # Link with C math library libm.a
 
 # Pre link steps
-add_custom_command(TARGET ${FIRMWARE_TARGET} PRE_LINK COMMAND ${CMAKE_COMMAND} -E echo)
 add_custom_command(TARGET ${FIRMWARE_TARGET} PRE_LINK
-                   COMMAND ${CMAKE_COMMAND} -E echo "PRE_LINK: ${FIRMWARE_LD_SCRIPT} preprocessing..."
+                   COMMAND ${P_PRINT} "PRE_LINK: ${FIRMWARE_LD_SCRIPT} preprocessing..."
                    COMMAND ${CMAKE_C_COMPILER}
                    "-D$<JOIN:$<TARGET_PROPERTY:${FIRMWARE_TARGET},COMPILE_DEFINITIONS>,;-D>"
                    "-I$<JOIN:$<TARGET_PROPERTY:${FIRMWARE_TARGET},INCLUDE_DIRECTORIES>,;-I>"
                    # $<TARGET_PROPERTY:${FIRMWARE_TARGET},COMPILE_OPTIONS>
                    -P -E -xc ${FIRMWARE_LD_SCRIPT} -o ${FIRMWARE_LD_SCRIPT_PP}
-                   COMMAND_EXPAND_LISTS
-                   VERBATIM)
+                   COMMAND ${P_PRINTLN} "[OK]"
+                   COMMAND_EXPAND_LISTS VERBATIM)
 
-### Post build steps
-add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo)
+# Post build steps
 add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Update checksum in ELF file, executing ${PROJECT_SOURCE_DIR}/build/checksum.py..."
+                   COMMAND ${P_PRINTLN} "POST_BUILD: Update checksum in ELF file, executing ${PROJECT_SOURCE_DIR}/build/checksum.py..."
                    COMMAND python ${PROJECT_SOURCE_DIR}/build/checksum.py ${FIRMWARE_TARGET})
 
 add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate BIN file..."
-                   COMMAND ${CMAKE_OBJCOPY} -Obinary ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.bin)
+                   COMMAND ${P_PRINT} "POST_BUILD: Generate BIN file..."
+                   COMMAND ${CMAKE_OBJCOPY} -Obinary ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.bin
+                   COMMAND ${P_PRINTLN} "[OK]")
 
 add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate HEX file..."
-                   COMMAND ${CMAKE_OBJCOPY} -Oihex ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.hex)
+                   COMMAND ${P_PRINT} "POST_BUILD: Generate HEX file..."
+                   COMMAND ${CMAKE_OBJCOPY} -Oihex ${FIRMWARE_TARGET} ${FIRMWARE_TARGET_NAME}.hex
+                   COMMAND ${P_PRINTLN} "[OK]")
 
 #add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD
-#                   COMMAND ${CMAKE_COMMAND} -E echo "POST_BUILD: Generate encrypted firmware file (EFF)..."
-#                   COMMAND ${PROJECT_SOURCE_DIR}/aes-256-ctr.py 0x208 ${FIRMWARE_TARGET_NAME}.bin ${FIRMWARE_TARGET_NAME}.eff)
+#                   COMMAND ${P_PRINT} "POST_BUILD: Generate encrypted firmware file (EFF)..."
+#                   COMMAND ${PROJECT_SOURCE_DIR}/aes-256-ctr.py 0x208 ${FIRMWARE_TARGET_NAME}.bin ${FIRMWARE_TARGET_NAME}.eff
+#                   COMMAND ${P_PRINTLN} "[OK]")
 
 ### Add the linker script file as depends of src/hal/hal_version.c for auto rebuild target on any ld script changes.
 set_source_files_properties(src/hal/hal_version.c PROPERTIES OBJECT_DEPENDS ${FIRMWARE_LD_SCRIPT})
