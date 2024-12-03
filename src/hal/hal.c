@@ -180,18 +180,18 @@ void hal_print_version(void)
 
 size_t hal_firmware_size(void)
 {
-    extern uintptr_t g_fw_size; /* FW size from LD file. */
+    extern const uintptr_t g_fw_size; /* FW size from LD file. */
     return (size_t)&g_fw_size;
 }
 
 void hal_firmware_self_check(void)
 {
-    extern uint32_t g_checksum_data; /* FW checksum from LD file. */
+    extern const uint32_t g_checksum_data; /* FW checksum from LD file. */
 
     hal_printf(HAL_PREFIX "Check firmware checksum...");
 
-    size_t   fw_size_dw = hal_firmware_size() / sizeof(uint32_t);
-    uint32_t checksum   = tm4c129_ccm_crc32_mpeg_32bit((void*)MM_FLASH_ADDR, fw_size_dw - 1, TM4C129_CCM_SEED);
+    size_t         fw_size_dw = hal_firmware_size() / sizeof(uint32_t);
+    const uint32_t checksum   = tm4c129_ccm_crc32_mpeg_32bit((void*)MM_FLASH_ADDR, fw_size_dw - 1, TM4C129_CCM_SEED);
 
     if (checksum != g_checksum_data)
     {
@@ -199,5 +199,5 @@ void hal_firmware_self_check(void)
         hal_mcu_halt();
     }
 
-    hal_puts("[done]");
+    hal_puts("[OK]");
 }

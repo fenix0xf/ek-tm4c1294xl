@@ -32,20 +32,20 @@
 
 #define HAL_INIT_MSG_LEN 0
 
-#define HAL_INIT_ASSERT(msg, init_func)                   \
-    do {                                                  \
-        hal_print(msg);                                   \
-        hal_flush();                                      \
-        if (init_func)                                    \
-        {                                                 \
-            int p = HAL_INIT_MSG_LEN - (int)strlen(msg);  \
-            hal_printf("%*s\n", p > 0 ? p : 0, "[done]"); \
-        }                                                 \
-        else                                              \
-        {                                                 \
-            hal_error(HAL_STFN(init_func));               \
-            hal_mcu_halt();                               \
-        }                                                 \
+#define HAL_INIT_ASSERT(msg, init_func)                  \
+    do {                                                 \
+        hal_print(msg);                                  \
+        hal_flush();                                     \
+        if (init_func)                                   \
+        {                                                \
+            int p = HAL_INIT_MSG_LEN - (int)strlen(msg); \
+            hal_printf("%*s\n", p > 0 ? p : 0, "[OK]");  \
+        }                                                \
+        else                                             \
+        {                                                \
+            hal_error(HAL_STFN(init_func));              \
+            hal_mcu_halt();                              \
+        }                                                \
     } while (0)
 
 /* HAL initialization function. Used as reset ISR handler. */
