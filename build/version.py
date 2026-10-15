@@ -42,13 +42,16 @@ def git_hash_get():
         env['LANGUAGE'] = 'C'
         env['LANG'] = 'C'
         env['LC_ALL'] = 'C'
-        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=env).communicate()[0]
+        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, env=env).communicate()[0]
         return out
 
     try:
         out = _minimal_ext_cmd(['git', 'rev-parse', '--short=8', 'HEAD'])
         git_revision = out.strip().decode('ascii')
     except OSError:
+        git_revision = None
+
+    if git_revision is None or len(git_revision) == 0:
         git_revision = "00000000"
 
     return git_revision
