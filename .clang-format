@@ -1,7 +1,8 @@
 BasedOnStyle: Microsoft
+ColumnLimit: 160
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
-AlignArrayOfStructures: Left
+AlignArrayOfStructures: Right
 AlignConsecutiveAssignments:
   Enabled: true
   AcrossEmptyLines: false
@@ -16,8 +17,8 @@ AlignConsecutiveBitFields:
   PadOperators: true
 AlignConsecutiveDeclarations:
   Enabled: true
-  AcrossEmptyLines: true
-  AcrossComments: true
+  AcrossEmptyLines: false
+  AcrossComments: false
   AlignCompound: true
   PadOperators: true
 AlignConsecutiveMacros:
@@ -26,14 +27,16 @@ AlignConsecutiveMacros:
   AcrossComments: true
   AlignCompound: true
   PadOperators: true
-AlignEscapedNewlines: Left
+AlignEscapedNewlines: LeftWithLastLine
 AlignOperands: AlignAfterOperator
-AlignTrailingComments: Always
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 2
 AllowAllArgumentsOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowAllConstructorInitializersOnNextLine: false
 AllowShortBlocksOnASingleLine: Empty
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 AllowShortEnumsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
@@ -78,7 +81,6 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
-ColumnLimit: 140
 CommentPragmas: ""
 CompactNamespaces: true
 ConstructorInitializerIndentWidth: 4
@@ -89,7 +91,7 @@ DisableFormat: false
 EmptyLineAfterAccessModifier: Never
 EmptyLineBeforeAccessModifier: LogicalBlock
 ExperimentalAutoDetectBinPacking: false
-FixNamespaceComments: true
+FixNamespaceComments: false
 ForEachMacros:
   - foreach
   - Q_FOREACH

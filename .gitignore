@@ -1,5 +1,4 @@
 .idea/*
 cmake-build-*/
 docs/
-util/
 src/version.h
