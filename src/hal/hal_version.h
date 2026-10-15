@@ -39,7 +39,7 @@ HAL_PACKED struct hal_version
 {
     union
     {
-        char     str[4];
+        char     str[4] __attribute__((nonstring));
         uint32_t dw;
     } sig; /* HAL_VERSION_SIG = "VER0" */
 

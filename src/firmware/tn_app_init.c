@@ -67,7 +67,7 @@ void grlib_test(void)
     // Put the application name in the middle of the banner.
     //
     GrContextFontSet(&sContext, &g_sFontCm20);
-    GrStringDrawCentered(&sContext, "grlib demo", -1, GrContextDpyWidthGet(&sContext) / 2, 8, 0);
+    GrStringDrawCentered(&sContext, "grlib test", -1, GrContextDpyWidthGet(&sContext) / 2, 8, 0);
 }
 
 /*
